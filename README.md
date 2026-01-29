@@ -1,55 +1,57 @@
-# [Nombre de la Aplicación]
+# El desván del friki
 
 ## 👥 Miembros del Equipo
 | Nombre y Apellidos | Correo URJC | Usuario GitHub |
 |:--- |:--- |:--- |
-| [Nombre 1] | [email1]@alumnos.urjc.es | [User1] |
-| [Nombre 2] | [email2]@alumnos.urjc.es | [User2] |
-| [Nombre 3] | [email3]@alumnos.urjc.es | [User3] |
-| [Nombre 4] | [email4]@alumnos.urjc.es | [User4] |
+| Eduardo Soria Escobar | e.soria.2024@alumnos.urjc.es | Edu_05 |
+| Álvaro Cuadrado García | a.cuadrado.2024@alumnos.urjc.es | Alvaro223 |
+| Hugo García Tapia | h.garciat.2024@alumnos.urjc.es | hugogarciatapia |
+| Claudio Rafael Horrillo Sicora | cr.horrillo.2024@alumnos.urjc.es | ClaudioURJC |
 
 ---
 
 ## 🎭 **Preparación: Definición del Proyecto**
 
 ### **Descripción del Tema**
-[Escribe aquí una descripción breve y concisa de qué trata tu aplicación, el sector al que pertenece y qué valor aporta al usuario].
+Se trata de una tienda online de venta de componentes para ordenadores. Pertenece al sector tecnológico, más concretamente a la venta online. Proporciona al usuario componentes a precios competitivos para sus dispositivos.
 
 ### **Entidades**
 Indicar las entidades principales que gestionará la aplicación y las relaciones entre ellas:
 
-1. **[Entidad 1]**: [Ej: Usuario]
-2. **[Entidad 2]**: [Ej: Producto]
-3. **[Entidad 3]**: [Ej: Pedido]
-4. **[Entidad 4]**: [Ej: Categoría]
+1. **[Entidad 1]**: Usuario
+2. **[Entidad 2]**: Administrador
+3. **[Entidad 3]**: Producto
+4. **[Entidad 4]**: Pedido
+5. **[Entidad 5]**: Categoría
 
 **Relaciones entre entidades:**
-- [Ej: Usuario - Pedido: Un usuario puede tener múltiples pedidos (1:N)]
-- [Ej: Pedido - Producto: Un pedido puede contener múltiples productos y un producto puede estar en múltiples pedidos (N:M)]
-- [Ej: Producto - Categoría: Un producto pertenece a una categoría (N:1)]
-- [Descripción de otras relaciones relevantes]
+- Usuario - Pedido: Un usuario puede tener múltiples pedidos (1:N)
+- Pedido - Producto: Un pedido puede contener múltiples productos y un producto puede estar en múltiples pedidos (N:M)
+- Producto - Categoría: Un producto pertenece a una categoría (N:1)
+- Administrador - Producto: Un administrador puede gestionar productos.
 
 ### **Permisos de los Usuarios**
 Describir los permisos de cada tipo de usuario e indicar de qué entidades es dueño:
 
 * **Usuario Anónimo**: 
-  - Permisos: [Ej: Visualización de catálogo, búsqueda de productos, registro]
+  - Permisos: Visualización de catálogo, búsqueda de productos, registro
   - No es dueño de ninguna entidad
 
 * **Usuario Registrado**: 
-  - Permisos: [Ej: Gestión de perfil, realizar pedidos, crear valoraciones]
-  - Es dueño de: [Ej: Sus propios Pedidos, su Perfil de Usuario, sus Valoraciones]
+  - Permisos: Gestión de perfil, realizar pedidos, crear valoraciones
+  - Es dueño de: Sus propios Pedidos, su Perfil de Usuario, sus Valoraciones
 
 * **Administrador**: 
-  - Permisos: [Ej: Gestión completa de productos (CRUD), visualización de estadísticas, moderación de contenido]
-  - Es dueño de: [Ej: Productos, Categorías, puede gestionar todos los Pedidos y Usuarios]
+  - Permisos: Gestión completa de productos (CRUD), moderación de contenido
+  - Es dueño de: Productos, Categorías, puede gestionar todos los Pedidos y Usuarios
 
 ### **Imágenes**
 Indicar qué entidades tendrán asociadas una o varias imágenes:
 
-- **[Entidad con imágenes 1]**: [Ej: Usuario - Una imagen de avatar por usuario]
-- **[Entidad con imágenes 2]**: [Ej: Producto - Múltiples imágenes por producto (galería)]
-- **[Entidad con imágenes 3]**: [Ej: Categoría - Una imagen representativa por categoría]
+- **[Entidad con imágenes 1]**: Usuario - Una imagen de avatar por usuario
+- **[Entidad con imágenes 2]**: Producto - Múltiples imágenes por producto (galería)
+- **[Entidad con imágenes 3]**: Categoría - Una imagen representativa por categoría
+- **[Entidad con imágenes 4]**: Administrador - Una imagen de avatar por administrador
 
 ---
 

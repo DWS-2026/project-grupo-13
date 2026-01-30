@@ -19,7 +19,7 @@ Se trata de una tienda online de venta de componentes para ordenadores. Pertenec
 Indicar las entidades principales que gestionará la aplicación y las relaciones entre ellas:
 
 1. **[Entidad 1]**: Usuario
-2. **[Entidad 2]**: Administrador
+2. **[Entidad 2]**: Valoración
 3. **[Entidad 3]**: Producto
 4. **[Entidad 4]**: Pedido
 5. **[Entidad 5]**: Categoría
@@ -28,7 +28,7 @@ Indicar las entidades principales que gestionará la aplicación y las relacione
 - Usuario - Pedido: Un usuario puede tener múltiples pedidos (1:N)
 - Pedido - Producto: Un pedido puede contener múltiples productos y un producto puede estar en múltiples pedidos (N:M)
 - Producto - Categoría: Un producto pertenece a una categoría (N:1)
-- Administrador - Producto: Un administrador puede gestionar productos.
+- Valoración - Producto: Un producto puede tener múltiples valoraciones (N:1).
 
 ### **Permisos de los Usuarios**
 Describir los permisos de cada tipo de usuario e indicar de qué entidades es dueño:
@@ -51,7 +51,6 @@ Indicar qué entidades tendrán asociadas una o varias imágenes:
 - **[Entidad con imágenes 1]**: Usuario - Una imagen de avatar por usuario
 - **[Entidad con imágenes 2]**: Producto - Múltiples imágenes por producto (galería)
 - **[Entidad con imágenes 3]**: Categoría - Una imagen representativa por categoría
-- **[Entidad con imágenes 4]**: Administrador - Una imagen de avatar por administrador
 
 ---
 

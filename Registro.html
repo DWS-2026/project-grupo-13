@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Comunidad Friki</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+    body { background-color: #1a1a2e; color: white; }
+    .card { background-color: #16213e; border: 1px solid #0f3460; }
+
+    h2 { 
+        color: #ffffff; 
+        text-shadow: 0px 0px 12px rgba(233, 69, 96, 0.4); 
+    }
+
+    .form-label { 
+        color: #cfd8dc; 
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .form-control { 
+        background-color: #0f3460; 
+        border: 1px solid #1a1a2e; 
+        color: #ffffff; 
+    }
+
+    
+    .form-control::placeholder {
+        color: #94a3b8 !important; 
+        opacity: 1; 
+    }
+
+    
+    .form-control:focus { 
+        background-color: #16213e; 
+        color: white; 
+        border: 1px solid #e94560; 
+        box-shadow: 0 0 8px rgba(233, 69, 96, 0.3); 
+    }
+
+    
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        filter: invert(1); 
+        cursor: pointer;
+    }
+    
+    .small.mb-0 {
+    color: #b0b8d1; 
+    }
+
+    
+    .text-info {
+    color: #00d4ff !important; 
+    font-weight: bold;
+    transition: 0.3s;
+    }
+
+    
+    .text-info:hover {
+    color: #ffffff !important;
+    text-decoration: underline !important;
+    }    
+</style>
+</head>
+<body class="py-5"> <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-11 col-sm-10 col-md-8 col-lg-5">
+                <div class="card shadow-lg p-4 rounded-4">
+                    <h2 class="text-center mb-4 fw-bold">Página de Registro</h2>
+                    
+                    <form action="IniciarSesion.html" method="POST">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Nombre</label>
+                                <input type="text" class="form-control" name="nombre" placeholder="Nombre" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Apellidos</label>
+                                <input type="text" class="form-control" name="apellidos" placeholder="Apellidos" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Fecha de nacimiento</label>
+                            <input type="date" class="form-control" name="fechaNacimiento" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Correo electrónico</label>
+                            <input type="email" class="form-control" name="email" placeholder="usuariofriki@correo.com" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Usuario</label>
+                            <input type="text" class="form-control" name="usuario" placeholder="Nick" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" name="password" placeholder="Mínimo 8 caracteres" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-danger w-100 fw-bold py-2">Crear cuenta</button>
+                    </form>
+
+                    <p class="mt-4 text-center small mb-0">
+                        ¿Ya formas parte? <a href="IniciarSesion.html" class="text-info text-decoration-none">Inicia sesión</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -84,3 +84,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .flecha:hover {
     transform: scale(1.2); 
 }
+
+.footer_principal {
+    color: white;
+    text-align: center;
+}

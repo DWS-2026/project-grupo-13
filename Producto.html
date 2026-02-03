@@ -1,38 +1,93 @@
-<DOCTYPE html>
-<html>
-    <body>
-        <header>
-            <nav>
-                <a href="PaginaPrincipal.html">Inicio</a>
-                <a href="PantallaCategorias.html">Categorías</a>
-                <a href="PantallaOfertas.html">Ofertas</a>
-                <a href="InicioSesion.html"><img src= "agregar-usuario.png" width="20" height="20" a>
-                <a href="EditarPerfil.html">Mi cuenta</a>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Categorías</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-            </nav>
-        </header>
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href = "producto.css">
+  
+</head>
+
+<body>
+        <header class="d-flex justify-content-center py-3">
+  <nav class="d-flex gap-4 align-items-center">
+    <a href="PaginaPrincipal.html" class="text-white text-decoration-none">Inicio</a>
+    <a href="PantallaCategorias.html" class="text-white text-decoration-none">Categorías</a>
+    <a href="PantallaOfertas.html" class="text-white text-decoration-none">Ofertas</a>
+    <a class="nav-link d-flex align-items-center" href="IniciarSesion.html">
+                        <img src="agregar-usuario.png" width="20" height="20" style="filter: invert(1);" class="me-2">
+                        <span>Iniciar sesión / Registrarse</span>
+                    </a>
+    <a href="EditarPerfil.html" class="text-white text-decoration-none" target="_blank">Mi cuenta</a>
+  </nav>
+</header>
         
+    <article class="producto">
+    
 
-        <article class="producto">
-            <h1>Nombre Producto</h1>
-            <img src="tg.jpg" width="200" height="200">
-            <h2> Nombre del producto más detallado</h2>
-            <h3>Precio: $$$$$ </h3>
-            <p>Descripción del producto</p>
-            <a href="Comprar.html">Compar ahora</a>
-            <a href="Carrito.html">Añadir al Carrito</a>
-        </article>
+    <div class="info">
+        <h1 class="nombre">Nombre del producto</h1>
 
-        <article class="Valoraciones">
-            <h2>Valoraciones del producto</h2>
-            <label for="inputText">Añade una valoración</label><br><br>
-            <input type="text" size="50">
-            <br>
-            <br><form>
-            <button>Cancel</button>
-            <button type="submit">Submit</button>
-            </form>
-        </article>
+        <p class="descripcion">
+            Esta es una descripción del producto. 
+        </p>
+
+        <p class="precio">€€€€</p>
+
+        <div class="acciones">
+            <a href="Comprar.html">Comprar ahora</a>
+            <a href="Carrito.html">Añadir al carrito</a>
+        </div>
+    </div>
+    </article>
+
+        <section class="valoraciones">
+    <h2>Valoraciones de clientes</h2>
+
+    <div class="valoracion">
+        <div class="estrellas">★★★★★</div>
+        <p class="usuario">Juan Pérez</p>
+        <p class="comentario">
+            Muy buen producto, excelente calidad y llegó rápido.
+        </p>
+    </div>
+
+    <div class="valoracion">
+        <div class="estrellas">★★★★☆</div>
+        <p class="usuario">María López</p>
+        <p class="comentario">
+            Me gustó bastante, aunque el precio podría ser mejor.
+        </p>
+    </div>
+    </section>
+
+    <section class="añadir-valoracion">
+    <h2>Deja tu valoración</h2>
+
+    <form id="formValoracion">
+        <input type="text" id="usuario" placeholder="Tu nombre" required>
+
+        <div class="estrellas-input">
+            <span data-valor="1">★</span>
+            <span data-valor="2">★</span>
+            <span data-valor="3">★</span>
+            <span data-valor="4">★</span>
+            <span data-valor="5">★</span>
+        </div>
+
+        <textarea id="comentario" placeholder="Escribe tu opinión" required></textarea>
+
+        <button type="submit">Enviar valoración</button>
+    </form>
+</section>
+
+
+
+
 
     </body>
     <html>

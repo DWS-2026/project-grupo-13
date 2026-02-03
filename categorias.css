@@ -1,0 +1,25 @@
+body {
+      background-color: #0f172a;
+      color: white;
+    }
+
+    .category-card {
+      background: #111827;
+      border: 1px solid #1f2937;
+      transition: all 0.3s ease;
+    }
+
+    .category-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 0 25px rgba(0, 212, 255, 0.35);
+    }
+
+    .category-card img {
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .category-title {
+      color: #00d4ff;
+      font-weight: 600;
+    }

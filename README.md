@@ -80,15 +80,15 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 #### **Alumno 1 - Álvaro Cuadrado García**
 
-Desarrollados los archivos HTML y CSS de la página principal y la página de edición de cuenta.
+Desarrollados los archivos HTML y CSS de la página principal y la página de edición de cuenta. Participaciones en el css GlobalStyle.css.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| HTML Página principal (URL_commit_1)            | [Archivo1](URL_archivo_1)   |
+|2| Página de cuenta de usuario (URL_commit_2)      | [Archivo2](URL_archivo_2)   |
+|3| CSS Página principal (URL_commit_3)             | [Archivo3](URL_archivo_3)   |
+|4| CSS Página de cuenta de usuario (URL_commit_4)  | [Archivo4](URL_archivo_4)   |
+|5| CSS GlobalStyle.css (URL_commit_5)              | [Archivo5](URL_archivo_5)   |
 
 ---
 

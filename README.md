@@ -78,9 +78,9 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 ### **Participación de Miembros en la Práctica 1**
 
-#### **Alumno 1 - [Nombre Completo]**
+#### **Alumno 1 - Álvaro Cuadrado García**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Desarrollados los archivos HTML y CSS de la página principal y la página de edición de cuenta.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|

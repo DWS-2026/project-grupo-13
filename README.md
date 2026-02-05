@@ -75,14 +75,34 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 > Página de inicio con el nombre de la web y la barra de navegación entre las distintas secciones.
 
 #### **2. Página de ofertas
-![Página de ofertas] (fotos_pagina/Ofertas.png)
+![Página de ofertas](fotos_pagina/Ofertas.png)
 
 > Página donde se muestran algunos productos en oferta con enlaces a los respectivos productos
 
 #### **3. Página de categorías
-![Página de categorías] (fotos_pagina/Categorías.png)
+![Página de categorías](fotos_pagina/Categorías.png)
 
 > Página donde se muestran algunos productos en oferta con enlaces a los respectivos productos
+
+#### **4. Página de registro
+![Página de registro](fotos_pagina/Registro.png)
+
+> Página en la que un usuario nuevo puede crear una cuenta
+
+#### **5. Página de inicio de sesión
+![Página de inicio de sesión](fotos_pagina/InicioSesion.png)
+
+> Página donde un usuario existente puede identificarse en su cuenta
+
+#### **6. Página de producto
+![Página de producto](fotos_pagina/Producto.png)
+
+> Página que muestra la información de un producto. Está diseñada como "plantilla" para que el backend la use para los distintos productos
+
+#### **7. Página de cuenta
+![Página de cuenta](fotos_pagina/MiCuenta.png)
+
+> Página donde cada usuario puede modificar los detalles de su cuenta
 
 #### **AQUÍ AÑADIR EL RESTO DE PÁGINAS**
 

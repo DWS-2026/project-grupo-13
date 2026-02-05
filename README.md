@@ -62,6 +62,7 @@ Indicar qué entidades tendrán asociadas una o varias imágenes:
 
 ### **Diagrama de Navegación**
 Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicación:
+**[Diagrama de navegación](fotos_pagina/diagramaP1.jpg)
 
 ![Diagrama de Navegación](images/navigation-diagram.png)
 

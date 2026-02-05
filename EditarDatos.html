@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Perfil - El desván del friki</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="GlobalStyle.css">
+    <link rel="stylesheet" href="EditarPerfil.css">
+</head>
+<body id="inicio">
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="PaginaPrincipal.html">El Desván</a>
+                <div class="navbar-nav ms-auto align-items-center">
+                    <a class="nav-link" href="PaginaPrincipal.html">Inicio</a>
+                    <a class="nav-link" href="PantallaCategorias.html">Categorías</a>
+                    <a class="nav-link" href="PantallaOfertas.html">Ofertas</a>
+                    
+                    <a class="nav-link d-flex align-items-center" href="IniciarSesion.html">
+                        <img src="imagenes/agregar-usuario.png" width="20" height="20" style="filter: invert(1);" class="me-2">
+                        <span>Iniciar sesión / Registrarse</span>
+                    </a>
+                    
+                    <a class="nav-link btn btn-outline-info ms-lg-2 active" href="EditarPerfil.html">Mi cuenta</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container" style="margin-top: 50px;">
+        <div class="row justify-content-center">
+            <div class="col-11 col-sm-10 col-md-8 col-lg-5">
+                <div class="card shadow-lg p-4">
+                    <h2 class="text-center mb-4 fw-bold">Editar Perfil</h2>
+                    
+                    <form>
+                        <div class="mb-3">
+                            <label for="inputNick" class="form-label">Nick de usuario</label>
+                            <input type="text" class="form-control" id="inputNick" placeholder="Ej: FrikiMaster99">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="inputNombre" class="form-label">Nuevo nombre</label>
+                            <input type="text" class="form-control" id="inputNombre" placeholder="Tu nombre real">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="inputPassword" class="form-label">Nueva contraseña</label>
+                            <input type="password" class="form-control" id="inputPassword" placeholder="********">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="inputDireccion" class="form-label">Dirección</label>
+                            <input type="text" class="form-control" id="inputDireccion" placeholder="Calle Falsa 123, Ciudad">
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="inputFecha" class="form-label">Fecha de nacimiento</label>
+                            <input type="date" class="form-control" id="inputFecha">
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <a href="PaginaPrincipal.html" class="btn btn-info text-white fw-bold">Guardar Cambios</a>
+                            <a href="EditarPerfil.html" class="btn btn-outline-secondary">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer_principal">
+        <p class="mb-0">© 2026 El desván del friki</p>
+    </footer>
+
+</body>
+</html>

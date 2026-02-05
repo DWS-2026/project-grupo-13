@@ -92,7 +92,7 @@ Desarrollados los archivos HTML y CSS de la página principal y la página de ed
 
 ---
 
-#### **Alumno 2 - [Claudio Rafael Horrillo Sicora]**
+#### **Alumno 2 - Claudio Rafael Horrillo Sicora**
 
 Desarrollados los archivos HTML de Inicio de Sesión y Página de Registro. Desarrollo de GlobalStyle con ayuda de los compañeros.
 
@@ -106,18 +106,18 @@ Desarrollados los archivos HTML de Inicio de Sesión y Página de Registro. Desa
 
 ---
 
-#### **Alumno 3 - [Nombre Completo]**
+#### **Alumno 3 - Hugo García Tapia**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Desarrollado los archivos HTML y CSS de la páginas CAtegorías, Ofertas Destacadas y la plantilla para los productos.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
-
+|1| HTML Página Ofertas Destacadas(https://github.com/DWS-2026/project-grupo-13/blob/main/PantallaOfertas.html)  | [Archivo1](URL_archivo_1)   |
+|2| HTML Plantilla Productos(https://github.com/DWS-2026/project-grupo-13/blob/main/Producto.html)  | [Archivo2](URL_archivo_2)   |
+|3| HTML Pantalla Categorías(https://github.com/DWS-2026/project-grupo-13/blob/main/PantallaCategorias.html)  | [Archivo3](URL_archivo_3)   |
+|4| CSS Producto(https://github.com/DWS-2026/project-grupo-13/blob/main/producto.css)  | [Archivo4](URL_archivo_4)   |
+|5| Css Pantalla Categorías(https://github.com/DWS-2026/project-grupo-13/blob/main/categorias.css)  | [Archivo5](URL_archivo_5)   |
+|6| Css Página Ofertas destacadas(https://github.com/DWS-2026/project-grupo-13/blob/main/ofertasDestacadas.css)  | [Archivo5](URL_archivo_6)   |
 ---
 
 #### **Alumno 4 - [Nombre Completo]**

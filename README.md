@@ -62,11 +62,12 @@ Indicar qué entidades tendrán asociadas una o varias imágenes:
 
 ### **Diagrama de Navegación**
 Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicación:
-**[Diagrama de navegación](fotos_pagina/diagramaP1.jpg)
 
-![Diagrama de Navegación](images/navigation-diagram.png)
+![Diagrama de Navegación](fotos_pagina/diagramaP1.jpg)
 
-> [Descripción opcional del flujo de navegación: Ej: "El usuario puede acceder desde la página principal a todas las secciones mediante el menú de navegación. Los usuarios anónimos solo tienen acceso a las páginas públicas, mientras que los registrados pueden acceder a su perfil y panel de usuario."]
+> Las líneas negras indican que cualquier usuario, aunque no se haya autenticado, puede acceder a dichas páginas.
+> Las líneas amarillas indican que sólo los usuarios con cuenta pueden acceder.
+> las líneas rojas indican que sólo los administradores pueden acceder.
 
 ### **Capturas de Pantalla y Descripción de Páginas**
 

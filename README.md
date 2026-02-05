@@ -74,6 +74,16 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 > Página de inicio con el nombre de la web y la barra de navegación entre las distintas secciones.
 
+#### **2. Página de ofertas
+![Página de ofertas] (fotos_pagina/Ofertas.png)
+
+> Página donde se muestran algunos productos en oferta con enlaces a los respectivos productos
+
+#### **3. Página de categorías
+![Página de categorías] (fotos_pagina/Categorías.png)
+
+> Página donde se muestran algunos productos en oferta con enlaces a los respectivos productos
+
 #### **AQUÍ AÑADIR EL RESTO DE PÁGINAS**
 
 ### **Participación de Miembros en la Práctica 1**

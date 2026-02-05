@@ -127,14 +127,14 @@ Desarrollados los archivos HTML y CSS de la página principal y la página de ed
 
 #### **Alumno 2 - Claudio Rafael Horrillo Sicora**
 
-Desarrollados los archivos HTML de Inicio de Sesión y Página de Registro. Desarrollo de GlobalStyle con ayuda de los compañeros.
+Desarrollados los archivos HTML de Inicio de Sesión y Página de Registro, también desarrollo de la página EditarDatos dentro del boton del HTML EditarPerfil. Desarrollo de GlobalStyle con ayuda de los compañeros.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
 |1| HTML Página de Registro (https://github.com/DWS-2026/project-grupo-13/blob/main/IniciarSesion.html)  | [Archivo1](URL_archivo_1)   |
 |2| HTML Inicio de Sesión (https://github.com/DWS-2026/project-grupo-13/blob/main/Registro.html)  | [Archivo2](URL_archivo_2)   |
 |3| CSS GlobalStyle.css (https://github.com/DWS-2026/project-grupo-13/blob/main/GlobalStyle.css)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
+|4| HTML Editar Datos (https://github.com/DWS-2026/project-grupo-13/blob/main/EditarDatos.html)  | [Archivo4](URL_archivo_4)   |
 |5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
 
 ---

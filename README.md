@@ -109,6 +109,21 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 > Página donde cada usuario puede modificar los detalles de su cuenta
 
+#### **8. Página de lista de productos
+![Página de productos](fotos_pagina/Productos.png)
+
+> Página donde de muestra el contenido de una categoría. Es igual para todas
+
+#### **9. Página de administración de producto
+![Página de admin productos](fotos_pagina/AdministrarProducto.png)
+
+> Página donde los administradores pueden alterar productos
+
+#### *10. Página de administración de usuario
+![Página de admin usuarios](fotos_pagina/AdministrarUsuarios.png)
+
+> Página donde los administradores pueden alterar productos
+
 ### **Participación de Miembros en la Práctica 1**
 
 #### **Alumno 1 - Álvaro Cuadrado García**

@@ -80,7 +80,7 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 > Página donde se muestran algunos productos en oferta con enlaces a los respectivos productos
 
 #### **3. Página de categorías
-![Página de categorías](fotos_pagina/Categorías.png)
+![Página de categorías](fotos_pagina/Categorias.png)
 
 > Página donde se muestran algunos productos en oferta con enlaces a los respectivos productos
 
@@ -109,18 +109,18 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 > Página donde cada usuario puede modificar los detalles de su cuenta
 
-#### **8. Página de lista de productos
+#### **9. Página de lista de productos
 ![Página de productos](fotos_pagina/Productos.png)
 
 > Página donde de muestra el contenido de una categoría. Es igual para todas
 
-#### **9. Página de administración de producto
+#### *10. Página de administración de producto
 ![Página de admin productos](fotos_pagina/AdministrarProducto.png)
 
 > Página donde los administradores pueden alterar productos
 
-#### *10. Página de administración de usuario
-![Página de admin usuarios](fotos_pagina/AdministrarUsuarios.png)
+#### *11. Página de administración de usuario
+![Página de admin usuarios](fotos_pagina/AdministrarUsuario.png)
 
 > Página donde los administradores pueden alterar productos
 

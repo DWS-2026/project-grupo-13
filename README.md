@@ -124,6 +124,11 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 > Página donde los administradores pueden alterar productos
 
+#### *12. Página de carrito de compra
+![Página de carro](fotos_pagina/Carrito.png)
+
+> Página donde se pueden ver y administrar los objetos a comprar
+
 ### **Participación de Miembros en la Práctica 1**
 
 #### **Alumno 1 - Álvaro Cuadrado García**

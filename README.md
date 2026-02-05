@@ -144,6 +144,8 @@ Desarrollados los archivos HTML y CSS de la página principal y la página de ed
 |3| CSS Página principal (https://github.com/DWS-2026/project-grupo-13/blob/main/PaginaPrincipal.css)              | [Archivo3](URL_archivo_3)   |
 |4| CSS Página de cuenta de usuario (https://github.com/DWS-2026/project-grupo-13/blob/main/EditarPerfil.css)      | [Archivo4](URL_archivo_4)   |
 |5| CSS GlobalStyle.css (https://github.com/DWS-2026/project-grupo-13/blob/main/GlobalStyle.css)                   | [Archivo5](URL_archivo_5)   |
+|6| HTML AdminProductos.html (https://github.com/DWS-2026/project-grupo-13/blob/main/AdminProductos.html)          | [Archivo5](URL_archivo_6)   |
+|7| HTML AdminUsuarios.html (https://github.com/DWS-2026/project-grupo-13/blob/main/AdminUsuarios.html)            | [Archivo5](URL_archivo_7)   |
 
 ---
 

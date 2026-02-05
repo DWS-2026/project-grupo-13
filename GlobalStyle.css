@@ -88,4 +88,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .footer_principal {
     color: white;
     text-align: center;
+
+}
+.category-title {
+    color: #ffffff !important;
+    text-decoration: none !important;
+}
+
+a:hover .category-title {
+    color: #00d4ff !important;
 }

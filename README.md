@@ -104,8 +104,6 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 > Página donde cada usuario puede modificar los detalles de su cuenta
 
-#### **AQUÍ AÑADIR EL RESTO DE PÁGINAS**
-
 ### **Participación de Miembros en la Práctica 1**
 
 #### **Alumno 1 - Álvaro Cuadrado García**

@@ -67,7 +67,7 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 > Las líneas negras indican que cualquier usuario, aunque no se haya autenticado, puede acceder a dichas páginas.
 > Las líneas amarillas indican que sólo los usuarios con cuenta pueden acceder.
-> las líneas rojas indican que sólo los administradores pueden acceder.
+> Las líneas rojas indican que sólo los administradores pueden acceder.
 
 ### **Capturas de Pantalla y Descripción de Páginas**
 

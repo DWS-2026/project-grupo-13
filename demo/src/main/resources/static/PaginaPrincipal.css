@@ -1,0 +1,11 @@
+body {
+    background-image: url('imagenes/imagen_fondo.png');
+
+    background-attachment: fixed;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    background-size: cover;
+}

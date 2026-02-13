@@ -1,0 +1,153 @@
+body {
+      background-color: #0f172a;
+      color: white;
+    }
+
+    .category-card {
+      background: #111827;
+      border: 1px solid #1f2937;
+      transition: all 0.3s ease;
+    }
+
+    .category-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 0 25px rgba(0, 212, 255, 0.35);
+    }
+
+    .category-card img {
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .category-title {
+      color: #00d4ff;
+      font-weight: 600;
+    }
+
+    .producto {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.producto img {
+    width: 300px;   /* imagen más grande */
+    height: auto;
+}
+
+.producto .info {
+    max-width: 500px;
+}
+
+.producto {
+    display: flex;
+    gap: 30px;
+    max-width: 900px;
+    margin: 40px auto;
+    font-family: Arial, sans-serif;
+}
+
+.producto img {
+    width: 320px;
+    border-radius: 8px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.nombre {
+    font-size: 28px;
+    margin: 0;
+}
+
+.descripcion {
+    color: #555;
+    line-height: 1.5;
+}
+
+.precio {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c7be5;
+}
+
+.acciones a {
+    display: inline-block;
+    margin-right: 15px;
+    padding: 10px 16px;
+    background: #2c7be5;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.acciones a:last-child {
+    background: #555;
+}
+
+.añadir-valoracion {
+    max-width: 900px;
+    margin: 40px auto;
+}
+
+#formValoracion {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#formValoracion input,
+#formValoracion textarea {
+    padding: 10px;
+    font-size: 16px;
+}
+
+.estrellas-input span {
+    font-size: 28px;
+    cursor: pointer;
+    color: #ccc;
+}
+
+.estrellas-input span.activa {
+    color: #f5b301;
+}
+
+button {
+    padding: 10px;
+    background: #2c7be5;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.valoraciones {
+    max-width: 900px;
+    margin: 50px auto;
+    font-family: Arial, sans-serif;
+}
+
+.valoraciones h2 {
+    margin-bottom: 20px;
+}
+
+.valoracion {
+    border-top: 1px solid #ddd;
+    padding: 15px 0;
+}
+
+.estrellas {
+    color: #f5b301;
+    font-size: 20px;
+}
+
+.usuario {
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.comentario {
+    color: #555;
+    line-height: 1.4;
+}

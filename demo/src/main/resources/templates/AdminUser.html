@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="GlobalStyle.css">
     <link rel="stylesheet" href="EditProfile.css">
 
-
 </head>
 
 <body id="inicio">
@@ -17,7 +16,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container">
-                <a class="navbar-brand" href="Index.html">El Desván</a>
+                <a class="navbar-brand" href="Index.html">El Desván</a> <span class="badge bg-danger">Admin</span>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -45,47 +44,25 @@
 
         <section class="my-account__header mb-5 text-center">
             <h1 class="display-5">Gestión de Usuarios</h1>
-            <p class="text-muted">Administra los accesos y roles de la plataforma</p>
+            <p class="text-muted">Lista de usuarios activos en el sistema</p>
         </section>
 
-        <div class="row g-4">
-            
-            <div class="col-lg-4">
-                <div class="card account-card h-100">
-                    <div class="card-body">
-                        <h5 class="card-title mb-4">Crear Nuevo Usuario</h5>
-                        <form>
-                            <div class="mb-3">
-                                <label class="form-label">Nombre Completo</label>
-                                <input type="text" class="form-control" placeholder="Ej. Juan Pérez">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Email</label>
-                                <input type="email" class="form-control" placeholder="correo@ejemplo.com">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Rol de Sistema</label>
-                                <select class="form-select">
-                                    <option value="user">Usuario Estándar</option>
-                                    <option value="admin">Administrador</option>
-                                </select>
-                            </div>
-                            <button class="btn btn-success w-100 mt-2">Registrar Usuario</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-8">
-                <div class="card account-card h-100">
-                    <div class="card-body">
-                        <h5 class="card-title mb-4">Usuarios Activos</h5>
+        <div class="row">
+            <div class="col-12">
+                <div class="card account-card">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="card-title mb-0">Usuarios Registrados</h5>
+                            <input type="text" class="form-control form-control-sm w-25" placeholder="Buscar usuario...">
+                        </div>
+                        
                         <div class="table-responsive">
                             <table class="table table-hover align-middle">
                                 <thead class="table-light">
                                     <tr>
                                         <th>Nombre</th>
                                         <th>Email</th>
+                                        <th>Estado</th>
                                         <th class="text-center">Acciones</th>
                                     </tr>
                                 </thead>
@@ -93,6 +70,7 @@
                                     <tr>
                                         <td><strong>Juan Pérez</strong></td>
                                         <td>juan@email.com</td>
+                                        <td><span class="badge bg-success">Activo</span></td>
                                         <td class="text-center">
                                             <button class="btn btn-warning btn-sm">Editar</button>
                                             <button class="btn btn-danger btn-sm">Eliminar</button>
@@ -101,6 +79,7 @@
                                     <tr>
                                         <td><strong>Ana García</strong></td>
                                         <td>ana@email.com</td>
+                                        <td><span class="badge bg-success">Activo</span></td>
                                         <td class="text-center">
                                             <button class="btn btn-warning btn-sm">Editar</button>
                                             <button class="btn btn-danger btn-sm">Eliminar</button>
@@ -112,7 +91,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
         <div class="text-center mt-5">

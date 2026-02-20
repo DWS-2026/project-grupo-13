@@ -1,5 +1,5 @@
 body {
-    background-image: url('imagenes/imagen_fondo.png');
+    background-image: url('../static/imagenes/imagen_fondo.png');
 
     background-attachment: fixed;
 

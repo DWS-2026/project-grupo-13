@@ -1,154 +1,88 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>El desván del friki</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="GlobalStyle.css">
-        <link rel="stylesheet" href="Admin.css">
-        
-        <style>
-            body { padding-top: 70px; }
-            html { scroll-behavior: smooth; }  
-        </style>
-        
-    </head>
-    <body id="inicio">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administrador - El Desván</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="GlobalStyle.css">
+    <style>
+        body { padding-top: 70px; } 
+        .card { transition: transform 0.2s; }
+        .card:hover { transform: translateY(-5px); } 
+        /* Altura fija para el contenedor de iconos para que nada se mueva */
+        .icon-container {
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
 
-        <header>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-                <div class="container">
-                    <a class="navbar-brand" href="Index.html">El Desván</a>
-                    <div class="navbar-nav ms-auto align-items-center">
-                        <a class="nav-link active" href="Index.html">Inicio</a>
-                        <a class="nav-link" href="CategoriesScreen.html">Categorías</a>
-                        <a class="nav-link" href="PromotionsScreen.html">Ofertas</a>
-                        
-                        <a class="nav-link d-flex align-items-center" href="Login.html">
-                            <img src="imagenes/agregar-usuario.png" width="20" height="20" style="filter: invert(1);" class="me-2">
-                            <span>Iniciar sesión / Registrarse</span>
-                        </a>
-                        
-                        <a class="nav-link btn btn-outline-info ms-lg-2" href="EditProfile.html">Mi cuenta</a>
-                        <a class="nav-link d-flex align-items-center" href="ShoppingCart.html">
-                            <img src="imagenes/carrito.png" width="20" height="20" style="filter: invert(1);" class="me-2">
-                        </a>
-                    </div>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="Index.html"><strong>El Desván</strong> <span class="badge bg-danger">Admin</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link" href="Index.html">Volver a la tienda</a>
                 </div>
-            </nav>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mt-5">
+        <header class="text-center mb-5">
+            <h2 class="display-5">Panel de Administración</h2>
+            <p class="text-muted">Selecciona una sección para gestionar tu tienda</p>
         </header>
 
-        <header>
-        <h1>Panel Administrador</h1>
-        <p>Aquí puedes gestionar los usuarios y los productos</p>
-        </header><br>   
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm border-0 text-center p-4">
+                    <div class="card-body d-flex flex-column">
+                        <div class="icon-container mb-3 text-primary">
+                            <img src="imagenes/agregar-usuario.png" width="50" alt="Usuarios">
+                        </div>
+                        <h4 class="card-title">Usuarios</h4>
+                        <p class="card-text text-muted">Gestionar roles, permisos y usuarios registrados.</p>
+                        <a href="AdminUser.html" class="btn btn-primary w-100 mt-auto">Entrar</a>
+                    </div>
+                </div>
+            </div>
 
-        <main>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm border-0 text-center p-4">
+                    <div class="card-body d-flex flex-column">
+                        <div class="icon-container mb-3 text-success">
+                            <img src="imagenes/carrito.png" width="50" alt="Productos">
+                        </div>
+                        <h4 class="card-title">Productos</h4>
+                        <p class="card-text text-muted">Añadir, editar o eliminar productos del inventario.</p>
+                        <a href="AdminProduct.html" class="btn btn-success w-100 mt-auto">Entrar</a>
+                    </div>
+                </div>
+            </div>
 
-        <h4>Gestión de usuarios</h4>
-        <form class="search-admin d-flex" action="" method="GET">
-
-        <input 
-            type="text" 
-            name="usuario"
-            class="form-control me-2"
-            placeholder="Buscar usuario..."
-        >
-
-        <button class="btn btn-outline-info" type="submit">
-            Buscar
-        </button>
-
-        </form><br>
-          
-
-       
-
-        <section class="users">
-
-        <!-- Usuario -->
-        <div class="user-card">
-            <h3>Nombre_usuario</h3>
-            <p>Email: email@ejemplo.com</p>
-            
-
-            <a href="AdminUser.html" class="btn">Ver perfil</a>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm border-0 text-center p-4">
+                    <div class="card-body d-flex flex-column">
+                        <div class="icon-container mb-3">
+                            <img src="imagenes/categorias.png" width="50" alt="Categorías" onerror="this.style.display='none'">
+                        </div>
+                        <h4 class="card-title">Categorías</h4>
+                        <p class="card-text text-muted">Organizar los productos por categorías y etiquetas.</p>
+                        <a href="AdminCategories.html" class="btn btn-warning w-100 mt-auto text-white">Entrar</a>
+                    </div>
+                </div>
+            </div>
         </div>
+    </main>
 
-        <!-- Usuario -->
-        <div class="user-card">
-            <h3>Nombre_usuario</h3>
-            <p>Email: email@ejemplo.com</p>
-            
-
-            <a href="AdminUser.html" class="btn">Ver perfil</a>
-        </div>
-
-        <!-- Usuario -->
-        <div class="user-card">
-            <h3>Nombre_usuario</h3>
-            <p>Email: email@ejemplo.com</p>
-            
-
-            <a href="AdminUser.html" class="btn">Ver perfil</a>
-        </div>
-
-        </section>
-
-        <br>
-        
-            <div class="container d-flex justify-content-between align-items-center"></div>
-            <h4> Gestión de Productos</h4>
-
-                <form class="search-product d-flex" action="" method="GET">
-
-                <input 
-                type="text" 
-                name="producto"
-                class="form-control me-2"
-                placeholder="Buscar producto..."
-                >
-
-                <button class="btn btn-outline-info" type="submit">
-                    Buscar
-                </button>
-                
-
-                </form>
-        
-        <section class="products">
-             
-
-        <div class="product-card">
-            <h3>Nombre_producto</h3>
-            <p>Precio: €€€</p>
-            <a href="Ad.html" class="btn">Administrar Producto</a>
-        </div><br>
-        <div class="product-card">
-            <h3>Nombre_producto</h3>
-            <p>Precio: €€€</p>
-            <a href="AdminProduct.html" class="btn">Administrar Producto</a>
-        </div><br>
-        <div class="product-card">
-            <h3>Nombre_producto</h3>
-            <p>Precio: €€€</p>
-            <a href="AdminProduct.html" class="btn">Administrar Producto</a>
-        </div>
-
-
-        </section>
-
-
-
-
-
-        </main>
-
-        <footer class="footer_principal">
-            <p>© 2026 El desván del friki</p>
-        </footer>
-
-    
-    </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

@@ -1,0 +1,9 @@
+/* Específico para AdminCategories.html */
+.category-form-box {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.category-form-box h3 {
+    color: var(--accent-blue); /* Resalta el título del form */
+}

@@ -1,0 +1,16 @@
+/* Específico para Gestión de Productos */
+.product-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+/* Para el badge de categoría en la tabla */
+.badge-category {
+    background-color: #06b6d4;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+}

@@ -172,3 +172,7 @@ footer {
     color: black;
     box-shadow: 0 0 10px #ffffff;
 }
+
+.text-muted{
+    color : white !important
+}

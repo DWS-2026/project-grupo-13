@@ -1,16 +1,105 @@
-/* Específico para Gestión de Productos */
-.product-grid {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 2rem;
-    align-items: start;
+/* Fondo general */
+body {
+    background-color: #0f172a !important;
+    color: white;
 }
 
-/* Para el badge de categoría en la tabla */
-.badge-category {
-    background-color: #06b6d4;
+/* Navbar ya es dark, solo ajustamos */
+.navbar {
+    border-bottom: 1px solid #0f3460;
+}
+
+/* Card del formulario */
+.card-form {
+    background-color: #16213e !important;
+    border: 1px solid #0f3460;
     color: white;
-    padding: 2px 8px;
-    border-radius: 12px;
-    font-size: 0.8rem;
+    box-shadow: 0 0 12px rgba(0,0,0,.4);
+}
+
+/* Inputs */
+.form-control,
+.form-select {
+    background-color: #1a2a4f;
+    border: 1px solid #0f3460;
+    color: white;
+}
+
+.form-control::placeholder {
+    color: #b0b8d1;
+}
+
+/* Focus bonito */
+.form-control:focus,
+.form-select:focus {
+    background-color: #1a2a4f;
+    color: white;
+    border-color: #e94560;
+    box-shadow: 0 0 8px rgba(233,69,96,.5);
+}
+
+/* Labels */
+.form-label {
+    color: #b0b8d1;
+}
+
+/* Botón */
+.btn-success {
+    background: #e94560;
+    border: none;
+}
+
+.btn-success:hover {
+    background: #e94560;
+    box-shadow: 0 0 10px #e94560;
+}
+
+/* Tabla contenedor */
+.bg-white {
+    background-color: #16213e !important;
+    border: 1px solid #0f3460;
+    color: white;
+}
+
+/* Tabla */
+.table {
+    color: white;
+}
+
+/* Cabecera tabla */
+.table-light {
+    background-color: #1a2a4f !important;
+    color: white;
+}
+
+/* Hover filas */
+.table-hover tbody tr:hover {
+    background-color: rgba(233,69,96,0.1);
+}
+
+/* Badges */
+.badge {
+    font-weight: 500;
+}
+
+/* Botones acciones */
+.btn-warning {
+    background: #facc15;
+    border: none;
+    color: black;
+}
+
+.btn-danger {
+    background: #ef4444;
+    border: none;
+}
+
+/* Títulos */
+h5 {
+    color: white;
+}
+
+/* IMPORTANTE: quitar gris de bootstrap */
+.text-muted {
+    color: #b0b8d1 !important;
 }

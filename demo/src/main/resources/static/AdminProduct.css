@@ -46,12 +46,15 @@ body {
 /* Botón */
 .btn-success {
     background: #ef4444;
+    background: #e94560;
     border: none;
 }
 
 .btn-success:hover {
     background: #ef4444;
     box-shadow: 0 0 10px #ef4444;
+    background: #e94560;
+    box-shadow: 0 0 10px #e94560;
 }
 
 /* Tabla contenedor */

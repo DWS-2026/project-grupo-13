@@ -1,9 +1,124 @@
-/* Específico para AdminCategories.html */
-.category-form-box {
-    max-width: 600px;
-    margin: 0 auto;
+/* Fondo general */
+body {
+    background-color: #0f172a !important;
+    color: white;
 }
 
-.category-form-box h3 {
-    color: var(--accent-blue); /* Resalta el título del form */
+/* Navbar */
+.navbar {
+    border-bottom: 1px solid #0f3460;
 }
+
+/* Card (formulario) */
+.card {
+    background-color: #16213e !important;
+    border: 1px solid #0f3460;
+    color: white;
+    box-shadow: 0 0 12px rgba(0,0,0,.4);
+}
+
+/* Inputs */
+.form-control {
+    background-color: #1a2a4f;
+    border: 1px solid #0f3460;
+    color: white;
+}
+
+.form-control::placeholder {
+    color: #b0b8d1;
+}
+
+/* Focus */
+.form-control:focus {
+    background-color: #1a2a4f;
+    color: white;
+    border-color: #e94560;
+    box-shadow: 0 0 8px rgba(233,69,96,.5);
+}
+
+/* Labels */
+.form-label {
+    color: #b0b8d1;
+}
+
+/* Botón guardar */
+.btn-success {
+    background: #e94560;
+    border: none;
+}
+
+.btn-success:hover {
+    background: #e94560;
+    box-shadow: 0 0 10px #e94560;
+}
+
+/* Tabla contenedor */
+.bg-white {
+    background-color: #16213e !important;
+    border: 1px solid #0f3460;
+}
+
+/* Tabla */
+.table {
+    color: white;
+    margin-bottom: 0;
+}
+
+/* Cabecera tabla */
+.table-dark {
+    background-color: #1a2a4f !important;
+}
+
+/* Hover filas */
+.table-hover tbody tr:hover {
+    background-color: rgba(233,69,96,0.1);
+}
+
+/* Bordes tabla */
+.table-bordered th,
+.table-bordered td {
+    border-color: #0f3460 !important;
+}
+
+/* Botones acciones */
+.btn-warning {
+    background: #facc15;
+    border: none;
+    color: black;
+}
+
+.btn-danger {
+    background: #ef4444;
+    border: none;
+}
+
+/* Títulos */
+h5 {
+    color: white;
+}
+
+/* Quitar gris bootstrap */
+.text-muted {
+    color: #b0b8d1 !important;
+}
+
+.table-dark {
+    background-color: #16213e !important; /* mismo color que la tabla */
+    color: white !important;
+}
+
+.table-dark th {
+    
+    background-color: #16213e !important;
+    color: white !important;
+    border-color: #0f3460 !important;
+
+
+    
+}
+
+.table {
+    border-radius: 10px;
+    overflow: hidden; /* MUY IMPORTANTE */
+}
+

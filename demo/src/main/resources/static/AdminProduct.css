@@ -45,13 +45,13 @@ body {
 
 /* Botón */
 .btn-success {
-    background: #22c55e;
+    background: #ef4444;
     border: none;
 }
 
 .btn-success:hover {
-    background: #16a34a;
-    box-shadow: 0 0 10px rgba(34,197,94,.5);
+    background: #ef4444;
+    box-shadow: 0 0 10px #ef4444;
 }
 
 /* Tabla contenedor */

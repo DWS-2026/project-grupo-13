@@ -1,58 +1,182 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>El desván del friki</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="/GlobalStyle.css">
-        <link rel="stylesheet" href="/Index.css">
-        
-        <style>
-            body { padding-top: 70px; }
-            html { scroll-behavior: smooth; }  
-        </style>
-        
-    </head>
-    <body id="inicio">
 
-        <header>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-                <div class="container">
-                    <a class="navbar-brand" href="/Index">El Desván</a>
-                    <div class="navbar-nav ms-auto align-items-center">
-                        <a class="nav-link active" href="/Index">Inicio</a>
-                        <a class="nav-link" href="/CategoriesScreen">Categorías</a>
-                        <a class="nav-link" href="/PromotionsScreen">Ofertas</a>
-                        
-                        <a class="nav-link d-flex align-items-center" href="/Login">
-                            <img src="/imagenes/agregar-usuario.png" width="20" height="20" style="filter: invert(1);" class="me-2">
-                            <span>Iniciar sesión / Registrarse</span>
-                        </a>
-                        
-                        <a class="nav-link btn btn-outline-info ms-lg-2" href="/EditProfile">Mi cuenta</a>
-                        <a class="nav-link d-flex align-items-center" href="/ShoppingCart">
-                            <img src="/imagenes/carrito.png" width="20" height="20" style="filter: invert(1);" class="me-2">
-                        </a>
-                    </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El desván del friki</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/GlobalStyle.css">
+    <link rel="stylesheet" href="/Index.css">
+
+    <style>
+        body { padding-top: 70px; }
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+
+<body id="inicio">
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="/Index">El Desván</a>
+
+                <div class="navbar-nav ms-auto align-items-center">
+                    <a class="nav-link active" href="/Index">Inicio</a>
+                    <a class="nav-link" href="/CategoriesScreen">Categorías</a>
+                    <a class="nav-link" href="/PromotionsScreen">Ofertas</a>
+
+                    <a class="nav-link d-flex align-items-center" href="/Login">
+                        <img src="/imagenes/agregar-usuario.png" width="20" height="20"
+                            style="filter: invert(1);" class="me-2">
+                        Iniciar sesión / Registrarse
+                    </a>
+
+                    <a class="nav-link btn btn-outline-info ms-lg-2" href="/EditProfile">Mi cuenta</a>
+
+                    <a class="nav-link d-flex align-items-center" href="/ShoppingCart">
+                        <img src="/imagenes/carrito.png" width="20" height="20"
+                            style="filter: invert(1);" class="me-2">
+                        Carrito
+                    </a>
                 </div>
-            </nav>
-        </header>
+            </div>
+        </nav>
+    </header>
 
-        <main class="container mt-5">
-            <div class="text-center mb-5">
-                <h1 class="display-4 fw-bold">Bienvenido al Desván del Friki</h1>
-                <p class="lead">Tu tienda de confianza para todo lo relacionado con el mundo geek.</p>
+    <main class="container mt-5">
+
+        <div class="text-center mb-5">
+            <h1 class="display-4 fw-bold">Bienvenido al Desván del Friki</h1>
+            <p class="lead">Tu tienda de confianza para todo lo relacionado con el mundo geek.</p>
+        </div>
+
+        <div id="carruselFriki" class="carousel slide shadow-lg" data-bs-ride="carousel">
+
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carruselFriki" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#carruselFriki" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#carruselFriki" data-bs-slide-to="2"></button>
+                <button type="button" data-bs-target="#carruselFriki" data-bs-slide-to="3"></button>
             </div>
 
-            
-        </main>
+            <div class="carousel-inner rounded-4 border border-info">
 
-        <footer class="footer_principal">
-            <p>© 2026 El desván del friki</p>
-        </footer>
+                <div class="carousel-item active" data-bs-interval="4000">
+                    <div class="overlay-carrusel"></div> <img src="/imagenes/pcs.jpg" class="d-block w-100 img-carrusel" alt="Ordenadores">
+                    <div class="carousel-caption">
+                        <h2 class="fw-bold text-uppercase">Ordenadores de Última Generación</h2>
+                        <p>Potencia sin límites para tu setup.</p>
+                        <a href="/Computers" class="btn btn-cyber">Ver Sección</a>
+                    </div>
+                </div>
 
-    
-    </body>
+                <div class="carousel-item" data-bs-interval="4000">
+                    <div class="overlay-carrusel"></div>
+                    <img src="/imagenes/tjs.jpg" class="d-block w-100 img-carrusel" alt="GPU">
+                    <div class="carousel-caption">
+                        <h2 class="fw-bold text-uppercase">Gráficas RTX y RX</h2>
+                        <p>El rendimiento que tus juegos merecen.</p>
+                        <a href="/GPU" class="btn btn-cyber">Explorar GPUs</a>
+                    </div>
+                </div>
 
+                <div class="carousel-item" data-bs-interval="4000">
+                    <div class="overlay-carrusel"></div>
+                    <img src="/imagenes/smart.jpg" class="d-block w-100 img-carrusel" alt="Smartphones">
+                    <div class="carousel-caption">
+                        <h2 class="fw-bold text-uppercase">Smartphones Pro</h2>
+                        <p>Los mejores Smartphones del mercado.</p>
+                        <a href="/Smartphones" class="btn btn-cyber">Explorar móviles</a>
+                    </div>
+                </div>
+
+                <div class="carousel-item" data-bs-interval="4000">
+                    <div class="overlay-carrusel"></div>
+                    <img src="/imagenes/tablets.avif" class="d-block w-100 img-carrusel" alt="Tablets">
+                    <div class="carousel-caption">
+                        <h2 class="fw-bold text-uppercase">Tablets Ergonómicas</h2>
+                        <p>Productividad y diseño en tu mano.</p>
+                        <a href="/Tablets" class="btn btn-cyber">Explorar Tablets</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#carruselFriki" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carruselFriki" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+
+        <section class="mt-5 py-5">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2 class="fw-bold">Sobre El Desván del Friki</h2>
+                    <p class="mt-3">
+                        Somos apasionados de la tecnología y la cultura geek. En nuestra tienda no solo encontrarás hardware de última generación, sino un espacio creado por y para entusiastas. Desde componentes especializados hasta los gadgets más innovadores del mercado.
+                    </p>
+                    <p>
+                        Nuestra misión es asesorarte para que encuentres exactamente lo que necesitas, garantizando siempre la mejor calidad y un servicio postventa que entiende tus necesidades.
+                    </p>
+                </div>
+                <div class="col-md-6 text-center">
+                    <div class="p-4 bg-dark text-info rounded-4 border border-info shadow">
+                        <h3>¿Por qué elegirnos?</h3>
+                        <ul class="list-unstyled mt-3">
+                            <li>🚀 Envíos ultra rápidos</li>
+                            <li>🛠️ Soporte técnico experto</li>
+                            <li>💎 Productos 100% originales</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mt-5 mb-5">
+            <h2 class="fw-bold text-center mb-4">Visítanos en nuestra Sede</h2>
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="card h-100 border-info bg-light">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Información de Contacto</h5>
+                            <p class="card-text">
+                                📍 <strong>Dirección:</strong> Calle de la Tecnología 42, Madrid, España.<br>
+                                📞 <strong>Teléfono:</strong> +34 912 345 678<br>
+                                📧 <strong>Email:</strong> info@eldesvandelfriki.com
+                            </p>
+                            <hr>
+                            <h5 class="card-title fw-bold">Horario</h5>
+                            <p class="card-text">
+                                Lunes a Viernes: 10:00 - 20:00<br>
+                                Sábados: 10:00 - 14:00
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="map-container shadow border border-dark">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12149.111818163553!2d-3.703790!3d40.416775!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd42287d48051729%3A0x8a1c9d44c80340b!2sPuerta%20del%20Sol!5e0!3m2!1ses!2ses!4v1700000000000!5m2!1ses!2ses" 
+                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer_principal text-center mt-5">
+        <p>© 2026 El desván del friki</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
 </html>

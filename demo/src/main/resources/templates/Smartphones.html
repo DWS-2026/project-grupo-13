@@ -42,130 +42,19 @@
 
   <div class="row g-4">
 
-    <!-- Categoría -->
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <a href="/Product" class="text-decoration-none">
-        <div class="card category-card h-100 text-center p-3">
-          <img src="/imagenes/Iphone17.jpg" class="card-img-top rounded" alt="Smartphones">
-          <div class="card-body">
-            <h5 class="category-title">Iphone 17</h5>
-          </div>
+      {{#productos}}
+  <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+    <a href="/Product/{{nombre}}" class="text-decoration-none">
+      <div class="card category-card h-100 text-center p-3">
+        <img src="{{imagen}}" class="card-img-top rounded" alt="{{nombre}}">
+        <div class="card-body">
+          <h5 class="category-title">{{nombre}}</h5>
         </div>
-      </a>
-    </div>
+      </div>
+    </a>
+  </div>
+  {{/productos}}
 
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <a href="/Product" class="text-decoration-none">
-        <div class="card category-card h-100 text-center p-3">
-          <img src="/imagenes/Oppo.jpg" class="card-img-top rounded" alt="Ordenadores">
-          <div class="card-body">
-            <h5 class="category-title">Oppo Reno 12 5G</h5>
-          </div>
-        </div>
-      </a>
-    </div>
-
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <a href="/Product" class="text-decoration-none">
-        <div class="card category-card h-100 text-center p-3">
-          <img src="/imagenes/samsung.jpg" class="card-img-top rounded" alt="Tarjetas Gráficas">
-          <div class="card-body">
-            <h5 class="category-title">Samsung Galaxy Z Flip 7 </h5>
-          </div>
-        </div>
-      </a>
-    </div>
-
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <a href="/Product" class="text-decoration-none">
-        <div class="card category-card h-100 text-center p-3">
-          <img src="/imagenes/samsung_galaxy_xcover7_1__1.jpg" class="card-img-top rounded" alt="Tablets">
-          <div class="card-body">
-            <h5 class="category-title">Samsung Galaxy XCover 7</h5>
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <a href="/Product" class="text-decoration-none">
-        <div class="card category-card h-100 text-center p-3">
-          <img src="/imagenes/samsung_galaxy_s25_fe_negro_1_.png" class="card-img-top rounded" alt="Smartphones">
-          <div class="card-body">
-            <h5 class="category-title">Samsung Galaxy s25</h5>
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <a href="/Product" class="text-decoration-none">
-        <div class="card category-card h-100 text-center p-3">
-          <img src="/imagenes/samsung A53.jpg" class="card-img-top rounded" alt="Smartphones">
-          <div class="card-body">
-            <h5 class="category-title">Samsung Galaxy A53</h5>
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <a href="/Product" class="text-decoration-none">
-        <div class="card category-card h-100 text-center p-3">
-          <img src="/imagenes/iphone 16.jpg" class="card-img-top rounded" alt="Smartphones">
-          <div class="card-body">
-            <h5 class="category-title">Iphone 16</h5>
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <a href="/Product" class="text-decoration-none">
-        <div class="card category-card h-100 text-center p-3">
-          <img src="/imagenes/iphone15.jpg" class="card-img-top rounded" alt="Smartphones">
-          <div class="card-body">
-            <h5 class="category-title">Iphone 15</h5>
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <a href="/Product" class="text-decoration-none">
-        <div class="card category-card h-100 text-center p-3">
-          <img src="/imagenes/iphone14.jpg" class="card-img-top rounded" alt="Smartphones">
-          <div class="card-body">
-            <h5 class="category-title">Iphone 14</h5>
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <a href="/Product" class="text-decoration-none">
-        <div class="card category-card h-100 text-center p-3">
-          <img src="/imagenes/iphone13.jpg" class="card-img-top rounded" alt="Smartphones">
-          <div class="card-body">
-            <h5 class="category-title">Iphone 13</h5>
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <a href="/Product" class="text-decoration-none">
-        <div class="card category-card h-100 text-center p-3">
-          <img src="/imagenes/iphone12.jpg" class="card-img-top rounded" alt="Smartphones">
-          <div class="card-body">
-            <h5 class="category-title">Iphone 12</h5>
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <a href="/Product" class="text-decoration-none">
-        <div class="card category-card h-100 text-center p-3">
-          <img src="/imagenes/iphone 11.jpg" class="card-img-top rounded" alt="Smartphones">
-          <div class="card-body">
-            <h5 class="category-title">Iphone 11</h5>
-          </div>
-        </div>
-      </a>
-    </div>
 
   </div>
 </div>

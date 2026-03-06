@@ -4,19 +4,13 @@ import java.util.List;
 
 public class DataService {
 
-    public static List<Category> getCategories() {
+    public static List<Producto> getProductos() {
         return List.of(
-            new Category("Laptops", "Portátiles"),
-            new Category("Smartphones", "Móviles"),
-            new Category("Tablets", "Tabletas")
-        );
-    }
-
-    public static List<Product> getProducts() {
-        return List.of(
-            new Product("MacBook Air", "Ligero y potente", 1299, "Laptops"),
-            new Product("Dell XPS 13", "Ultrabook premium", 1499, "Laptops")
+            new Producto("Iphone 17", 1299, "Último modelo", "/imagenes/Iphone17.jpg", "Smartphones"),
+            new Producto("Oppo Reno 12 5G", 499, "Gama media premium", "/imagenes/Oppo.jpg", "Smartphones"),
+            new Producto("Samsung Galaxy Z Flip 7", 1099, "Plegable", "/imagenes/samsung.jpg", "Smartphones")
         );
     }
 }
+
 

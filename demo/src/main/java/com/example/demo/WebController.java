@@ -79,11 +79,6 @@ public class WebController {
         return "ShoppingCart";
     }
 
-    @GetMapping("/Smartphones")
-    public String Smartphones(){
-        return "Smartphones";
-    }
-
     @GetMapping("/Tablets")
     public String Tablets(){
         return "Tablets";

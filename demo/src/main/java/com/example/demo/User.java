@@ -12,7 +12,7 @@ public class User {
     private String password;
 
     // AÑADIMOS EL CAMPO DE FECHA DE NACIMIENTO
-    @DateTimeFormat(pattern = "yyyy-MM-dd") // Obligatorio para formatear la fecha que envía el HTML
+    @DateTimeFormat(pattern = "dd-MM-yyyy") // Obligatorio para formatear la fecha que envía el HTML
     private LocalDate birthDate;
 
     // 1. CONSTRUCTOR VACÍO OBLIGATORIO para el framework

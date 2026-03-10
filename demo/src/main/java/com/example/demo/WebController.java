@@ -154,21 +154,6 @@ public class WebController {
 
     }
 
-<<<<<<< HEAD
-
-
-    @GetMapping("/Smartphones")
-
-    public String Smartphones(){
-
-        return "Smartphones";
-
-    }
-
-
-
-=======
->>>>>>> 23b8319750d0499cbda647949a60f2957ee03b90
     @GetMapping("/Tablets")
 
     public String Tablets(){

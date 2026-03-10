@@ -13,7 +13,7 @@ public class ProductController {
     @GetMapping("/categoria/{nombre}")
     public String categoria(@PathVariable String nombre, Model model) {
 
-        List<Producto> lista = DataService.getProductos()
+        List<Product> lista = DataService.getProductos()
             .stream()
             .filter(p -> p.getCategoria().equalsIgnoreCase(nombre))
             .toList();
@@ -27,7 +27,7 @@ public class ProductController {
     @GetMapping("/producto/{id}")
     public String producto(@PathVariable int id, Model model) {
 
-        Producto p = DataService.getProductos()
+        Product p = DataService.getProductos()
             .stream()
             .filter(prod -> prod.getId() == id)
             .findFirst()

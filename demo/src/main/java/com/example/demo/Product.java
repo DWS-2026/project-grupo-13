@@ -4,7 +4,7 @@ import jakarta.persistence.Id;
 
 
 @Entity
-public class Producto {
+public class Product {
 
     @Id
     private int id;
@@ -15,7 +15,7 @@ public class Producto {
     private String imagen;
     private String categoria;
 
-    public Producto(int id, String nombre, double precio, String descripcion, String imagen, String categoria) {
+    public Product(int id, String nombre, double precio, String descripcion, String imagen, String categoria) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
@@ -24,7 +24,7 @@ public class Producto {
         this.categoria = categoria;
     }
 
-    public Producto() {} //Para JPA
+    public Product() {} //Para JPA
 
     public int getId() {return id; }
     public String getNombre() { return nombre; }

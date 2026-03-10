@@ -127,12 +127,7 @@ private List<Review> todasLasValoraciones = new ArrayList<>();
 
 @GetMapping("/Product")
 public String verProducto(@RequestParam(name="id") int id, org.springframework.ui.Model model) {
-    
-    // Aquí asumo que ya obtienes tu objeto 'producto' de tu base de datos/lógica dinámica
-    // Product producto = productoService.obtenerPorId(id); 
-    
-    // Filtramos la lista de valoraciones para que solo pasen las que coinciden con el ID del producto
-    List<Review> valoracionesFiltradas = todasLasValoraciones.stream()
+        List<Review> valoracionesFiltradas = todasLasValoraciones.stream()
             .filter(r -> r.getProductoId() == id)
             .toList();
 

@@ -1,7 +1,14 @@
 package com.example.demo;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
-public class Product {
+
+@Entity
+public class Producto {
+
+    @Id
     private int id;
+
     private String nombre;
     private double precio;
     private String descripcion;
@@ -16,6 +23,8 @@ public class Product {
         this.imagen = imagen;
         this.categoria = categoria;
     }
+
+    public Producto() {} //Para JPA
 
     public int getId() {return id; }
     public String getNombre() { return nombre; }

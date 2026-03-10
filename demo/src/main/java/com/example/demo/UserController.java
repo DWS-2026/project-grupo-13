@@ -11,7 +11,7 @@ import java.util.List;
 @Controller
 public class UserController {
 
-    private static List<User> listaUsuarios = new ArrayList<>();
+    public static List<User> listaUsuarios = new ArrayList<>();
 
     @PostMapping("/registro")
     public String procesarRegistro(@ModelAttribute User usuarioRegistrado) {
@@ -21,6 +21,7 @@ public class UserController {
         System.out.println("¡USUARIO GUARDADO EN LA LISTA!");
         System.out.println("Nombre: " + usuarioRegistrado.getName());
         System.out.println("Total de usuarios registrados: " + listaUsuarios.size());
+        System.out.println("Fecha: " + usuarioRegistrado.getBirthDate());
         System.out.println("-------------------------------------------");
         
         return "redirect:/Login"; 

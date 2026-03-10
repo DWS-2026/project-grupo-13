@@ -154,6 +154,18 @@ public class WebController {
 
     }
 
+
+
+    @GetMapping("/Smartphones")
+
+    public String Smartphones(){
+
+        return "Smartphones";
+
+    }
+
+
+
     @GetMapping("/Tablets")
 
     public String Tablets(){

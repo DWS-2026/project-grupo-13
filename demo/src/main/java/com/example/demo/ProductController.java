@@ -24,5 +24,18 @@ public class ProductController {
         return "Categoria"; // Categoria.html
     }
 
+    @GetMapping("/producto/{id}")
+    public String producto(@PathVariable int id, Model model) {
+
+        Producto p = DataService.getProductos()
+            .stream()
+            .filter(prod -> prod.getId() == id)
+            .findFirst()
+            .orElse(null);
+
+        model.addAttribute("producto", p);
+
+        return "Product"; // producto.html
+    }
 
 }

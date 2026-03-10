@@ -180,10 +180,6 @@ public String guardarValoracion(@RequestBody Review nuevaReview) {
 
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 8b65b2074bc7d0569c4cfc6b577b5f532ec0d927
 
     @GetMapping("/Smartphones")
 
@@ -194,10 +190,6 @@ public String guardarValoracion(@RequestBody Review nuevaReview) {
     }
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 8b65b2074bc7d0569c4cfc6b577b5f532ec0d927
     @GetMapping("/Tablets")
 
     public String Tablets(){

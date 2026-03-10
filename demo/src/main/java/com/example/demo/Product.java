@@ -4,7 +4,7 @@ import jakarta.persistence.Id;
 
 
 @Entity
-public class Producto {
+public class Product {
 
     @Id
     private int id;
@@ -24,7 +24,7 @@ public class Producto {
         this.categoria = categoria;
     }
 
-    public Producto() {} //Para JPA
+    public Product() {} //Para JPA
 
     public int getId() {return id; }
     public String getNombre() { return nombre; }

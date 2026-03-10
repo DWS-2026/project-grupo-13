@@ -12,6 +12,7 @@ public class DataService {
 
             new Producto(4, "MacBook Pro", 1999, "Portátil profesional", "/imagenes/asus2.jpg", "Ordenadores"),
             new Producto(5, "Asus ROG Strix", 1499, "Gaming", "/imagenes/asus1.jpg", "Ordenadores"),
+            new Producto(9, "Lenovo Legion", 999, "Portátil doméstico", "/imagenes/lenovo.jpg", "Ordenadores"),
 
             new Producto(6, "RTX 4090", 1999, "GPU tope de gama", "/imagenes/grafica1.jpg", "GPU"),
             new Producto(7, "RTX 4070", 699, "Gama media-alta", "/imagenes/grafica3.jpg", "GPU"),

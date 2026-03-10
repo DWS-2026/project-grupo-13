@@ -1,153 +1,99 @@
-body {
-      background-color: #0f172a;
-      color: white;
-    }
-
-    .category-card {
-      background: #111827;
-      border: 1px solid #1f2937;
-      transition: all 0.3s ease;
-    }
-
-    .category-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 0 25px rgba(0, 212, 255, 0.35);
-    }
-
-    .category-card img {
-      height: 180px;
-      object-fit: cover;
-    }
-
-    .category-title {
-      color: #00d4ff;
-      font-weight: 600;
-    }
-
-    .producto {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-}
-
-.producto img {
-    width: 300px;   /* imagen más grande */
-    height: auto;
-}
-
-.producto .info {
-    max-width: 500px;
-}
-
+/* --- 1. MANTENER DISTRIBUCIÓN ORIGINAL --- */
 .producto {
     display: flex;
-    gap: 30px;
-    max-width: 900px;
+    align-items: flex-start;
+    gap: 40px; /* Espacio entre imagen e info */
+    max-width: 1000px;
     margin: 40px auto;
-    font-family: Arial, sans-serif;
 }
 
 .producto img {
-    width: 320px;
-    border-radius: 8px;
+    width: 400px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
 
 .info {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 15px;
 }
 
-.nombre {
-    font-size: 28px;
-    margin: 0;
-}
-
-.descripcion {
-    color: #555;
-    line-height: 1.5;
-}
-
-.precio {
-    font-size: 24px;
-    font-weight: bold;
-    color: #2c7be5;
-}
-
-.acciones a {
-    display: inline-block;
-    margin-right: 15px;
-    padding: 10px 16px;
-    background: #2c7be5;
-    color: white;
-    text-decoration: none;
-    border-radius: 6px;
-}
-
-.acciones a:last-child {
-    background: #555;
-}
-
+/* --- 2. ESTILO DARK (Como tu Login) --- */
 .añadir-valoracion {
     max-width: 900px;
     margin: 40px auto;
+    padding: 30px;
+    background-color: #111c30; /* Azul oscuro del login */
+    border-radius: 12px;
+    border: 1px solid #1f2937;
 }
 
-#formValoracion {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-#formValoracion input,
-#formValoracion textarea {
-    padding: 10px;
-    font-size: 16px;
-}
-
-.estrellas-input span {
-    font-size: 28px;
-    cursor: pointer;
-    color: #ccc;
-}
-
-.estrellas-input span.activa {
-    color: #f5b301;
-}
-
-button {
-    padding: 10px;
-    background: #2c7be5;
+.añadir-valoracion h2 {
     color: white;
-    border: none;
-    cursor: pointer;
-}
-.valoraciones {
-    max-width: 900px;
-    margin: 50px auto;
-    font-family: Arial, sans-serif;
-}
-
-.valoraciones h2 {
+    font-size: 1.8rem;
     margin-bottom: 20px;
 }
 
-.valoracion {
-    border-top: 1px solid #ddd;
-    padding: 15px 0;
+/* Inputs oscuros */
+#formValoracion input, 
+#formValoracion textarea {
+    background-color: #0f172a; 
+    border: 1px solid #334155;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    width: 100%;
+    margin-bottom: 15px;
 }
 
-.estrellas {
-    color: #f5b301;
-    font-size: 20px;
-}
-
-.usuario {
+/* --- 3. EL BOTÓN ROJO (Igual al "Sign in") --- */
+button[type="submit"] {
+    background-color: #e11d48; /* El rojo de tu captura */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
     font-weight: bold;
-    margin: 5px 0;
+    cursor: pointer;
+    width: 100%; /* Para que ocupe el ancho como en el login */
+    transition: background 0.3s ease;
 }
 
-.comentario {
-    color: #555;
-    line-height: 1.4;
+button[type="submit"]:hover {
+    background-color: #be123c;
+    box-shadow: 0 0 15px rgba(225, 29, 72, 0.4);
+}
+
+/* Estrellas */
+.estrellas-input span {
+    font-size: 30px;
+    color: #475569;
+    cursor: pointer;
+}
+
+.estrellas-input span.active {
+    color: #fbbf24; /* Dorado para que resalte */
+}
+/* Esto fuerza a que los textos dentro de las valoraciones sean claros */
+.lista-valoraciones h2, 
+.lista-valoraciones .card-title {
+    color: #ffffff !important;
+}
+
+.lista-valoraciones .card-text {
+    color: #f8f9fa !important; /* Un blanco roto para que no canse la vista */
+}
+
+.lista-valoraciones .text-muted, 
+.lista-valoraciones small {
+    color: #adb5bd !important; /* Gris claro para la fecha */
+}
+
+/* Si quieres que el fondo de la tarjeta sea un poco más claro que el fondo general */
+.lista-valoraciones .card {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }

@@ -1,6 +1,6 @@
 package com.example.demo;
 
-public class Producto {
+public class Product {
     private int id;
     private String nombre;
     private double precio;
@@ -8,7 +8,7 @@ public class Producto {
     private String imagen;
     private String categoria;
 
-    public Producto(int id, String nombre, double precio, String descripcion, String imagen, String categoria) {
+    public Product(int id, String nombre, double precio, String descripcion, String imagen, String categoria) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;

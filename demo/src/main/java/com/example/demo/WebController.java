@@ -2,9 +2,16 @@ package com.example.demo;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 
@@ -116,13 +123,32 @@ public class WebController {
 
 
 
-    @GetMapping("/Product")
+private List<Review> todasLasValoraciones = new ArrayList<>();
 
-    public String Product(){
+@GetMapping("/Product")
+public String verProducto(@RequestParam(name="id") int id, org.springframework.ui.Model model) {
+    
+    // Aquí asumo que ya obtienes tu objeto 'producto' de tu base de datos/lógica dinámica
+    // Product producto = productoService.obtenerPorId(id); 
+    
+    // Filtramos la lista de valoraciones para que solo pasen las que coinciden con el ID del producto
+    List<Review> valoracionesFiltradas = todasLasValoraciones.stream()
+            .filter(r -> r.getProductoId() == id)
+            .toList();
 
-        return "Product";
+    // Enviamos a la vista las valoraciones específicas de este producto
+    model.addAttribute("valoraciones", valoracionesFiltradas);
+    
+    return "Product";
+}
 
-    }
+@PostMapping("/api/valoraciones")
+@ResponseBody
+public String guardarValoracion(@RequestBody Review nuevaReview) {
+    // Al recibir el JSON, Review ya debe traer el productoId desde el JavaScript
+    todasLasValoraciones.add(nuevaReview);
+    return "Valoración guardada correctamente";
+}
 
 
 
@@ -154,8 +180,6 @@ public class WebController {
 
     }
 
-<<<<<<< HEAD
-
 
     @GetMapping("/Smartphones")
 
@@ -166,9 +190,6 @@ public class WebController {
     }
 
 
-
-=======
->>>>>>> 23b8319750d0499cbda647949a60f2957ee03b90
     @GetMapping("/Tablets")
 
     public String Tablets(){
@@ -176,5 +197,4 @@ public class WebController {
         return "Tablets";
 
     }
-
 }

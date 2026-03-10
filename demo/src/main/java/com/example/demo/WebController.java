@@ -154,6 +154,7 @@ public class WebController {
 
     }
 
+<<<<<<< HEAD
 
 
     @GetMapping("/Smartphones")
@@ -166,6 +167,8 @@ public class WebController {
 
 
 
+=======
+>>>>>>> 23b8319750d0499cbda647949a60f2957ee03b90
     @GetMapping("/Tablets")
 
     public String Tablets(){

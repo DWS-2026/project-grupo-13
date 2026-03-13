@@ -146,7 +146,7 @@ public String guardarValoracion(@PathVariable long productId, Review nuevaReview
   
     todasLasValoraciones.add(nuevaReview);
 
-    System.out.println(nuevaReview.getEstrellas());
+    System.out.println(nuevaReview.getProductoId());
     System.out.println(nuevaReview.getComentario());
     System.out.println(nuevaReview.getUsuario());
 

@@ -21,7 +21,7 @@ public class ProductController {
         model.addAttribute("productos", lista);
         model.addAttribute("categoria", nombre);
 
-        return "Categoria"; // Categoria.html
+        return "Categories"; // Categoria.html
     }
 
     @GetMapping("/producto/{id}")

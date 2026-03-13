@@ -5,7 +5,6 @@
   <title>{{producto.nombre}}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/GlobalStyle.css">
   <link rel="stylesheet" href="/Product.css">
@@ -50,16 +49,22 @@
         <p class="precio">{{producto.precio}} €</p>
 
         <div class="acciones">
-            <a href="/Comprar/{{producto.id}}">Comprar ahora</a>
-            <a href="/ShoppingCart">Añadir al carrito</a>
+            <a href="/Comprar/{{producto.id}}" class="btn btn-primary" style="margin-right: 15px;">Comprar ahora</a>
+            
+            <form action="/agregar-carrito" method="POST" style="display: inline-block;">
+                <input type="hidden" name="nombreProducto" value="{{producto.nombre}}">
+                <input type="hidden" name="imagenProducto" value="{{producto.imagen}}">
+                
+                <button type="submit" style="background-color: #606c76; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; font-family: inherit; cursor: pointer; display: inline-block;">
+                    Añadir al carrito
+                </button>
+            </form>
         </div>
-    </div>
 </article>
 
 <section class="valoraciones">
     <h2>Valoraciones de clientes</h2>
 
-    <!-- Estas valoraciones siguen siendo estáticas, lo cual está bien por ahora -->
     <div class="valoracion">
         <div class="estrellas">★★★★★</div>
         <p class="usuario">Juan Pérez</p>

@@ -127,6 +127,14 @@ public class WebController {
         return "Login";
 
     }
+     @GetMapping("/OrderHistory")
+
+    public String OrderHistory(){
+
+        return "OrderHistory";
+
+    }
+
 
 
 

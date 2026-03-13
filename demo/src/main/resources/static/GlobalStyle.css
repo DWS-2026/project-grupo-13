@@ -98,3 +98,41 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 a:hover .category-title {
     color: #00d4ff !important;
 }
+select[name="estrellas"] {
+    width: 100%; /* Para que ocupe el mismo ancho que los otros campos */
+    max-width: 150px; /* O un ancho fijo si prefieres que sea corto, pero bien alineado */
+    font-size: 1.1rem;        
+    color: #ffcc00;           
+    background-color: #0f172a; /* Un tono más oscuro para que coincida con el fondo */
+    border: 1px solid #334155; /* Borde sutil similar a los otros inputs */
+    padding: 0.6rem 1rem;      /* Más espacio interno para que sea cómodo */
+    border-radius: 8px;        /* Bordes más redondeados y modernos */
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23ffcc00'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.7rem center;
+    background-size: 1rem;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+select[name="estrellas"]:focus {
+    border-color: #ffcc00;
+    box-shadow: 0 0 0 2px rgba(255, 204, 0, 0.2);
+}
+
+select[name="estrellas"] option {
+    background-color: #0f172a;
+    color: #ffcc00;
+    padding: 10px;
+}
+
+.lista-valoraciones .text-warning {
+    font-size: 1.2rem;        
+    color: #ffcc00;           
+    text-shadow: 0 0 8px rgba(255, 170, 0, 0.4);
+}

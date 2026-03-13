@@ -64,21 +64,21 @@ Carrito
 <section class="añadir-valoracion">
 <h2>Deja tu valoración</h2>
 
-<form id="formValoracion">
+<form action="/createreview/{{producto.id}}" method="post" id="formValoracion">
 
 <input type="hidden" id="productoId" value="{{producto.id}}">
 
-<input type="text" id="usuario" placeholder="Tu nombre" required>
+<input type="text" name="usuario" placeholder="Tu nombre" required>
 
-<div class="estrellas-input" id="contenedorEstrellas">
-<span data-valor="1">★</span>
-<span data-valor="2">★</span>
-<span data-valor="3">★</span>
-<span data-valor="4">★</span>
-<span data-valor="5">★</span>
-</div>
+<select name="estrellas">
+    <option value="1" selected>★</option>
+    <option value="2">★★</option>
+    <option value="3">★★★</option>
+    <option value="4">★★★★</option>
+    <option value="5">★★★★★</option>
+</select>
 
-<textarea id="comentario" placeholder="Escribe tu opinión" rows="4" required></textarea>
+<textarea name="comentario" placeholder="Escribe tu opinión" rows="4" required></textarea>
 
 <button type="submit" class="btn btn-success">Enviar valoración</button>
 
@@ -128,81 +128,5 @@ Aún no hay reseñas para este producto. ¡Sé el primero en opinar!
 <footer class="footer_principal mt-5 text-center">
 <p>© 2026 El desván del friki</p>
 </footer>
-
-<script>
-
-let estrellasSeleccionadas = 0;
-const estrellas = document.querySelectorAll('.estrellas-input span');
-
-estrellas.forEach(estrella => {
-estrella.addEventListener('click', function() {
-
-estrellasSeleccionadas = this.getAttribute('data-valor');
-
-actualizarEstrellas();
-
-});
-});
-
-function actualizarEstrellas() {
-
-estrellas.forEach((s, index) => {
-
-if (index < estrellasSeleccionadas) {
-s.classList.add('active');
-}
-else {
-s.classList.remove('active');
-}
-
-});
-
-}
-
-document.getElementById('formValoracion').addEventListener('submit', function(e) {
-
-e.preventDefault();
-
-if (estrellasSeleccionadas === 0) {
-alert("Por favor, selecciona una puntuación con estrellas.");
-return;
-}
-
-const data = {
-
-productoId: Number(document.getElementById('productoId').value),
-usuario: document.getElementById('usuario').value,
-estrellas: Number(estrellasSeleccionadas),
-comentario: document.getElementById('comentario').value
-
-};
-
-fetch('/api/valoraciones', {
-
-method: 'POST',
-headers: { 'Content-Type': 'application/json' },
-body: JSON.stringify(data)
-
-})
-
-.then(response => {
-
-if(response.ok) {
-alert('¡Gracias! Tu valoración se ha guardado.');
-
-const id = document.getElementById('productoId').value;
-window.location.href = "/Product?id=" + id;
-
-}
-else {
-alert('Error al enviar la valoración.');
-}
-
-})
-
-});
-
-</script>
-
 </body>
 </html>

@@ -189,15 +189,16 @@ body: JSON.stringify(data)
 
 if(response.ok) {
 alert('¡Gracias! Tu valoración se ha guardado.');
-location.reload();
+
+const id = document.getElementById('productoId').value;
+window.location.href = "/Product?id=" + id;
+
 }
 else {
 alert('Error al enviar la valoración.');
 }
 
 })
-
-.catch(error => console.error('Error:', error));
 
 });
 

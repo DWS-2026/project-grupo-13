@@ -5,15 +5,9 @@
     <title>{{producto.nombre}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<<<<<<< HEAD
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/GlobalStyle.css">
-  <link rel="stylesheet" href="/Product.css">
-=======
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/GlobalStyle.css">
     <link rel="stylesheet" href="/Product.css">
->>>>>>> 74b26fe9c3e4fe60cce6e0356be9a5ab3b3a8c9e
 </head>
 
 <body>
@@ -55,41 +49,6 @@ Carrito
 
 <p class="descripcion">{{producto.descripcion}}</p>
 
-<<<<<<< HEAD
-        <div class="acciones">
-            <a href="/Comprar/{{producto.id}}" class="btn btn-primary" style="margin-right: 15px;">Comprar ahora</a>
-            
-            <form action="/agregar-carrito" method="POST" style="display: inline-block;">
-                <input type="hidden" name="nombreProducto" value="{{producto.nombre}}">
-                <input type="hidden" name="imagenProducto" value="{{producto.imagen}}">
-                
-                <button type="submit" style="background-color: #606c76; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; font-family: inherit; cursor: pointer; display: inline-block;">
-                    Añadir al carrito
-                </button>
-            </form>
-        </div>
-</article>
-
-<section class="valoraciones">
-    <h2>Valoraciones de clientes</h2>
-
-    <div class="valoracion">
-        <div class="estrellas">★★★★★</div>
-        <p class="usuario">Juan Pérez</p>
-        <p class="comentario">
-            Muy buen producto, excelente calidad y llegó rápido.
-        </p>
-    </div>
-
-    <div class="valoracion">
-        <div class="estrellas">★★★★☆</div>
-        <p class="usuario">María López</p>
-        <p class="comentario">
-            Me gustó bastante, aunque el precio podría ser mejor.
-        </p>
-    </div>
-</section>
-=======
 <p class="precio">{{producto.precio}} €</p>
 
 <div class="acciones">
@@ -101,7 +60,6 @@ Carrito
 </article>
 
 <hr>
->>>>>>> 74b26fe9c3e4fe60cce6e0356be9a5ab3b3a8c9e
 
 <section class="añadir-valoracion">
 <h2>Deja tu valoración</h2>

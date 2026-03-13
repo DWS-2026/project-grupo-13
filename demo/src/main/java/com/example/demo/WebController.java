@@ -61,7 +61,13 @@ public class WebController {
         return "AdminUser";
 
     }
+     @GetMapping("/AdminCategories")
 
+    public String AdminCategories(){
+
+        return "AdminCategories";
+
+    }
 
 
     @GetMapping("/Computers")

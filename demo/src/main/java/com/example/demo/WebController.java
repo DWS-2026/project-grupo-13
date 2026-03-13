@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -140,26 +141,16 @@ public class WebController {
 
 private List<Review> todasLasValoraciones = new ArrayList<>();
 
-@GetMapping("/Product")
-public String verProducto(@RequestParam(name="id") int id, Model model) {
-
-    List<Review> valoracionesFiltradas = todasLasValoraciones.stream()
-        .filter(r -> r.getProductoId() == id)
-        .toList();
-
-    model.addAttribute("valoraciones", valoracionesFiltradas);
-
-    model.addAttribute("productoId", id); // importante
-
-    return "Product";
-}
-@PostMapping("/api/valoraciones")
-@ResponseBody
-public String guardarValoracion(@RequestBody Review nuevaReview) {
-
+@PostMapping("/createreview/{productId}")
+public String guardarValoracion(@PathVariable long productId, Review nuevaReview) {
+  
     todasLasValoraciones.add(nuevaReview);
 
-    return "ok";
+    System.out.println(nuevaReview.getEstrellas());
+    System.out.println(nuevaReview.getComentario());
+    System.out.println(nuevaReview.getUsuario());
+
+    return "redirect:/producto/" + productId;
 }
 
 

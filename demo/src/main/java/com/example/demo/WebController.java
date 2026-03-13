@@ -2,15 +2,26 @@ package com.example.demo;
 
 
 
+<<<<<<< HEAD
 
 
 
+=======
+import java.util.ArrayList;
+import java.util.List;
+>>>>>>> 74b26fe9c3e4fe60cce6e0356be9a5ab3b3a8c9e
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 
 
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 
@@ -107,7 +118,13 @@ public class WebController {
 
 
     }
+     @GetMapping("/AdminCategories")
 
+    public String AdminCategories(){
+
+        return "AdminCategories";
+
+    }
 
 
 
@@ -227,8 +244,11 @@ public class WebController {
 
 
     }
+     @GetMapping("/OrderHistory")
 
+    public String OrderHistory(){
 
+<<<<<<< HEAD
 
 
 
@@ -243,6 +263,9 @@ public class WebController {
 
 
         return "Product";
+=======
+        return "OrderHistory";
+>>>>>>> 74b26fe9c3e4fe60cce6e0356be9a5ab3b3a8c9e
 
 
 
@@ -250,7 +273,24 @@ public class WebController {
 
 
 
+<<<<<<< HEAD
 
+=======
+
+private List<Review> todasLasValoraciones = new ArrayList<>();
+
+@PostMapping("/createreview/{productId}")
+public String guardarValoracion(@PathVariable long productId, Review nuevaReview) {
+  
+    todasLasValoraciones.add(nuevaReview);
+
+    System.out.println(nuevaReview.getEstrellas());
+    System.out.println(nuevaReview.getComentario());
+    System.out.println(nuevaReview.getUsuario());
+
+    return "redirect:/producto/" + productId;
+}
+>>>>>>> 74b26fe9c3e4fe60cce6e0356be9a5ab3b3a8c9e
 
 
 
@@ -305,11 +345,23 @@ public class WebController {
         return "ShoppingCart";
 
 
+<<<<<<< HEAD
+=======
+
+    @GetMapping("/Smartphones")
+
+    public String Smartphones(){
+
+        return "Smartphones";
+>>>>>>> 74b26fe9c3e4fe60cce6e0356be9a5ab3b3a8c9e
 
     }
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 74b26fe9c3e4fe60cce6e0356be9a5ab3b3a8c9e
     @GetMapping("/Tablets")
 
 
@@ -323,7 +375,10 @@ public class WebController {
 
 
     }
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 74b26fe9c3e4fe60cce6e0356be9a5ab3b3a8c9e
 }

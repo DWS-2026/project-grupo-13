@@ -6,3 +6,6 @@ VALUES (2, 'Oppo Reno 12 5G', 499, 'Gama media premium', '/imagenes/Oppo.jpg', '
 
 INSERT INTO PRODUCT (id, nombre, precio, descripcion, imagen, categoria)
 VALUES (3, 'Samsung Galaxy Z Flip 7', 1099, 'Plegable', '/imagenes/samsung.jpg', 'Smartphones');
+
+INSERT INTO USERS (id, name, surname, email, nickname, password, birth_Date)
+VALUES (1, 'Hugo', 'Garcia', 'hugo@email.com', 'hugog', '1234', '2000-05-10');

@@ -6,16 +6,16 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class User {
     private String name;
-    private String surname; // Corregido: no es 'surename'
+    private String surname;
     private String email;
     private String nickname;
     private String password;
 
-    // AÑADIMOS EL CAMPO DE FECHA DE NACIMIENTO
-    @DateTimeFormat(pattern = "dd-MM-yyyy") // Obligatorio para formatear la fecha que envía el HTML
+    
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate birthDate;
 
-    // 1. CONSTRUCTOR VACÍO OBLIGATORIO para el framework
+    // necesario para JPA
     public User() {
     }
 
@@ -29,7 +29,6 @@ public class User {
         this.birthDate = birthDate;
     }
 
-    // 2. GETTERS Y SETTERS OBLIGATORIOS (Hechos automáticamente con VS Code)
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 

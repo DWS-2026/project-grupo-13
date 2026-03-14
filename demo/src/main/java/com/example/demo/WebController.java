@@ -30,11 +30,6 @@ public class WebController {
         return "Admin";
     }
 
-    @GetMapping("/AdminProduct")
-    public String AdminProduct(){
-        return "AdminProduct";
-    }
-
     @GetMapping("/AdminUser")
     public String AdminUser(){
         return "AdminUser";

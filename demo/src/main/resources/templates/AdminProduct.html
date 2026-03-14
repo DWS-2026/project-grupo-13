@@ -40,35 +40,43 @@
             <div class="col-lg-4 mb-4">
                 <div class="card-form p-4">
                     <h5 class="mb-3 text-primary">Añadir Nuevo Producto</h5>
-                    <form>
-                        <div class="mb-3">
-                            <label for="prodNombre" class="form-label">Nombre del Producto</label>
-                            <input type="text" id="prodNombre" class="form-control" placeholder="Ej: Figura Luffy">
-                        </div>
+                    <form action="/AdminProduct" method="post">
 
-                        <div class="mb-3">
-                            <label for="prodDesc" class="form-label">Descripción</label>
-                            <textarea id="prodDesc" class="form-control" rows="3"></textarea>
-                        </div>
+                    <div class="mb-3">
+                        <label for="prodNombre" class="form-label">Nombre del Producto</label>
+                        <input type="text" id="prodNombre" name="nombre" class="form-control" placeholder="Ej: Zotac RTX5060ti" required>
+                    </div>
 
-                        <div class="row mb-3">
-                            <div class="col">
-                                <label for="prodPrecio" class="form-label">Precio (€)</label>
-                                <input type="number" id="prodPrecio" class="form-control" step="0.01">
-                            </div>
-                            <div class="col">
-                                <label for="prodCat" class="form-label">Categoría</label>
-                                <select id="prodCat" class="form-select">
-                                    <option selected disabled>Elegir...</option>
-                                    <option>Camisetas</option>
-                                    <option>Figuras</option>
-                                    <option>Videojuegos</option>
-                                </select>
-                            </div>
-                        </div>
+                    <div class="mb-3">
+                        <label for="prodDesc" class="form-label">Descripción</label>
+                        <textarea id="prodDesc" name="descripcion" class="form-control" rows="3" required></textarea>
+                    </div>
 
-                        <button type="submit" class="btn btn-success w-100">Crear Producto</button>
-                    </form>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="prodPrecio" class="form-label">Precio (€)</label>
+                            <input type="number" id="prodPrecio" name="precio" class="form-control" step="0.01" required>
+                        </div>
+                        <div class="col">
+                            <label for="prodCat" class="form-label">Categoría</label>
+                            <select id="prodCat" name="categoria" class="form-select" required>
+                                <option selected disabled>Elegir...</option>
+                                <option>Smartphones</option>
+                                <option>GPUs</option>
+                                <option>Tablets</option>
+                                <option>Ordenadores</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="prodImg" class="form-label">URL de Imagen</label>
+                        <input type="text" id="prodImg" name="imagen" class="form-control" placeholder="/imagenes/ejemplo.jpg" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-100">Crear Producto</button>
+                </form>
+
                 </div>
             </div>
 
@@ -86,16 +94,18 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {{#productos}}
                                 <tr>
-                                    <td><strong>Figura Dragon Ball</strong></td>
-                                    <td>49,99€</td>
-                                    <td><span class="badge bg-info text-dark">Figuras</span></td>
+                                    <td><strong>{{nombre}}</strong></td>
+                                    <td>{{precio}}€</td>
+                                    <td><span class="badge bg-info text-dark">{{categoria}}</span></td>
                                     <td class="text-center">
-                                        <button class="btn btn-warning btn-sm">Editar</button>
-                                        <button class="btn btn-danger btn-sm">Eliminar</button>
+                                        <a href="/AdminProduct/eliminar/{{id}}" class="btn btn-danger btn-sm">Eliminar</a>
                                     </td>
                                 </tr>
-                                </tbody>
+                                {{/productos}}
+                            </tbody>
+
                         </table>
                     </div>
                 </div>

@@ -1,7 +1,10 @@
 package com.example.demo;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
+import jakarta.persistence.GeneratedValue;
 
 
 @Entity
@@ -9,6 +12,7 @@ import jakarta.persistence.Table;
 public class Product {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String nombre;
@@ -34,6 +38,13 @@ public class Product {
     public String getDescripcion() { return descripcion; }
     public String getImagen() { return imagen; }
     public String getCategoria() { return categoria; }
+
+    public void setId(int id) { this.id = id; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+    public void setPrecio(double precio) { this.precio = precio; }
+    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+    public void setImagen(String imagen) { this.imagen = imagen; }
+    public void setCategoria(String categoria) { this.categoria = categoria; }
 }
 
 

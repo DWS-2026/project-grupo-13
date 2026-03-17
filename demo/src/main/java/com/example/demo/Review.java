@@ -1,31 +1,79 @@
 package com.example.demo;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
+
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "REVIEWS")
 public class Review {
 
-    private int productoId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String usuario;
     private int estrellas;
     private String comentario;
     private LocalDate fecha;
 
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
+
     public Review() {
         this.fecha = LocalDate.now();
     }
 
-    public int getProductoId() { return productoId; }
-    public void setProductoId(int productoId) { this.productoId = productoId; }
+    // GETTERS Y SETTERS
 
-    public String getUsuario() { return usuario; }
-    public void setUsuario(String usuario) { this.usuario = usuario; }
+    public Long getId() {
+        return id;
+    }
 
-    public int getEstrellas() { return estrellas; }
-    public void setEstrellas(int estrellas) { this.estrellas = estrellas; }
+    public String getUsuario() {
+        return usuario;
+    }
 
-    public String getComentario() { return comentario; }
-    public void setComentario(String comentario) { this.comentario = comentario; }
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
 
-    public LocalDate getFecha() { return fecha; }
-    public void setFecha(LocalDate fecha) { this.fecha = fecha; }
+    public int getEstrellas() {
+        return estrellas;
+    }
+
+    public void setEstrellas(int estrellas) {
+        this.estrellas = estrellas;
+    }
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 }

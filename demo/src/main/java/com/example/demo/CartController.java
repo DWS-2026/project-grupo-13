@@ -16,13 +16,13 @@ public class CartController {
     @PostMapping("/agregar-carrito")
     public String agregarAlCarrito(
             @RequestParam("nombreProducto") String nombre,
-            @RequestParam("imagenProducto") String imagen) {
+            @RequestParam("imagenProducto") String imagen,
+            @RequestParam("precioProducto") double precio) { // Recibimos el precio
         
-        carrito.add(new CartItem(nombre, imagen));
+        carrito.add(new CartItem(nombre, imagen, precio));
         
         System.out.println("-------------------------------------------");
-        System.out.println("¡AÑADIDO CORRECTAMENTE!");
-        System.out.println("Producto: " + nombre);
+        System.out.println("¡AÑADIDO: " + nombre + " por " + precio + "€!");
         System.out.println("-------------------------------------------");
         
         return "redirect:/Index"; 
@@ -31,15 +31,8 @@ public class CartController {
     @PostMapping("/eliminar-producto")
     @ResponseBody
     public String eliminarProducto(@RequestParam("nombre") String nombre) {
-        // Buscamos en la lista y eliminamos el que coincida con el nombre
         carrito.removeIf(item -> item.getNombre().equals(nombre));
-        
-        System.out.println("-------------------------------------------");
-        System.out.println("¡ELIMINADO!");
-        System.out.println("Producto: " + nombre);
-        System.out.println("-------------------------------------------");
-        
-        return "OK"; // Respondemos OK al JavaScript para que refresque la pantalla
+        return "OK";
     }
 
     @GetMapping("/api/carrito")

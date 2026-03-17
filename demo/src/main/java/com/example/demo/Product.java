@@ -1,7 +1,14 @@
 package com.example.demo;
+import java.util.ArrayList;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.CascadeType;
+import java.util.List;
 
 
 @Entity
@@ -9,6 +16,7 @@ import jakarta.persistence.Table;
 public class Product {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String nombre;
@@ -16,6 +24,11 @@ public class Product {
     private String descripcion;
     private String imagen;
     private String categoria;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<Review> reviews = new ArrayList<>();
+
+
 
     public Product(int id, String nombre, double precio, String descripcion, String imagen, String categoria) {
         this.id = id;
@@ -34,6 +47,15 @@ public class Product {
     public String getDescripcion() { return descripcion; }
     public String getImagen() { return imagen; }
     public String getCategoria() { return categoria; }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+    
 }
 
 

@@ -62,65 +62,51 @@ Carrito
 <hr>
 
 <section class="añadir-valoracion">
-<h2>Deja tu valoración</h2>
+    <h2>Deja tu valoración</h2>
 
-<form action="/createreview/{{producto.id}}" method="post" id="formValoracion">
+    <form action="/producto/{{producto.id}}/review" method="post" id="formValoracion">
 
-<input type="hidden" id="productoId" value="{{producto.id}}">
+        <input type="text" name="usuario" placeholder="Tu nombre" required>
 
-<input type="text" name="usuario" placeholder="Tu nombre" required>
+        <select name="estrellas">
+            <option value="1" selected>★</option>
+            <option value="2">★★</option>
+            <option value="3">★★★</option>
+            <option value="4">★★★★</option>
+            <option value="5">★★★★★</option>
+        </select>
 
-<select name="estrellas">
-    <option value="1" selected>★</option>
-    <option value="2">★★</option>
-    <option value="3">★★★</option>
-    <option value="4">★★★★</option>
-    <option value="5">★★★★★</option>
-</select>
+        <textarea name="comentario" placeholder="Escribe tu opinión" rows="4" required></textarea>
 
-<textarea name="comentario" placeholder="Escribe tu opinión" rows="4" required></textarea>
-
-<button type="submit" class="btn btn-success">Enviar valoración</button>
-
-</form>
+        <button type="submit" class="btn btn-success">Enviar valoración</button>
+    </form>
 </section>
 
 <hr>
 
 <section class="lista-valoraciones">
+    <h2>Opiniones de otros clientes</h2>
 
-<h2>Opiniones de otros clientes</h2>
+    {{^reviews}}
+    <div class="alert alert-light">
+        Aún no hay reseñas para este producto. ¡Sé el primero en opinar!
+    </div>
+    {{/reviews}}
 
-{{^valoraciones}}
-<div class="alert alert-light">
-Aún no hay reseñas para este producto. ¡Sé el primero en opinar!
-</div>
-{{/valoraciones}}
+    {{#reviews}}
+    <div class="card mb-3 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title">
+                <span class="fw-bold">{{usuario}}</span>
+                <span class="text-warning ms-2">
+                    {{estrellas}} ★
+                </span>
+            </h5>
 
-{{#valoraciones}}
-
-<div class="card mb-3 shadow-sm">
-<div class="card-body">
-
-<h5 class="card-title">
-
-<span class="fw-bold">{{usuario}}</span>
-
-<span class="text-warning ms-2">
-{{estrellas}} ★
-</span>
-
-</h5>
-
-<p class="card-text">{{comentario}}</p>
-
-<small class="text-muted">{{fecha}}</small>
-
-</div>
-</div>
-
-{{/valoraciones}}
-
+            <p class="card-text">{{comentario}}</p>
+        </div>
+    </div>
+    {{/reviews}}
 </section>
 
 </main>

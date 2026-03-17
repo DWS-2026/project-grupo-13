@@ -21,14 +21,13 @@ public class CartController {
         carrito.add(new CartItem(nombre, imagen));
         
         System.out.println("-------------------------------------------");
-        System.out.println("¡AÑADIDO CON IMAGEN!");
+        System.out.println("¡AÑADIDO CORRECTAMENTE!");
         System.out.println("Producto: " + nombre);
         System.out.println("-------------------------------------------");
         
         return "redirect:/Index"; 
     }
 
-    // --- ESTE ES EL MÉTODO QUE TE FALTABA ---
     @PostMapping("/eliminar-producto")
     @ResponseBody
     public String eliminarProducto(@RequestParam("nombre") String nombre) {

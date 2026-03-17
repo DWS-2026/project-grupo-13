@@ -28,13 +28,6 @@ public class LoginController {
         System.out.println("Login Incorrecto ");
         return "redirect:/Login";
 
-       /*  for (User u : UserController.listaUsuarios) {
 
-            if (u.getEmail().equals(email) && u.getPassword().equals(password)) {
-                System.out.println("LOGIN CORRECTO: " + u.getName());
-                return "redirect:/Index";
-            }
-        }
-            */
     }
 }

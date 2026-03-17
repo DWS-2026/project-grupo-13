@@ -26,7 +26,7 @@ public class User {
     
 
     
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
 
     // necesario para JPA

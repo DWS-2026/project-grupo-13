@@ -10,6 +10,8 @@ import jakarta.persistence.Table;
 import jakarta.persistence.CascadeType;
 import java.util.List;
 
+import jakarta.persistence.GeneratedValue;
+
 
 @Entity
 @Table(name = "PRODUCT")

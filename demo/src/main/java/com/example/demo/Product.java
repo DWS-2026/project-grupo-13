@@ -1,16 +1,6 @@
 package com.example.demo;
 import java.util.ArrayList;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import jakarta.persistence.CascadeType;
 import java.util.List;
-
-import jakarta.persistence.GeneratedValue;
 
 import jakarta.persistence.*;
 
@@ -33,23 +23,20 @@ public class Product {
     @OneToOne
     private Image image;
 
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<Review> reviews = new ArrayList<>();
+
     public Product() {} // Para JPA
 
     // Constructor SIN imagen
-    public Product(String nombre, double precio, String descripcion, Category category) {}
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    private List<Review> reviews = new ArrayList<>();
-    
-
-
-
-    public Product(int id, String nombre, double precio, String descripcion, String imagen, String categoria) {
-        this.id = id;
+    public Product(String nombre, double precio, String descripcion, Category category) {
         this.nombre = nombre;
         this.precio = precio;
         this.descripcion = descripcion;
         this.category = category;
     }
+    
+    
 
     // Constructor CON imagen
     public Product(String nombre, double precio, String descripcion, Category category, Image image) {

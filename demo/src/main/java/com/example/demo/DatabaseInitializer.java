@@ -10,20 +10,25 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
 
-import com.example.demo.Product;
-import com.example.demo.User;
-//import com.example.demo.Category;
+import java.time.LocalDate;
+
+/*import com.example.demo.Category;
 import com.example.demo.Image;
 import com.example.demo.ImageService;
 
+import com.example.demo.Product;
+import com.example.demo.User;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import com.example.demo.ProductService;
 import com.example.demo.UserService;
+*/
 
 
 @Service
@@ -83,6 +88,7 @@ public class DatabaseInitializer {
             smartphones
         );
 
+        
         // imagen del producto
         setProductImage(p1, "imagenes/iphone15.jpg");
 

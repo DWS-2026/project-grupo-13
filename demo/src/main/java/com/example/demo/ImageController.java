@@ -1,7 +1,6 @@
 package com.example.demo;
 
-import com.example.demo.Image;
-import com.example.demo.ImageService;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

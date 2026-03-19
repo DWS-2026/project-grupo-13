@@ -159,3 +159,93 @@
     </footer>
   </body>
 </html>
+
+<hr class="text-white">
+<section class="añadir-valoracion text-white">
+<h2>Deja tu valoración</h2>
+<form action="/createreview/{{producto.id}}" method="post" id="formValoracion">
+<input type="text" name="usuario" placeholder="Tu nombre" class="form-control mb-2" required>
+<select name="estrellas" class="form-select mb-2">
+    <option value="1">★</option>
+    <option value="2">★★</option>
+    <option value="3">★★★</option>
+    <option value="4">★★★★</option>
+    <option value="5" selected>★★★★★</option>
+</select>
+<textarea name="comentario" placeholder="Escribe tu opinión" rows="4" class="form-control mb-2" required></textarea>
+<button type="submit" class="btn btn-success">Enviar valoración</button>
+</form>
+</section>
+
+<hr class="text-white">
+<section class="lista-valoraciones text-white">
+<h2>Opiniones de otros clientes</h2>
+{{^valoraciones}}
+<div class="alert alert-dark border-secondary">Aún no hay reseñas para este producto.</div>
+{{/valoraciones}}
+{{#valoraciones}}
+<div class="card mb-3 shadow-sm bg-dark border-secondary text-white">
+<div class="card-body">
+<h5 class="card-title"><span class="fw-bold">{{usuario}}</span> <span class="text-warning ms-2">{{estrellas}} ★</span></h5>
+<p class="card-text">{{comentario}}</p>
+</div>
+</div>
+{{/valoraciones}}
+
+<hr>
+
+<section class="añadir-valoracion">
+    <h2>Deja tu valoración</h2>
+
+    <form action="/producto/{{producto.id}}/review" method="post" id="formValoracion">
+
+        <input type="text" name="usuario" placeholder="Tu nombre" required>
+
+        <select name="estrellas">
+            <option value="1" selected>★</option>
+            <option value="2">★★</option>
+            <option value="3">★★★</option>
+            <option value="4">★★★★</option>
+            <option value="5">★★★★★</option>
+        </select>
+
+        <textarea name="comentario" placeholder="Escribe tu opinión" rows="4" required></textarea>
+
+        <button type="submit" class="btn btn-success">Enviar valoración</button>
+    </form>
+</section>
+
+<hr>
+
+<section class="lista-valoraciones">
+    <h2>Opiniones de otros clientes</h2>
+
+    {{^reviews}}
+    <div class="alert alert-light">
+        Aún no hay reseñas para este producto. ¡Sé el primero en opinar!
+    </div>
+    {{/reviews}}
+
+    {{#reviews}}
+    <div class="card mb-3 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title">
+                <span class="fw-bold">{{usuario}}</span>
+                <span class="text-warning ms-2">
+                    {{estrellas}} ★
+                </span>
+            </h5>
+
+            <p class="card-text">{{comentario}}</p>
+        </div>
+    </div>
+    {{/reviews}}
+
+</section>
+</main>
+
+<footer class="footer_principal mt-5 text-center text-white pb-4">
+<p>© 2026 El desván del friki</p>
+</footer>
+</body>
+</html>

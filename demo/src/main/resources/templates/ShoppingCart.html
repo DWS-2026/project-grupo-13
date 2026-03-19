@@ -18,12 +18,6 @@
                 <a class="nav-link active" href="/Index">Inicio</a>
                 <a class="nav-link" href="/CategoriesScreen">Categorías</a>
                 <a class="nav-link" href="/PromotionsScreen">Ofertas</a>
-                
-                <a class="nav-link d-flex align-items-center" href="/Login">
-                    <img src="/imagenes/agregar-usuario.png" width="20" height="20" style="filter: invert(1);" class="me-2">
-                    <span>Iniciar sesión / Registrarse</span>
-                </a>
-                
                 <a class="nav-link btn btn-outline-info ms-lg-2" href="/EditProfile">Mi cuenta</a>
                 <a class="nav-link d-flex align-items-center" href="/ShoppingCart">
                     <img src="/imagenes/carrito.png" width="20" height="20" style="filter: invert(1);" class="me-2">
@@ -44,7 +38,8 @@
   <div class="d-flex justify-content-end mt-4">
       <div class="text-end text-white">
           <h4>Total de artículos: <span class="fw-bold text-primary" id="total-articulos">0</span></h4>
-          <button class="btn btn-success btn-lg mt-2">Proceder al Pago</button>
+          <h3 class="mt-2">Total a pagar: <span class="fw-bold text-success" id="precio-total">0.00</span>€</h3>
+          <button class="btn btn-success btn-lg mt-3">Proceder al Pago</button>
       </div>
   </div>
 
@@ -54,40 +49,41 @@
 </div>
 
 <script>
-    // Función para cargar los productos (la llamamos al empezar y al borrar)
     function cargarCarrito() {
         fetch('/api/carrito')
             .then(response => response.json())
             .then(productos => {
                 const contenedor = document.getElementById('contenedor-carrito');
                 const totalArticulos = document.getElementById('total-articulos');
+                const precioTotal = document.getElementById('precio-total');
                 
                 contenedor.innerHTML = '';
-                totalArticulos.textContent = productos.length;
+                let sumaTotal = 0;
 
                 if(productos.length === 0) {
                     contenedor.innerHTML = '<div class="col-12"><div class="alert alert-dark text-center border-secondary text-white bg-dark">Tu carrito está vacío.</div></div>';
+                    totalArticulos.textContent = 0;
+                    precioTotal.textContent = "0.00";
                     return;
                 }
 
                 productos.forEach(producto => {
+                    sumaTotal += producto.precio;
                     const tarjetaHTML = `
                     <div class="col-12">
                       <div class="card shadow-sm bg-dark border-secondary">
                         <div class="row g-0 align-items-center">
                           <div class="col-3 col-md-2 p-2 text-center">
-                            <img src="${producto.imagen}" class="img-fluid rounded object-fit-contain bg-white" style="height: 80px; width: 100%; padding: 5px;" alt="${producto.nombre}">
+                            <img src="${producto.imagen}" class="img-fluid rounded bg-white" style="height: 80px; width: 100%; object-fit: contain; padding: 5px;" alt="${producto.nombre}">
                           </div>
-                          <div class="col-9 col-md-10">
-                            <div class="card-body d-flex justify-content-between align-items-center">
-                              <div>
-                                <h5 class="card-title mb-1 text-white">${producto.nombre}</h5>
-                              </div>
-                              <div class="text-end">
-                                <span class="d-block fw-bold fs-6 text-success mb-2">✓ Añadido</span>
-                                <button onclick="eliminarDelCarrito('${producto.nombre}')" class="btn btn-link text-danger p-0 small text-decoration-none">Eliminar</button>
-                              </div>
+                          <div class="col-6 col-md-7">
+                            <div class="card-body">
+                              <h5 class="card-title mb-1 text-white">${producto.nombre}</h5>
+                              <button onclick="eliminarDelCarrito('${producto.nombre}')" class="btn btn-link text-danger p-0 small text-decoration-none">Eliminar</button>
                             </div>
+                          </div>
+                          <div class="col-3 col-md-3 text-end pe-4">
+                            <h4 class="text-success mb-0 fw-bold">${producto.precio.toFixed(2)}€</h4>
                           </div>
                         </div>
                       </div>
@@ -95,26 +91,19 @@
                     `;
                     contenedor.insertAdjacentHTML('beforeend', tarjetaHTML);
                 });
+
+                totalArticulos.textContent = productos.length;
+                precioTotal.textContent = sumaTotal.toFixed(2);
             });
     }
 
-    // Función para conectar con Java y borrar el producto
     function eliminarDelCarrito(nombre) {
         const formData = new URLSearchParams();
         formData.append('nombre', nombre);
-
-        fetch('/eliminar-producto', {
-            method: 'POST',
-            body: formData
-        })
-        .then(() => {
-            // Una vez borrado en Java, volvemos a cargar la lista visualmente
-            cargarCarrito();
-        })
-        .catch(error => console.error('Error al eliminar:', error));
+        fetch('/eliminar-producto', { method: 'POST', body: formData })
+        .then(() => cargarCarrito());
     }
 
-    // Iniciar la carga al abrir la página
     cargarCarrito();
 </script>
 </body>

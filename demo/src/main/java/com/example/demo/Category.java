@@ -1,27 +1,38 @@
 package com.example.demo;
 
+import jakarta.persistence.*;
+import java.util.List;
+
+@Entity
 public class Category {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String name;
-    private String description;
 
-    public Category (String name, String description) {
-        this.name = name;
-        this.description = description;
-    }
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    private List<Product> products;
 
-    public String getName() {
-        return name;
-    }
+    @OneToOne
+    private Image image;
 
-    public void setName(String name) {
+    public Category() {}
+
+    public Category(String name) {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
-    }
+    // Getters y setters
+    public Long getId() { return id; }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+
+    public List<Product> getProducts() { return products; }
+    public void setProducts(List<Product> products) { this.products = products; }
+
+    public Image getImage() { return image; }
+    public void setImage(Image image) { this.image = image; }
 }

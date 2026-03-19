@@ -12,7 +12,7 @@ import java.util.List;
 public class AdminUserController {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
 
     //Esto es para buscar los usuarios. Si la cadena del formulario no es null devuelve el buscado. Si es null los devuelve todos.
@@ -24,9 +24,9 @@ public class AdminUserController {
         List<User> usuarios;
 
         if (q != null && !q.isEmpty()) {
-            usuarios = userRepository.findByNameContainingIgnoreCase(q);
+            usuarios = userService.findByNameContainingIgnoreCase(q);
         } else {
-            usuarios = userRepository.findAll();
+            usuarios = userService.findAll();
         }
 
         model.addAttribute("usuarios", usuarios);
@@ -37,7 +37,7 @@ public class AdminUserController {
 
     @GetMapping("/AdminUser/eliminar/{id}")
     public String eliminarUsuario(@PathVariable int id) {
-        userRepository.deleteById(id);
+        userService.deleteById(id);
         return "redirect:/AdminUser";
     }
 }

@@ -13,20 +13,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class ProductController {
 
     @Autowired
-    private ProductRepository productRepository;
+    private ProductService productService;
 
 
     @GetMapping("/categoria/{nombre}")
     public String categoria(@PathVariable String nombre, Model model) {
 
-        /*
-        List<Product> lista = DataService.getProductos()
-            .stream()
-            .filter(p -> p.getCategoria().equalsIgnoreCase(nombre))
-            .toList();
-        */
-
-        List<Product> lista = productRepository.findByCategoriaIgnoreCase(nombre);
+        List<Product> lista = productService.findByCategoryName(nombre);
 
         model.addAttribute("productos", lista);
         model.addAttribute("categoria", nombre);
@@ -37,13 +30,7 @@ public class ProductController {
     @GetMapping("/producto/{id}")
     public String producto(@PathVariable int id, Model model) {
 
-        /*Product p = DataService.getProductos()
-            .stream()
-            .filter(prod -> prod.getId() == id)
-            .findFirst()
-            .orElse(null);
-        */
-       Product p = productRepository.findById(id).orElse(null);
+       Product p = productService.findById(id).orElse(null);
 
 
         model.addAttribute("producto", p);

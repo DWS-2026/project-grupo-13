@@ -14,25 +14,28 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 */
+import com.example.demo.CategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 @Controller
 public class WebController {
 
+    @Autowired
+    private CategoryService categoryService;
 
     @GetMapping("/CategoriesScreen")
-    public String CategoriesScreen(){
-        return "CategoriesScreen";
-    }
+    public String categoriesScreen(Model model) {
+
+    List<Category> categorias = categoryService.findAll();
+    model.addAttribute("categorias", categorias);
+
+    return "CategoriesScreen";
+}
 
     @GetMapping("/Admin")
     public String Admin(){
         return "Admin";
-    }
-
-     @GetMapping("/AdminCategories")
-    public String AdminCategories(){
-        return "AdminCategories";
     }
 
     @GetMapping("/Computers")

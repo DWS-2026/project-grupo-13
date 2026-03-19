@@ -5,5 +5,5 @@ import java.util.List;
 //import com.example.demo.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
-    List<Product> findByCategoriaIgnoreCase(String categoria);
+    List<Product> findByCategory_Name(String name);
 }

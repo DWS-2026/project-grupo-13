@@ -43,7 +43,22 @@
         <div class="card category-card h-100 text-center p-3 bg-transparent text-white" style="border: 1px solid rgba(255, 255, 255, 0.15);">
             
             <a href="/producto/{{id}}" class="text-decoration-none text-white">
-                <img src="{{imagen}}" class="card-img-top rounded bg-white p-2" alt="{{nombre}}">
+                {{#image}}
+                    <img 
+                    src="/image/{{image.id}}" 
+                    class="card-img-top rounded bg-white p-2" 
+                    alt="{{nombre}}"
+                    />
+                    {{/image}}
+
+                    {{^image}}
+                    <img 
+                    src="/imagenes/default.jpg" 
+                    class="card-img-top rounded bg-white p-2" 
+                    alt="Sin imagen"
+                    />
+                {{/image}}
+
                 <div class="card-body pb-0">
                     <h5 class="category-title mt-2">{{nombre}}</h5>
                 </div>
@@ -51,10 +66,18 @@
             
             <form action="/agregar-carrito" method="POST" class="mt-3">
                 <input type="hidden" name="nombreProducto" value="{{nombre}}">
-                <input type="hidden" name="imagenProducto" value="{{imagen}}">
-                
+
+                {{#image}}
+                <input type="hidden" name="imagenProducto" value="/image/{{image.id}}">
+                {{/image}}
+
+                {{^image}}
+                <input type="hidden" name="imagenProducto" value="/imagenes/default.jpg">
+                {{/image}}
+
                 <button type="submit" class="btn btn-outline-light w-100 fw-bold">Añadir al carrito</button>
             </form>
+
         </div>
         
     </div>

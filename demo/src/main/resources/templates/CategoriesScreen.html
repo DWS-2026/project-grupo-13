@@ -47,49 +47,19 @@
   <div class="row g-4">
 
     <!-- Categoría -->
+    {{#categorias}}
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <a href="/categoria/Smartphones" class="text-decoration-none">
+      <a href="/categoria/{{name}}" class="text-decoration-none">
         <div class="card category-card h-100 text-center p-3">
-          <img src="/imagenes/smart.jpg" class="card-img-top rounded" alt="Smartphones">
+          <img src="/image/{{image.id}}" class="card-img-top rounded" alt="{{name}}">
           <div class="card-body">
-            <h5 class="category-title">Smartphones</h5>
+            <h5 class="category-title">{{name}}</h5>
           </div>
         </div>
       </a>
     </div>
+    {{/categorias}}
 
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <a href="/categoria/Ordenadores" class="text-decoration-none">
-        <div class="card category-card h-100 text-center p-3">
-          <img src="/imagenes/pcs.jpg" class="card-img-top rounded" alt="Ordenadores">
-          <div class="card-body">
-            <h5 class="category-title">Ordenadores</h5>
-          </div>
-        </div>
-      </a>
-    </div>
-
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <a href="/categoria/GPU" class="text-decoration-none">
-        <div class="card category-card h-100 text-center p-3">
-          <img src="/imagenes/tjs.jpg" class="card-img-top rounded" alt="Tarjetas Gráficas">
-          <div class="card-body">
-            <h5 class="category-title">Tarjetas Gráficas</h5>
-          </div>
-        </div>
-      </a>
-    </div>
-
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <a href="/categoria/Tablets" class="text-decoration-none">
-        <div class="card category-card h-100 text-center p-3">
-          <img src="/imagenes/tablets.avif" class="card-img-top rounded" alt="Tablets">
-          <div class="card-body">
-            <h5 class="category-title">Tablets</h5>
-          </div>
-        </div>
-      </a>
-    </div>
 
   </div>
 </div>

@@ -26,8 +26,8 @@ public class ProductService {
     }
 
     // Buscar por ID
-    public Optional<Product> findById(int id) {
-        return productRepository.findById(id);
+    public Product findById(int id) {
+        return productRepository.findById(id).orElse(null);
     }
 
     // Eliminar por ID

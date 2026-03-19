@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.example.demo.Product;
 import com.example.demo.Review;
-import com.example.demo.ProductRepository;
-import com.example.demo.ReviewRepository;
+import com.example.demo.ReviewService;
+import com.example.demo.ProductService;
+
 
 @Controller
 public class ProductController {
@@ -22,7 +23,7 @@ public class ProductController {
     private ProductService productService;
 
     @Autowired
-    private ReviewRepository reviewRepository;
+    private ReviewRepository reviewService;
 
 
     
@@ -42,7 +43,7 @@ public class ProductController {
     @GetMapping("/producto/{id}")
     public String producto(@PathVariable int id, Model model) {
 
-       Product p = productService.findById(id).orElse(null);
+       Product p = productService.findById(id);
 
         if (p == null) {
             return "redirect:/"; 
@@ -61,15 +62,16 @@ public class ProductController {
     public String guardarReview(@PathVariable int id,
                                 @ModelAttribute("nuevaReview") Review review) {
 
-        Product p = productRepository.findById(id).orElse(null);
+        Product p = productService.findById(id);
 
         if (p == null) {
             return "redirect:/";
         }
 
-        review.setProduct(p);   // clave: asociar review → producto
-        reviewRepository.save(review);
+        review.setProduct(p);
+        reviewService.save(review);
 
         return "redirect:/producto/" + id;
     }
+
 }

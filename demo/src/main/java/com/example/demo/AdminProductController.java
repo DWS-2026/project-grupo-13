@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -17,10 +18,14 @@ public class AdminProductController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private CategoryService categoryService;
+
     @GetMapping("/AdminProduct")
     public String adminProductos(Model model) {
         model.addAttribute("producto", new Product());
         model.addAttribute("productos", productService.findAll());
+        model.addAttribute("categorias", categoryService.findAll());
         return "AdminProduct"; //Devuelve a la propia página
     }
 
@@ -33,14 +38,16 @@ public class AdminProductController {
 
 
     @PostMapping("/AdminProduct")
-    public String crearProducto(@ModelAttribute Product producto) {
+    public String crearProducto(@ModelAttribute Product producto,
+                                @RequestParam Long category) {
 
-        productService.save(producto); // ID se genera solo
+        Category c = categoryService.findById(category);
+        producto.setCategory(c);
 
+        productService.save(producto);
         return "redirect:/AdminProduct";
     }
 
-    
 }
 
 

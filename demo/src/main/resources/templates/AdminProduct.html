@@ -59,12 +59,12 @@
                         </div>
                         <div class="col">
                             <label for="prodCat" class="form-label">Categoría</label>
-                            <select id="prodCat" name="categoria" class="form-select" required>
+                            <select id="prodCat" name="category" class="form-select" required>
                                 <option selected disabled>Elegir...</option>
-                                <option>Smartphones</option>
-                                <option>GPUs</option>
-                                <option>Tablets</option>
-                                <option>Ordenadores</option>
+
+                                {{#categorias}}
+                                    <option value="{{id}}">{{name}}</option>
+                                {{/categorias}}
                             </select>
                         </div>
                     </div>
@@ -98,7 +98,7 @@
                                 <tr>
                                     <td><strong>{{nombre}}</strong></td>
                                     <td>{{precio}}€</td>
-                                    <td><span class="badge bg-info text-dark">{{categoria}}</span></td>
+                                    <td><span class="badge bg-info text-dark">{{category.name}}</span></td>
                                     <td class="text-center">
                                         <a href="/AdminProduct/eliminar/{{id}}" class="btn btn-danger btn-sm">Eliminar</a>
                                     </td>

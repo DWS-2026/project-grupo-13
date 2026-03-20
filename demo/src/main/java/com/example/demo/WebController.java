@@ -115,4 +115,10 @@ public String guardarValoracion(@PathVariable long productId, Review nuevaReview
     public String Tablets(){
         return "Tablets";
     }
+
+    @GetMapping("/OrderSpecification")
+    public String orderSpecification() {
+    return "OrderSpecification";
+    }
+
 }

@@ -81,41 +81,40 @@ public class DatabaseInitializer {
 
 
 
+        //Productos
         Product p1 = new Product(
             "Iphone 15",
             999.99,
             "El último modelo de Apple",
             smartphones
         );
-
-        
         // imagen del producto
         setProductImage(p1, "imagenes/iphone15.jpg");
-
         productService.save(p1);
 
-
-
+        //Usuarios
         User u1 = new User(
-            "Carlos",
-            "García",
-            "carlos.garcia@example.com",
-            "cgarcia",
-            passwordEncoder.encode("carlos123"),
-            LocalDate.of(1998, 5, 12)
+        "Carlos",
+        "García",
+        "carlos.garcia@example.com",
+        "cgarcia",
+        passwordEncoder.encode("carlos123"),
+        "USER",
+        LocalDate.of(1998, 5, 12)
         );
         userService.save(u1);
 
 
         User u2 = new User(
-            "Laura",
-            "Martínez",
-            "laura.martinez@example.com",
-            "lauram",
-            passwordEncoder.encode("admin456"),
-            LocalDate.of(1992, 11, 3)
+        "Laura",
+        "Martínez",
+        "laura.martinez@example.com",
+        "lauram",
+        passwordEncoder.encode("admin456"),
+        "ADMIN",
+        LocalDate.of(1992, 11, 3)
         );
-        userService.save(u2);
+        userService.save(u2); 
     }
 
     public void setProductImage(Product product, String classpathResource) throws IOException {

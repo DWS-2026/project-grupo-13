@@ -21,27 +21,36 @@ public class User {
     private String name;
     private String surname;
     private String email;
-    private String nickname;
-    private String password;
-    
 
-    
+    // Username para Spring Security
+    private String nickname;
+
+    // Contraseña cifrada con BCrypt
+    private String encodedPassword;
+
+    // Lista de roles
+    private String role;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
 
-    // necesario para JPA
-    public User() {
-    }
+    public User() {}
 
-    // Constructor con todos los parámetros
-    public User(String name, String surname, String email, String nickname, String password, LocalDate birthDate) {
+    public User(String name, String surname, String email, String nickname,
+            String encodedPassword, String role, LocalDate birthDate) {
+
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.nickname = nickname;
-        this.password = password;
+        this.encodedPassword = encodedPassword;
+        this.role = role;
         this.birthDate = birthDate;
     }
+
+
+    // Getters y setters
+    public int getId() { return id; }
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
@@ -55,12 +64,12 @@ public class User {
     public String getNickname() { return nickname; }
     public void setNickname(String nickname) { this.nickname = nickname; }
 
-    public String getPassword() { return password; }
-    public void setPassword(String password) { this.password = password; }
+    public String getEncodedPassword() { return encodedPassword; }
+    public void setEncodedPassword(String encodedPassword) { this.encodedPassword = encodedPassword; }
+
+    public String getRole() { return role; }
+    public void setRole(String role) { this.role = role; }
 
     public LocalDate getBirthDate() { return birthDate; }
     public void setBirthDate(LocalDate birthDate) { this.birthDate = birthDate; }
-
-    public int getId() {return id;}
-    public void setId(int id) {this.id = id;}
 }

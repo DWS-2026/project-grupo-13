@@ -43,18 +43,20 @@
                     
                     <form action="/login" method="POST">
                         <div class="mb-3">
-                            <label for="inputEmail" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="inputEmail" name="email" placeholder="usuariofriki@correo.com" required>
+                            <label for="inputUsername" class="form-label">Nombre de usuario</label>
+                            <input type="text" class="form-control" id="inputUsername" 
+                                name="username" placeholder="Tu nickname" required>
                         </div>
                         
                         <div class="mb-4">
                             <label for="inputPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Tu contraseña" required>
+                            <input type="password" class="form-control" id="inputPassword" 
+                                name="password" placeholder="Tu contraseña" required>
                         </div>
                         
                         <button type="submit" class="btn btn-danger w-100 fw-bold py-2">Sign in</button>
                     </form>
-                    
+
                     <div class="mt-4 text-center">
                         <p class="small mb-0">¿No tienes cuenta?</p>
                         <a href="/Register" class="text-info text-decoration-none">Regístrate aquí</a>

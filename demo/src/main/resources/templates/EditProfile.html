@@ -47,7 +47,7 @@
     <p class="my-account__welcome">
         Hola,
         <strong>
-            <span data-user-name>Nombre del usuario</span>
+            <span data-user-name>{{usuario.name}} {{usuario.surname}}</span>
         </strong>
     </p>
 </section>
@@ -63,11 +63,11 @@
                     <h5 class="card-title">Datos personales</h5>
                     <p class="card-text">
                         <strong>Nombre:</strong><br>
-                        <span data-user-name>Nombre del usuario</span>
+                        <span data-user-name>{{usuario.name}} {{usuario.surname}}</span>
                     </p>
                     <p class="card-text">
                         <strong>Email:</strong><br>
-                        <span data-user-email>correo@ejemplo.com</span>
+                        <span data-user-email>{{usuario.email}}</span>
                     </p>
                 </div>
             </div>
@@ -129,18 +129,21 @@
     </button></a>
     </div>
 
-    <div class="text-center mt-5">
-    <a href="/Admin">
-        <button
-        type="button"
-        class="btn btn-outline-light btn-lg"
-        id="btn-editar-perfil"
-        data-edit-profile
-    >
-        Soy administrador
-        
-    </button> </a>
-    </div>
+    {{#isAdmin}}
+        <div class="text-center mt-5">
+            <a href="/Admin">
+                <button
+                    type="button"
+                    class="btn btn-outline-light btn-lg"
+                    id="btn-editar-perfil"
+                    data-edit-profile
+                >
+                    Soy administrador
+                </button>
+            </a>
+        </div>
+    {{/isAdmin}}
+
 
 
 

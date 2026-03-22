@@ -48,10 +48,7 @@ public class WebController {
         return "EditData";
     }
 
-    @GetMapping("/EditProfile")
-    public String EditProfile(){
-        return "EditProfile";
-    }
+   
 
     @GetMapping("/GPU")
     public String GPU(){

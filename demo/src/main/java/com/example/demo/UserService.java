@@ -44,4 +44,9 @@ public class UserService {
         return userRepository.findByNameContainingIgnoreCase(name);
     }
 
+    public User findByNickname(String nickname) {
+    return userRepository.findByNickname(nickname);
+}
+
+
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
+
 @Controller
 public class AdminUserController {
 
@@ -40,5 +41,12 @@ public class AdminUserController {
         userService.deleteById(id);
         return "redirect:/AdminUser";
     }
+    @GetMapping("/AdminUser/verUsuario/{id}")
+    public String verUsuario(@PathVariable int id, Model model) {
+        User usuario = userService.findById(id).orElse(null);
+        model.addAttribute("usuario", usuario);
+
+        return "AdminUserDetail"; 
+}
 }
 

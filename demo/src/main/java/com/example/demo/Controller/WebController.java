@@ -14,6 +14,7 @@ import com.example.demo.Model.Review;
 import com.example.demo.Service.CategoryService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class WebController {

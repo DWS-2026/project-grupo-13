@@ -8,9 +8,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/GlobalStyle">
   <link rel="stylesheet" href="/Product">
-    <link rel="stylesheet" href="/AdminProduct">
+  <link rel="stylesheet" href="/AdminProduct">
 
-  
   <style>
     body { padding-top: 85px; background-color: #f8f9fa; }
     .card-form { background: white; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
@@ -18,7 +17,7 @@
 </head>
 
 <body>
-       <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="/Index">
                 <strong>El Desván</strong> <span class="badge bg-danger">Admin</span>
@@ -30,18 +29,25 @@
                 <div class="navbar-nav ms-auto">
                     <a class="nav-link" href="/Index">Volver a la tienda</a>
                     <a class="nav-link" href="/Admin">Panel Admin</a>
-
                 </div>
             </div>
         </div>
     </nav>
 
+    <main class="container">
         <div class="row">
             <div class="col-lg-4 mb-4">
                 <div class="card-form p-4">
                     <h5 class="mb-3 text-primary">Añadir Nuevo Producto</h5>
-                    <form action="/AdminProduct" method="post">
+                    
+                    {{#errorDuplicado}}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>¡Error!</strong> Ya existe un producto llamado "<strong>{{nombreFallido}}</strong>". Por favor, usa otro nombre.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {{/errorDuplicado}}
 
+                    <form action="/AdminProduct" method="post">
                     <div class="mb-3">
                         <label for="prodNombre" class="form-label">Nombre del Producto</label>
                         <input type="text" id="prodNombre" name="nombre" class="form-control" placeholder="Ej: Zotac RTX5060ti" required>
@@ -61,7 +67,6 @@
                             <label for="prodCat" class="form-label">Categoría</label>
                             <select id="prodCat" name="category" class="form-select" required>
                                 <option selected disabled>Elegir...</option>
-
                                 {{#categorias}}
                                     <option value="{{id}}">{{name}}</option>
                                 {{/categorias}}
@@ -105,7 +110,6 @@
                                 </tr>
                                 {{/productos}}
                             </tbody>
-
                         </table>
                     </div>
                 </div>

@@ -88,8 +88,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .footer_principal {
     color: white;
     text-align: center;
-
 }
+
 .category-title {
     color: #ffffff !important;
     text-decoration: none !important;
@@ -98,15 +98,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 a:hover .category-title {
     color: #00d4ff !important;
 }
+
+/* Select de estrellas */
 select[name="estrellas"] {
-    width: 100%; /* Para que ocupe el mismo ancho que los otros campos */
-    max-width: 150px; /* O un ancho fijo si prefieres que sea corto, pero bien alineado */
+    width: 100%; 
+    max-width: 150px; 
     font-size: 1.1rem;        
     color: #ffcc00;           
-    background-color: #0f172a; /* Un tono más oscuro para que coincida con el fondo */
-    border: 1px solid #334155; /* Borde sutil similar a los otros inputs */
-    padding: 0.6rem 1rem;      /* Más espacio interno para que sea cómodo */
-    border-radius: 8px;        /* Bordes más redondeados y modernos */
+    background-color: #0f172a; 
+    border: 1px solid #334155; 
+    padding: 0.6rem 1rem;      
+    border-radius: 8px;        
     cursor: pointer;
     outline: none;
     transition: all 0.3s ease;
@@ -135,4 +137,54 @@ select[name="estrellas"] option {
     font-size: 1.2rem;        
     color: #ffcc00;           
     text-shadow: 0 0 8px rgba(255, 170, 0, 0.4);
+}
+
+/* =========================================
+   NUEVO: Mensaje de Error (Login)
+   ========================================= */
+.error-container {
+    background-color: #1a1a1a;
+    border: 1px solid #ff4d4d;
+    border-bottom: 3px solid #ff4d4d;
+    border-radius: 4px;
+    padding: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    color: white;
+    text-align: left;
+}
+
+.error-icon {
+    background-color: #ff0000;
+    color: black;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    margin-right: 15px;
+    flex-shrink: 0;
+    font-size: 14px;
+}
+
+.error-text p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.error-text a {
+    color: #ff8080;
+    text-decoration: none;
+    font-size: 13px;
+    display: block;
+    margin-top: 4px;
+}
+
+.error-text a:hover {
+    text-decoration: underline;
 }

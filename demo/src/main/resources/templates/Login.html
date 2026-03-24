@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="/GlobalStyle.css">
 </head>
 
-<body class="d-flex flex-column vh-100"> <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<body class="d-flex flex-column vh-100"> 
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="/Index">El Desván</a>
             <div class="navbar-nav ms-auto align-items-center">
@@ -39,8 +40,17 @@
     <div class="container flex-grow-1 d-flex align-items-center justify-content-center">
         <div class="row justify-content-center w-100">
             <div class="col-11 col-sm-8 col-md-6 col-lg-4">
-                <div class="card shadow-lg p-4 rounded-4">
+                <div class="card shadow-lg p-4 rounded-4 border-secondary">
                     <h2 class="text-center mb-4 fw-bold">Inicie Sesión</h2>
+                    
+                    {{#errorLogin}}
+                    <div class="error-container">
+                        <div class="error-icon">−</div>
+                        <div class="error-text">
+                            <p>El usuario o la contraseña son incorrectos. Inténtalo de nuevo.</p>
+                        </div>
+                    </div>
+                    {{/errorLogin}}
                     
                     <form action="/login" method="POST">
                         <div class="mb-3">

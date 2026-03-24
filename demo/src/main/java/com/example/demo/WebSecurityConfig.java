@@ -62,6 +62,9 @@ public class WebSecurityConfig {
 
                 // ADMIN
                 .requestMatchers("/Admin/**").hasRole("ADMIN")
+                .requestMatchers("/AdminProduct/**").hasRole("ADMIN")
+                .requestMatchers("/AdminUser/**").hasRole("ADMIN")
+                .requestMatchers("/AdminCategory/**").hasRole("ADMIN")
 
                 // Cualquier otra ruta → permitida
                 .anyRequest().permitAll()

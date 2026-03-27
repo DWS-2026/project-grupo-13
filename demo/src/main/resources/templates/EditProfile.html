@@ -118,48 +118,37 @@
 
     </section>
 
-    <div class="text-center mt-5">
-    <a href="/EditData"><button
-        type="button"
-        class="btn btn-outline-light btn-lg"
-        id="btn-editar-perfil"
-        data-edit-profile
-    >
-        Editar perfil
-    </button></a>
+   <div class="botones-usuario text-center mt-5">
+
+    <!-- Fila superior: Editar perfil + Cerrar sesión -->
+    <div class="d-flex justify-content-center gap-3 mb-3">
+        <a href="/EditData">
+            <button type="button" class="btn btn-outline-light btn-lg">
+                Editar perfil
+            </button>
+        </a>
+
+        {{#logged}}
+        <a href="/logout">
+            <button type="button" class="btn btn-outline-light btn-lg">
+                Cerrar Sesión
+            </button>
+        </a>
+        {{/logged}}
     </div>
 
-
-    
-    {{#logged}}
-        <div class="text-center mt-5">
-            <a href="/logout">
-                <button
-                    type="button"
-                    class="btn btn-outline-light btn-lg"
-                    id="btn-editar-perfil"
-                    data-edit-profile
-                >
-                    Cerrar Sesión
-                </button>
-            </a>
-        </div>
-    {{/logged}}
-
+    <!-- Botón inferior: Administrador -->
     {{#isAdmin}}
-        <div class="text-center mt-5">
-            <a href="/Admin">
-                <button
-                    type="button"
-                    class="btn btn-outline-light btn-lg"
-                    id="btn-editar-perfil"
-                    data-edit-profile
-                >
-                    Soy administrador
-                </button>
-            </a>
-        </div>
+    <div class="mt-3">
+        <a href="/Admin">
+            <button type="button" class="btn btn-outline-light btn-lg">
+                Soy administrador
+            </button>
+        </a>
+    </div>
     {{/isAdmin}}
+
+</div>
 
 
 

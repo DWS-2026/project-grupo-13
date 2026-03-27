@@ -129,6 +129,23 @@
     </button></a>
     </div>
 
+
+    
+    {{#logged}}
+        <div class="text-center mt-5">
+            <a href="/logout">
+                <button
+                    type="button"
+                    class="btn btn-outline-light btn-lg"
+                    id="btn-editar-perfil"
+                    data-edit-profile
+                >
+                    Cerrar Sesión
+                </button>
+            </a>
+        </div>
+    {{/logged}}
+
     {{#isAdmin}}
         <div class="text-center mt-5">
             <a href="/Admin">

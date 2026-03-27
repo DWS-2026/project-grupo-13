@@ -47,10 +47,10 @@ public class AdminUserController {
     }
     @GetMapping("/AdminUser/verUsuario/{id}")
     public String verUsuario(@PathVariable int id, Model model) {
-        User usuario = userService.findById(id).orElse(null);
+        User usuario = userService.findById(id).get();
         model.addAttribute("usuario", usuario);
 
-        return "AdminUserDetail"; 
+        return "AdminUserDetails"; 
 }
 }
 

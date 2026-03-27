@@ -37,7 +37,7 @@ public class WebSecurityConfig {
 
         http
             // Necesario para permitir H2-console
-            .csrf(csrf -> csrf.disable())
+            
             .headers(headers -> headers.frameOptions(frame -> frame.disable()))
 
             .authorizeHttpRequests(authorize -> authorize

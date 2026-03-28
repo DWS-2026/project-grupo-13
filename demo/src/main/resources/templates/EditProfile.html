@@ -129,13 +129,17 @@
         </a>
 
         {{#logged}}
-        <a href="/logout">
-            <button type="button" class="btn btn-outline-light btn-lg">
+        <form id="logoutForm" action="/logout" method="post">
+            {{#token}}
+            <input type="hidden" name="_csrf" value="{{token}}">
+            {{/token}}
+            <button type="submit" class="btn btn-outline-light btn-lg">
                 Cerrar Sesión
             </button>
-        </a>
+        </form>
         {{/logged}}
     </div>
+
 
     <!-- Botón inferior: Administrador -->
     {{#isAdmin}}

@@ -1,261 +1,134 @@
 <!doctype html>
 <html lang="es">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <title>{{producto.nombre}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="/GlobalStyle.css" />
     <link rel="stylesheet" href="/Product.css" />
-  </head>
+</head>
 
-  <body>
+<body style="background-color: #1a1a2e; color: white;">
     <header>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-          <a class="navbar-brand" href="/Index">El Desván</a>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="/Index">El Desván</a>
 
-          <div class="navbar-nav ms-auto align-items-center">
-            <a class="nav-link active" href="/Index">Inicio</a>
-            <a class="nav-link" href="/CategoriesScreen">Categorías</a>
-            <a class="nav-link" href="/PromotionsScreen">Ofertas</a>
+                <div class="navbar-nav ms-auto align-items-center">
+                    <a class="nav-link active" href="/Index">Inicio</a>
+                    <a class="nav-link" href="/CategoriesScreen">Categorías</a>
+                    <a class="nav-link" href="/PromotionsScreen">Ofertas</a>
 
-            <!-- BOTÓN LOGIN (solo si NO está logueado) -->
-{{^logged}}
-<a class="nav-link d-flex align-items-center" href="/Login">
-    <img src="/imagenes/agregar-usuario.png" width="20" height="20"
-        style="filter: invert(1);" class="me-2">
-    Iniciar sesión / Registrarse
-</a>
-{{/logged}}
+                    {{^logged}}
+                    <a class="nav-link d-flex align-items-center" href="/Login">
+                        <img src="/imagenes/agregar-usuario.png" width="20" height="20" style="filter: invert(1);" class="me-2">
+                        Iniciar sesión / Registrarse
+                    </a>
+                    {{/logged}}
 
-<!-- MI CUENTA DROPDOWN (solo si SÍ está logueado) -->
-{{#logged}}
-<li class="nav-item dropdown ms-lg-2">
-    <a class="nav-link dropdown-toggle btn btn-outline-info" href="#" id="cuentaDropdown"
-       role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Mi cuenta
-    </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cuentaDropdown">
-        <li><a class="dropdown-item" href="/EditProfile">Editar perfil</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item text-danger" href="/logout">Cerrar sesión</a></li>
-    </ul>
-</li>
-{{/logged}}
+                    {{#logged}}
+                    <li class="nav-item dropdown ms-lg-2" style="list-style: none;">
+                        <a class="nav-link dropdown-toggle btn btn-outline-info" href="#" id="cuentaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Mi cuenta
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cuentaDropdown">
+                            <li><a class="dropdown-item" href="/EditProfile">Editar perfil</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="/logout">Cerrar sesión</a></li>
+                        </ul>
+                    </li>
+                    {{/logged}}
 
-            <a class="nav-link d-flex align-items-center" href="/ShoppingCart">
-              <img
-                src="/imagenes/carrito.png"
-                width="20"
-                height="20"
-                style="filter: invert(1)"
-                class="me-2"
-              />
-              Carrito
-            </a>
-          </div>
-        </div>
-      </nav>
+                    <a class="nav-link d-flex align-items-center" href="/ShoppingCart">
+                        <img src="/imagenes/carrito.png" width="20" height="20" style="filter: invert(1)" class="me-2" />
+                        Carrito
+                    </a>
+                </div>
+            </div>
+        </nav>
     </header>
 
     <main class="container mt-5 pt-5">
-      <article class="producto d-flex gap-4">
-        {{#producto.image}}
-        <img
-        src="/image/{{producto.image.id}}"
-        alt="{{producto.nombre}}"
-        style="max-width: 400px"
-        />
-        {{/producto.image}}
+        <article class="producto d-flex gap-4">
+            {{#producto.image}}
+            <img src="/image/{{producto.image.id}}" alt="{{producto.nombre}}" style="max-width: 400px; border-radius: 8px;" class="bg-white p-2" />
+            {{/producto.image}}
 
-        {{^producto.image}}
-        <img
-        src="/imagenes/default.jpg"
-        alt="Sin imagen"
-        style="max-width: 400px"
-        />
-        {{/producto.image}}
+            {{^producto.image}}
+            <img src="/imagenes/default.jpg" alt="Sin imagen" style="max-width: 400px; border-radius: 8px;" class="bg-white p-2" />
+            {{/producto.image}}
 
-        <div class="info">
-          <h1 class="nombre">{{producto.nombre}}</h1>
+            <div class="info">
+                <h1 class="nombre text-white">{{producto.nombre}}</h1>
+                <p class="descripcion text-light">{{producto.descripcion}}</p>
+                <p class="precio h2 text-success">{{producto.precio}} €</p>
 
-          <p class="descripcion">{{producto.descripcion}}</p>
+                <div class="acciones d-flex gap-2 mt-4">
+                    <a href="/Comprar/{{producto.id}}" class="btn btn-primary btn-lg">Comprar ahora</a>
+                    
+                    <form action="/agregar-carrito" method="POST">
+                        <input type="hidden" name="nombreProducto" value="{{producto.nombre}}">
+                        <input type="hidden" name="imagenProducto" value="/image/{{producto.image.id}}">
+                        <input type="hidden" name="precioProducto" value="{{producto.precio}}">
+                        <button type="submit" class="btn btn-outline-light btn-lg">Añadir al carrito</button>
+                    </form>
+                    </div>
+            </div>
+        </article>
 
-          <p class="precio">{{producto.precio}} €</p>
+        <hr class="text-white mt-5">
 
-          <div class="acciones">
-            <a href="/Comprar/{{producto.id}}" class="btn btn-primary"
-              >Comprar ahora</a
-            >
-            <a href="/ShoppingCart" class="btn btn-outline-secondary"
-              >Añadir al carrito</a
-            >
-          </div>
-        </div>
-      </article>
+        <section class="añadir-valoracion text-white">
+            <h2>Deja tu valoración</h2>
+            <form action="/createreview/{{producto.id}}" method="post" id="formValoracion">
+                <input type="text" name="usuario" placeholder="Tu nombre" class="form-control mb-3 bg-dark text-white border-secondary" required>
+                
+                <select name="estrellas" class="form-select mb-3 bg-dark text-warning border-secondary" style="max-width: 150px;">
+                    <option value="1">★</option>
+                    <option value="2">★★</option>
+                    <option value="3">★★★</option>
+                    <option value="4">★★★★</option>
+                    <option value="5" selected>★★★★★</option>
+                </select>
+                
+                <textarea name="comentario" placeholder="Escribe tu opinión" rows="4" class="form-control mb-3 bg-dark text-white border-secondary" required></textarea>
+                
+                <button type="submit" class="btn btn-success">Enviar valoración</button>
+            </form>
+        </section>
 
-      <hr />
+        <hr class="text-white">
 
-      <section class="añadir-valoracion">
-        <h2>Deja tu valoración</h2>
+        <section class="lista-valoraciones text-white mb-5">
+            <h2>Opiniones de otros clientes</h2>
+            
+            {{^valoraciones}}
+            <div class="alert alert-dark border-secondary text-white">
+                Aún no hay reseñas para este producto. ¡Sé el primero en opinar!
+            </div>
+            {{/valoraciones}}
 
-        <form
-          action="/createreview/{{producto.id}}"
-          method="post"
-          id="formValoracion"
-        >
-          <input type="hidden" id="productoId" value="{{producto.id}}" />
-
-          <input type="text" name="usuario" placeholder="Tu nombre" required />
-
-          <select name="estrellas">
-            <option value="1" selected>★</option>
-            <option value="2">★★</option>
-            <option value="3">★★★</option>
-            <option value="4">★★★★</option>
-            <option value="5">★★★★★</option>
-          </select>
-
-          <textarea
-            name="comentario"
-            placeholder="Escribe tu opinión"
-            rows="4"
-            required
-          ></textarea>
-
-          <button type="submit" class="btn btn-success">
-            Enviar valoración
-          </button>
-        </form>
-      </section>
-
-      <hr />
-
-      <section class="lista-valoraciones">
-        <h2>Opiniones de otros clientes</h2>
-
-        {{^valoraciones}}
-        <div class="alert alert-light">
-          Aún no hay reseñas para este producto. ¡Sé el primero en opinar!
-        </div>
-        {{/valoraciones}} {{#valoraciones}}
-
-        <div class="card mb-3 shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title">
-              <span class="fw-bold">{{usuario}}</span>
-
-              <span class="text-warning ms-2"> {{estrellas}} ★ </span>
-            </h5>
-
-            <p class="card-text">{{comentario}}</p>
-
-            <small class="text-muted">{{fecha}}</small>
-          </div>
-        </div>
-
-        {{/valoraciones}}
-      </section>
+            {{#valoraciones}}
+            <div class="card mb-3 shadow-sm bg-dark border-secondary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <span class="fw-bold">{{usuario}}</span> 
+                        <span class="text-warning ms-2">{{estrellas}} ★</span>
+                    </h5>
+                    <p class="card-text">{{comentario}}</p>
+                    <small class="text-muted">{{fecha}}</small>
+                </div>
+            </div>
+            {{/valoraciones}}
+        </section>
+        
     </main>
 
-    <footer class="footer_principal mt-5 text-center">
-      <p>© 2026 El desván del friki</p>
+    <footer class="footer_principal text-center text-white pb-4 border-top border-secondary pt-4">
+        <p>© 2026 El desván del friki</p>
     </footer>
-  </body>
-</html>
-
-<hr class="text-white">
-<section class="añadir-valoracion text-white">
-<h2>Deja tu valoración</h2>
-<form action="/createreview/{{producto.id}}" method="post" id="formValoracion">
-<input type="text" name="usuario" placeholder="Tu nombre" class="form-control mb-2" required>
-<select name="estrellas" class="form-select mb-2">
-    <option value="1">★</option>
-    <option value="2">★★</option>
-    <option value="3">★★★</option>
-    <option value="4">★★★★</option>
-    <option value="5" selected>★★★★★</option>
-</select>
-<textarea name="comentario" placeholder="Escribe tu opinión" rows="4" class="form-control mb-2" required></textarea>
-<button type="submit" class="btn btn-success">Enviar valoración</button>
-</form>
-</section>
-
-<hr class="text-white">
-<section class="lista-valoraciones text-white">
-<h2>Opiniones de otros clientes</h2>
-{{^valoraciones}}
-<div class="alert alert-dark border-secondary">Aún no hay reseñas para este producto.</div>
-{{/valoraciones}}
-{{#valoraciones}}
-<div class="card mb-3 shadow-sm bg-dark border-secondary text-white">
-<div class="card-body">
-<h5 class="card-title"><span class="fw-bold">{{usuario}}</span> <span class="text-warning ms-2">{{estrellas}} ★</span></h5>
-<p class="card-text">{{comentario}}</p>
-</div>
-</div>
-{{/valoraciones}}
-
-<hr>
-
-<section class="añadir-valoracion">
-    <h2>Deja tu valoración</h2>
-
-    <form action="/producto/{{producto.id}}/review" method="post" id="formValoracion">
-
-        <input type="text" name="usuario" placeholder="Tu nombre" required>
-
-        <select name="estrellas">
-            <option value="1" selected>★</option>
-            <option value="2">★★</option>
-            <option value="3">★★★</option>
-            <option value="4">★★★★</option>
-            <option value="5">★★★★★</option>
-        </select>
-
-        <textarea name="comentario" placeholder="Escribe tu opinión" rows="4" required></textarea>
-
-        <button type="submit" class="btn btn-success">Enviar valoración</button>
-    </form>
-</section>
-
-<hr>
-
-<section class="lista-valoraciones">
-    <h2>Opiniones de otros clientes</h2>
-
-    {{^reviews}}
-    <div class="alert alert-light">
-        Aún no hay reseñas para este producto. ¡Sé el primero en opinar!
-    </div>
-    {{/reviews}}
-
-    {{#reviews}}
-    <div class="card mb-3 shadow-sm">
-        <div class="card-body">
-            <h5 class="card-title">
-                <span class="fw-bold">{{usuario}}</span>
-                <span class="text-warning ms-2">
-                    {{estrellas}} ★
-                </span>
-            </h5>
-
-            <p class="card-text">{{comentario}}</p>
-        </div>
-    </div>
-    {{/reviews}}
-
-</section>
-</main>
-
-<footer class="footer_principal mt-5 text-center text-white pb-4">
-<p>© 2026 El desván del friki</p>
-</footer>
 </body>
 </html>

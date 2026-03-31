@@ -97,6 +97,61 @@ public class DatabaseInitializer {
         setProductImage(p1, "imagenes/iphone15.jpg");
         productService.save(p1);
 
+        //Productos
+        Product p2 = new Product(
+            "Iphone 12",
+            1299.99,
+            "El 12avo modelo de Apple",
+            smartphones
+        );
+        // imagen del producto
+        setProductImage(p2, "imagenes/iphone12.jpg");
+        productService.save(p2);
+
+        //Productos
+        Product p3 = new Product(
+            "Asus Gaming",
+            1099.99,
+            "Portátil gaming de alta gama",
+            ordenadores
+        );
+        // imagen del producto
+        setProductImage(p3, "imagenes/LaptopAsusGaming.jpg");
+        productService.save(p3);
+
+        //Productos
+        Product p4 = new Product(
+            "Asus Gaming Pro",
+            1199.99,
+            "Portátil gaming de alta gama a otro nivel",
+            ordenadores
+        );
+        // imagen del producto
+        setProductImage(p4, "imagenes/LaptopAsusProArt.jpg");
+        productService.save(p4);
+
+        //Productos
+        Product p5 = new Product(
+            " Asus GTX 1650",
+            1299.99,
+            "Tarjeta gráfica de gama media para juegos y tareas creativas",
+            gpus
+        );
+        // imagen del producto
+        setProductImage(p5, "imagenes/GraficaAsusGTX1650.jpg");
+        productService.save(p5);
+
+        //Productos
+        Product p6 = new Product(
+            " Asus GTX 1650",
+            1299.99,
+            "Tarjeta gráfica de gama media para juegos y tareas creativas",
+            gpus
+        );
+        // imagen del producto
+        setProductImage(p6, "imagenes/GraficaAsusGTX1650.jpg");
+        productService.save(p6);
+
         //Usuarios
         User u1 = new User(
         "Carlos",

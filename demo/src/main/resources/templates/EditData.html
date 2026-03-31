@@ -19,10 +19,7 @@
                         <a class="nav-link" href="/CategoriesScreen">Categorías</a>
                         <a class="nav-link" href="/PromotionsScreen">Ofertas</a>
                         
-                        <a class="nav-link d-flex align-items-center" href="/Login">
-                            <img src="/imagenes/agregar-usuario.png" width="20" height="20" style="filter: invert(1);" class="me-2">
-                            <span>Iniciar sesión / Registrarse</span>
-                        </a>
+                        
                         
                         <a class="nav-link btn btn-outline-info ms-lg-2" href="/EditProfile">Mi cuenta</a>
                         <a class="nav-link d-flex align-items-center" href="/ShoppingCart">
@@ -39,37 +36,47 @@
                 <div class="card shadow-lg p-4">
                     <h2 class="text-center mb-4 fw-bold">Editar Perfil</h2>
                     
-                    <form>
+                    <form action="/EditData" method="post">
+
+                        <input type="hidden" name="_csrf" value="{{token}}">
+
                         <div class="mb-3">
                             <label for="inputNick" class="form-label">Nick de usuario</label>
-                            <input type="text" class="form-control" id="inputNick" placeholder="Ej: FrikiMaster99">
+                            <input type="text" class="form-control" id="inputNick" name="nickname" value="{{usuario.nickname}}" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="inputNombre" class="form-label">Nuevo nombre</label>
-                            <input type="text" class="form-control" id="inputNombre" placeholder="Tu nombre real">
+                            <label for="inputNombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="inputNombre" name="name" value="{{usuario.name}}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="inputApellido" class="form-label">Apellido</label>
+                            <input type="text" class="form-control" id="inputApellido" name="surname" value="{{usuario.surname}}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="inputEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="inputEmail" name="email" value="{{usuario.email}}">
                         </div>
 
                         <div class="mb-3">
                             <label for="inputPassword" class="form-label">Nueva contraseña</label>
-                            <input type="password" class="form-control" id="inputPassword" placeholder="********">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="inputDireccion" class="form-label">Dirección</label>
-                            <input type="text" class="form-control" id="inputDireccion" placeholder="Calle Falsa 123, Ciudad">
+                            <input type="password" class="form-control" id="inputPassword" name="password">
                         </div>
 
                         <div class="mb-4">
                             <label for="inputFecha" class="form-label">Fecha de nacimiento</label>
-                            <input type="date" class="form-control" id="inputFecha">
+                            <input type="date" class="form-control" id="inputFecha" name="birthDate" value="{{usuario.birthDate}}">
                         </div>
 
                         <div class="d-grid gap-2">
-                            <a href="EditProfile.html" class="btn btn-info text-white fw-bold">Guardar Cambios</a>
-                            <a href="EditProfile.html" class="btn btn-outline-secondary">Cancelar</a>
+                            <button type="submit" class="btn btn-info text-white fw-bold">Guardar Cambios</button>
+                            <a href="/EditProfile" class="btn btn-outline-secondary">Cancelar</a>
                         </div>
+
                     </form>
+
                 </div>
             </div>
         </div>

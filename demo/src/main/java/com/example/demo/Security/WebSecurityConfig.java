@@ -37,7 +37,7 @@ public class WebSecurityConfig {
 
         http
             // Necesario para permitir H2-console
-            .csrf(csrf -> csrf.disable())
+            
             .headers(headers -> headers.frameOptions(frame -> frame.disable()))
 
             .authorizeHttpRequests(authorize -> authorize
@@ -70,8 +70,7 @@ public class WebSecurityConfig {
             )
 
             .formLogin(formLogin -> formLogin
-                .loginPage("/Login")
-                .loginProcessingUrl("/login")
+                .loginPage("/login")
                 .failureUrl("/Login?error")
                 .defaultSuccessUrl("/Index", true)
                 .permitAll()
@@ -80,6 +79,9 @@ public class WebSecurityConfig {
             .logout(logout -> logout
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/Index")
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .deleteCookies("JSESSIONID")
                 .permitAll()
             );
 

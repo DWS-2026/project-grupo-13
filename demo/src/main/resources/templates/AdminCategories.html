@@ -40,7 +40,7 @@
                         </div>
                         {{/error}}
 
-                        <form action="/AdminCategories" method="post" enctype="multipart/form-data">
+                        <form action="/admin/categorias/guardar" method="post" enctype="multipart/form-data">
                             
                             <div class="mb-3">
                                 <label class="form-label">Nombre de categoría</label>
@@ -53,6 +53,7 @@
                             </div>
 
                             <button type="submit" class="btn btn-success w-100">Guardar Categoría</button>
+                            <input type="hidden" name="_csrf" value="{{token}}" />
                         </form>
                     </div>
                 </div>

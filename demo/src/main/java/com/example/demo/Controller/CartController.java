@@ -20,7 +20,7 @@ public class CartController {
     public String agregarAlCarrito(
             @RequestParam("nombreProducto") String nombre,
             @RequestParam("imagenProducto") String imagen,
-            @RequestParam("precioProducto") double precio) { // Recibimos el precio
+            @RequestParam("precioProducto") double precio) { 
         
         carrito.add(new CartItem(nombre, imagen, precio));
         
@@ -34,7 +34,8 @@ public class CartController {
     @PostMapping("/eliminar-producto")
     @ResponseBody
     public String eliminarProducto(@RequestParam("nombre") String nombre) {
-        carrito.removeIf(item -> item.getNombre().equals(nombre));
+        // Eliminamos usando trim() para asegurar que coincida exactamente
+        carrito.removeIf(item -> item.getNombre().trim().equalsIgnoreCase(nombre.trim()));
         return "OK";
     }
 

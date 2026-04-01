@@ -56,63 +56,90 @@
 
     <div class="row g-4">
 
-        <!-- Card: Datos personales -->
-        <div class="col-md-6 col-lg-4">
-            <div class="card h-100 account-card">
-                <div class="card-body">
-                    <h5 class="card-title">Datos personales</h5>
-                    <p class="card-text">
-                        <strong>Nombre:</strong><br>
-                        <span data-user-name>{{usuario.name}} {{usuario.surname}}</span>
-                    </p>
-                    <p class="card-text">
-                        <strong>Email:</strong><br>
-                        <span data-user-email>{{usuario.email}}</span>
-                    </p>
-                </div>
+    <!-- Card: Datos personales -->
+    <div class="col-md-6 col-lg-4">
+        <div class="card h-100 account-card">
+            <div class="card-body">
+                <h5 class="card-title">Datos personales</h5>
+                <p class="card-text">
+                    <strong>Nombre:</strong><br>
+                    <span data-user-name>{{usuario.name}} {{usuario.surname}}</span>
+                </p>
+                <p class="card-text">
+                    <strong>Email:</strong><br>
+                    <span data-user-email>{{usuario.email}}</span>
+                </p>
+                <p class="card-text">
+                    <strong>Fecha de Nacimiento:</strong><br>
+                    <span data-user-birthdate>{{usuario.birthDate}}</span>
+                </p>
             </div>
         </div>
+    </div>
 
-        <!-- Card: Pedidos -->
-        <div class="col-md-6 col-lg-4">
-            <div class="card h-100 account-card">
-                <div class="card-body">
-                    <h5 class="card-title">Mis pedidos</h5>
-                    <p class="card-text">
-                        Pedidos realizados:
-                        <strong>
-                            <span data-user-orders>0</span>
-                        </strong>
-                    </p>
-                    <p class="mb-0">
-                        Último pedido:
-                        <span data-last-order-date>—</span>
-                    </p><br>
-                    <a href="/OrderHistory"><button
-                        type="button"
-                        class="btn btn-outline-light btn-sm"
-                        id="btn-editar-perfil"
-                        data-edit-profile
-                    >
+    <!-- Card: Pedidos -->
+    <div class="col-md-6 col-lg-4">
+        <div class="card h-100 account-card">
+            <div class="card-body">
+                <h5 class="card-title">Mis pedidos</h5>
+                <p class="card-text">
+                    Pedidos realizados:
+                    <strong>
+                        <span data-user-orders>0</span>
+                    </strong>
+                </p>
+                <p class="mb-0">
+                    Último pedido:
+                    <span data-last-order-date>—</span>
+                </p><br>
+                <a href="/OrderHistory">
+                    <button type="button" class="btn btn-outline-light btn-sm">
                         Ver últimos pedidos
-                    </button></a>
-                </div>
+                    </button>
+                </a>
             </div>
         </div>
+    </div>
 
-        <!-- Card: Dirección -->
-        <div class="col-md-6 col-lg-4">
-            <div class="card h-100 account-card">
-                <div class="card-body">
-                    <h5 class="card-title">Dirección principal</h5>
-                    <p class="card-text">
-                        <span data-user-address>
-                            Dirección no registrada
-                        </span>
-                    </p>
-                </div>
+    <!-- Card: Foto de perfil -->
+    <div class="col-md-6 col-lg-4">
+        <div class="card h-100 account-card">
+            <div class="card-body text-center">
+                <h5 class="card-title mb-3">{{usuario.nickname}}</h5>
+
+                {{#user.profileImage}}
+                    <img src="/image/{{user.profileImage.id}}" 
+                         class="rounded-circle mb-3" 
+                         width="120" height="120">
+                {{/user.profileImage}}
+
+                {{^user.profileImage}}
+                    <img src="/imagenes/default-profile.png" 
+                         class="rounded-circle mb-3" 
+                         width="120" height="120">
+                {{/user.profileImage}}
+
+                <form id="profileForm" action="/user/profile/upload" 
+                      method="post" enctype="multipart/form-data" style="display:none">
+
+                    {{#token}}
+                    <input type="hidden" name="_csrf" value="{{token}}">
+                    {{/token}}
+
+                    <input type="file" id="profileInput" name="profileImage" accept="image/*"
+                           onchange="document.getElementById('profileForm').submit();">
+                </form>
+
+                <button class="btn btn-primary w-100" onclick="document.getElementById('profileInput').click();">
+                    Actualizar foto
+                </button>
             </div>
         </div>
+    </div>
+
+</div>
+
+
 
     </div>
 
@@ -129,17 +156,13 @@
         </a>
 
         {{#logged}}
-        <form id="logoutForm" action="/logout" method="post">
-            {{#token}}
-            <input type="hidden" name="_csrf" value="{{token}}">
-            {{/token}}
-            <button type="submit" class="btn btn-outline-light btn-lg">
+        <a href="/logout">
+            <button type="button" class="btn btn-outline-light btn-lg">
                 Cerrar Sesión
             </button>
-        </form>
+        </a>
         {{/logged}}
     </div>
-
 
     <!-- Botón inferior: Administrador -->
     {{#isAdmin}}

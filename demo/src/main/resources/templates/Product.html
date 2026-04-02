@@ -37,7 +37,13 @@
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cuentaDropdown">
                             <li><a class="dropdown-item" href="/EditProfile">Editar perfil</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item text-danger" href="/logout">Cerrar sesión</a></li>
+                            <li><form action="/logout" method="post" style="display:inline;">
+                                <input type="hidden" name="_csrf" value="{{token}}" />
+                                <button type="submit" class="dropdown-item">
+                                    Cerrar sesión
+                                </button>
+                            </form>
+                        </li>
                         </ul>
                     </li>
                     {{/logged}}

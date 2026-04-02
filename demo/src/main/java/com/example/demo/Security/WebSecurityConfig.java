@@ -58,6 +58,8 @@ public class WebSecurityConfig {
                 .requestMatchers("/categoria/**").permitAll()
                 .requestMatchers("/register").permitAll()
                 .requestMatchers("/Login").permitAll()
+                
+
 
                 // PÁGINAS PRIVADAS
                 .requestMatchers("/ShoppingCart").hasAnyRole("USER", "ADMIN")
@@ -68,7 +70,7 @@ public class WebSecurityConfig {
                 .requestMatchers("/AdminProduct/**").hasRole("ADMIN")
                 .requestMatchers("/AdminUser/**").hasRole("ADMIN")
                 .requestMatchers("/AdminCategories/**").hasRole("ADMIN")
-
+                .requestMatchers("/ChangePassword").authenticated()
                 // Cualquier otra ruta → permitida
                 .anyRequest().authenticated()
                 

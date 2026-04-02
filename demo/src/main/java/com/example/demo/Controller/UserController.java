@@ -145,6 +145,48 @@ public class UserController {
 
         return "redirect:/EditProfile";
     }
+    @PostMapping("/ChangePassword")
+    public String changePassword(@RequestParam String oldPassword,
+                                @RequestParam String newPassword,
+                                Principal principal) {
+
+        User usuario = userService.findByNickname(principal.getName());
+
+        // Validar contraseña antigua
+        if (!passwordEncoder.matches(oldPassword, usuario.getEncodedPassword())) {
+            return "redirect:/ChangePassword?errorPassword";
+        }
+
+        // Guardar nueva contraseña
+        usuario.setEncodedPassword(passwordEncoder.encode(newPassword));
+        userService.save(usuario);
+
+        // Actualizar sesión
+        UserDetails userDetails = userDetailsService.loadUserByUsername(usuario.getNickname());
+        Authentication authentication = new UsernamePasswordAuthenticationToken(
+                userDetails,
+                userDetails.getPassword(),
+                userDetails.getAuthorities()
+        );
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        return "redirect:/EditProfile?passwordChanged";
+        
+
+    }
+
+    @GetMapping("/ChangePassword")
+    public String changePasswordForm(Model model,
+                                    @RequestParam(required = false) String errorPassword) {
+
+        if (errorPassword != null) {
+            model.addAttribute("errorPassword", true);
+        }
+
+        return "ChangePassword";
+    }
+
+    
 
 
 

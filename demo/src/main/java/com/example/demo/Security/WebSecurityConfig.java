@@ -43,8 +43,12 @@ public class WebSecurityConfig {
             .authorizeHttpRequests(authorize -> authorize
                 // H2-console siempre permitido
                 .requestMatchers("/h2-console/**").permitAll()
-
+                
+                
+            
+                
                 // PÁGINAS PÚBLICAS
+                .requestMatchers("/css/**", "/js/**", "/imagenes/**", "/image/**", "/*.css").permitAll()
                 .requestMatchers("/", "/Index").permitAll()
                 .requestMatchers("/imagenes/**").permitAll()
                 .requestMatchers("/image/**").permitAll()
@@ -66,7 +70,12 @@ public class WebSecurityConfig {
                 .requestMatchers("/AdminCategories/**").hasRole("ADMIN")
 
                 // Cualquier otra ruta → permitida
-                .anyRequest().permitAll()
+                .anyRequest().authenticated()
+                
+
+                
+
+
             )
 
             .formLogin(formLogin -> formLogin

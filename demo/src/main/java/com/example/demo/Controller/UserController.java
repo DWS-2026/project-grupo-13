@@ -1,6 +1,9 @@
 package com.example.demo.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,11 +16,13 @@ import com.example.demo.Model.Image;
 import org.springframework.ui.Model;
 
 import com.example.demo.Model.User;
+import com.example.demo.Security.RepositoryUserDetailsService;
 import com.example.demo.Service.UserService;
 
 import org.springframework.ui.Model;
 
 
+import org.springframework.security.core.Authentication;
 
 import com.example.demo.Service.ImageService;
 
@@ -42,6 +47,10 @@ public class UserController {
 
     @Autowired
     private ImageService imageService;
+
+    @Autowired
+    private RepositoryUserDetailsService userDetailsService;
+
 
 
     @PostMapping("/registro")
@@ -125,7 +134,18 @@ public class UserController {
 
         userService.save(usuario);
 
+        // 🔥 Actualizar sesión
+        UserDetails userDetails = userDetailsService.loadUserByUsername(usuario.getNickname());
+        Authentication authentication = new UsernamePasswordAuthenticationToken(
+            userDetails,
+            userDetails.getPassword(),
+            userDetails.getAuthorities()
+        );
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
         return "redirect:/EditProfile";
     }
+
+
 
 }

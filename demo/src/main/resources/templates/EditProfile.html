@@ -108,31 +108,33 @@
                 <h5 class="card-title mb-3">{{usuario.nickname}}</h5>
 
                 {{#user.profileImage}}
-                    <img src="/image/{{user.profileImage.id}}" 
-                         class="rounded-circle mb-3" 
-                         width="120" height="120">
+                    <img src="image/{{user.profileImage.id}}?t={{user.profileImage.id}}" 
+                        class="rounded-circle mb-3" 
+                        width="120" height="120">
                 {{/user.profileImage}}
 
                 {{^user.profileImage}}
-                    <img src="/imagenes/default-profile.png" 
-                         class="rounded-circle mb-3" 
-                         width="120" height="120">
+                    <img src="imagenes/default-profile.png" 
+                        class="rounded-circle mb-3" 
+                        width="120" height="120">
                 {{/user.profileImage}}
 
+
                 <form id="profileForm" action="/user/profile/upload" 
-                      method="post" enctype="multipart/form-data" style="display:none">
+                    method="post" enctype="multipart/form-data" style="display:none">
 
                     {{#token}}
                     <input type="hidden" name="_csrf" value="{{token}}">
                     {{/token}}
 
                     <input type="file" id="profileInput" name="profileImage" accept="image/*"
-                           onchange="document.getElementById('profileForm').submit();">
+                        onchange="document.getElementById('profileForm').submit();">
                 </form>
 
                 <button class="btn btn-primary w-100" onclick="document.getElementById('profileInput').click();">
                     Actualizar foto
                 </button>
+
             </div>
         </div>
     </div>

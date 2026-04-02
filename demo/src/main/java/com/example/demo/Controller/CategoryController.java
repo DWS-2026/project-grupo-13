@@ -29,7 +29,7 @@ public class CategoryController {
     @GetMapping
     public String listarCategorias(Model model) {
         model.addAttribute("categorias", categoryService.findAll());
-        return "admin/categorias"; // Vista Mustache
+        return "AdminCategories"; // Vista Mustache
     }
 
     // Formulario para crear categoría

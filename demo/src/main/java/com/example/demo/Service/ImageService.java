@@ -35,6 +35,8 @@ public class ImageService {
         return imageRepository.save(image);
     }
 
+    
+
     public Image findById(long id) {
         return imageRepository.findById(id).orElse(null);
     }

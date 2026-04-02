@@ -152,6 +152,26 @@ public class DatabaseInitializer {
         setProductImage(p6, "imagenes/GraficaAsusGTX1650.jpg");
         productService.save(p6);
 
+        Product p7 = new Product(
+            " Tablet Lenovo",
+            199.99,
+            "Tablet de última generación con lápiz",
+            tablets
+        );
+        // imagen del producto
+        setProductImage(p7, "imagenes/tabletlenovo3.jpg");
+        productService.save(p7);
+
+        Product p8 = new Product(
+            "Samsung Galaxy TabS10 Ultra",
+            399.99,
+            "Tablet muy chula para los niños",
+            tablets
+        );
+        // imagen del producto
+        setProductImage(p8, "imagenes/TabletSamsungGalaxyTabS10Ultra.jpg");
+        productService.save(p8);
+
         //Usuarios
         User u1 = new User(
         "Carlos",

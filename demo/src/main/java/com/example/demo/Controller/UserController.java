@@ -126,4 +126,12 @@ public class UserController {
                 userDetails, userDetails.getPassword(), userDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
+
+    /*@GetMapping("/EditProfile")
+    public String editProfile(Model model, Principal principal) {
+        User user = userService.findByNickname(principal.getName());
+        model.addAttribute("user", user);
+        return "EditProfile";
+    }
+*/
 }

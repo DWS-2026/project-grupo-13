@@ -47,7 +47,7 @@ public class WebSecurityConfig {
                 
             
                 
-                // PÁGINAS PÚBLICAS
+               
                 .requestMatchers("/css/**", "/js/**", "/imagenes/**", "/image/**", "/*.css").permitAll()
                 .requestMatchers("/", "/Index").permitAll()
                 .requestMatchers("/imagenes/**").permitAll()
@@ -63,17 +63,21 @@ public class WebSecurityConfig {
                 
 
 
-                // PÁGINAS PRIVADAS
+
+                
                 .requestMatchers("/ShoppingCart").hasAnyRole("USER", "ADMIN")
                 .requestMatchers("/agregar-carrito/**").hasAnyRole("USER", "ADMIN")
 
-                // ADMIN
+                
                 .requestMatchers("/Admin/**").hasRole("ADMIN")
                 .requestMatchers("/AdminProduct/**").hasRole("ADMIN")
                 .requestMatchers("/AdminUser/**").hasRole("ADMIN")
                 .requestMatchers("/AdminCategories/**").hasRole("ADMIN")
                 .requestMatchers("/ChangePassword").authenticated()
-                // Cualquier otra ruta → permitida
+               
+                
+                .requestMatchers("/user/profile/upload").authenticated()
+
                 .anyRequest().authenticated()
                 
 

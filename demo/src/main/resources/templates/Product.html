@@ -76,12 +76,13 @@
                     <a href="/Comprar/{{producto.id}}" class="btn btn-primary btn-lg">Comprar ahora</a>
                     
                     <form action="/agregar-carrito" method="POST">
+                        <input type="hidden" name="_csrf" value="{{token}}" />
                         <input type="hidden" name="nombreProducto" value="{{producto.nombre}}">
                         <input type="hidden" name="imagenProducto" value="/image/{{producto.image.id}}">
                         <input type="hidden" name="precioProducto" value="{{producto.precio}}">
                         <button type="submit" class="btn btn-outline-light btn-lg">Añadir al carrito</button>
                     </form>
-                    </div>
+                </div>
             </div>
         </article>
 

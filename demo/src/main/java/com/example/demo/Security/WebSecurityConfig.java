@@ -63,7 +63,7 @@ public class WebSecurityConfig {
 
                 // PÁGINAS PRIVADAS
                 .requestMatchers("/ShoppingCart").hasAnyRole("USER", "ADMIN")
-                .requestMatchers("/agregar-carrito").hasAnyRole("USER", "ADMIN")
+                .requestMatchers("/agregar-carrito/**").hasAnyRole("USER", "ADMIN")
 
                 // ADMIN
                 .requestMatchers("/Admin/**").hasRole("ADMIN")

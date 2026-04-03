@@ -56,8 +56,10 @@ public class WebSecurityConfig {
                 .requestMatchers("/PromotionsScreen").permitAll()
                 .requestMatchers("/producto/**").permitAll()
                 .requestMatchers("/categoria/**").permitAll()
-                .requestMatchers("/register").permitAll()
-                .requestMatchers("/Login").permitAll()
+                .requestMatchers("/register", "/Register").permitAll()
+                .requestMatchers("/login", "/Login").permitAll()
+                .requestMatchers("/registro", "/registro/**").permitAll()
+
                 
 
 

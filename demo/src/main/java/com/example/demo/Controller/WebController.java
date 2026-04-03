@@ -87,8 +87,8 @@ public class WebController {
     }
 
     // --- REGISTRO ---
-    @GetMapping("/Register")
-    public String Resgister() {
+    @GetMapping("/register")
+    public String resgister() {
         return "Register";
     }
 

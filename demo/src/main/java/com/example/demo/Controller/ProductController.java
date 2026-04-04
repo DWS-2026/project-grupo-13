@@ -40,21 +40,7 @@ public class ProductController {
 
 
   
-    @GetMapping("/producto/{id}")
-    public String producto(@PathVariable int id, Model model) {
-
-       Product p = productService.findById(id);
-
-        if (p == null) {
-            return "redirect:/"; 
-        }
-
-        model.addAttribute("producto", p);
-        model.addAttribute("reviews", p.getReviews());
-        model.addAttribute("nuevaReview", new Review()); // para formulario
-
-        return "Product"; 
-    }
+    
 
 
 
@@ -73,5 +59,22 @@ public class ProductController {
 
         return "redirect:/producto/" + id;
     }
+
+    @GetMapping("/producto/{id}")
+    public String verProducto(@PathVariable int id, Model model) {
+
+        Product p = productService.findById(id);
+
+        if (p == null) {
+            return "redirect:/Login";
+        }
+
+        model.addAttribute("producto", p);
+        model.addAttribute("valoraciones", reviewService.findByProductId(id));
+        model.addAttribute("nuevaReview", new Review());
+
+        return "Product"; 
+    }
+
 
 }

@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import com.example.demo.Model.Review;
 import com.example.demo.Repository.ReviewRepository;
 
+import java.util.List;
+
 @Service
 public class ReviewService {
 
@@ -15,5 +17,10 @@ public class ReviewService {
     public void save(Review review) {
         reviewRepository.save(review);
     }
+
+    public List<Review> findByProductId(int id) {
+    return reviewRepository.findByProductId(id);
+    }
+
 }
 

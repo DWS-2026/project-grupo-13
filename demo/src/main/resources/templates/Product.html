@@ -90,9 +90,9 @@
 
         <section class="añadir-valoracion text-white">
             <h2>Deja tu valoración</h2>
-            <form action="/createreview/{{producto.id}}" method="post" id="formValoracion">
-                <input type="text" name="usuario" placeholder="Tu nombre" class="form-control mb-3 bg-dark text-white border-secondary" required>
-                
+            <form action="/reviews/add" method="POST" class="mt-4">
+                <input type="hidden" name="_csrf" value="{{token}}">
+                <input type="hidden" name="productId" value="{{producto.id}}">
                 <select name="estrellas" class="form-select mb-3 bg-dark text-warning border-secondary" style="max-width: 150px;">
                     <option value="1">★</option>
                     <option value="2">★★</option>
@@ -107,41 +107,36 @@
             </form>
         </section>
 
-        <hr class="text-white">
+
 
         <section class="lista-valoraciones text-white mb-5">
-            <h2>Opiniones de otros clientes</h2>
-            
-            {{^valoraciones}}
-            <div class="alert alert-dark border-secondary text-white">
-                Aún no hay reseñas para este producto. ¡Sé el primero en opinar!
-            </div>
-            {{/valoraciones}}
+    <h2>Opiniones de otros clientes</h2>
 
-            {{#valoraciones}}
-            <div class="card mb-3 shadow-sm bg-dark border-secondary text-white">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <span class="fw-bold">{{usuario}}</span> 
-                        <span class="text-warning ms-2">{{estrellas}} ★</span>
-                    </h5>
-                    <p class="card-text">{{comentario}}</p>
-                    <small class="text-muted">{{fecha}}</small>
-                </div>
-            </div>
-            {{/valoraciones}}
-        </section>
-        
+    {{^valoraciones}}
+    <div class="alert alert-dark border-secondary text-white">
+        Aún no hay reseñas para este producto. ¡Sé el primero en opinar!
+    </div>
+    {{/valoraciones}}
+
+    {{#valoraciones}}
+    <div class="card mb-3 shadow-sm bg-dark border-secondary text-white">
+        <div class="card-body">
+            <h5 class="card-title">
+                <span class="fw-bold">{{usuario}}</span>
+                <span class="text-warning ms-2">{{estrellas}} ★</span>
+            </h5>
+            <p class="card-text">{{comentario}}</p>
+            <small class="text-muted">{{fecha}}</small>
+        </div>
+    </div>
+    {{/valoraciones}}
+</section>
+
     </main>
 
     <footer class="footer_principal text-center text-white pb-4 border-top border-secondary pt-4">
         <p>© 2026 El desván del friki</p>
     </footer>
-<<<<<<< HEAD
-</body>
-</html>
-=======
   </body>
 </html>
 
->>>>>>> a8615cef1371b36df577dde12311133d0262695a

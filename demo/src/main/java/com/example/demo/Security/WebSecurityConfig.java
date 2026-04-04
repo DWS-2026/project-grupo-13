@@ -68,6 +68,9 @@ public class WebSecurityConfig {
                 .requestMatchers("/ShoppingCart").hasAnyRole("USER", "ADMIN")
                 .requestMatchers("/agregar-carrito/**").hasAnyRole("USER", "ADMIN")
 
+                .requestMatchers("/reviews/add").hasAnyRole("USER", "ADMIN")
+
+
                 
                 .requestMatchers("/Admin/**").hasRole("ADMIN")
                 .requestMatchers("/AdminProduct/**").hasRole("ADMIN")

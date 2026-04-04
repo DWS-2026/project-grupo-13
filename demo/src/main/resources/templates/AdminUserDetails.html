@@ -9,11 +9,40 @@
 <body class="container">
     <div class="main-wrapper"> <h1>Detalle del Usuario</h1>
 
+        <div class="user-photo">
+            {{#usuario.profileImage}}
+                <img src="/image/{{usuario.profileImage.id}}" 
+                    alt="Foto de perfil" 
+                    class="profile-img">
+            {{/usuario.profileImage}}
+
+            {{^usuario.profileImage}}
+                <img src="/imagenes/default-profile.png" 
+                    alt="Foto por defecto" 
+                    class="profile-img">
+            {{/usuario.profileImage}}
+        </div>
+
         <div class="card">
             <div class="card-body">
                 <h2 class="card-title">{{usuario.name}} {{usuario.surname}}</h2>
                 <p><strong>Email</strong> {{usuario.email}}</p>
                 <p><strong>ID Usuario</strong> #{{usuario.id}}</p>
+
+                <div>
+                    <form action="/AdminUser/promote/{{usuario.id}}" method="POST" style="margin-top: 20px;">
+                        <input type="hidden" name="_csrf" value="{{token}}">
+
+                        {{#usuario.isAdmin}}
+                            <p><strong>Rol actual:</strong> ADMIN</p>
+                        {{/usuario.isAdmin}}
+
+                        {{^usuario.isAdmin}}
+                            <p><strong>Rol actual:</strong> USER</p>
+                            <button type="submit" class="btn-primary">Ascender a ADMIN</button>
+                        {{/usuario.isAdmin}}
+                    </form>
+                </div><br>
                 
                 <a href="/AdminUser" class="btn-secondary">Volver al Panel</a>
             </div>

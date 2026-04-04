@@ -72,6 +72,7 @@ public class WebSecurityConfig {
                 .requestMatchers("/Admin/**").hasRole("ADMIN")
                 .requestMatchers("/AdminProduct/**").hasRole("ADMIN")
                 .requestMatchers("/AdminUser/**").hasRole("ADMIN")
+                .requestMatchers("/AdminUser/promote/**").hasRole("ADMIN")
                 .requestMatchers("/AdminCategories/**").hasRole("ADMIN")
                 .requestMatchers("/ChangePassword").authenticated()
                

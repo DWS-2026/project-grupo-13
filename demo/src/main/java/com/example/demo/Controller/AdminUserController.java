@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.Model.User;
@@ -51,6 +52,17 @@ public class AdminUserController {
         model.addAttribute("usuario", usuario);
 
         return "AdminUserDetails"; 
-}
+    }
+
+    @PostMapping("/AdminUser/promote/{id}")
+    public String promoteUser(@PathVariable int id) {
+        User user = userService.findById(id).orElse(null);
+        if (user != null) {
+            user.setRole("ADMIN");
+            userService.save(user);
+        }
+        return "redirect:/AdminUser/verUsuario/" + id;
+    }
+
 }
 

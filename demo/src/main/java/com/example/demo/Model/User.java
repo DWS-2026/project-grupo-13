@@ -85,4 +85,10 @@ public class User {
     public Image getProfileImage() {return profileImage;}
     public void setProfileImage(Image profileImage) {this.profileImage = profileImage;}
 
+    //Esto es para la vista de AdminUserDetails
+    public boolean isAdmin() {
+        return role != null && (role.equals("ADMIN") || role.equals("ROLE_ADMIN"));
+    }
+
+
 }

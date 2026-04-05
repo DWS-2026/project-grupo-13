@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.example.demo.Model.Category;
 import com.example.demo.Model.Image;
 import com.example.demo.Model.Product;
+import com.example.demo.Repository.ProductRepository;
 import com.example.demo.Service.CategoryService;
 import com.example.demo.Service.ProductService;
 import com.example.demo.Service.ImageService;
@@ -24,6 +26,9 @@ public class AdminProductController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private ProductRepository productRepository;
 
     @Autowired
     private CategoryService categoryService;
@@ -88,4 +93,59 @@ public class AdminProductController {
         
         return "redirect:/AdminProduct";
     }
+
+    @PostMapping("/AdminProducts/Edit/{id}")
+    public String updateProduct(@PathVariable int id,
+                                @RequestParam String nombre,
+                                @RequestParam double precio,
+                                @RequestParam String descripcion,
+                                @RequestParam Long categoryId,
+                                @RequestParam("image") MultipartFile file) {
+
+        Product product = productRepository.findById(id).orElseThrow();
+
+        product.setNombre(nombre);
+        product.setPrecio(precio);
+        product.setDescripcion(descripcion);
+
+        Category c = categoryService.findById(categoryId);
+        product.setCategory(c);
+
+        if (!file.isEmpty()) {
+            try {
+                Image image = product.getImage();
+                if (image == null) image = new Image();
+                image.setData(file.getBytes());
+                product.setImage(image);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        productRepository.save(product);
+
+        return "redirect:/AdminProduct";
+    }
+
+    @GetMapping("/AdminProducts/image/{id}")
+    @ResponseBody
+    public byte[] getProductImage(@PathVariable int id) {
+        Product product = productRepository.findById(id).orElseThrow();
+
+        if (product.getImage() == null) {
+            return new byte[0]; // evita null pointer
+        }
+
+        return product.getImage().getData();
+    }
+
+    @GetMapping("/AdminProducts/Edit/{id}")
+    public String editProduct(@PathVariable int id, Model model) {
+        Product product = productRepository.findById(id).orElseThrow();
+        model.addAttribute("product", product);
+        model.addAttribute("categorias", categoryService.findAll());
+        return "EditProduct";
+    }
+
+
 }

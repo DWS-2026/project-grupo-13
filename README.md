@@ -201,7 +201,14 @@ Desarrollado los archivos HTML y CSS de la páginas CAtegorías, Ofertas Destaca
 
 #### **Diagrama de Navegación**
 
-Solo si ha cambiado.
+Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicación:
+
+![Diagrama de Navegación](fotos_pagina/diagrama_practica2.jpg)
+
+> Las líneas negras indican que cualquier usuario, aunque no se haya autenticado, puede acceder a dichas páginas.
+> Las líneas rosas indican que sólo los usuarios con sesion iniciada pueden acceder.
+> Las líneas amarillas indican que sólo los administradores pueden acceder.
+
 
 #### **Capturas de Pantalla Actualizadas**
 
@@ -233,17 +240,27 @@ Solo si han cambiado.
 
 Diagrama mostrando las entidades, sus campos y relaciones:
 
-![Diagrama Entidad-Relación](images/database-diagram.png)
+![Diagrama Entidad-Relación](fotos_pagina/diagrama_entidades.png)
 
-> [Descripción opcional: Ej: "El diagrama muestra las 4 entidades principales: Usuario, Producto, Pedido y Categoría, con sus respectivos atributos y relaciones 1:N y N:M."]
+> El diagrama muestra las principales entidades del sistema: Usuario, Categoría, Producto, Carrito, Pedido, Review e Imagen, junto con sus atributos y relaciones.
+
+La entidad Usuario almacena los datos personales del usuario (id, nombre, email, etc.). Un usuario puede visualizar múltiples categorías (relación 1:N) y dispone de un único carrito (relación 1:1).
+La entidad Categoría contiene los distintos tipos de productos. Cada categoría puede tener múltiples productos, estableciendo una relación 1:N con Producto.
+La entidad Producto incluye información como nombre, precio y descripción. Cada producto pertenece a una única categoría, pero una categoría puede contener muchos productos.
+Un Producto puede tener múltiples Reviews (relación 1:N), donde los usuarios valoran y comentan los productos.
+La entidad Carrito pertenece a un usuario (1:1) y puede contener múltiples productos. Esta relación es de tipo N:M, ya que un producto puede estar en varios carritos.
+A partir del carrito se genera un Pedido, que representa la compra realizada por el usuario. Un pedido puede incluir múltiples productos.
+La entidad Imagen se utiliza para almacenar imágenes, ya sea asociadas a productos o como imagen de perfil de un usuario.
+
 
 ### **Diagrama de Clases y Templates**
 
 Diagrama de clases de la aplicación con diferenciación por colores o secciones:
 
-![Diagrama de Clases](images/classes-diagram.png)
+![Diagrama de Clases](fotos_pagina/diagrama_clases.png)
 
-> [Descripción opcional del diagrama y relaciones principales]
+>En este diagrama se puede ver cómo tenemos varias clases, entre ellas destaca User, la cual tiene diversos atributos y uno especial de Admin. Un usuario puede ser administrador y, si lo es, como se ve en la imagen, podrá administrar las categorías, los productos y al resto de usuarios. Cada producto pertenecerá a una categoría y este podrá tener reviews, además de otros atributos.
+
 
 ### **Participación de Miembros en la Práctica 2**
 

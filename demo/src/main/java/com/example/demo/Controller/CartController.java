@@ -1,47 +1,140 @@
 package com.example.demo.Controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import org.springframework.security.core.Authentication;
 
 import com.example.demo.Model.CartItem;
+import com.example.demo.Model.Order;
+import com.example.demo.Model.OrderItem;
+import com.example.demo.Model.Product;
+import com.example.demo.Model.User;
 
+import org.springframework.ui.Model;
+
+import com.example.demo.Service.ProductService;
+import com.example.demo.Service.CartService;
+import com.example.demo.Service.UserService;
+import com.example.demo.Service.OrderService;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Controller
 public class CartController {
 
+    @Autowired
+    private ProductService productService;
+
+    @Autowired
+    private CartService cartService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private OrderService orderService;
+
+    
+
     private static List<CartItem> carrito = new ArrayList<>();
 
-    @PostMapping("/agregar-carrito")
-    public String agregarAlCarrito(
-            @RequestParam("nombreProducto") String nombre,
-            @RequestParam("imagenProducto") String imagen,
-            @RequestParam("precioProducto") double precio) { 
-        
-        carrito.add(new CartItem(nombre, imagen, precio));
-        
-        System.out.println("-------------------------------------------");
-        System.out.println("¡AÑADIDO: " + nombre + " por " + precio + "€!");
-        System.out.println("-------------------------------------------");
-        
-        return "redirect:/Index"; 
+    @GetMapping("/ShoppingCart")
+    public String verCarrito(Authentication auth, Model model) {
+
+        String nickname = auth.getName();
+        List<CartItem> carrito = cartService.getCartItems(nickname);
+
+        double total = carrito.stream()
+                .mapToDouble(item -> item.getPrecio() * item.getCantidad())
+                .sum();
+
+        model.addAttribute("carrito", carrito);
+        model.addAttribute("total", total);
+        model.addAttribute("totalArticulos", carrito.size());
+
+        return "ShoppingCart";
     }
 
-    @PostMapping("/eliminar-producto")
-    @ResponseBody
-    public String eliminarProducto(@RequestParam("nombre") String nombre) {
-        // Eliminamos usando trim() para asegurar que coincida exactamente
-        carrito.removeIf(item -> item.getNombre().trim().equalsIgnoreCase(nombre.trim()));
-        return "OK";
+
+    @PostMapping("/agregar-carrito")
+    public String agregarCarrito(@RequestParam("productId") int productId, Authentication auth) {
+
+        Product p = productService.findById(productId);
+
+        CartItem item = new CartItem(
+            p.getId(),
+            p.getNombre(),
+            "/image/" + p.getImage().getId(),
+            p.getPrecio(),
+            1
+        );
+
+        cartService.addItem(auth.getName(), item);
+
+        return "redirect:/ShoppingCart";
     }
+
+
+
+    @PostMapping("/eliminar-producto")
+    public String eliminarProducto(@RequestParam("nombre") String nombre, Authentication auth) {
+
+        cartService.removeItem(auth.getName(), nombre);
+
+        return "redirect:/ShoppingCart";
+    }
+
 
     @GetMapping("/api/carrito")
     @ResponseBody
-    public List<CartItem> obtenerCarrito() {
-        return carrito;
+    public List<CartItem> obtenerCarrito(Authentication auth) {
+        return cartService.getCartItems(auth.getName());
     }
+
+
+    @PostMapping("/pagar")
+    public String pagar(Authentication auth) {
+
+        // 1. Usuario logueado
+        String nickname = auth.getName();
+        User user = userService.findByNickname(nickname);
+
+        // 2. Obtener carrito
+        List<CartItem> carrito = cartService.getCartItems(nickname);
+
+        // 3. Crear pedido
+        Order order = new Order();
+        order.setFecha(LocalDateTime.now());
+        order.setUser(user);
+
+        List<OrderItem> items = new ArrayList<>();
+
+        for (CartItem c : carrito) {
+
+            Product p = productService.findById(c.getProductId());
+
+            OrderItem item = new OrderItem();
+            item.setOrder(order);
+            item.setProduct(p);
+            item.setCantidad(c.getCantidad());
+            item.setPrecio(c.getPrecio());
+
+            items.add(item);
+        }
+
+        order.setItems(items);
+
+        orderService.save(order);
+
+        cartService.clearCart(nickname);
+
+        return "redirect:/mis-pedidos";
+    }
+
+
 }

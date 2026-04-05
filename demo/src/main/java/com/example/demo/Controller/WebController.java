@@ -45,12 +45,6 @@ public class WebController {
         return "Index";
     }
 
-    
-
-    @GetMapping("/ShoppingCart")
-    public String ShoppingCart() {
-        return "ShoppingCart";
-    }
 
     @GetMapping("/OrderHistory")
     public String OrderHistory() {

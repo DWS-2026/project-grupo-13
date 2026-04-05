@@ -87,22 +87,9 @@
             </a>
             
             <form action="/agregar-carrito" method="POST" class="mt-3">
-                <input type="hidden" name="nombreProducto" value="{{nombre}}">
-
-                {{#image}}
-                <input type="hidden" name="imagenProducto" value="/image/{{image.id}}">
-                {{/image}}
-
-                {{^image}}
-                <input type="hidden" name="imagenProducto" value="/imagenes/default.jpg">
-                {{/image}}
-                
-
-                <input type="hidden" name="precioProducto" value="{{precio}}">
-
-                
-                <button type="submit" class="btn btn-outline-light w-100 fw-bold">Añadir al carrito</button>
                 <input type="hidden" name="_csrf" value="{{token}}" />
+                <input type="hidden" name="productId" value="{{id}}">
+                <button type="submit" class="btn btn-outline-light w-100 fw-bold">Añadir al carrito</button>
             </form>
 
         </div>

@@ -73,113 +73,31 @@
             </nav>
         </header>
 
-<div class="container py-5">
-  <br><h1 class="text-center mb-5 fw-bold">Ofertas Destacadas</h1>
-        
+  <div class="container py-5">
+    <br><h1 class="text-center mb-5 fw-bold">Ofertas Destacadas</h1>
+            <div class="row g-4">
+              {{#promociones}}
+              <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/producto/{{id}}" class="text-decoration-none text-dark">
+                  <div class="card oferta-card h-100 text-center p-3 position-relative">
+                    <span class="badge bg-danger position-absolute top-0 start-0 m-2">OFERTA</span>
+                    <img src="/imagenes/{{image}}" class="card-img-top rounded" alt="{{nombre}}">
+                    <div class="card-body">
+                      <h5 class="card-title" style="color: white">{{nombre}}</h5>
+                      <p class="mb-1"><span class="precio-anterior">{{precioOriginal}}€</span></p>
+                      <p class="precio-nuevo">{{precioOferta}}€</p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              {{/promociones}}
+            </div>
 
-  <div class="row g-4">
 
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-  <a href="/producto/9" class="text-decoration-none text-dark">
-    <div class="card oferta-card h-100 text-center p-3 position-relative">
+    
 
-      <!-- Etiqueta oferta -->
-      <span class="badge bg-danger position-absolute top-0 start-0 m-2">
-        OFERTA
-      </span>
 
-      <img src="/imagenes/lenovolaptop3.jpg" class="card-img-top rounded" alt="Producto">
-
-      <div class="card-body">
-        <h5 class="card-title" style="color: white">Laptop Lenovo</h5>
-
-        <!-- Precios -->
-        <p class="mb-1">
-          <span class="precio-anterior">999€</span>
-        </p>
-        <p class="precio-nuevo">678€</p>
-
-      </div>
     </div>
-  </a>
-</div>
-
-
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-  <a href="/producto/1" class="text-decoration-none text-dark">
-    <div class="card oferta-card h-100 text-center p-3 position-relative">
-
-      <!-- Etiqueta oferta -->
-      <span class="badge bg-danger position-absolute top-0 start-0 m-2">
-        OFERTA
-      </span>
-
-      <img src="/imagenes/iphone17.jpg" class="card-img-top rounded" alt="Producto">
-
-      <div class="card-body">
-        <h5 class="card-title" style="color: white">Iphone 17</h5>
-
-        <!-- Precios -->
-        <p class="mb-1">
-          <span class="precio-anterior">1050€</span>
-        </p>
-        <p class="precio-nuevo">850€</p>
-
-      </div>
-    </div>
-  </a>
-</div>
-<div class="col-12 col-sm-6 col-md-4 col-lg-3">
-  <a href="/producto/3" class="text-decoration-none text-dark">
-    <div class="card oferta-card h-100 text-center p-3 position-relative">
-
-      <!-- Etiqueta oferta -->
-      <span class="badge bg-danger position-absolute top-0 start-0 m-2">
-        OFERTA
-      </span>
-
-      <img src="/imagenes/samsung.jpg" class="card-img-top rounded" alt="Producto">
-
-      <div class="card-body">
-        <h5 class="card-title" style="color: white">Galaxy Z Flip 7</h5>
-
-        <!-- Precios -->
-        <p class="mb-1">
-          <span class="precio-anterior">250€</span>
-        </p>
-        <p class="precio-nuevo">100€</p>
-
-      </div>
-    </div>
-  </a>
-</div>
-<div class="col-12 col-sm-6 col-md-4 col-lg-3">
-  <a href="/producto/5" class="text-decoration-none text-dark">
-    <div class="card oferta-card h-100 text-center p-3 position-relative">
-
-      <!-- Etiqueta oferta -->
-      <span class="badge bg-danger position-absolute top-0 start-0 m-2">
-        OFERTA
-      </span>
-
-      <img src="/imagenes/asus1.jpg" class="card-img-top rounded" alt="Producto">
-
-      <div class="card-body">
-        <h5 class="card-title" style="color: white">Laptop Asus</h5>
-
-        <!-- Precios -->
-        <p class="mb-1">
-          <span class="precio-anterior">300€</span>
-        </p>
-        <p class="precio-nuevo">220€</p>
-
-      </div>
-    </div>
-  </a>
-</div>
-
-
-  </div>
 </div>
 
 </body>

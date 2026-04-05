@@ -163,14 +163,66 @@ public class DatabaseInitializer {
         productService.save(p7);
 
         Product p8 = new Product(
-            "Samsung Galaxy TabS10 Ultra",
-            399.99,
-            "Tablet muy chula para los niños",
-            tablets
-        );
-        // imagen del producto
+        "Samsung Galaxy TabS10 Ultra",
+        399.99,
+        "Tablet muy chula para los niños",
+        tablets
+            );
+
+        
         setProductImage(p8, "imagenes/TabletSamsungGalaxyTabS10Ultra.jpg");
+
+        
+        p8.setPromotion(true); 
+        p8.setPrecioOriginal(499.99); 
+        p8.setPrecioOferta(399.99);   
+
         productService.save(p8);
+
+        Product p9 = new Product(
+        "Google Pixel 9 Pro",
+        799.99,
+        "El nuevo Pixel con cámara avanzada y Android puro.",
+        smartphones
+        );
+        setProductImage(p9, "imagenes/googlePixel.jpg");
+        
+        p9.setPromotion(true); 
+        p9.setPrecioOriginal(1099.99); 
+        p9.setPrecioOferta(799.99);  
+        productService.save(p9);
+
+
+        Product p10 = new Product(
+            "MSI Katana GF66",
+            1199.99,
+            "Portátil gaming con RTX 4060 y pantalla de 144Hz.",
+            ordenadores
+        );
+        setProductImage(p10, "imagenes/msiKatana.jpg");
+        
+        p10.setPromotion(true);
+        p10.setPrecioOriginal(1199.99);
+        p10.setPrecioOferta(999.99);   
+        productService.save(p10);
+        
+        
+        Product p11 = new Product(
+            "NVIDIA RTX 4070 Ti SUPER",
+            599.99,
+            "Gráfica de última generación con DLSS 3.5 y rendimiento extremo.",
+            gpus
+        );
+        
+        setProductImage(p11, "imagenes/nvidia4070.jpg");
+        p11.setPromotion(true); 
+        p11.setPrecioOriginal(899.99); 
+        p11.setPrecioOferta(599.99);   
+        productService.save(p11);
+
+
+
+
 
         //Usuarios
         User u1 = new User(
@@ -195,6 +247,9 @@ public class DatabaseInitializer {
         LocalDate.of(1992, 11, 3)
         );
         userService.save(u2); 
+
+        
+
     }
 
     public void setProductImage(Product product, String classpathResource) throws IOException {

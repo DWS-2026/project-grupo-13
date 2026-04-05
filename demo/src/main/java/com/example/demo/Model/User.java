@@ -10,7 +10,6 @@ import jakarta.persistence.Table;
 // Necesaria para el tipo de dato de fecha
 import java.time.LocalDate; 
 import org.springframework.format.annotation.DateTimeFormat;
-import com.example.demo.Model.Image;
 
 
 @Entity

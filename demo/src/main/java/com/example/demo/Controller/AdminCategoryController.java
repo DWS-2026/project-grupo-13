@@ -15,7 +15,7 @@ import com.example.demo.Repository.CategoryRepository; // Importamos el Reposito
 @Controller
 public class AdminCategoryController {
 
-    // Inyectamos directamente el repositorio
+    
     @Autowired
     private CategoryRepository categoryRepository;
 
@@ -25,28 +25,21 @@ public class AdminCategoryController {
         return "AdminCategories";
     }
 
+    //Este método está obsoleto
     @PostMapping("/AdminCategories")
     public String createCategory(@RequestParam String name, 
                                  @RequestParam("image") MultipartFile image, 
                                  Model model) {
 
-        // 1. Validar si la categoría ya existe llamando al repositorio
         if (categoryRepository.existsByName(name)) {
             model.addAttribute("error", "La categoría '" + name + "' ya ha sido añadida.");
             model.addAttribute("categorias", categoryRepository.findAll());
             return "AdminCategories"; 
         }
 
-        // 2. Crear y guardar la categoría
         Category c = new Category(name);
         
-        // Si tienes la imagen en el modelo, sería algo así:
-        // c.setImageName(image.getOriginalFilename());
-        
         categoryRepository.save(c);
-
-        // 3. TODO: Aquí iría tu código para guardar el archivo físico (la foto)
-        // igual que lo tienes en productos.
 
         return "redirect:/AdminCategories";
     }

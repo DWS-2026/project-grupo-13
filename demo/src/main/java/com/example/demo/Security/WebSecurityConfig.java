@@ -36,7 +36,7 @@ public class WebSecurityConfig {
         http.authenticationProvider(authenticationProvider());
 
         http
-            // Necesario para permitir H2-console
+            
             
             .headers(headers -> headers.frameOptions(frame -> frame.disable()))
 

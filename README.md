@@ -203,7 +203,7 @@ Desarrollado los archivos HTML y CSS de la páginas CAtegorías, Ofertas Destaca
 
 Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicación:
 
-![Diagrama de Navegación](fotos_pagina/diagrama_practica2_dws.jpg)
+![Diagrama de Navegación](fotos_pagina/diagrama_practica2.jpg)
 
 > Las líneas negras indican que cualquier usuario, aunque no se haya autenticado, puede acceder a dichas páginas.
 > Las líneas rosas indican que sólo los usuarios con sesion iniciada pueden acceder.

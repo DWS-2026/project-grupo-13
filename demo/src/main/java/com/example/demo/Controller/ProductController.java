@@ -39,11 +39,6 @@ public class ProductController {
     }
 
 
-  
-    
-
-
-
     @PostMapping("/producto/{id}/review")
     public String guardarReview(@PathVariable int id,
                                 @ModelAttribute("nuevaReview") Review review) {

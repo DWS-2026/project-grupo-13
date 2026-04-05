@@ -45,10 +45,7 @@ public class WebController {
         return "Index";
     }
 
-    @GetMapping("/PromotionsScreen")
-    public String PromotionsScreen() {
-        return "PromotionsScreen";
-    }
+    
 
     @GetMapping("/ShoppingCart")
     public String ShoppingCart() {

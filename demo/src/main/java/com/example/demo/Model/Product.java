@@ -16,6 +16,11 @@ public class Product {
     private double precio;
     private String descripcion;
 
+    private boolean promotion;
+    private Double precioOriginal;
+    private Double precioOferta;
+
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
@@ -70,5 +75,14 @@ public class Product {
         this.reviews = reviews;
     }
     
+    public boolean isPromotion() { return promotion; }
+    public void setPromotion(boolean promotion) { this.promotion = promotion; }
+
+    public Double getPrecioOriginal() { return precioOriginal; }
+    public void setPrecioOriginal(Double precioOriginal) { this.precioOriginal = precioOriginal; }
+
+    public Double getPrecioOferta() { return precioOferta; }
+    public void setPrecioOferta(Double precioOferta) { this.precioOferta = precioOferta; }
+
 }
 

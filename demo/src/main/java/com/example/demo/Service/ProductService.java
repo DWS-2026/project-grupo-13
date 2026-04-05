@@ -38,5 +38,10 @@ public class ProductService {
     public List<Product> findByCategoryName(String category) {
         return productRepository.findByCategory_Name(category);
     }
+
+    public List<Product> findPromotions() {
+    return productRepository.findByPromotionTrue();
+    }
+
 }
 

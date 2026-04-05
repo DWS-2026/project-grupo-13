@@ -74,7 +74,7 @@ public class ProductController {
     @GetMapping("/PromotionsScreen")
     public String verPromociones(Model model) {
         model.addAttribute("promociones", productService.findPromotions());
-        return "PromotionsScreen"; // tu plantilla HTML
+        return "PromotionsScreen"; 
     }
 
 

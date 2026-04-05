@@ -248,6 +248,27 @@ public class DatabaseInitializer {
         );
         userService.save(u2); 
 
+        User u3 = new User (
+            "user",
+            "user",
+            "user@user.com",
+            "user",
+            passwordEncoder.encode("user"),
+            "USER",
+            LocalDate.of(2000, 6, 12)
+        );
+        userService.save(u3);
+
+        User u4 = new User (
+            "admin",
+            "admin",
+            "admin@admin.com",
+            "admin",
+            passwordEncoder.encode("admin"),
+            "ADMIN",
+            LocalDate.of(2000, 6, 12)
+        );
+        userService.save(u4);
         
 
     }

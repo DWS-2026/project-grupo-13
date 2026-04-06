@@ -7,6 +7,6 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     
     Category findByName(String name);
     
-    // Añade esta línea para que el controlador funcione a la perfección:
+    
     boolean existsByName(String name);
 }

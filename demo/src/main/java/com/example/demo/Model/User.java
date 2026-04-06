@@ -57,7 +57,7 @@ public class User {
     }
 
 
-    // Getters y setters
+    
     public int getId() { return id; }
 
     public String getName() { return name; }
@@ -84,7 +84,7 @@ public class User {
     public Image getProfileImage() {return profileImage;}
     public void setProfileImage(Image profileImage) {this.profileImage = profileImage;}
 
-    //Esto es para la vista de AdminUserDetails
+    //For AdminUserDetails
     public boolean isAdmin() {
         return role != null && (role.equals("ADMIN") || role.equals("ROLE_ADMIN"));
     }

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "ORDERS") // "ORDER" es palabra reservada en SQL
+@Table(name = "ORDERS") // "ORDER" is reserved in SQL
 public class Order {
 
     @Id

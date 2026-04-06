@@ -31,7 +31,7 @@ public class Review {
         this.fecha = LocalDate.now();
     }
 
-    // GETTERS Y SETTERS
+   
 
     public Long getId() {
         return id;

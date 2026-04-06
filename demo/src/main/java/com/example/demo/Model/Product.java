@@ -33,7 +33,7 @@ public class Product {
 
     public Product() {} // Para JPA
 
-    // Constructor SIN imagen
+    
     public Product(String nombre, double precio, String descripcion, Category category) {
         this.nombre = nombre;
         this.precio = precio;
@@ -43,7 +43,7 @@ public class Product {
     
     
 
-    // Constructor CON imagen
+    
     public Product(String nombre, double precio, String descripcion, Category category, Image image) {
         this.nombre = nombre;
         this.precio = precio;
@@ -52,7 +52,7 @@ public class Product {
         this.image = image;
     }
 
-    // Getters
+    
     public int getId() { return id; }
     public String getNombre() { return nombre; }
     public double getPrecio() { return precio; }
@@ -60,7 +60,7 @@ public class Product {
     public Category getCategory() { return category; }
     public Image getImage() { return image; }
 
-    // Setters
+    
     public void setId(int id) { this.id = id; }
     public void setNombre(String nombre) { this.nombre = nombre; }
     public void setPrecio(double precio) { this.precio = precio; }

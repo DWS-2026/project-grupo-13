@@ -21,7 +21,7 @@ public class OrderItem {
 
     private int cantidad;
 
-    private double precio; // precio en el momento de la compra
+    private double precio; 
 
     @Transient
     private double total;

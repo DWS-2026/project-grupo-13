@@ -21,14 +21,14 @@ public class ImageService {
     @Autowired
     private ImageRepository imageRepository;
 
-    // Para imágenes cargadas desde el classpath (inicializador)
+    
     public Image createImage(InputStream inputStream) throws IOException {
         byte[] bytes = inputStream.readAllBytes();
         Image image = new Image(bytes);
         return imageRepository.save(image);
     }
 
-    // Para imágenes subidas por el usuario (multipart/form-data)
+    
     public Image createImage(MultipartFile file) throws IOException {
         byte[] bytes = file.getBytes();
         Image image = new Image(bytes);

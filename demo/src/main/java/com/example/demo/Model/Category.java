@@ -24,7 +24,7 @@ public class Category {
         this.name = name;
     }
 
-    // Getters y setters
+    
     public Long getId() { return id; }
 
     public String getName() { return name; }

@@ -15,22 +15,22 @@ public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
-    // Guardar un pedido
+    
     public Order save(Order order) {
         return orderRepository.save(order);
     }
 
-    // Obtener todos los pedidos de un usuario
+    
     public List<Order> findByUser(User user) {
         return orderRepository.findByUser(user);
     }
 
-    // Obtener un pedido por ID (opcional)
+    
     public Order findById(Long id) {
         return orderRepository.findById(id).orElse(null);
     }
 
-    // Obtener todos los pedidos (solo admin)
+    
     public List<Order> findAll() {
         return orderRepository.findAll();
     }

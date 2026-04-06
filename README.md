@@ -351,17 +351,18 @@ Mostrar dinámicamente los productos de la BD con mustache y la parte de segurid
 
 ---
 
-#### **Alumno 2 - [Nombre Completo]**
+#### **Alumno 2 - Claudio Rafael Horrillo Sicora**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Desarrollo del Index con carrusel Dinámico, desarrollo del AdminUserDetails y desarrollo de sistema de Review (Valoraciones de productos). Ayuda a otros compañeros para actualizar rutas de la página a dinámica.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [AdminUserDetails.java](URL_commit_1)  | [Archivo1](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/resources/templates/AdminUserDetails.html)   |
+|2| [ReviewController.java](URL_commit_2)  | [Archivo2](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/java/com/example/demo/Controller/ReviewController.java)   |
+|3| [Review.java](URL_commit_3)  | [Archivo3](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/java/com/example/demo/Model/Review.java)   |
+|4| [Index.html](URL_commit_4)  | [Archivo4]((https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/resources/templates/Index.html))   |
+|5| [AdminUserController.java](URL_commit_5)  | [Archivo5](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/java/com/example/demo/Controller/AdminUserController.java)  |
+|6| [Product.java](URL_commit_5)  | [Archivo5](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/java/com/example/demo/Model/Product.java)  |
 
 ---
 

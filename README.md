@@ -72,17 +72,17 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 ### **Capturas de Pantalla y Descripción de Páginas**
 
 #### **1. Página Principal / Home**
-![Página Principal](fotos_pagina/PaginaPrincipal.png)
+![Página Principal](fotos_pagina/PaginaPrincipalN.png)
 
 > Página de inicio con el nombre de la web y la barra de navegación entre las distintas secciones.
 
 #### **2. Página de ofertas
-![Página de ofertas](fotos_pagina/Ofertas.png)
+![Página de ofertas](fotos_pagina/ofertas.png)
 
 > Página donde se muestran algunos productos en oferta con enlaces a los respectivos productos
 
 #### **3. Página de categorías
-![Página de categorías](fotos_pagina/Categorias.png)
+![Página de categorías](fotos_pagina/categorias.png)
 
 > Página donde se muestran algunos productos en oferta con enlaces a los respectivos productos
 
@@ -102,34 +102,45 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 > Página que muestra la información de un producto. Está diseñada como "plantilla" para que el backend la use para los distintos productos
 
 #### **7. Página de cuenta
-![Página de cuenta](fotos_pagina/MiCuenta.png)
+![Página de cuenta](fotos_pagina/PaginaCuenta.png)
 
 > Página donde cada usuario puede modificar los detalles de su cuenta
 
 #### **8. Página de administración
-![Página de admin](fotos_pagina/PanelAdmin.png)
+![Página de admin](fotos_pagina/PanelAdministracion.png)
 
-> Página donde cada usuario puede modificar los detalles de su cuenta
+> Página donde cada administrador puede gestionar los usuarios, productos y categorías
 
 #### **9. Página de lista de productos
-![Página de productos](fotos_pagina/Productos.png)
+![Página de productos](fotos_pagina/paginalistaproductos.png)
 
 > Página donde de muestra el contenido de una categoría. Es igual para todas
 
 #### *10. Página de administración de producto
-![Página de admin productos](fotos_pagina/AdministrarProducto.png)
+![Página de admin productos](fotos_pagina/PaginaGestionProd.png)
 
 > Página donde los administradores pueden alterar productos
 
 #### *11. Página de administración de usuario
-![Página de admin usuarios](fotos_pagina/AdministrarUsuario.png)
+![Página de admin usuarios](fotos_pagina/PaginaGestionDeUsuarios.png)
 
-> Página donde los administradores pueden alterar productos
+> Pagina de la administracion de un usuario
 
-#### *12. Página de carrito de compra
-![Página de carro](fotos_pagina/Carrito.png)
+#### *12. Página de edición de usuario
+![Página de edit usuarios](fotos_pagina/PaginaEdicionPerfil.png)
+
+> Página donde el usuario puede editar su cuenta
+
+#### *13. Página de carrito de compra
+![Página de carro](fotos_pagina/PaginaCarrito.png)
 
 > Página donde se pueden ver y administrar los objetos a comprar
+
+#### *14. Página de edicion de categoría
+![Página de carro](fotos_pagina/Edicioncategoria.png)
+
+> Página donde se pueden ver y administrar las categorias
+
 
 ### **Participación de Miembros en la Práctica 1**
 

@@ -15,27 +15,27 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    // Guardar usuario
+    
     public User save(User user) {
         return userRepository.save(user);
     }
 
-    // Buscar todos los usuarios
+    
     public List<User> findAll() {
         return userRepository.findAll();
     }
 
-    // Buscar por ID
+    
     public Optional<User> findById(int id) {
         return userRepository.findById(id);
     }
 
-    // Buscar por email
+    
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
-    // Eliminar por ID
+    
     public void deleteById(int id) {
         userRepository.deleteById(id);
     }

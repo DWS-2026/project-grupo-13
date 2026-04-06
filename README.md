@@ -117,7 +117,7 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 > Página donde de muestra el contenido de una categoría. Es igual para todas
 
 #### *10. Página de administración de producto
-![Página de admin productos](fotos_pagina/GestionDeproductos.png)
+![Página de admin productos](fotos_pagina/AdministrarProducto.png)
 
 > Página donde los administradores pueden alterar productos
 

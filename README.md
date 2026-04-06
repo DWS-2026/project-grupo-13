@@ -343,11 +343,11 @@ Mostrar dinámicamente los productos de la BD con mustache y la parte de segurid
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [ProductController.java](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [WebSecurity.java](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Order.java](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [OrderItem.java](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [OrderHistory.html y OrderDetails.html](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [OrderController.java](URL_commit_1)  | [Archivo1](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/java/com/example/demo/Controller/OrderController.java)   |
+|2| [WebSecurity.java](URL_commit_2)  | [Archivo2](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/java/com/example/demo/Security/WebSecurityConfig.java)   |
+|3| [Order.java](URL_commit_3)  | [Archivo3](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/java/com/example/demo/Model/Order.java)   |
+|4| [OrderItem.java](URL_commit_4)  | [Archivo4](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/java/com/example/demo/Model/OrderItem.java)   |
+|5| [ImageController.java](URL_commit_5)  | [Archivo5](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/java/com/example/demo/Controller/ImageController.java)   |
 
 ---
 

@@ -53,9 +53,8 @@ public class AdminProductController {
     public String crearProducto(@ModelAttribute Product producto,
                                 @RequestParam Long category, 
                                 @RequestParam("productImage") MultipartFile file,
-                                Model model) throws IOException { // Añadimos Model aquí para pasar el error
+                                Model model) throws IOException {
         
-        // 1. COMPROBAR SI EXISTE: 
         // Obtenemos todos los productos y comparamos el nombre
         List<Product> todosLosProductos = productService.findAll();
         boolean nombreDuplicado = false;
@@ -67,20 +66,20 @@ public class AdminProductController {
             }
         }
 
-        // 2. SI ESTÁ DUPLICADO, DEVOLVEMOS EL ERROR A LA PANTALLA
+        
         if (nombreDuplicado) {
             model.addAttribute("errorDuplicado", true);
             model.addAttribute("nombreFallido", producto.getNombre());
             
-            // Tenemos que volver a cargar las listas para que la página no se rompa
-            model.addAttribute("producto", producto); // Devolvemos lo que escribió para que no se borre
+            
+            model.addAttribute("producto", producto);
             model.addAttribute("productos", productService.findAll());
             model.addAttribute("categorias", categoryService.findAll());
             
-            return "AdminProduct"; // Devolvemos la vista normal, no un redirect
+            return "AdminProduct";
         }
 
-        // 3. SI NO EXISTE, GUARDAMOS NORMAL
+        
         Category c = categoryService.findById(category);
         producto.setCategory(c);
 
@@ -133,7 +132,7 @@ public class AdminProductController {
         Product product = productRepository.findById(id).orElseThrow();
 
         if (product.getImage() == null) {
-            return new byte[0]; // evita null pointer
+            return new byte[0];
         }
 
         return product.getImage().getData();

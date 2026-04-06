@@ -21,7 +21,7 @@ public class AdminUserController {
     private UserService userService;
 
 
-    //Esto es para buscar los usuarios. Si la cadena del formulario no es null devuelve el buscado. Si es null los devuelve todos.
+    //if string is empty, returns all, if not, returns the one that matches
     @GetMapping("/AdminUser")
     public String adminUsuarios(
             @RequestParam(required = false) String q,

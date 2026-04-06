@@ -25,21 +25,18 @@ public class CategoryController {
         this.imageService = imageService;
     }
 
-    // Mostrar lista de categorías
     @GetMapping
     public String listarCategorias(Model model) {
         model.addAttribute("categorias", categoryService.findAll());
-        return "AdminCategories"; // Vista Mustache
+        return "AdminCategories";
     }
 
-    // Formulario para crear categoría
     @GetMapping("/nueva")
     public String nuevaCategoriaForm(Model model) {
         model.addAttribute("categoria", new Category());
         return "admin/nueva-categoria";
     }
 
-    // Guardar categoría
     @PostMapping("/guardar")
     public String guardarCategoria(
             @RequestParam("name") String name,

@@ -37,7 +37,7 @@ public class OrderController {
 
         List<Order> pedidos = orderService.findByUser(user);
 
-        // Obtener token CSRF para los formularios
+        // get CSRF token for the forms
         CsrfToken token = (CsrfToken) ((ServletRequestAttributes)
                 RequestContextHolder.currentRequestAttributes())
                 .getRequest()
@@ -50,7 +50,7 @@ public class OrderController {
             double total = o.getItems().stream()
                 .mapToDouble(i -> i.getPrecio() * i.getCantidad())
                 .sum();
-            o.setTotal(total); // necesitas añadir este campo en Order
+            o.setTotal(total);
         }
 
         return "OrderHistory";

@@ -62,7 +62,6 @@ public class UserController {
         return "redirect:/EditProfile";
     }
 
-    // --- CAMBIO AQUÍ: Le cambio el nombre a esta ruta para que no choque con EditProfileController ---
     @GetMapping("/UserProfileView") 
     public String mostrarPerfil(Model model, Principal principal) {
         User user = userService.findByNickname(principal.getName());
@@ -107,9 +106,8 @@ public class UserController {
                                  Principal principal, Model model) {
         User usuario = userService.findByNickname(principal.getName());
 
-        // Validar contraseña antigua
         if (!passwordEncoder.matches(oldPassword, usuario.getEncodedPassword())) {
-            model.addAttribute("errorPassword", true); // Esto activa el cuadro rojo en el HTML
+            model.addAttribute("errorPassword", true);
             return "ChangePassword";
         }
 
@@ -126,12 +124,4 @@ public class UserController {
                 userDetails, userDetails.getPassword(), userDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
-
-    /*@GetMapping("/EditProfile")
-    public String editProfile(Model model, Principal principal) {
-        User user = userService.findByNickname(principal.getName());
-        model.addAttribute("user", user);
-        return "EditProfile";
-    }
-*/
 }

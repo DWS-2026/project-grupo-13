@@ -100,14 +100,11 @@ public class CartController {
     @PostMapping("/pagar")
     public String pagar(Authentication auth) {
 
-        // 1. Usuario logueado
         String nickname = auth.getName();
         User user = userService.findByNickname(nickname);
 
-        // 2. Obtener carrito
         List<CartItem> carrito = cartService.getCartItems(nickname);
 
-        // 3. Crear pedido
         Order order = new Order();
         order.setFecha(LocalDateTime.now());
         order.setUser(user);

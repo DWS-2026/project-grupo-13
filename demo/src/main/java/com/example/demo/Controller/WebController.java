@@ -22,7 +22,7 @@ public class WebController {
     @Autowired
     private CategoryService categoryService;
 
-    // --- CATEGORÍAS ---
+    
     @GetMapping("/CategoriesScreen")
     public String categoriesScreen(Model model) {
         List<Category> categorias = categoryService.findAll();
@@ -30,7 +30,7 @@ public class WebController {
         return "CategoriesScreen";
     }
 
-    // --- LOGIN CON DETECCIÓN DE ERROR ---
+    
     @GetMapping("/Login")
     public String Login(@RequestParam(value = "error", required = false) String error, Model model) {
         if (error != null) {
@@ -39,7 +39,6 @@ public class WebController {
         return "Login";
     }
 
-    // --- PÁGINAS PRINCIPALES Y NAVEGACIÓN ---
     @GetMapping("/Index")
     public String Index() {
         return "Index";
@@ -51,7 +50,6 @@ public class WebController {
         return "OrderHistory";
     }
 
-    // --- VISTAS DE PRODUCTOS ---
     @GetMapping("/Product")
     public String Product() {
         return "Product";
@@ -77,22 +75,17 @@ public class WebController {
         return "Tablets";
     }
 
-    // --- REGISTRO ---
     @GetMapping("/register")
     public String resgister() {
         return "Register";
     }
 
-    // --- ADMINISTRACIÓN ---
     @GetMapping("/Admin")
     public String Admin() {
         return "Admin";
     }
 
    
-
-
-    // --- VALORACIONES ---
     private List<Review> todasLasValoraciones = new ArrayList<>();
 
     @PostMapping("/createreview/{productId}")

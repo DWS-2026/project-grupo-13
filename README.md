@@ -232,55 +232,55 @@ Solo si han cambiado.
 
 > Página donde se muestran algunos productos en oferta con enlaces a los respectivos productos
 
-#### **4. Página de registro
-![Página de registro](fotos_pagina/Registro.png)
-
-> Página en la que un usuario nuevo puede crear una cuenta
-
-#### **5. Página de inicio de sesión
-![Página de inicio de sesión](fotos_pagina/InicioSesion.png)
-
-> Página donde un usuario existente puede identificarse en su cuenta
-
-#### **6. Página de cuenta
+#### **4. Página de cuenta
 ![Página de cuenta](fotos_pagina/PaginaCuenta.png)
 
 > Página donde cada usuario puede modificar los detalles de su cuenta
 
-#### **7. Página de administración
+#### **5. Página de administración
 ![Página de admin](fotos_pagina/PanelAdministracion.png)
 
 > Página donde cada administrador puede gestionar los usuarios, productos y categorías
 
-#### **8. Página de lista de productos
+#### **6. Página de lista de productos
 ![Página de productos](fotos_pagina/paginalistaproductos.png)
 
 > Página donde de muestra el contenido de una categoría. Es igual para todas
 
-#### *9. Página de administración de producto
+#### *7. Página de administración de producto
 ![Página de admin productos](fotos_pagina/GestionDeproductos.png)
 
 > Página donde los administradores pueden alterar productos
 
-#### *10. Página de administración de usuario
+#### *8. Página de administración de usuario
 ![Página de admin usuarios](fotos_pagina/PaginaGestionDeUsuarios.png)
 
 > Pagina de la administracion de un usuario
 
-#### *11. Página de edición de usuario
+#### *9. Página de edición de usuario
 ![Página de edit usuarios](fotos_pagina/PaginaEdicionPerfil.png)
 
 > Página donde el usuario puede editar su cuenta
 
-#### *12. Página de carrito de compra
+#### *10. Página de carrito de compra
 ![Página de carro](fotos_pagina/PaginaCarrito.png)
 
 > Página donde se pueden ver y administrar los objetos a comprar
 
-#### *13. Página de edicion de categoría
+#### *11. Página de gestión de categoría
 ![Página de carro](fotos_pagina/GestionCategorias.png)
 
 > Página donde se pueden ver y administrar las categorias
+
+#### *12. Página de edición de categoría
+![Página de carro](fotos_pagina/EdicionCategorias.png)
+
+> Página donde se pueden editar las categorías
+
+#### *13. Página de edición de productos
+![Página de carro](fotos_pagina/EdicionProductos.png)
+
+> Página donde se pueden editar los productos
 
 #### *14. Página de gestions de pedidos
 ![Página de carro](fotos_pagina/PaginaGestionProd.png)
@@ -292,7 +292,7 @@ Solo si han cambiado.
 #### **Requisitos Previos**
 - **Java**: versión 21 o superior
 - **Maven**: versión 3.8 o superior
-- **MySQL**: versión 8.0 o superior
+- **MySQ1L**: versión 8.0 o superior
 - **Git**: para clonar el repositorio
 
 #### **Pasos para ejecutar la aplicación**

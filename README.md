@@ -377,7 +377,7 @@ Desarrollo y corrección de la lógica del carrito de la compra, validación de 
 |3| [Index.html](URL_commit_3)  | [Archivo3](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/resources/templates/Index.html)   |
 |4| [DatabaseInitializer.java](URL_commit_4)  | [Archivo4](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/java/com/example/demo/Service/DatabaseInitializer.java)   |
 |5| [AdminProduct.html](URL_commit_5)  | [Archivo5](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/resources/templates/AdminProduct.html)   |
-|6| [Login.html](URL_commit_5)  | [Archivo5](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/resources/templates/Login.html)   |
+|6| [Login.html](URL_commit_6)  | [Archivo6](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/resources/templates/Login.html)   |
 
 ---
 

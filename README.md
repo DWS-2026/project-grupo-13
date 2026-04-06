@@ -230,6 +230,78 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 Solo si han cambiado.
 
+### **Capturas de Pantalla y Descripción de Páginas**
+
+#### **1. Página Principal / Home**
+![Página Principal](fotos_pagina/PaginaPrincipalN.png)
+
+> Página de inicio con el nombre de la web y la barra de navegación entre las distintas secciones.
+
+#### **2. Página de ofertas
+![Página de ofertas](fotos_pagina/ofertas.png)
+
+> Página donde se muestran algunos productos en oferta con enlaces a los respectivos productos
+
+#### **3. Página de categorías
+![Página de categorías](fotos_pagina/categorias.png)
+
+> Página donde se muestran algunos productos en oferta con enlaces a los respectivos productos
+
+#### **4. Página de registro
+![Página de registro](fotos_pagina/Registro.png)
+
+> Página en la que un usuario nuevo puede crear una cuenta
+
+#### **5. Página de inicio de sesión
+![Página de inicio de sesión](fotos_pagina/InicioSesion.png)
+
+> Página donde un usuario existente puede identificarse en su cuenta
+
+#### **6. Página de cuenta
+![Página de cuenta](fotos_pagina/PaginaCuenta.png)
+
+> Página donde cada usuario puede modificar los detalles de su cuenta
+
+#### **7. Página de administración
+![Página de admin](fotos_pagina/PanelAdministracion.png)
+
+> Página donde cada administrador puede gestionar los usuarios, productos y categorías
+
+#### **8. Página de lista de productos
+![Página de productos](fotos_pagina/paginalistaproductos.png)
+
+> Página donde de muestra el contenido de una categoría. Es igual para todas
+
+#### *9. Página de administración de producto
+![Página de admin productos](fotos_pagina/GestionDeproductos.png)
+
+> Página donde los administradores pueden alterar productos
+
+#### *10. Página de administración de usuario
+![Página de admin usuarios](fotos_pagina/PaginaGestionDeUsuarios.png)
+
+> Pagina de la administracion de un usuario
+
+#### *11. Página de edición de usuario
+![Página de edit usuarios](fotos_pagina/PaginaEdicionPerfil.png)
+
+> Página donde el usuario puede editar su cuenta
+
+#### *12. Página de carrito de compra
+![Página de carro](fotos_pagina/PaginaCarrito.png)
+
+> Página donde se pueden ver y administrar los objetos a comprar
+
+#### *13. Página de edicion de categoría
+![Página de carro](fotos_pagina/GestionCategorias.png)
+
+> Página donde se pueden ver y administrar las categorias
+
+#### *14. Página de gestions de pedidos
+![Página de carro](fotos_pagina/PaginaGestionProd.png)
+
+> Página donde se pueden ver los pedidos realizados
+
 ### **Instrucciones de Ejecución**
 
 #### **Requisitos Previos**

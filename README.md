@@ -117,7 +117,7 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 > Página donde de muestra el contenido de una categoría. Es igual para todas
 
 #### *10. Página de administración de producto
-![Página de admin productos](fotos_pagina/PaginaGestionProd.png)
+![Página de admin productos](fotos_pagina/GestionDeproductos.png)
 
 > Página donde los administradores pueden alterar productos
 
@@ -137,9 +137,14 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 > Página donde se pueden ver y administrar los objetos a comprar
 
 #### *14. Página de edicion de categoría
-![Página de carro](fotos_pagina/Edicioncategoria.png)
+![Página de carro](fotos_pagina/EdicionCategoria.png)
 
 > Página donde se pueden ver y administrar las categorias
+
+#### *14. Página de gestions de pedidos
+![Página de carro](fotos_pagina/PaginaGestionProd.png)
+
+> Página donde se pueden ver los pedidos realizados
 
 
 ### **Participación de Miembros en la Práctica 1**

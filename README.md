@@ -366,17 +366,18 @@ Desarrollo del Index con carrusel Dinámico, desarrollo del AdminUserDetails y d
 
 ---
 
-#### **Alumno 3 - [Nombre Completo]**
+#### **Alumno 3 - Eduardo Soria Escobar**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Desarrollo y corrección de la lógica del carrito de la compra, validación de productos duplicados en el panel de administrador y unificación de errores de seguridad en el Login. Creación y sincronización de subtítulos para la demostración.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [AdminProductController.java](URL_commit_1)  | [Archivo1](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/java/com/example/demo/Controller/AdminProductController.java))   |
+|2| [Product.html](URL_commit_2)  | [Archivo2](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/resources/templates/Product.html)   |
+|3| [Index.html](URL_commit_3)  | [Archivo3](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/resources/templates/Index.html)   |
+|4| [DatabaseInitializer.java](URL_commit_4)  | [Archivo4](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/java/com/example/demo/Service/DatabaseInitializer.java)   |
+|5| [AdminProduct.html](URL_commit_5)  | [Archivo5](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/resources/templates/AdminProduct.html)   |
+|6| [Login.html](URL_commit_5)  | [Archivo5](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/resources/templates/Login.html)   |
 
 ---
 

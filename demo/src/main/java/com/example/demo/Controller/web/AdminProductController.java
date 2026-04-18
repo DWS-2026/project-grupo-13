@@ -1,4 +1,4 @@
-package com.example.demo.Controller;
+package com.example.demo.Controller.web;
 
 import java.io.IOException;
 import java.util.List;

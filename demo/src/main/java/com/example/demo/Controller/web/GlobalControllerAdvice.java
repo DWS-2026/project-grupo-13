@@ -1,4 +1,4 @@
-package com.example.demo.Controller;
+package com.example.demo.Controller.web;
 
 
 import org.springframework.security.authentication.AnonymousAuthenticationToken;

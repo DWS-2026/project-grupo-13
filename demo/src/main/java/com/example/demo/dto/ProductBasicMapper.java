@@ -1,15 +1,13 @@
 package com.example.demo.dto;
-import org.springframework.stereotype.Component;
 import com.example.demo.Model.Product;
+import org.mapstruct.Mapper;
 
-@Component
-public class ProductBasicMapper {
+import java.util.List;
+import java.util.Collection;
 
-    public ProductBasicDTO toDTO(Product product) {
-        return new ProductBasicDTO(
-            product.getId(),
-            product.getNombre(),
-            product.getPrecio()
-        );
-    }
+@Mapper (componentModel = "spring")
+public interface ProductBasicMapper {
+
+    List<ProductBasicDTO> toDTOs(Collection<Product> products);
+
 }

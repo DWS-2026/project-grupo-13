@@ -12,9 +12,6 @@ import com.example.demo.Repository.ImageRepository;
 import org.springframework.web.multipart.MultipartFile;
 
 
-
-
-
 @Service
 public class ImageService {
 
@@ -36,7 +33,6 @@ public class ImageService {
     }
 
     
-
     public Image findById(long id) {
         return imageRepository.findById(id).orElse(null);
     }
@@ -44,6 +40,24 @@ public class ImageService {
     public Image save(Image image) {
         return imageRepository.save(image);
     }
+
+    //FOR THE API REST
+    
+    public Image getImage(long id) {
+        return imageRepository.findById(id).orElseThrow();
+    }
+
+    public Image createImage(byte[] data) {
+        Image image = new Image(data);
+        return imageRepository.save(image);
+    }
+
+    public Image replaceImage(long id, byte[] data) {
+        Image image = imageRepository.findById(id).orElseThrow();
+        image.setData(data);
+        return imageRepository.save(image);
+    }
+
 }
 
 

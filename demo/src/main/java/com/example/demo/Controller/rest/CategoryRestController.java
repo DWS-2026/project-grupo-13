@@ -1,7 +1,8 @@
 package com.example.demo.Controller.rest;
-import com.example.demo.dto.UserBasicDTO;
-import com.example.demo.dto.UserBasicMapper;
-import com.example.demo.Service.UserService;
+
+import com.example.demo.dto.CategoryBasicDTO;
+import com.example.demo.dto.CategoryBasicMapper;
+import com.example.demo.Service.CategoryService;
 
 import java.net.URI;
 import java.sql.SQLException;
@@ -18,20 +19,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
-@RequestMapping("/api/users")
-public class UserRestController {
+@RequestMapping("api/categories")
+public class CategoryRestController {
+
+    @Autowired
+    private CategoryService categoryService;
+
+    @Autowired
+    CategoryBasicMapper categoryBasicMapper;
     
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private UserBasicMapper userBasicMapper;
-
     @GetMapping("/")
-    public List<UserBasicDTO> getUsers() {
-        return userBasicMapper.toDTOs(userService.findAll());
+    public List<CategoryBasicDTO> getCategories() {
+        return categoryService.findAll().stream().map(categoryBasicMapper::toDTO).toList();
     }
 
+    /*
+    @GetMapping("/{id}")
+    public CategoryBasicDTO getCategory(@PathVariable Long id) {
+        return categoryService.findById(id).map(this::toDTO)
+    }
+    */
+    
 }

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.example.demo.Service.ProductService;
@@ -40,7 +39,9 @@ public class ProductRestController {
 
     @GetMapping("/")
     public List<ProductBasicDTO> getProducts() {
-        return productService.findAll().stream().map(productBasicMapper::toDTO).toList();
+        return productBasicMapper.toDTOs(productService.findAll());
     }
+    
+
 
 }

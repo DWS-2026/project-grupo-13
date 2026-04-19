@@ -1,12 +1,12 @@
 package com.example.demo.dto;
-import org.springframework.stereotype.Component;
 import com.example.demo.Model.User;
+import org.mapstruct.Mapper;
+import java.util.List;
+import java.util.Collection;
 
-@Component
-public class UserBasicMapper {
+@Mapper (componentModel = "spring")
+public interface UserBasicMapper {
     
-    public UserBasicDTO toDTO (User user) {
-        return new UserBasicDTO(user.getId(), user.getNickname(), user.getEmail(), user.getRole());
-    }
+    List<UserBasicDTO> toDTOs(Collection<User> users);
 
 }

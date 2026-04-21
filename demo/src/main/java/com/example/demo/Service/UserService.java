@@ -26,8 +26,20 @@ public class UserService {
     }
 
     
-    public Optional<User> findById(int id) {
-        return userRepository.findById(id);
+    public User findById(int id) {
+        return userRepository.findById(id).orElseThrow();
+    }
+    
+
+    public User createUser(User user){
+
+        userRepository.save(user);
+
+        return user;
+    }
+
+    public boolean existsById(int id) {
+        return userRepository.existsById(id);
     }
 
     

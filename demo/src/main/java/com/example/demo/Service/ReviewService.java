@@ -19,7 +19,15 @@ public class ReviewService {
     }
 
     public List<Review> findByProductId(int id) {
-    return reviewRepository.findByProductId(id);
+        return reviewRepository.findByProductId(id);
+    }
+
+    public List<Review> findAll() {
+        return reviewRepository.findAll();
+    }
+
+    public Review findById(long id) {
+        return reviewRepository.findById(id).orElseThrow();
     }
 
 }

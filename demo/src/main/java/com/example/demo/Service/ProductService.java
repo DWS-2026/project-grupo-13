@@ -26,12 +26,16 @@ public class ProductService {
 
    
     public Product findById(int id) {
-        return productRepository.findById(id).orElse(null);
+        return productRepository.findById(id).orElseThrow();
     }
 
     
     public void deleteById(int id) {
         productRepository.deleteById(id);
+    }
+
+    public boolean existsById(int id) {
+        return productRepository.existsById(id);
     }
 
     
@@ -42,6 +46,21 @@ public class ProductService {
     public List<Product> findPromotions() {
     return productRepository.findByPromotionTrue();
     }
+
+    public Product createProduct(Product product) {
+
+        /*
+        if(product.getId() != null) {
+            throw new IllegalArgumentException();
+        }
+        */
+
+        productRepository.save(product);
+
+        return product;
+
+    }
+
 
 }
 

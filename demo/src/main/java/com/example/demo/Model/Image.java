@@ -27,4 +27,5 @@ public class Image {
     public Long getId() { return id; }
     public byte[] getData() { return data; }
     public void setData(byte[] data) { this.data = data; }
+    
 }

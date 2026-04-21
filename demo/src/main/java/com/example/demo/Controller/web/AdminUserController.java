@@ -1,4 +1,4 @@
-package com.example.demo.Controller;
+package com.example.demo.Controller.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -48,7 +48,7 @@ public class AdminUserController {
     }
     @GetMapping("/AdminUser/verUsuario/{id}")
     public String verUsuario(@PathVariable int id, Model model) {
-        User usuario = userService.findById(id).get();
+        User usuario = userService.findById(id);
         model.addAttribute("usuario", usuario);
 
         return "AdminUserDetails"; 
@@ -56,7 +56,7 @@ public class AdminUserController {
 
     @PostMapping("/AdminUser/promote/{id}")
     public String promoteUser(@PathVariable int id) {
-        User user = userService.findById(id).orElse(null);
+        User user = userService.findById(id);
         if (user != null) {
             user.setRole("ADMIN");
             userService.save(user);

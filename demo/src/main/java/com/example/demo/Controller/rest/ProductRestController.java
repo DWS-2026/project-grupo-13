@@ -19,7 +19,9 @@ import java.util.List;
 import com.example.demo.Service.ProductService;
 import com.example.demo.Service.ImageService;
 import com.example.demo.dto.ProductBasicDTO;
+import com.example.demo.dto.ProductDetailDTO;
 import com.example.demo.dto.ProductBasicMapper;
+import com.example.demo.dto.ProductDetailMapper;
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
@@ -36,12 +38,21 @@ public class ProductRestController {
     @Autowired
     private ProductBasicMapper productBasicMapper;
 
+    @Autowired
+    private ProductDetailMapper productDetailMapper;
 
+
+    //show all products in the DB
     @GetMapping("/")
     public List<ProductBasicDTO> getProducts() {
         return productBasicMapper.toDTOs(productService.findAll());
     }
     
+    //show one detailed product
+    @GetMapping("/{id}")
+    public ProductDetailDTO getproduct(@PathVariable int id) {
+        return productDetailMapper.toDTO(productService.findById(id));
+    }
 
 
 }

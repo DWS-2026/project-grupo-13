@@ -22,8 +22,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.demo.dto.ImageDTO;
 import com.example.demo.dto.ImageMapper;
 import com.example.demo.Model.Image;
+import com.example.demo.Service.CategoryService;
 import com.example.demo.Service.ImageService;
 import com.example.demo.Service.ProductService;
+
 
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -31,6 +33,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @RestController
 @RequestMapping("api/images")
 public class ImageRestController {
+    
+    @Autowired 
+    private CategoryService categoryService;
     
     @Autowired
     private ImageService imageService;
@@ -104,5 +109,36 @@ public class ImageRestController {
 
 
     //Methods for category images
+    @PostMapping("/categories/{id}/images")
+    public ResponseEntity<ImageDTO> createCategoryImage(@PathVariable int id, 
+        @RequestParam MultipartFile imageFile) throws IOException {
+
+            if (imageFile.isEmpty()) {
+                throw new IllegalArgumentException("The file cannot be empty");
+            }
+
+            Image image = imageService.createImage(imageFile.getInputStream());
+            // Requiere que categoryService y el método addImageToCategory existan
+            categoryService.addImageToCategory(id, image); 
+
+            URI location = ServletUriComponentsBuilder
+                .fromCurrentContextPath()
+                .path("/api/images/{imageId}/media")
+                .buildAndExpand(image.getId())
+                .toUri();
+
+            return ResponseEntity.created(location).body(imageMapper.toDTO(image));
+    }
+
+    @DeleteMapping("/categories/{categoryId}/images/{imageId}")
+    public ImageDTO deleteCategoryImage(@PathVariable int categoryId, @PathVariable long imageId) {
+
+        Image image = imageService.getImage(imageId);
+        // Requiere que categoryService y el método removeImageCategory existan
+        categoryService.removeImageCategory(categoryId); 
+        imageService.deleteImage(imageId);
+
+        return imageMapper.toDTO(image);
+    }
 
 }

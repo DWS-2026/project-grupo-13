@@ -1,7 +1,9 @@
 package com.example.demo.Controller.rest;
 
 import com.example.demo.dto.CategoryBasicDTO;
+import com.example.demo.dto.CategoryDetailDTO;
 import com.example.demo.dto.CategoryBasicMapper;
+import com.example.demo.dto.CategoryDetailMapper;
 import com.example.demo.Service.CategoryService;
 
 import java.net.URI;
@@ -30,18 +32,24 @@ public class CategoryRestController {
     private CategoryService categoryService;
 
     @Autowired
-    CategoryBasicMapper categoryBasicMapper;
+    private CategoryBasicMapper categoryBasicMapper;
+
+    @Autowired
+    private CategoryDetailMapper categoryDetailMapper;
     
+    //show all categories
     @GetMapping("/")
     public List<CategoryBasicDTO> getCategories() {
-        return categoryService.findAll().stream().map(categoryBasicMapper::toDTO).toList();
+        return categoryBasicMapper.toDTOs(categoryService.findAll());
     }
 
-    /*
+    //show one detailed category
     @GetMapping("/{id}")
-    public CategoryBasicDTO getCategory(@PathVariable Long id) {
-        return categoryService.findById(id).map(this::toDTO)
+    public CategoryDetailDTO getCategory(@PathVariable Long id) {
+        return categoryDetailMapper.toDTO(categoryService.findById(id));
     }
-    */
+
+    
+    
     
 }

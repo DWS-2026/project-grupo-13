@@ -1,5 +1,11 @@
 package com.example.demo.dto;
 
-public record CategoryDetailDTO(Long id, String name) {
-    
-}
+import java.util.List;
+
+public record CategoryDetailDTO(
+    Long id,
+    String name,
+    List<ProductBasicDTO> products,
+    ImageDTO image
+
+) {}

@@ -1,5 +1,7 @@
 package com.example.demo.dto;
 
+import java.util.List;
+
 
 public record ProductDetailDTO(
     int id, 
@@ -7,6 +9,7 @@ public record ProductDetailDTO(
     double precio, 
     String descripcion, 
     CategoryBasicDTO category, 
-    ImageDTO image) {
-    
-}
+    ImageDTO image,
+    List<ReviewDetailDTO> reviews
+
+) {}

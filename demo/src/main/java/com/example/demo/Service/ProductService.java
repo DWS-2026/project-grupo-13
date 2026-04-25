@@ -34,6 +34,10 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
+    public boolean existsById(int id) {
+        return productRepository.existsById(id);
+    }
+
     
     public List<Product> findByCategoryName(String category) {
         return productRepository.findByCategory_Name(category);
@@ -56,6 +60,7 @@ public class ProductService {
         return product;
 
     }
+
 
 }
 

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import com.example.demo.Service.ProductService;
 import com.example.demo.Service.ImageService;
@@ -71,4 +72,34 @@ public class ProductRestController {
         return ResponseEntity.created(location).body(productDetailDTO);
     }
 
+    //delete a product
+    @DeleteMapping("/{id}")
+    public ProductDetailDTO deleteProduct(@PathVariable int id) {
+
+        Product product = productService.findById(id);
+
+        productService.deleteById(id);
+
+        return productDetailMapper.toDTO(product);
+
+    }
+
+    //replace a product
+    @PutMapping("/{id}")
+    public ProductDetailDTO replaceProduct(@PathVariable int id, @RequestBody ProductDetailDTO newProductDTO) {
+
+        if (productService.existsById(id)) {
+
+            Product newProduct = productDetailMapper.toDomain(newProductDTO);
+
+            newProduct.setId(id);
+            productService.save(newProduct);
+
+            return productDetailMapper.toDTO(newProduct);
+
+        } else {
+            throw new NoSuchElementException();
+        }
+
+    }
 }

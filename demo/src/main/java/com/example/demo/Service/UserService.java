@@ -30,6 +30,17 @@ public class UserService {
         return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
     }
 
+    public User createUser(User user){
+
+        userRepository.save(user);
+
+        return user;
+    }
+
+    public boolean existsById(int id) {
+        return userRepository.existsById(id);
+    }
+
     
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);

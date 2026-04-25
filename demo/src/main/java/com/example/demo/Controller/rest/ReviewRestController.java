@@ -43,7 +43,7 @@ public class ReviewRestController {
     @Autowired
     private ReviewService reviewService;
 
-    //show all products in the DB
+    //show all reviews in the DB
     @GetMapping("/")
     public List<ReviewDetailDTO> getReviews() {
         return reviewDetailMapper.toDTOs(reviewService.findAll());

@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Collection;
 
 @Mapper (componentModel = "spring")
-public interface UserBasicMapper {
+public interface UserDetailMapper {
     
-    List<UserBasicDTO> toDTOs(Collection<User> users);
+    UserDetailDTO toDTO (User user);
 
 }

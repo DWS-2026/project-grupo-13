@@ -1,7 +1,9 @@
 package com.example.demo.Controller.rest;
 import com.example.demo.dto.UserBasicDTO;
 import com.example.demo.dto.UserBasicMapper;
+import com.example.demo.dto.UserDetailMapper;
 import com.example.demo.Service.UserService;
+import com.example.demo.dto.UserDetailDTO;
 
 import java.net.URI;
 import java.sql.SQLException;
@@ -29,9 +31,17 @@ public class UserRestController {
     @Autowired
     private UserBasicMapper userBasicMapper;
 
+    @Autowired
+    private UserDetailMapper userDetailMapper;
+
     @GetMapping("/")
     public List<UserBasicDTO> getUsers() {
         return userBasicMapper.toDTOs(userService.findAll());
+    }
+
+    @GetMapping("/{id}")
+    public UserDetailDTO getUser(@PathVariable int id) {
+        return userDetailMapper.toDTO(userService.findById(id));
     }
 
 }

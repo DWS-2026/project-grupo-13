@@ -43,5 +43,19 @@ public class ProductService {
     return productRepository.findByPromotionTrue();
     }
 
+    public Product createProduct(Product product) {
+
+        /*
+        if(product.getId() != null) {
+            throw new IllegalArgumentException();
+        }
+        */
+
+        productRepository.save(product);
+
+        return product;
+
+    }
+
 }
 

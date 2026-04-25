@@ -23,6 +23,8 @@ import com.example.demo.dto.ProductDetailDTO;
 import com.example.demo.dto.ProductBasicMapper;
 import com.example.demo.dto.ProductDetailMapper;
 
+import com.example.demo.Model.Product;
+
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 @RestController
@@ -54,5 +56,19 @@ public class ProductRestController {
         return productDetailMapper.toDTO(productService.findById(id));
     }
 
+    //create a new product
+    @PostMapping("/")
+    public ResponseEntity<ProductDetailDTO> createProduct (@RequestBody ProductDetailDTO productDetailDTO) {
+
+        Product product = productDetailMapper.toDomain(productDetailDTO);
+
+        product = productService.createProduct(product);
+
+        productDetailDTO = productDetailMapper.toDTO(product);
+
+        URI location = fromCurrentRequest().path("/{id}").buildAndExpand(productDetailDTO.id()).toUri();
+
+        return ResponseEntity.created(location).body(productDetailDTO);
+    }
 
 }

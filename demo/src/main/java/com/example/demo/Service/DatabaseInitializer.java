@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.Model.Category;
 import com.example.demo.Model.Image;
 import com.example.demo.Model.Product;
+import com.example.demo.Model.Review;
 import com.example.demo.Model.User;
 
 import java.io.IOException;
@@ -47,6 +48,9 @@ public class DatabaseInitializer {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private ReviewService reviewService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -264,8 +268,27 @@ public class DatabaseInitializer {
             LocalDate.of(2000, 6, 12)
         );
         userService.save(u4);
-        
 
+        //Reviews for products
+
+        Review r1 = new Review (
+            "user",
+            4,
+            "Buen producto",
+            LocalDate.of(2026, 4, 11),
+            p1
+        );
+        reviewService.save(r1);
+
+        Review r2 = new Review(
+            "user2", 
+            5, 
+            "Excelente calidad",
+            LocalDate.now(),
+            p1
+        );
+        reviewService.save(r2);
+        
     }
 
     public void setProductImage(Product product, String classpathResource) throws IOException {

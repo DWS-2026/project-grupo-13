@@ -31,7 +31,13 @@ public class Review {
         this.fecha = LocalDate.now();
     }
 
-   
+    public Review(String usuario, int estrellas, String comentario, LocalDate fecha, Product product) {
+        this.usuario = usuario;
+        this.estrellas = estrellas;
+        this.comentario = comentario;
+        this.fecha = fecha;
+        this.product = product;
+    }
 
     public Long getId() {
         return id;

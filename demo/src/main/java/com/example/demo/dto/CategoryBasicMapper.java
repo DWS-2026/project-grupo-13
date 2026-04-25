@@ -7,4 +7,6 @@ public interface CategoryBasicMapper {
     
     CategoryBasicDTO toDTO (Category category);
 
+    Category toDomain(CategoryBasicDTO categoryBasicDTO);
+
 }

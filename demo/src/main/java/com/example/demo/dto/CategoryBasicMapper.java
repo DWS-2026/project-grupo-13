@@ -12,6 +12,6 @@ public interface CategoryBasicMapper {
 
     List<CategoryBasicDTO> toDTOs (Collection<Category> categories);
 
-    Category toDomain(CategoryBasicDTO categoryBasicDTO);
+    Category toDomain (CategoryBasicDTO categoryBasicDTO);
 
 }

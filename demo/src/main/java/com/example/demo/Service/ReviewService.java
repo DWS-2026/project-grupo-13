@@ -27,7 +27,7 @@ public class ReviewService {
     }
 
     public Review findById(long id) {
-        return reviewRepository.findById(id).orElseThrow(() -> new RuntimeException("Review not found"));
+        return reviewRepository.findById(id).orElseThrow();
     }
 
 }

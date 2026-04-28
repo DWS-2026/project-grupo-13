@@ -10,14 +10,17 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.Model.Category;
 import com.example.demo.Model.Image;
+import com.example.demo.Model.OrderItem;
 import com.example.demo.Model.Product;
 import com.example.demo.Model.Review;
 import com.example.demo.Model.User;
-
+import com.example.demo.Model.Order;
+import java.util.List;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /*import com.example.demo.Category;
 import com.example.demo.Image;
@@ -57,6 +60,9 @@ public class DatabaseInitializer {
 
     @Autowired(required = false)
     private ImageService imageService;
+
+    @Autowired
+    private OrderService orderService;
 
     @PostConstruct
     public void init() throws IOException, URISyntaxException {
@@ -288,6 +294,48 @@ public class DatabaseInitializer {
             p1
         );
         reviewService.save(r2);
+
+        // --- ORDERS (PEDIDOS) DE PRUEBA ---
+
+            // Pedido 1: Carlos compra un iPhone 15 y un Asus Gaming
+            Order o1 = new Order();
+            o1.setUser(u1); // Carlos
+            o1.setFecha(LocalDateTime.now());
+
+            OrderItem item1 = new OrderItem();
+            item1.setProduct(p1); // iPhone 15
+            item1.setCantidad(1);
+            item1.setPrecio(p1.getPrecio());
+            item1.setOrder(o1);
+
+            OrderItem item2 = new OrderItem();
+            item2.setProduct(p3); // Asus Gaming
+            item2.setCantidad(1);
+            item2.setPrecio(p3.getPrecio());
+            item2.setOrder(o1);
+
+            o1.setItems(List.of(item1, item2));
+            // El total sería la suma de p1 + p3
+            o1.setTotal(p1.getPrecio() + p3.getPrecio());
+
+            orderService.save(o1);
+
+
+            // Pedido 2: El usuario "user" compra 3 unidades de la GTX 1650
+            Order o2 = new Order();
+            o2.setUser(u3); // user
+            o2.setFecha(LocalDateTime.now().minusDays(1)); // Ayer
+
+            OrderItem item3 = new OrderItem();
+            item3.setProduct(p5); // GTX 1650
+            item3.setCantidad(3);
+            item3.setPrecio(p5.getPrecio());
+            item3.setOrder(o2);
+
+            o2.setItems(List.of(item3));
+            o2.setTotal(p5.getPrecio() * 3);
+
+            orderService.save(o2);
         
     }
 

@@ -7,12 +7,18 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.Model.Product;
 import com.example.demo.Repository.ProductRepository;
+import com.example.demo.Repository.ImageRepository;
+
+import com.example.demo.Model.Image;
 
 @Service
 public class ProductService {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private ImageRepository imageRepository;
 
     
     public Product save(Product product) {
@@ -59,6 +65,33 @@ public class ProductService {
 
         return product;
 
+    }
+
+    //These are methods for the ImageRestController
+
+    public Product addImageToProduct(int id, Image image) {
+
+        Product product = productRepository.findById(id).orElseThrow();
+        product.setImage(image);
+        productRepository.save(product);
+
+        return product;
+    }
+
+    public Product removeImageProduct(int id) {
+
+        Product product = productRepository.findById(id).orElseThrow();
+
+        Image image = product.getImage();
+        product.setImage(null);
+        productRepository.save(product);
+
+        //delete the image from the BD
+        if (image != null) {
+            imageRepository.delete(image);
+        }
+
+        return product;
     }
 
 

@@ -41,6 +41,7 @@ public class ImageService {
         return imageRepository.save(image);
     }
 
+    
     //FOR THE API REST
     
     public Image getImage(long id) {
@@ -56,6 +57,12 @@ public class ImageService {
         Image image = imageRepository.findById(id).orElseThrow();
         image.setData(data);
         return imageRepository.save(image);
+    }
+
+    public void deleteImage(long id) {
+
+        imageRepository.deleteById(id);
+
     }
 
 }

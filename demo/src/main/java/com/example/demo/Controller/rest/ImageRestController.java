@@ -1,6 +1,7 @@
 package com.example.demo.Controller.rest;
 
 import java.io.IOException;
+import java.net.URI;
 import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.MediaTypeFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +23,10 @@ import com.example.demo.dto.ImageDTO;
 import com.example.demo.dto.ImageMapper;
 import com.example.demo.Model.Image;
 import com.example.demo.Service.ImageService;
+import com.example.demo.Service.ProductService;
+
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 
 @RestController
 @RequestMapping("api/images")
@@ -29,6 +36,9 @@ public class ImageRestController {
     private ImageService imageService;
 
     @Autowired
+    private ProductService productService;
+
+    @Autowired
     private ImageMapper imageMapper;
 
     @GetMapping("/{id}")
@@ -36,25 +46,56 @@ public class ImageRestController {
         return imageMapper.toDTO(imageService.getImage(id));
     }
 
-    @GetMapping("/{id}/media")
+    @GetMapping("/{id}/images")
     public ResponseEntity<byte[]> getImageMedia(@PathVariable long id) {
 
         Image image = imageService.getImage(id);
 
         return ResponseEntity
                 .ok()
-                .contentType(MediaType.IMAGE_JPEG) // o PNG si lo usas
+                .contentType(MediaType.IMAGE_JPEG)
                 .body(image.getData());
     }
 
 
-    @PutMapping("/{id}/media")
+    @PostMapping("/{id}/images")
+    public ResponseEntity<ImageDTO> createProductImage(@PathVariable int id, 
+        @RequestParam MultipartFile imageFile) throws IOException {
+
+            if (imageFile.isEmpty()) {
+                throw new IllegalArgumentException("The file cannot be empty");
+            }
+
+            Image image = imageService.createImage(imageFile.getInputStream());
+            productService.addImageToProduct(id, image);
+
+            URI location = ServletUriComponentsBuilder
+                .fromCurrentContextPath()
+                .path("/images/{imageId}/media")
+                .buildAndExpand(image.getId())
+                .toUri();
+
+            return ResponseEntity.created(location).body(imageMapper.toDTO(image));
+    }
+
+
+    @PutMapping("/{id}/images")
     public ResponseEntity<Void> replaceImage(
             @PathVariable long id,
             @RequestParam MultipartFile imageFile) throws IOException {
 
         imageService.replaceImage(id, imageFile.getBytes());
         return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{productId}/images/{imageId}")
+    public ImageDTO deleteProductImage(@PathVariable int productId, @PathVariable long imageId) {
+
+        Image image = imageService.getImage(imageId);
+        productService.removeImageProduct(productId);
+        imageService.deleteImage(imageId);
+
+        return imageMapper.toDTO(image);
     }
 
 

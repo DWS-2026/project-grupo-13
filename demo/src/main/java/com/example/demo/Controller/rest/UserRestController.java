@@ -1,9 +1,13 @@
 package com.example.demo.Controller.rest;
+import com.example.demo.dto.ImageDTO;
+import com.example.demo.dto.ImageMapper;
 import com.example.demo.dto.ProductDetailDTO;
 import com.example.demo.dto.UserBasicDTO;
 import com.example.demo.dto.UserBasicMapper;
 import com.example.demo.dto.UserDetailMapper;
+import com.example.demo.Model.Image;
 import com.example.demo.Model.Product;
+import com.example.demo.Service.ImageService;
 import com.example.demo.Service.UserService;
 import com.example.demo.dto.UserDetailDTO;
 import com.example.demo.Model.User;
@@ -14,6 +18,7 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.io.IOException;
 import java.net.URI;
 import java.sql.SQLException;
 import java.util.Collection;
@@ -26,7 +31,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -39,6 +46,12 @@ public class UserRestController {
     
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ImageService imageService;
+
+    @Autowired
+    private ImageMapper imageMapper;
 
     @Autowired
     private UserBasicMapper userBasicMapper;
@@ -57,7 +70,7 @@ public class UserRestController {
 
     //show one detailed user
     @GetMapping("/{id}")
-    public UserDetailDTO getUser(@PathVariable int id) {
+    public UserDetailDTO getUser(@PathVariable Long id) {
         return userDetailMapper.toDTO(userService.findById(id));
     }
 
@@ -78,7 +91,7 @@ public class UserRestController {
 
     //delete a user
     @DeleteMapping("/{id}")
-    public UserDetailDTO deleteUser(@PathVariable int id) {
+    public UserDetailDTO deleteUser(@PathVariable Long id) {
 
         User user = userService.findById(id);
 
@@ -90,7 +103,7 @@ public class UserRestController {
 
     //replace a user
     @PutMapping("/{id}")
-    public UserDetailDTO replaceUser(@PathVariable int id, @RequestBody UserDetailDTO newUserDTO) {
+    public UserDetailDTO replaceUser(@PathVariable Long id, @RequestBody UserDetailDTO newUserDTO) {
 
         if (userService.existsById(id)) {
 
@@ -105,6 +118,43 @@ public class UserRestController {
             throw new NoSuchElementException();
         }
 
+    }
+    
+
+    // 🔹 Endpoints para imágenes de perfil
+    @PostMapping("/{id}/image")
+    public ResponseEntity<ImageDTO> uploadProfileImage(@PathVariable Long id,
+                                                       @RequestParam("imageFile") org.springframework.web.multipart.MultipartFile imageFile)
+            throws IOException {
+
+        if (imageFile.isEmpty()) {
+            throw new IllegalArgumentException("El archivo no puede estar vacío");
+        }
+
+        Image image = imageService.createImage(imageFile.getInputStream());
+        userService.addImageToUser(id, image);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentContextPath()
+                .path("/images/{imageId}/media")
+                .buildAndExpand(image.getId())
+                .toUri();
+
+        return ResponseEntity.created(location).body(imageMapper.toDTO(image));
+    }
+
+    @DeleteMapping("/{id}/image")
+    public ResponseEntity<ImageDTO> deleteProfileImage(@PathVariable Long id) {
+        User user = userService.findById(id);
+        Image image = user.getProfileImage();
+        userService.removeImageFromUser(id);
+
+        if (image != null) {
+            imageService.deleteImage(image.getId());
+            return ResponseEntity.ok(imageMapper.toDTO(image));
+        }
+
+        return ResponseEntity.noContent().build();
     }
 
 }

@@ -42,12 +42,12 @@ public class AdminUserController {
     }
 
     @GetMapping("/AdminUser/eliminar/{id}")
-    public String eliminarUsuario(@PathVariable int id) {
+    public String eliminarUsuario(@PathVariable Long id) {
         userService.deleteById(id);
         return "redirect:/AdminUser";
     }
     @GetMapping("/AdminUser/verUsuario/{id}")
-    public String verUsuario(@PathVariable int id, Model model) {
+    public String verUsuario(@PathVariable Long id, Model model) {
         User usuario = userService.findById(id);
         model.addAttribute("usuario", usuario);
 
@@ -55,7 +55,7 @@ public class AdminUserController {
     }
 
     @PostMapping("/AdminUser/promote/{id}")
-    public String promoteUser(@PathVariable int id) {
+    public String promoteUser(@PathVariable Long id) {
         User user = userService.findById(id);
         if (user != null) {
             user.setRole("ADMIN");

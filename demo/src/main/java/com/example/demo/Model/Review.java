@@ -1,14 +1,20 @@
 package com.example.demo.Model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.Positive;
 
 import java.time.LocalDate;
+
 
 @Entity
 @Table(name = "REVIEWS")
@@ -20,6 +26,10 @@ public class Review {
 
     private String usuario;
     private int estrellas;
+
+    @Column(columnDefinition = "MEDIUMTEXT")
+    @NotBlank(message = "El comentario no puede estar vacío")
+    @Size(min = 10, message = "El comentario debe tener al menos 10 caracteres")
     private String comentario;
     private LocalDate fecha;
 

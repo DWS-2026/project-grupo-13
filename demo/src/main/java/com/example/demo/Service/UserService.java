@@ -6,14 +6,20 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.Model.Image;
 import com.example.demo.Model.User;
+import com.example.demo.Repository.ImageRepository;
 import com.example.demo.Repository.UserRepository;
+
 
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ImageRepository imageRepository;
 
     
     public User save(User user) {
@@ -26,7 +32,7 @@ public class UserService {
     }
 
     
-    public User findById(int id) {
+    public User findById(Long id) {
         return userRepository.findById(id).orElseThrow();
     }
     
@@ -38,7 +44,7 @@ public class UserService {
         return user;
     }
 
-    public boolean existsById(int id) {
+    public boolean existsById(Long id) {
         return userRepository.existsById(id);
     }
 
@@ -48,7 +54,7 @@ public class UserService {
     }
 
     
-    public void deleteById(int id) {
+    public void deleteById(Long id) {
         userRepository.deleteById(id);
     }
 
@@ -58,7 +64,40 @@ public class UserService {
 
     public User findByNickname(String nickname) {
     return userRepository.findByNickname(nickname);
-}
+    }
 
 
+    
+
+    // 🔹 Methods for Profile Image
+    public User addImageToUser(Long id, Image image) {
+        User user = userRepository.findById(id).orElseThrow();
+        user.setProfileImage(image);
+        userRepository.save(user);
+        return user;
+    }
+
+    public User removeImageFromUser(Long id) {
+        User user = userRepository.findById(id).orElseThrow();
+        Image image = user.getProfileImage();
+        user.setProfileImage(null);
+        userRepository.save(user);
+
+        if (image != null) {
+            imageRepository.delete(image);
+        }
+
+        return user;
+    }
+
+    public void deleteImage(Long id) {
+        imageRepository.deleteById(id);
+    }
 }
+    
+
+
+
+
+
+

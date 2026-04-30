@@ -10,4 +10,6 @@ public interface ProductBasicMapper {
 
     List<ProductBasicDTO> toDTOs(Collection<Product> products);
 
+    ProductBasicDTO toDTO(Product product);
+
 }

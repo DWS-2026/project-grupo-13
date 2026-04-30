@@ -7,8 +7,12 @@ import com.example.demo.Model.Product;
 import com.example.demo.Service.UserService;
 import com.example.demo.dto.UserDetailDTO;
 import com.example.demo.Model.User;
+import com.example.demo.Repository.UserRepository;
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.net.URI;
 import java.sql.SQLException;
@@ -42,10 +46,13 @@ public class UserRestController {
     @Autowired
     private UserDetailMapper userDetailMapper;
 
+    @Autowired
+    private UserRepository userRepository;
+
     //show a list of all users
     @GetMapping("/")
-    public List<UserBasicDTO> getUsers() {
-        return userBasicMapper.toDTOs(userService.findAll());
+    public Page<UserBasicDTO> getUsers(Pageable pageable) {
+        return userRepository.findAll(pageable).map(userBasicMapper::toDTO);
     }
 
     //show one detailed user

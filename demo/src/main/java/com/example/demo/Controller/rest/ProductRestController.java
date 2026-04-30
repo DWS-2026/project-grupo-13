@@ -1,5 +1,6 @@
 package com.example.demo.Controller.rest;
 
+import com.example.demo.Repository.ProductRepository;
 import java.net.URI;
 import java.sql.SQLException;
 import java.util.Collection;
@@ -13,6 +14,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -31,7 +36,10 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 @RestController
 @RequestMapping("/api/products")
 public class ProductRestController {
-    
+
+    @Autowired
+    private ProductRepository productRepository;
+
     @Autowired
     private ProductService productService;
 
@@ -45,10 +53,11 @@ public class ProductRestController {
     private ProductDetailMapper productDetailMapper;
 
 
+
     //show all products in the DB
     @GetMapping("/")
-    public List<ProductBasicDTO> getProducts() {
-        return productBasicMapper.toDTOs(productService.findAll());
+    public Page<ProductBasicDTO> getProducts(Pageable pageable) {
+        return productRepository.findAll(pageable).map(productBasicMapper::toDTO);
     }
     
     //show one detailed product

@@ -10,4 +10,6 @@ public interface UserBasicMapper {
     
     List<UserBasicDTO> toDTOs(Collection<User> users);
 
+    UserBasicDTO toDTO(User user);
+
 }

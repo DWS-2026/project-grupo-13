@@ -15,12 +15,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.example.demo.Service.OrderService;
 import com.example.demo.dto.OrderBasicDTO;
 import com.example.demo.dto.OrderDetailDTO;
 import com.example.demo.dto.OrderBasicMapper;
 import com.example.demo.dto.OrderDetailMapper;
 import com.example.demo.Model.Order;
+import com.example.demo.Repository.OrderRepository;
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
@@ -37,10 +41,13 @@ public class OrderRestController {
     @Autowired
     private OrderDetailMapper orderDetailMapper;
 
+    @Autowired
+    private OrderRepository orderRepository;
+
     //show all orders in the DB
     @GetMapping("/")
-    public List<OrderBasicDTO> getOrders() {
-        return orderBasicMapper.toDTOs(orderService.findAll());
+    public Page<OrderBasicDTO> getOrders(Pageable pageable) {
+        return orderRepository.findAll(pageable).map(orderBasicMapper::toDTO);
     }
 
     //show one detailed order

@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import java.util.List;
 
 import com.example.demo.Service.ProductService;
@@ -28,6 +31,7 @@ import com.example.demo.dto.ReviewDetailMapper;
 import com.example.demo.Service.ReviewService;
 
 import com.example.demo.Model.Product;
+import com.example.demo.Repository.ReviewRepository;
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
@@ -43,10 +47,13 @@ public class ReviewRestController {
     @Autowired
     private ReviewService reviewService;
 
+    @Autowired
+    private ReviewRepository reviewRepository;
+
     //show all reviews in the DB
     @GetMapping("/")
-    public List<ReviewDetailDTO> getReviews() {
-        return reviewDetailMapper.toDTOs(reviewService.findAll());
+    public Page<ReviewDetailDTO> getReviews(Pageable pageable) {
+        return reviewRepository.findAll(pageable).map(reviewDetailMapper::toDTO);
     }
 
     //show one detailed review

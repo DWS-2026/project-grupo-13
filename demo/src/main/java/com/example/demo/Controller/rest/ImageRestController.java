@@ -57,6 +57,7 @@ public class ImageRestController {
                 .body(image.getData());
     }
 
+    //Methods for product images
 
     @PostMapping("/{id}/images")
     public ResponseEntity<ImageDTO> createProductImage(@PathVariable int id, 
@@ -98,5 +99,10 @@ public class ImageRestController {
         return imageMapper.toDTO(image);
     }
 
+    //Methods for user images
+
+
+
+    //Methods for category images
 
 }

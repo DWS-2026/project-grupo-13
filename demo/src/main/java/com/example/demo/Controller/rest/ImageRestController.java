@@ -23,6 +23,7 @@ import com.example.demo.dto.ImageDTO;
 import com.example.demo.dto.ImageMapper;
 import com.example.demo.Model.Image;
 import com.example.demo.Service.CategoryService;
+import com.example.demo.Service.UserService;
 import com.example.demo.Service.ImageService;
 import com.example.demo.Service.ProductService;
 
@@ -45,6 +46,10 @@ public class ImageRestController {
 
     @Autowired
     private ImageMapper imageMapper;
+
+    @Autowired
+    private UserService userService;
+
 
     @GetMapping("/{id}")
     public ImageDTO getImage(@PathVariable long id) {
@@ -105,6 +110,52 @@ public class ImageRestController {
     }
 
     //Methods for user images
+
+    @PostMapping("/users/{id}/image")
+    public ResponseEntity<ImageDTO> createUserImage(
+            @PathVariable long id,
+            @RequestParam MultipartFile imageFile) throws IOException {
+
+        if (imageFile.isEmpty()) {
+            throw new IllegalArgumentException("The file cannot be empty");
+        }
+
+        Image image = imageService.createImage(imageFile.getInputStream());
+        userService.addImageToUser(id, image);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentContextPath()
+                .path("/images/{imageId}/media")
+                .buildAndExpand(image.getId())
+                .toUri();
+
+        return ResponseEntity.created(location).body(imageMapper.toDTO(image));
+    }
+    @PutMapping("/users/{id}/image")
+    public ResponseEntity<Void> replaceUserImage(
+            @PathVariable long id,
+            @RequestParam MultipartFile imageFile) throws IOException {
+
+        if (imageFile.isEmpty()) {
+            throw new IllegalArgumentException("The file cannot be empty");
+        }
+
+        imageService.replaceImage(id, imageFile.getBytes());
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/users/{userId}/image/{imageId}")
+    public ImageDTO deleteUserImage(
+            @PathVariable long userId,
+            @PathVariable long imageId) {
+
+        Image image = imageService.getImage(imageId);
+
+        userService.removeImageFromUser(userId);
+        imageService.deleteImage(imageId);
+
+        return imageMapper.toDTO(image);
+    }
 
 
 

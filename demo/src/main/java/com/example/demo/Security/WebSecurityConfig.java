@@ -44,19 +44,46 @@ public class WebSecurityConfig {
                 //.exceptionHandling(handling -> handling.authenticationEntryPoint(unauthorizedHandlerJwt));
 
         http
-                .authorizeHttpRequests(authorize -> authorize  //examples we have to replace
+                .authorizeHttpRequests(authorize -> authorize
                         // PRIVATE ENDPOINTS
                         // Images
-                        .requestMatchers(HttpMethod.PUT, "/api/images/*/media").hasRole("USER")
-                        .requestMatchers(HttpMethod.DELETE, "/api/books/*/images/*").hasRole("USER")
-                        // Books
-                        .requestMatchers(HttpMethod.POST, "/api/books/**").hasRole("USER")
-                        .requestMatchers(HttpMethod.PUT, "/api/books/**").hasRole("USER")
-                        .requestMatchers(HttpMethod.DELETE, "/api/books/**").hasRole("ADMIN")
-                        // Shops
-                        .requestMatchers(HttpMethod.PUT, "/api/shops/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/shops/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/shops/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/images/*/images").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/images/*/images").hasRole("ADMIN")
+                        
+                        // Methods for images on entities
+                        //Product
+                        .requestMatchers(HttpMethod.POST, "/api/products/*/images").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT,  "/api/products/*/images").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/products/*/images/*").hasRole("ADMIN")
+
+                        //User
+                        .requestMatchers(HttpMethod.POST, "/api/users/*/image").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/users/*/image").hasRole("ADMIN")
+
+                        //Category
+                        .requestMatchers(HttpMethod.POST, "/api/categories/*/image").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT,  "/api/categories/*/image").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/categories/*/image").hasRole("ADMIN")
+
+                        ///////////////////////////////////////////////////////////////////////////
+                        ///////////////////////////////////////////////////////////////////////////
+
+                        // Categories
+                        .requestMatchers(HttpMethod.POST, "/api/categories/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/categories/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/categories/**").hasRole("ADMIN")
+                        // Products
+                        .requestMatchers(HttpMethod.POST, "/api/products/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/products/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/products/**").hasRole("ADMIN")
+                        // Reviews
+                        .requestMatchers(HttpMethod.POST, "/api/reviews/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/reviews/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/reviews/**").hasRole("ADMIN")
+                        // Users
+                        .requestMatchers(HttpMethod.POST, "/api/users/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/users/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/users/**").hasRole("ADMIN")
                         // PUBLIC ENDPOINTS
                         .anyRequest().permitAll());
 

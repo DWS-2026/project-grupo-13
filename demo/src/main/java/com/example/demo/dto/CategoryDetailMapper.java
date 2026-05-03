@@ -8,6 +8,6 @@ public interface CategoryDetailMapper {
     
     CategoryDetailDTO toDTO (Category category);
 
-    Category toDomain (Category category);
+    Category toDomain (CategoryDetailDTO dto);
 
 }

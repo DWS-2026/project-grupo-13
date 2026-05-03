@@ -46,6 +46,18 @@ public class CategoryService {
         categoryRepository.deleteById(id);
     }
 
+    public Category createCategory(Category category) {
+
+        categoryRepository.save(category);
+
+        return category;
+
+    }
+
+    public boolean existsById(long id) {
+        return categoryRepository.existsById(id);
+    }
+
     //These are methods for the ImageRestController
 
     public Category addImageToCategory(long id, Image image) {

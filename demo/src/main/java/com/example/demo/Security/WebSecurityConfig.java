@@ -78,9 +78,9 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/api/products/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/products/**").hasRole("ADMIN")
                         // Reviews
-                        .requestMatchers(HttpMethod.POST, "/api/reviews/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/reviews/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/reviews/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/reviews/**").hasRole("USER")
+                        .requestMatchers(HttpMethod.PUT, "/api/reviews/**").hasRole("USER")
+                        .requestMatchers(HttpMethod.DELETE, "/api/reviews/**").hasRole("USER")
                         // Users
                         .requestMatchers(HttpMethod.POST, "/api/users/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/users/**").hasRole("ADMIN")

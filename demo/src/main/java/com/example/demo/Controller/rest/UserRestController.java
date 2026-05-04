@@ -120,7 +120,6 @@ public class UserRestController {
 
     }
     
-
     // 🔹 Endpoints para imágenes de perfil
     @PostMapping("/{id}/image")
     public ResponseEntity<ImageDTO> uploadProfileImage(@PathVariable Long id,

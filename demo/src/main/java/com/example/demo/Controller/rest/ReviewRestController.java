@@ -79,8 +79,6 @@ public class ReviewRestController {
         return ResponseEntity.created(location).body(saved);
     }
 
-
-
     @PutMapping("/reviews/{reviewId}")
     public ResponseEntity<Review> updateReview(
             @PathVariable long reviewId,
@@ -90,16 +88,11 @@ public class ReviewRestController {
         return ResponseEntity.ok(updated);
     }
 
-
-
     @DeleteMapping("/reviews/{reviewId}")
     public ResponseEntity<Void> deleteReview(@PathVariable long reviewId) {
 
         reviewService.deleteReview(reviewId);
         return ResponseEntity.noContent().build();
     }
-
-
-
 
 }

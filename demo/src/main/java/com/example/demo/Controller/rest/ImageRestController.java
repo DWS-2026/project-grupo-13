@@ -68,7 +68,6 @@ public class ImageRestController {
     }
 
     //Methods for product images
-
     @PostMapping("/{id}/images")
     public ResponseEntity<ImageDTO> createProductImage(@PathVariable int id, 
         @RequestParam MultipartFile imageFile) throws IOException {
@@ -110,7 +109,6 @@ public class ImageRestController {
     }
 
     //Methods for user images
-
     @PostMapping("/users/{id}/image")
     public ResponseEntity<ImageDTO> createUserImage(
             @PathVariable long id,

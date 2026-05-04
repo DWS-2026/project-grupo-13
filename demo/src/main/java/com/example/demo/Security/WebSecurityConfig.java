@@ -3,46 +3,66 @@ package com.example.demo.Security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 
+import com.example.demo.Security.jwt.JwtRequestFilter;
+import com.example.demo.Security.jwt.JwtTokenProvider;
+import com.example.demo.Security.jwt.UnauthorizedHandlerJwt;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-    @Autowired
-    private RepositoryUserDetailsService userDetailsService;
+        @Autowired
+        private JwtTokenProvider jwtTokenProvider;
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+        @Autowired
+        private RepositoryUserDetailsService userDetailService;
 
-    @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(userDetailsService);
-        authProvider.setPasswordEncoder(passwordEncoder());
-        return authProvider;
-    }
+        @Autowired
+        private UnauthorizedHandlerJwt unauthorizedHandlerJwt;
 
-    @Bean
-    @Order(1)
-    public SecurityFilterChain apiFilterChain(HttpSecurity http) throws Exception {
+        @Autowired
+        private JwtRequestFilter jwtRequestFilter;
+
+        @Bean
+        public PasswordEncoder passwordEncoder() {
+                return new BCryptPasswordEncoder();
+        }
+
+        @Bean
+        public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+                return authConfig.getAuthenticationManager();
+        }
+
+        @Bean
+        public DaoAuthenticationProvider authenticationProvider() {
+                DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(userDetailService);
+                authProvider.setPasswordEncoder(passwordEncoder());
+                return authProvider;
+        }
+
+        @Bean
+        @Order(1)
+        public SecurityFilterChain apiFilterChain(HttpSecurity http) throws Exception {
 
         http.authenticationProvider(authenticationProvider());
 
         http
-                .securityMatcher("/api/**");
-                //.exceptionHandling(handling -> handling.authenticationEntryPoint(unauthorizedHandlerJwt));
+                .securityMatcher("/api/**")
+                .exceptionHandling(handling -> handling.authenticationEntryPoint(unauthorizedHandlerJwt));
 
         http
                 .authorizeHttpRequests(authorize -> authorize
@@ -88,25 +108,27 @@ public class WebSecurityConfig {
                         // PUBLIC ENDPOINTS
                         .anyRequest().permitAll());
 
-        // Disable Form login Authentication
-        http.formLogin(formLogin -> formLogin.disable());
+                // Disable Form login Authentication
+                http.formLogin(formLogin -> formLogin.disable());
 
-        // Disable CSRF protection (it is difficult to implement in REST APIs)
-        http.csrf(csrf -> csrf.disable());
+                // Disable CSRF protection (it is difficult to implement in REST APIs)
+                http.csrf(csrf -> csrf.disable());
 
-        // Enable Basic Authentication
-        http.httpBasic(Customizer.withDefaults()); //httpBasic -> httpBasic.disable()
+                // Enable Basic Authentication
+                http.httpBasic(httpBasic -> httpBasic.disable()); //  Customizer.withDefaults()
 
-        // Stateless session
-        http.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                // Stateless session
+                http.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
-        // Add JWT Token filter
-        /* 
-        http.addFilterBefore(new JwtRequestFilter(userDetailService, jwtTokenProvider),
-                UsernamePasswordAuthenticationFilter.class);
-        */
-        return http.build();
-    }
+                // Add JWT Token filter
+                /*
+                http.addFilterBefore(new JwtRequestFilter(userDetailService, jwtTokenProvider),
+                        UsernamePasswordAuthenticationFilter.class);
+                */
+                http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+                
+                return http.build();
+        }
 
     @Bean
     @Order(2)

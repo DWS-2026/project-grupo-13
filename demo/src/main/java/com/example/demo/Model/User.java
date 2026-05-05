@@ -92,6 +92,10 @@ public class User {
         this.dni = dni;
     }
 
+    public Document getDni() {
+        return dni;
+    }
+
     //For AdminUserDetails
     public boolean isAdmin() {
         return role != null && (role.equals("ADMIN") || role.equals("ROLE_ADMIN"));

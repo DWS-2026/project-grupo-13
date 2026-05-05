@@ -13,7 +13,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import jakarta.validation.constraints.Positive;
 import jakarta.persistence.Transient;
-import org.jsoup.Jsoup;
+
 
 
 import java.time.LocalDate;

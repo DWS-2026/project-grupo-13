@@ -89,7 +89,7 @@
         <section class="añadir-valoracion text-white">
                 <h2>Deja tu valoración</h2>
 
-                <form action="/producto/{{producto.id}}/review" method="POST" class="mt-4">
+                <form id="review-form" action="/producto/{{producto.id}}/review" method="POST" class="mt-4">
 
                     <input type="hidden" name="_csrf" value="{{token}}">
                     <input type="hidden" name="productId" value="{{producto.id}}">
@@ -175,31 +175,17 @@ window.addEventListener("load", function () {
         }
     });
 
-    const form = document.querySelector("form");
-    form.addEventListener("submit", function (e) {
-        // Copiar el contenido del editor al textarea oculto
+    const form = document.getElementById("review-form");
+
+    form.addEventListener("submit", function () {
         const contenidoHTML = quill.root.innerHTML.trim();
-        const textoPlano = quill.getText().trim();
-
-        console.log("Contenido enviado:", contenidoHTML);
-
-        if (textoPlano.length < 10) {
-            e.preventDefault();
-            alert("El comentario debe tener al menos 10 caracteres.");
-            return false;
-        }
-
-        // Si el contenido está vacío, evita enviar
-        if (textoPlano === "") {
-            e.preventDefault();
-            alert("El comentario no puede estar vacío.");
-            return false;
-        }
-
         document.getElementById("comentario-textarea").value = contenidoHTML;
     });
 });
 </script>
+
+
+
 
 
   </body>

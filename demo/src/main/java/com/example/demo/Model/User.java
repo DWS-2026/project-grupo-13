@@ -7,6 +7,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 
 // Necesaria para el tipo de dato de fecha
 import java.time.LocalDate; 
@@ -31,9 +32,11 @@ public class User {
 
     private String name;
     private String surname;
+    @Column(unique = true)
     private String email;
 
     // Username para Spring Security
+    @Column(unique = true)
     private String nickname;
 
     // Contraseña cifrada con BCrypt
@@ -61,7 +64,7 @@ public class User {
 
 
     
-    public long getId() { return id; }
+    public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
     public String getName() { return name; }

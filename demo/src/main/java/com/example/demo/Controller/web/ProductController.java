@@ -95,7 +95,7 @@ public class ProductController {
         Product p = productService.findById(id);
 
         if (p == null) {
-            return "redirect:/Login";
+            return "Error";
         }
 
         model.addAttribute("producto", p);

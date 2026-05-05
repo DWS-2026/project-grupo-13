@@ -32,7 +32,7 @@ public class ProductService {
 
    
     public Product findById(int id) {
-        return productRepository.findById(id).orElseThrow();
+        return productRepository.findById(id).orElse(null);
     }
 
     

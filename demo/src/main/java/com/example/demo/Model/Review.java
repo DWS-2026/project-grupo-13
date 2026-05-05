@@ -12,6 +12,9 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import jakarta.validation.constraints.Positive;
+import jakarta.persistence.Transient;
+
+
 
 import java.time.LocalDate;
 
@@ -28,8 +31,7 @@ public class Review {
     private int estrellas;
 
     @Column(columnDefinition = "MEDIUMTEXT")
-    @NotBlank(message = "El comentario no puede estar vacío")
-    @Size(min = 10, message = "El comentario debe tener al menos 10 caracteres")
+    
     private String comentario;
     private LocalDate fecha;
 
@@ -41,10 +43,12 @@ public class Review {
         this.fecha = LocalDate.now();
     }
 
+    
+
     public Review(String usuario, int estrellas, String comentario, LocalDate fecha, Product product) {
         this.usuario = usuario;
         this.estrellas = estrellas;
-        this.comentario = comentario;
+         this.setComentario(comentario);
         this.fecha = fecha;
         this.product = product;
     }
@@ -73,8 +77,12 @@ public class Review {
         return comentario;
     }
 
+    
+
     public void setComentario(String comentario) {
-        this.comentario = comentario;
+         this.comentario = comentario;
+
+       
     }
 
     public LocalDate getFecha() {

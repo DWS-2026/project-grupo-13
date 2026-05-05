@@ -75,4 +75,19 @@ public class OrderRestController {
         return ResponseEntity.created(location).body(orderDetailDTO);
     }
 
+    // delete an order
+    @DeleteMapping("/{id}")
+    public OrderDetailDTO deleteOrder(@PathVariable Long id) {
+
+        Order order = orderService.findById(id);
+
+        if (order == null) {
+            throw new NoSuchElementException("Order not found with id: " + id);
+        }
+
+        orderService.deleteById(id);
+
+        return orderDetailMapper.toDTO(order);
+    }
+
 }

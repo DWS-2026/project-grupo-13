@@ -1,6 +1,7 @@
 package com.example.demo.Controller.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.Model.Image;
 import com.example.demo.Model.User;
@@ -21,6 +23,21 @@ import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
+
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import com.example.demo.Model.Document;
+import com.example.demo.Service.DocumentService;
+import com.example.demo.Repository.DocumentRepository;
+
+
+import java.io.IOException;
+
 
 @Controller
 public class UserController {
@@ -36,6 +53,12 @@ public class UserController {
 
     @Autowired
     private RepositoryUserDetailsService userDetailsService;
+
+    @Autowired
+    private DocumentService documentService;
+
+    @Autowired
+    private DocumentRepository documentRepository;
 
     @PostMapping("/registro")
     public String procesarRegistro(@ModelAttribute User usuarioRegistrado) {
@@ -61,6 +84,38 @@ public class UserController {
         }
         return "redirect:/EditProfile";
     }
+
+    @PostMapping("/users/{id}/dni")
+    public String uploadUserDni(
+            @PathVariable long id,
+            @RequestParam("file") MultipartFile file,
+            RedirectAttributes redirectAttributes) {
+
+        try {
+            userService.addDniToUser(id, file);
+            redirectAttributes.addFlashAttribute("success", "DNI subido correctamente");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "Error al subir el DNI");
+        }
+
+        return "redirect:/EditProfile"; // o /users/{id} según tu ruta real
+    }
+
+    @GetMapping("/documents/{id}/file")
+    public ResponseEntity<Resource> downloadDni(@PathVariable long id) throws IOException {
+
+        Document doc = documentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Document not found"));
+
+        Resource file = documentService.loadFile(doc.getFilePath());
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_PDF)
+                .header(HttpHeaders.CONTENT_DISPOSITION,
+                        "inline; filename=\"" + doc.getOriginalName() + "\"")
+                .body(file);
+    }
+
 
     @GetMapping("/UserProfileView") 
     public String mostrarPerfil(Model model, Principal principal) {

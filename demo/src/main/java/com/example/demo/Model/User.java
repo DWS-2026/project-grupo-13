@@ -26,9 +26,6 @@ public class User {
     private Image profileImage;
     
     
-
-
-
     private String name;
     private String surname;
     private String email;
@@ -44,6 +41,9 @@ public class User {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Document dni;
 
     public User() {}
 
@@ -87,6 +87,10 @@ public class User {
 
     public Image getProfileImage() {return profileImage;}
     public void setProfileImage(Image profileImage) {this.profileImage = profileImage;}
+
+    public void setDni(Document dni) {
+        this.dni = dni;
+    }
 
     //For AdminUserDetails
     public boolean isAdmin() {

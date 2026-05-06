@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.Model.Review;
 import com.example.demo.Service.ProductService;
 import com.example.demo.Service.ReviewService;
-
+import com.example.demo.Model.Product;
+import org.springframework.ui.Model;
+import com.example.demo.Security.SecurityUtils;
 
 @Controller
 public class ReviewController {
@@ -27,11 +29,23 @@ public class ReviewController {
         @RequestParam int estrellas,
         @RequestParam String comentario,
         @RequestParam Long productId,
-        Principal principal) {
+        Principal principal, Model model) {
 
     if (principal == null) {
         return "redirect:/Login";
     }
+
+    Product product = productService.findById(productId.intValue());
+    if (product == null){
+        return "Error";
+    }
+
+    if (estrellas < 1 || estrellas >5){
+        model.addAttribute("errorEstrellas", true);
+        return "redirect:/producto/" + productId;
+    }
+
+    String comentarioSaneado = SecurityUtils.sanitize(comentario);
 
     Review review = new Review();
     review.setEstrellas(estrellas);

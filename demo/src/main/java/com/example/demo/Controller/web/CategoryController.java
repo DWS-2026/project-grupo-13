@@ -12,7 +12,6 @@ import com.example.demo.Model.Image;
 import com.example.demo.Service.CategoryService;
 import com.example.demo.Service.ImageService;
 
-
 @Controller
 @RequestMapping("/admin/categorias")
 public class CategoryController {
@@ -40,18 +39,48 @@ public class CategoryController {
     @PostMapping("/guardar")
     public String guardarCategoria(
             @RequestParam("name") String name,
-            @RequestParam("image") MultipartFile imageFile) throws IOException {
+            @RequestParam("image") MultipartFile imageFile,
+            Model model) throws IOException {
+
+        // 1) Validar nombre vacío
+        if (name == null || name.isBlank()) {
+            model.addAttribute("errorNombreVacio", true);
+            model.addAttribute("categoria", new Category(name));
+            return "admin/nueva-categoria";
+        }
+
+        // 2) Comprobar duplicado por nombre (case-insensitive si quieres)
+        Category existente = categoryService.findByName(name);
+        if (existente != null) {
+            model.addAttribute("errorDuplicado", true);
+            model.addAttribute("nombreFallido", name);
+            model.addAttribute("categoria", new Category(name));
+            return "admin/nueva-categoria";
+        }
 
         Category categoria = new Category();
-        categoria.setName(name);
+        categoria.setName(name); // si quieres, aquí podrías sanitizar
 
+        // 3) Validar imagen (tipo y tamaño) antes de guardar
         if (!imageFile.isEmpty()) {
+            String contentType = imageFile.getContentType();
+            if (contentType == null || !contentType.startsWith("image/")) {
+                model.addAttribute("errorImagenTipo", true);
+                model.addAttribute("categoria", categoria);
+                return "admin/nueva-categoria";
+            }
+
+            if (imageFile.getSize() > 2_000_000) { // 2 MB
+                model.addAttribute("errorImagenTamano", true);
+                model.addAttribute("categoria", categoria);
+                return "admin/nueva-categoria";
+            }
+
             Image img = imageService.createImage(imageFile);
             categoria.setImage(img);
         }
 
         categoryService.save(categoria);
-
         return "redirect:/admin/categorias";
     }
 }

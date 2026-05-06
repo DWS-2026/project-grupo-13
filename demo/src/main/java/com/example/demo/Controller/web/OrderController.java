@@ -33,7 +33,14 @@ public class OrderController {
     public String misPedidos(Authentication auth, Model model) {
 
         String nickname = auth.getName();
+         
         User user = userService.findByNickname(nickname);
+        if (user == null) {
+            return "redirect:/Login";
+        }
+
+        
+        
 
         List<Order> pedidos = orderService.findByUser(user);
 
@@ -62,13 +69,19 @@ public class OrderController {
 
         Order pedido = orderService.findById(id);
 
+        if(auth == null){
+            return "redirect:/Login";
+        }
+
         if (pedido == null) {
             return "redirect:/mis-pedidos";
         }
 
         String nickname = auth.getName();
-        if (!pedido.getUser().getNickname().equals(nickname)) {
-            return "redirect:/mis-pedidos";
+        User user = userService.findByNickname(nickname);
+
+        if (pedido == null || !pedido.getUser().getId().equals(user.getId())) {
+        return "redirect:/mis-pedidos";
         }
 
         double total = pedido.getItems().stream()

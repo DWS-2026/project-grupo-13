@@ -26,6 +26,13 @@ public class ReviewService {
     private ProductRepository productRepository;
 
     public void save(Review review) {
+        if(review.getEstrellas() < 1 || review.getEstrellas() > 5){
+            throw new IllegalArgumentException("Rating fuera de rango");
+        }
+
+        if (review.getComentario() != null && review.getComentario().length() > 5000) {
+            throw new IllegalArgumentException("Comentario demasiado largo");
+        }
         reviewRepository.save(review);
     }
 

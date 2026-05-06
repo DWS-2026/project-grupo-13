@@ -111,4 +111,21 @@ public class ProductRestController {
         }
 
     }
+
+
+    //the product is created but the category is set to null
+    /*
+        {
+    "id": 11,
+    "nombre": "Prueba",
+    "precio": 100,
+    "descripcion": "prueba prueba",
+    "category":{
+        "name": "Smartphones"
+    },
+    "image": null,
+    "reviews": null
+}
+    
+    */
 }

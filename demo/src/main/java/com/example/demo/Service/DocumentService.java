@@ -1,16 +1,10 @@
 package com.example.demo.Service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.example.demo.Repository.DocumentRepository;
-import com.example.demo.Model.Document;
-
-import java.util.List;
+import org.springframework.util.StringUtils;
 
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
-import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -18,7 +12,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-
 
 @Service
 public class DocumentService {
@@ -30,14 +23,29 @@ public class DocumentService {
     }
 
     public String saveFile(MultipartFile file, Long documentId) throws IOException {
+        if (file.isEmpty()) {
+            throw new IOException("El archivo no puede estar vacío");
+        }
 
-        String originalName = file.getOriginalFilename();
-        String extension = originalName.substring(originalName.lastIndexOf("."));
+        // 1. Limpieza de la ruta para evitar ataques de Path Traversal
+        String originalName = StringUtils.cleanPath(file.getOriginalFilename());
+
+        if (originalName.contains("..")) {
+            throw new IOException("Nombre de archivo no válido");
+        }
+
+        // 2. Obtención de la extensión de manera segura
+        String extension = "";
+        if (originalName.contains(".")) {
+            extension = originalName.substring(originalName.lastIndexOf("."));
+        } else {
+            extension = ".bin"; 
+        }
 
         String storedName = "manual_" + documentId + extension;
-
         Path destination = root.resolve(storedName);
 
+        // 3. Copia del archivo asegurando que no se sobrescriban otros directorios
         Files.copy(file.getInputStream(), destination, StandardCopyOption.REPLACE_EXISTING);
 
         return destination.toString();
@@ -45,7 +53,12 @@ public class DocumentService {
 
     public Resource loadFile(String path) throws IOException {
         Path file = Paths.get(path);
-        return new UrlResource(file.toUri());
+        Resource resource = new UrlResource(file.toUri());
+
+        if (resource.exists() || resource.isReadable()) {
+            return resource;
+        } else {
+            throw new IOException("No se pudo leer el archivo: " + path);
+        }
     }
 }
-

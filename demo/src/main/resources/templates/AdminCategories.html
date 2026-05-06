@@ -41,7 +41,30 @@
                         {{/error}}
 
                         <form action="/admin/categorias/guardar" method="post" enctype="multipart/form-data">
-                            
+                            {{#errorDuplicado}}
+                            <div class="alert alert-danger">
+                                Ya existe una categoría llamada "{{nombreFallido}}".
+                            </div>
+                            {{/errorDuplicado}}
+
+                            {{#errorNombreVacio}}
+                            <div class="alert alert-danger">
+                                El nombre de la categoría no puede estar vacío.
+                            </div>
+                            {{/errorNombreVacio}}
+
+                            {{#errorImagenTipo}}
+                            <div class="alert alert-danger">
+                                El archivo subido no es una imagen válida.
+                            </div>
+                            {{/errorImagenTipo}}
+
+                            {{#errorImagenTamano}}
+                            <div class="alert alert-danger">
+                                La imagen es demasiado grande (máx. 2MB).
+                            </div>
+                            {{/errorImagenTamano}}
+
                             <div class="mb-3">
                                 <label class="form-label">Nombre de categoría</label>
                                 <input type="text" name="name" class="form-control" placeholder="Ej: Consolas" required>

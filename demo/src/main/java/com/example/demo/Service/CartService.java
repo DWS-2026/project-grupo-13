@@ -22,9 +22,10 @@ public class CartService {
         getCartItems(nickname).add(item);
     }
 
-    public void removeItem(String nickname, String nombre) {
-        getCartItems(nickname).removeIf(i -> i.getNombre().equalsIgnoreCase(nombre));
+    public void removeItem(String nickname, int productId) {
+    getCartItems(nickname).removeIf(i -> i.getProductId() == productId);
     }
+
 
     public void clearCart(String nickname) {
         getCartItems(nickname).clear();

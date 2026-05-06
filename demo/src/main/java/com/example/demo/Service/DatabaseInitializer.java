@@ -252,7 +252,7 @@ public class DatabaseInitializer {
         LocalDate.of(1992, 11, 3)
         );
         userService.save(u2); 
-
+        /* 
         User u3 = new User (
             "user",
             "user",
@@ -274,7 +274,7 @@ public class DatabaseInitializer {
             LocalDate.of(2000, 6, 12)
         );
         userService.save(u4);
-
+        */
         //Reviews for products
 
         Review r1 = new Review (
@@ -323,7 +323,7 @@ public class DatabaseInitializer {
 
             // Pedido 2: El usuario "user" compra 3 unidades de la GTX 1650
             Order o2 = new Order();
-            o2.setUser(u3); // user
+            o2.setUser(u1); // user
             o2.setFecha(LocalDateTime.now().minusDays(1)); // Ayer
 
             OrderItem item3 = new OrderItem();

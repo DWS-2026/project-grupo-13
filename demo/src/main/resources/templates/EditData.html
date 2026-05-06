@@ -40,7 +40,11 @@
                     <form action="/EditData" method="post">
 
                         <input type="hidden" name="_csrf" value="{{token}}">
-
+                        {{#errorNicknameDuplicado}}
+                        <div class="alert alert-danger">
+                            El nickname "{{nicknameFallido}}" ya está en uso.
+                        </div>
+                        {{/errorNicknameDuplicado}}
                         <div class="mb-3">
                             <label for="inputNick" class="form-label">Nick de usuario</label>
                             <input type="text" class="form-control" id="inputNick" name="nickname" value="{{usuario.nickname}}" required>
@@ -55,7 +59,11 @@
                             <label for="inputApellido" class="form-label">Apellido</label>
                             <input type="text" class="form-control" id="inputApellido" name="surname" value="{{usuario.surname}}">
                         </div>
-
+                        {{#errorEmailDuplicado}}
+                        <div class="alert alert-danger">
+                            El email "{{emailFallido}}" ya está en uso.
+                        </div>
+                        {{/errorEmailDuplicado}}
                         <div class="mb-3">
                             <label for="inputEmail" class="form-label">Email</label>
                             <input type="email" class="form-control" id="inputEmail" name="email" value="{{usuario.email}}">

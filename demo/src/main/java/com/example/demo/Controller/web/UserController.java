@@ -134,13 +134,25 @@ public class UserController {
     @PostMapping("/EditData")
     public String editarDatos(@RequestParam String nickname, @RequestParam String name, @RequestParam String surname,
                               @RequestParam String email, @RequestParam(required = false) String password,
-                              @RequestParam String birthDate, Principal principal) {
+                              @RequestParam String birthDate, Principal principal, Model model) {
         User usuario = userService.findByNickname(principal.getName());
-        usuario.setNickname(nickname);
+        //usuario.setNickname(nickname);
         usuario.setName(name);
         usuario.setSurname(surname);
         usuario.setEmail(email);
         usuario.setBirthDate(LocalDate.parse(birthDate));
+
+        
+        User otro = userService.findByEmail(email);
+
+        if (otro != null && !(otro.getId().equals(usuario.getId()))) {
+            model.addAttribute("errorEmailDuplicado", true);
+            model.addAttribute("emailFallido", email);
+            model.addAttribute("usuario", usuario);
+            return "EditData";
+        }
+
+
 
         if (password != null && !password.isBlank()) {
             usuario.setEncodedPassword(passwordEncoder.encode(password));

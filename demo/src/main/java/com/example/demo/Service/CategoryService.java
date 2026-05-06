@@ -27,8 +27,9 @@ public class CategoryService {
     }
 
     public Category findById(Long id) {
-        return categoryRepository.findById(id).orElseThrow();
+    return categoryRepository.findById(id).orElse(null);
     }
+
 
     public Category findByName(String name) {
         return categoryRepository.findByName(name);

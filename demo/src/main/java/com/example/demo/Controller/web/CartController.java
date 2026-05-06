@@ -64,6 +64,10 @@ public class CartController {
     @PostMapping("/agregar-carrito")
     public String agregarCarrito(@RequestParam("productId") int productId, Authentication auth) {
 
+        if (!productService.existsById(productId)) {
+            return "Error"; 
+        }
+
         Product p = productService.findById(productId);
 
         CartItem item = new CartItem(
@@ -74,6 +78,8 @@ public class CartController {
             1
         );
 
+        
+
         cartService.addItem(auth.getName(), item);
 
         return "redirect:/ShoppingCart";
@@ -82,12 +88,11 @@ public class CartController {
 
 
     @PostMapping("/eliminar-producto")
-    public String eliminarProducto(@RequestParam("nombre") String nombre, Authentication auth) {
+        public String eliminarProducto(@RequestParam("productId") int productId, Authentication auth) {
+            cartService.removeItem(auth.getName(), productId);
+            return "redirect:/ShoppingCart";
+        }
 
-        cartService.removeItem(auth.getName(), nombre);
-
-        return "redirect:/ShoppingCart";
-    }
 
 
     @GetMapping("/api/carrito")
@@ -113,13 +118,17 @@ public class CartController {
 
         for (CartItem c : carrito) {
 
+            if (c.getCantidad()< 1 || c.getCantidad() > 10) {
+                return "Error";
+            }
+
             Product p = productService.findById(c.getProductId());
 
             OrderItem item = new OrderItem();
             item.setOrder(order);
             item.setProduct(p);
             item.setCantidad(c.getCantidad());
-            item.setPrecio(c.getPrecio());
+            item.setPrecio(p.getPrecio());
 
             items.add(item);
         }

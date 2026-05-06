@@ -31,7 +31,7 @@ public class Review {
     private int estrellas;
 
     @Column(columnDefinition = "MEDIUMTEXT")
-    
+    @Size (max = 5000)
     private String comentario;
     private LocalDate fecha;
 

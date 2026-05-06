@@ -10,6 +10,10 @@ import com.example.demo.Repository.ProductRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 
+
+import org.owasp.html.PolicyFactory;
+import org.owasp.html.Sanitizers;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -22,6 +26,13 @@ public class ReviewService {
     private ProductRepository productRepository;
 
     public void save(Review review) {
+        if(review.getEstrellas() < 1 || review.getEstrellas() > 5){
+            throw new IllegalArgumentException("Rating fuera de rango");
+        }
+
+        if (review.getComentario() != null && review.getComentario().length() > 5000) {
+            throw new IllegalArgumentException("Comentario demasiado largo");
+        }
         reviewRepository.save(review);
     }
 
@@ -47,15 +58,16 @@ public class ReviewService {
     return reviewRepository.save(review);
     }
 
+   
 
     public Review updateReview(long reviewId, Review newData) {
-
         Review review = reviewRepository.findById(reviewId)
                 .orElseThrow(() -> new EntityNotFoundException("Review not found"));
 
         review.setUsuario(newData.getUsuario());
         review.setEstrellas(newData.getEstrellas());
-        review.setComentario(newData.getComentario());
+
+        
 
         return reviewRepository.save(review);
     }
@@ -63,5 +75,7 @@ public class ReviewService {
     public void deleteReview(long reviewId) {
         reviewRepository.deleteById(reviewId);
     }
+
+    
 }
 

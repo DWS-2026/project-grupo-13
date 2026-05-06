@@ -44,7 +44,7 @@
           <h5 class="card-title mb-1 text-white">{{nombre}}</h5>
 
           <form action="/eliminar-producto" method="post" class="mt-2">
-            <input type="hidden" name="nombre" value="{{nombre}}">
+            <input type="hidden" name="productId" value="{{productId}}">
             <input type="hidden" name="_csrf" value="{{token}}">
             <button class="btn btn-link text-danger p-0 small text-decoration-none">Eliminar</button>
           </form>

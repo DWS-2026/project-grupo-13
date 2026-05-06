@@ -7,6 +7,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 
 // Necesaria para el tipo de dato de fecha
 import java.time.LocalDate; 
@@ -26,14 +27,13 @@ public class User {
     private Image profileImage;
     
     
-
-
-
     private String name;
     private String surname;
+    @Column(unique = true)
     private String email;
 
     // Username para Spring Security
+    @Column(unique = true)
     private String nickname;
 
     // Contraseña cifrada con BCrypt
@@ -44,6 +44,9 @@ public class User {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Document dni;
 
     public User() {}
 
@@ -61,7 +64,7 @@ public class User {
 
 
     
-    public long getId() { return id; }
+    public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
     public String getName() { return name; }
@@ -87,6 +90,14 @@ public class User {
 
     public Image getProfileImage() {return profileImage;}
     public void setProfileImage(Image profileImage) {this.profileImage = profileImage;}
+
+    public void setDni(Document dni) {
+        this.dni = dni;
+    }
+
+    public Document getDni() {
+        return dni;
+    }
 
     //For AdminUserDetails
     public boolean isAdmin() {

@@ -4,11 +4,13 @@ import java.io.IOException;
 import java.net.URI;
 import java.sql.SQLException;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.MediaTypeFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.Model.User;
 import com.example.demo.dto.ImageDTO;
 import com.example.demo.dto.ImageMapper;
 import com.example.demo.Model.Image;
@@ -30,6 +33,7 @@ import com.example.demo.Service.ProductService;
 
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("api/images")
@@ -129,6 +133,7 @@ public class ImageRestController {
 
         return ResponseEntity.created(location).body(imageMapper.toDTO(image));
     }
+
     @PutMapping("/users/{id}/image")
     public ResponseEntity<Void> replaceUserImage(
             @PathVariable long id,
@@ -143,18 +148,25 @@ public class ImageRestController {
     }
 
     @DeleteMapping("/users/{userId}/image/{imageId}")
-    public ImageDTO deleteUserImage(
+    public ResponseEntity<ImageDTO> deleteUserImage(
             @PathVariable long userId,
             @PathVariable long imageId) {
+
+        // Obtener el usuario autenticado en sesión
+        User loggedUser = getLoggedUser(); 
+
+        // Comprobación de seguridad para evitar IDOR
+        if (loggedUser.getId() != userId && !loggedUser.getRole().equals("ADMIN")) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build(); // 403 Forbidden
+        }
 
         Image image = imageService.getImage(imageId);
 
         userService.removeImageFromUser(userId);
         imageService.deleteImage(imageId);
 
-        return imageMapper.toDTO(image);
+        return ResponseEntity.ok(imageMapper.toDTO(image));
     }
-
 
 
     //Methods for category images
@@ -190,4 +202,9 @@ public class ImageRestController {
         return imageMapper.toDTO(image);
     }
 
+    // Método de soporte para obtener el usuario logueado en la sesión
+    private User getLoggedUser() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userService.findByNickname(username); 
+    }
 }

@@ -130,6 +130,41 @@
         </div>
     </div>
 
+    <div class="col-md-6 col-lg-4">
+    <div class="card h-100 account-card">
+        <div class="card-body">
+            <h5 class="card-title">Documento de identidad</h5>
+
+            {{#usuario.dni}}
+                <p class="card-text">
+                    <strong>DNI subido:</strong><br>
+                    <a href="/documents/{{usuario.dni.id}}/file" class="btn btn-outline-light btn-sm mt-2">
+                        Descargar DNI
+                    </a>
+                </p>
+            {{/usuario.dni}}
+
+            {{^usuario.dni}}
+                <p class="card-text">Todavía no has subido tu DNI.</p>
+            {{/usuario.dni}}
+
+            <form action="/users/{{usuario.id}}/dni" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="_csrf" value="{{token}}" />
+
+                <div class="mb-3">
+                    <label class="form-label">Subir DNI (PDF)</label>
+                    <input type="file" class="form-control" name="file" accept="application/pdf" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">
+                    Subir / Reemplazar DNI
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 </div>
 
 

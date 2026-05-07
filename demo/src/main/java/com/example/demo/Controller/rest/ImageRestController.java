@@ -29,6 +29,7 @@ import com.example.demo.Service.CategoryService;
 import com.example.demo.Service.UserService;
 import com.example.demo.Service.ImageService;
 import com.example.demo.Service.ProductService;
+import com.example.demo.Model.Category;
 
 
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -201,8 +202,38 @@ public class ImageRestController {
 
         return imageMapper.toDTO(image);
     }
+    @PutMapping("/categories/{categoryId}/images/{imageId}")
+    public ResponseEntity<ImageDTO> updateCategoryImage(
+            @PathVariable long categoryId,
+            @PathVariable long imageId,
+            @RequestParam MultipartFile imageFile) throws IOException {
 
-    // Método de soporte para obtener el usuario logueado en la sesión
+        if (imageFile.isEmpty()) {
+            throw new IllegalArgumentException("The file cannot be empty");
+        }
+
+        
+        Category category = categoryService.findById(categoryId);
+        if (category == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        
+        Image existingImage = imageService.getImage(imageId);
+        if (existingImage == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        
+        Image updatedImage = imageService.replaceImage(imageId, imageFile.getBytes());
+
+        
+        categoryService.addImageToCategory(categoryId, updatedImage);
+
+        return ResponseEntity.ok(imageMapper.toDTO(updatedImage));
+    }
+
+    
     private User getLoggedUser() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         return userService.findByNickname(username); 

@@ -454,17 +454,17 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 
 ---
 
-#### **Alumno 3 - [Nombre Completo]**
+#### **Alumno 3 - [Eduardo Soria Escobar]**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+[Desarrollo del sistema de reseñas con control de autoría, protección contra ataques IDOR, integración de editor Quill ]
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [ImageRestController.java](URL_commit_1)  | [Archivo1](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/java/com/example/demo/Controller/rest/ImageRestController.java)   |
+|2| [Review.java](URL_commit_2)  | [Archivo2](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/java/com/example/demo/Model/Review.java)   |
+|3| [ProductController.java](URL_commit_3)  | [Archivo3](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/java/com/example/demo/Controller/web/ProductController.java)   |
+|4| [CategoryService.java](URL_commit_4)  | [Archivo4](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/java/com/example/demo/Service/CategoryService.java)   |
+|5| [ReviewService.java](URL_commit_5)  | [Archivo5](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/java/com/example/demo/Service/ReviewService.java)   |
 
 ---
 

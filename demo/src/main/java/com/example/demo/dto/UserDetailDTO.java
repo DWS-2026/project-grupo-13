@@ -10,6 +10,7 @@ public record UserDetailDTO (
     String email,
     String nickname,
     String role,
-    LocalDate birthDate
+    LocalDate birthDate,
+    DocumentDTO dni
 
 ) {}

@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -105,13 +108,27 @@ public class UserService {
     }
 
     //for the file
-    public void addDniToUser(long userId, MultipartFile file) throws IOException {
+    public ResponseEntity<?> addDniToUser(long userId, MultipartFile file) throws IOException {
+         
+        String nickname = SecurityContextHolder.getContext().getAuthentication().getName();
+        User authenticatedUser = userRepository.findByNickname(nickname);
 
-        User user = userRepository.findById(userId).orElseThrow();
+        
+        if (authenticatedUser == null || authenticatedUser.getId() != userId) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
 
-        Document doc = new Document();
+        
+        User user = authenticatedUser;
+
+        
+        Document doc = user.getDni();
+        if (doc == null) {
+            doc = new Document();
+            doc.setUser(user);
+        }
+
         doc.setOriginalName(file.getOriginalFilename());
-        doc.setUser(user);
 
         Document saved = documentRepository.save(doc);
 
@@ -122,6 +139,8 @@ public class UserService {
 
         user.setDni(saved);
         userRepository.save(user);
+
+        return ResponseEntity.ok().build();
     }
 
 }

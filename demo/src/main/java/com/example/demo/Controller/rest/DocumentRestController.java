@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,7 @@ import com.example.demo.dto.DocumentMapper;
 import com.example.demo.Repository.DocumentRepository;
 import com.example.demo.Repository.UserRepository;
 import com.example.demo.Service.DocumentService;
+import com.example.demo.Service.UserService;
 
 import com.example.demo.Model.User;
 import com.example.demo.Model.Document;
@@ -51,56 +53,28 @@ public class DocumentRestController {
     @Autowired
     private DocumentMapper documentMapper;
 
+    @Autowired
+    private UserService userService;
+
 
     //this method extracts the nickname used to login from the contextHolder and checks if the 
     //item trying to be modified is asociated with the logged user
     @PostMapping("/users/{id}/dni")
-    public ResponseEntity<DocumentDTO> uploadUserDni(
+    public ResponseEntity<?> uploadUserDni(
             @PathVariable long id,
-            @RequestParam("file") MultipartFile file) throws IOException {
+            @RequestParam("file") MultipartFile file,
+            RedirectAttributes redirectAttributes) throws IOException {
 
-        /*
-        if (file.isEmpty()) {
-            return ResponseEntity.badRequest().build();
+        try {
+            ResponseEntity<?> response = userService.addDniToUser(id, file);
+            redirectAttributes.addFlashAttribute("success", "DNI subido correctamente");
+            return response; // ← usa la respuesta del service directamente
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "Error al subir el DNI");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        */
-
-        // 1. Obtener usuario autenticado
-        String nickname = SecurityContextHolder.getContext().getAuthentication().getName();
-        User authenticatedUser = userRepository.findByNickname(nickname);
-
-        // 2. Comprobar propiedad del recurso
-        if (authenticatedUser.getId() != id) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
-
-        // 3. Lógica normal
-        User user = authenticatedUser;
-
-        // Si ya tiene DNI, lo reemplazamos
-        Document doc = user.getDni();
-        if (doc == null) {
-            doc = new Document();
-            doc.setUser(user);
-        }
-        
-        doc.setOriginalName(file.getOriginalFilename());
-        Document saved = documentRepository.save(doc);
-
-        String path = documentService.saveFile(file, saved.getId());
-        saved.setFilePath(path);
-
-        documentRepository.save(saved);
-
-        user.setDni(saved);
-        userRepository.save(user);
-
-        return ResponseEntity.ok(documentMapper.toDTO(saved));
     }
+
 
     @GetMapping("/{id}/file")
     public ResponseEntity<Resource> downloadDni(@PathVariable long id) throws IOException {

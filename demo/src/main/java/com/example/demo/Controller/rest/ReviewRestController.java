@@ -2,11 +2,14 @@ package com.example.demo.Controller.rest;
 
 import java.net.URI;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -28,11 +31,16 @@ import com.example.demo.dto.ProductDetailMapper;
 
 import com.example.demo.dto.ReviewDetailDTO;
 import com.example.demo.dto.ReviewDetailMapper;
-import com.example.demo.Service.ReviewService;
 
+import jakarta.persistence.EntityNotFoundException;
+
+import com.example.demo.Service.ReviewService;
+import com.example.demo.Model.User;
 import com.example.demo.Model.Product;
 import com.example.demo.Model.Review;
 import com.example.demo.Repository.ReviewRepository;
+import com.example.demo.Repository.ProductRepository;
+import com.example.demo.Repository.UserRepository;
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
@@ -51,6 +59,12 @@ public class ReviewRestController {
     @Autowired
     private ReviewRepository reviewRepository;
 
+    @Autowired
+    private ProductRepository productRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
     //show all reviews in the DB
     @GetMapping("/")
     public Page<ReviewDetailDTO> getReviews(Pageable pageable) {
@@ -64,19 +78,27 @@ public class ReviewRestController {
     }
 
     @PostMapping("/products/{productId}/reviews")
-    public ResponseEntity<Review> createReview(
-            @PathVariable int productId,   // usa int, no long
-            @RequestBody Review review) {
+    @Transactional
+    public Review createReview( @PathVariable int productId,
+        @RequestBody Review review) {
 
-        Review saved = reviewService.createReview(productId, review);
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new EntityNotFoundException("Product not found"));
 
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(saved.getId())
-                .toUri();
+        String nickname = SecurityContextHolder.getContext().getAuthentication().getName();
+        User authenticatedUser = userRepository.findByNickname(nickname);
 
-        return ResponseEntity.created(location).body(saved);
+        if (authenticatedUser == null) {
+            review.setUsuario("anonimo");
+        } else {
+            review.setUsuario(authenticatedUser.getNickname());
+            review.setUser(authenticatedUser);
+        }
+
+        review.setFecha(LocalDate.now());
+        review.setProduct(product);
+
+        return reviewRepository.save(review);
     }
 
     @PutMapping("/reviews/{reviewId}")
@@ -88,11 +110,9 @@ public class ReviewRestController {
         return ResponseEntity.ok(updated);
     }
 
-    @DeleteMapping("/reviews/{reviewId}")
-    public ResponseEntity<Void> deleteReview(@PathVariable long reviewId) {
-
-        reviewService.deleteReview(reviewId);
-        return ResponseEntity.noContent().build();
+    @DeleteMapping("/reviews/{id}")
+    public ResponseEntity<?> deleteReview(@PathVariable int id) {
+        return reviewService.deleteReview(id);
     }
 
 }

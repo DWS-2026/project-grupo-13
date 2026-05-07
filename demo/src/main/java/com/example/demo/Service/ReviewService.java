@@ -1,12 +1,17 @@
 package com.example.demo.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Model.Product;
 import com.example.demo.Model.Review;
+import com.example.demo.Model.User;
 import com.example.demo.Repository.ReviewRepository;
 import com.example.demo.Repository.ProductRepository;
+import com.example.demo.Repository.UserRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -20,6 +25,8 @@ public class ReviewService {
     private ReviewRepository reviewRepository;
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     public void save(Review review) {
         if(review.getEstrellas() < 1 || review.getEstrellas() > 5){
@@ -63,8 +70,26 @@ public class ReviewService {
         return reviewRepository.save(review);
     }
 
-    public void deleteReview(long reviewId) {
-        reviewRepository.deleteById(reviewId);
+    public ResponseEntity<?> deleteReview(long reviewId) {
+
+        String nickname = SecurityContextHolder.getContext().getAuthentication().getName();
+        User authenticatedUser = userRepository.findByNickname(nickname);
+
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new RuntimeException("Review no encontrada"));
+
+        if (review.getUser() == null) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("La review no tiene usuario asignado");
+        }
+
+        if (review.getUser().getId() != authenticatedUser.getId()) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                    .body("No puedes borrar una review que no es tuya");
+        }
+
+        reviewRepository.delete(review);
+        return ResponseEntity.ok("Review eliminada correctamente");
     }
     
     public void deleteById(Long id) {

@@ -101,20 +101,31 @@ public class ProductController {
 
 
     @GetMapping("/producto/{id}")
-    public String verProducto(@PathVariable int id, Model model) {
-
-        Product p = productService.findById(id);
-
-        if (p == null) {
-            return "Error";
-        }
-
-        model.addAttribute("producto", p);
-        model.addAttribute("valoraciones", reviewService.findByProductId(id));
-        model.addAttribute("nuevaReview", new Review());
-
-        return "Product"; 
+public String verProducto(@PathVariable int id, Model model) {
+    Product p = productService.findById(id);
+    if (p == null) {
+        return "Error";
     }
+
+    // Obtenemos el usuario actual logueado
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    String currentUsername = auth.getName();
+
+    List<Review> valoraciones = reviewService.findByProductId(id);
+
+    // Lógica de seguridad: Marcamos cuáles puede borrar el usuario
+    for (Review r : valoraciones) {
+        if (currentUsername != null && currentUsername.equals(r.getUsuario())) {
+            r.setCanDelete(true);
+        }
+    }
+
+    model.addAttribute("producto", p);
+    model.addAttribute("valoraciones", valoraciones);
+    model.addAttribute("nuevaReview", new Review());
+
+    return "Product"; 
+}
 
     @GetMapping("/PromotionsScreen")
     public String verPromociones(Model model) {

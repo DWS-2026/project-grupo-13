@@ -1,23 +1,8 @@
 package com.example.demo.Model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-
-import jakarta.validation.constraints.NotBlank;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
-import jakarta.validation.constraints.Positive;
-import jakarta.persistence.Transient;
-
-
-
 import java.time.LocalDate;
-
 
 @Entity
 @Table(name = "REVIEWS")
@@ -36,23 +21,28 @@ public class Review {
     private LocalDate fecha;
 
     @ManyToOne
+    private User user;
+
+    @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+
+    @Transient // Este campo no se guarda en la DB, solo sirve para Mustache
+    private boolean canDelete;
 
     public Review() {
         this.fecha = LocalDate.now();
     }
 
-    
-
     public Review(String usuario, int estrellas, String comentario, LocalDate fecha, Product product) {
         this.usuario = usuario;
         this.estrellas = estrellas;
-         this.setComentario(comentario);
+        this.setComentario(comentario);
         this.fecha = fecha;
         this.product = product;
     }
 
+    // Getters y Setters necesarios para el funcionamiento
     public Long getId() {
         return id;
     }
@@ -76,28 +66,14 @@ public class Review {
     public String getComentario() {
         return comentario;
     }
+    public void setComentario(String comentario) { this.comentario = comentario; }
+    public LocalDate getFecha() { return fecha; }
+    public void setFecha(LocalDate fecha) { this.fecha = fecha; }
+    public Product getProduct() { return product; }
+    public void setProduct(Product product) { this.product = product; }
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
 
-    
-
-    public void setComentario(String comentario) {
-         this.comentario = comentario;
-
-       
-    }
-
-    public LocalDate getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(LocalDate fecha) {
-        this.fecha = fecha;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
+    public boolean isCanDelete() { return canDelete; }
+    public void setCanDelete(boolean canDelete) { this.canDelete = canDelete; }
 }

@@ -124,10 +124,6 @@ public class WebSecurityConfig {
                 http.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
                 // Add JWT Token filter
-                /*
-                http.addFilterBefore(new JwtRequestFilter(userDetailService, jwtTokenProvider),
-                        UsernamePasswordAuthenticationFilter.class);
-                */
                 http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
                 
                 return http.build();
@@ -163,6 +159,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/agregar-carrito/**").hasAnyRole("USER", "ADMIN")
 
                         .requestMatchers("/reviews/add").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/review/eliminar/**").hasAnyRole("USER", "ADMIN")
 
                         .requestMatchers("/Admin/**").hasRole("ADMIN")
                         .requestMatchers("/AdminProduct/**").hasRole("ADMIN")
@@ -174,9 +171,9 @@ public class WebSecurityConfig {
                         .requestMatchers("/user/profile/upload").authenticated()
 
                         // OpenAPI
-			.requestMatchers("/v3/api-docs*/**").permitAll()
-			.requestMatchers("/swagger-ui.html").permitAll()
-			.requestMatchers("/swagger-ui/**").permitAll()
+                        .requestMatchers("/v3/api-docs*/**").permitAll()
+                        .requestMatchers("/swagger-ui.html").permitAll()
+                        .requestMatchers("/swagger-ui/**").permitAll()
 
                         .anyRequest().authenticated()
 

@@ -10,10 +10,6 @@ import com.example.demo.Repository.ProductRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 
-
-import org.owasp.html.PolicyFactory;
-import org.owasp.html.Sanitizers;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -48,17 +44,14 @@ public class ReviewService {
         return reviewRepository.findById(id).orElseThrow();
     }
 
-
     public Review createReview(int productId, Review review) {
-    Product product = productRepository.findById(productId)
-            .orElseThrow(() -> new EntityNotFoundException("Product not found"));
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new EntityNotFoundException("Product not found"));
 
-    review.setProduct(product);
-    review.setFecha(LocalDate.now());
-    return reviewRepository.save(review);
+        review.setProduct(product);
+        review.setFecha(LocalDate.now());
+        return reviewRepository.save(review);
     }
-
-   
 
     public Review updateReview(long reviewId, Review newData) {
         Review review = reviewRepository.findById(reviewId)
@@ -67,15 +60,14 @@ public class ReviewService {
         review.setUsuario(newData.getUsuario());
         review.setEstrellas(newData.getEstrellas());
 
-        
-
         return reviewRepository.save(review);
     }
 
     public void deleteReview(long reviewId) {
         reviewRepository.deleteById(reviewId);
     }
-
     
+    public void deleteById(Long id) {
+        reviewRepository.deleteById(id);
+    }
 }
-

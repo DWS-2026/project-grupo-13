@@ -72,7 +72,7 @@
                 <p class="descripcion text-light">{{producto.descripcion}}</p>
 
                 <div class="mt-3">
-        <!-- HAY QUE CAMBIAR LA REF --> <a href="/manuales/manual_{{producto.id}}.pdf" 
+        <a href="/manuales/manual_{{producto.id}}.pdf" 
            class="btn btn-outline-info btn-sm d-inline-flex align-items-center" 
            download="Manual_{{producto.nombre}}.pdf">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-pdf me-2" viewBox="0 0 16 16">
@@ -115,21 +115,13 @@
                         <option value="5" selected>★★★★★</option>
                     </select>
 
-                    <!-- EDITOR VISUAL -->
                     <div id="editor" class="bg-white text-dark" style="height: 200px;"></div>
 
-                    <!-- TEXTAREA OCULTO QUE RECIBE EL HTML -->
                     <textarea id="comentario-textarea" name="comentario" style="display:none;"></textarea>
 
                     <button type="submit" class="btn btn-success mt-3">Enviar valoración</button>
                 </form>
             </section>
-
-            
-
-
-
-
 
         <section class="lista-valoraciones text-white mb-5">
 
@@ -149,31 +141,33 @@
     <div class="card mb-3 shadow-sm bg-dark border-secondary text-white">
         <div class="card-body">
             <h5 class="card-title">
-                <span class="fw-bold">{{usuario}}</span>
+                <span class="fw-bold">{{usuario}}</span> 
                 <span class="text-warning ms-2">{{estrellas}} ★</span>
             </h5>
-
-            <!-- AQUÍ SE RENDERIZA EL HTML DEL COMENTARIO -->
-            <div class="card-text">{{{comentario}}}</div>
-
+            <p class="card-text">{{{comentario}}}</p>
             <small class="text-muted">{{fecha}}</small>
+            
+            {{#canDelete}}
+            <form action="/review/eliminar/{{id}}" method="POST" class="mt-2 text-end">
+                <input type="hidden" name="_csrf" value="{{token}}">
+                <input type="hidden" name="productoId" value="{{product.id}}">
+                <button type="submit" class="btn btn-danger btn-sm">Eliminar mi reseña</button>
+            </form>
+            {{/canDelete}}
         </div>
     </div>
     {{/valoraciones}}
 
-</section>
-
+    </section>
     </main>
 
     <footer class="footer_principal text-center text-white pb-4 border-top border-secondary pt-4">
         <p>© 2026 El desván del friki</p>
     </footer>
 
-    <!-- QUILL -->
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-rc.2/dist/quill.snow.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/quill@2.0.0-rc.2/dist/quill.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0-rc.2/dist/quill.js"></script>
 
-    
 <script>
 window.addEventListener("load", function () {
     const quill = new Quill('#editor', {
@@ -196,11 +190,5 @@ window.addEventListener("load", function () {
     });
 });
 </script>
-
-
-
-
-
-  </body>
+</body>
 </html>
-

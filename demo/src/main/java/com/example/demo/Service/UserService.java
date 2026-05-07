@@ -54,6 +54,10 @@ public class UserService {
 
     // Métodos básicos
     public User save(User user) {
+        String name = user.getNickname();
+        if(userRepository.findByNickname(name) != null){
+            throw new IllegalArgumentException("Nickname ya existe");
+        }
         return userRepository.save(user);
     }
 

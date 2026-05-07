@@ -45,6 +45,15 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
+    /*
+    public void deleteProduct(int id) {
+        Product product = productRepository.findById(id).orElseThrow();
+
+        reviewRepository.deleteAll(product.getReviews());
+        productRepository.delete(product);
+    }
+    */
+
     public boolean existsById(int id) {
         return productRepository.existsById(id);
     }

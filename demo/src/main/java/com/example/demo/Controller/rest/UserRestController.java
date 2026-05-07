@@ -77,28 +77,27 @@ public class UserRestController {
     }
 
     //create new user
-    /*
-    @PostMapping("/")
-    public ResponseEntity<UserDetailDTO> createUser (@RequestBody UserDetailDTO userDetailDTO) {
-
-        User user = userDetailMapper.toDomain(userDetailDTO);
-
-        user = userService.createUser(user);
-
-        userDetailDTO = userDetailMapper.toDTO(user);
-
-        URI location = fromCurrentRequest().path("/{id}").buildAndExpand(userDetailDTO.id()).toUri();
-
-        return ResponseEntity.created(location).body(userDetailDTO);
-    }
-    */
-
     @PostMapping("/")
     public ResponseEntity<UserDetailDTO> createUser(@RequestBody UserCreateDTO dto) {
 
         UserDetailDTO created = userService.createUser(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
+
+    /*
+    
+    example:
+
+    {
+    "name": "Lucía",
+    "surname": "Martínez",
+    "email": "lucia@example.com",
+    "nickname": "lmartinez",
+    "password": "ClaveUltraSegura456",
+    "birthDate": "1998-11-03"
+    }
+
+    */
 
 
     //delete a user

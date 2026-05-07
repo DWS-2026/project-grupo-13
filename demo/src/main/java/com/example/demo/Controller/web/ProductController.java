@@ -90,7 +90,7 @@ public class ProductController {
         review.setFecha(LocalDate.now());
         review.setProduct(p);
 
-        // SANITIZAR EL HTML ANTES DE GUARDARLO
+        
         String comentarioSaneado = SecurityUtils.sanitize(comentario);
         review.setComentario(comentarioSaneado);
 

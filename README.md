@@ -415,7 +415,7 @@ Desarrollo de los formularios para editar categorías y productos. Foto de perfi
 
 Diagrama actualizado incluyendo los @RestController y su relación con los @Service compartidos:
 
-![Diagrama de Clases Actualizado](images/complete-classes-diagram.png)
+![Diagrama de Clases Actualizado](fotos_pagina/diagrama.png)
 
 #### **Credenciales de Usuarios de Ejemplo**
 
@@ -440,17 +440,17 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 
 ---
 
-#### **Alumno 2 - [Nombre Completo]**
+#### **Alumno 2 - [Hugo García Tapia]**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+[Desarrollo del texto enriquecido, DocumentRestController, comprobaciones con Reseñas]
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Texto Enriquecido](URL_commit_1)  | [Archivo1](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/resources/templates/Product.html)   |
+|2| [DocumentRestController](URL_commit_2)  | [Archivo2](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/java/com/example/demo/Controller/rest/DocumentRestController.java)   |
+|3| [Reviews](URL_commit_3)  | [Archivo3](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/java/com/example/demo/Controller/rest/ReviewRestController.java)   |
+|4| [Comprobaciones Vulnerabilidades](URL_commit_4)  | [Archivo4](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/java/com/example/demo/Controller/web/ProductController.java)   |
+|5| [Comprobaciones Vulnerabilidades](URL_commit_5)  | [Archivo5](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/java/com/example/demo/Controller/web/OrderController.java)   |
 
 ---
 

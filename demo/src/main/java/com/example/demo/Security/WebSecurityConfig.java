@@ -106,8 +106,8 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/api/v1/users/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/v1/users/**").hasRole("ADMIN")
                         // Files
-                        .requestMatchers(HttpMethod.POST, "/api/documents/users/*/dni").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/api/documents/*/file").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/documents/users/*/dni").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/v1/documents/*/file").hasAnyRole("USER", "ADMIN")
                         // PUBLIC ENDPOINTS
                         .anyRequest().permitAll());
 

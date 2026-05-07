@@ -38,7 +38,7 @@ import com.example.demo.Model.Document;
 // These methods 
 
 @RestController
-@RequestMapping("/api/documents")
+@RequestMapping("/api/v1/documents")
 public class DocumentRestController {
     
     @Autowired

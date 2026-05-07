@@ -8,14 +8,19 @@ import org.springframework.stereotype.Service;
 import com.example.demo.Model.Product;
 import com.example.demo.Repository.ProductRepository;
 import com.example.demo.Repository.ImageRepository;
+import com.example.demo.Repository.CategoryRepository;
 
 import com.example.demo.Model.Image;
+import com.example.demo.Model.Category;
 
 @Service
 public class ProductService {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Autowired
     private ImageRepository imageRepository;
@@ -39,6 +44,15 @@ public class ProductService {
     public void deleteById(int id) {
         productRepository.deleteById(id);
     }
+
+    /*
+    public void deleteProduct(int id) {
+        Product product = productRepository.findById(id).orElseThrow();
+
+        reviewRepository.deleteAll(product.getReviews());
+        productRepository.delete(product);
+    }
+    */
 
     public boolean existsById(int id) {
         return productRepository.existsById(id);
@@ -86,6 +100,18 @@ public class ProductService {
         }
 
         return product;
+    }
+
+    public void assignCategory(int productId, long categoryId) {
+
+        Product product = productRepository.findById(productId)
+                .orElseThrow();
+
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow();
+
+        product.setCategory(category);
+        productRepository.save(product);
     }
 
 

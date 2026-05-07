@@ -109,6 +109,7 @@ public class CategoryRestController {
         return categoryDetailMapper.toDTO(category);
 
     }
+
     
 
 }

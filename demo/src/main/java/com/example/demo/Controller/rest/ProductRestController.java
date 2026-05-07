@@ -112,6 +112,16 @@ public class ProductRestController {
 
     }
 
+    @PostMapping("/{productId}/category/{categoryId}")
+    public ResponseEntity<?> assignCategoryToProduct(
+            @PathVariable int productId,
+            @PathVariable long categoryId) {
+
+        productService.assignCategory(productId, categoryId);
+        return ResponseEntity.ok().build();
+    }
+
+
 
     //the product is created but the category is set to null
     /*
@@ -125,7 +135,10 @@ public class ProductRestController {
     },
     "image": null,
     "reviews": null
-}
+    }
+
+    to add a category to the created product use the method assign category to product with the category ID and the new product ID
+
     
     */
 }

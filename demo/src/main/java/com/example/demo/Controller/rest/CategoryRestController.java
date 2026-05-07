@@ -35,7 +35,7 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 
 
 @RestController
-@RequestMapping("api/categories")
+@RequestMapping("api/v1/categories")
 public class CategoryRestController {
 
 

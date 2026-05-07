@@ -36,7 +36,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("api/images")
+@RequestMapping("api/v1/images")
 public class ImageRestController {
     
     @Autowired 

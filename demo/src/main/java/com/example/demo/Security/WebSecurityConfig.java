@@ -68,43 +68,43 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         // PRIVATE ENDPOINTS
                         // Images
-                        .requestMatchers(HttpMethod.POST, "/api/images/*/images").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/images/*/images").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/images/*/images").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/v1/images/*/images").hasRole("ADMIN")
                         
                         // Methods for images on entities
                         //Product
-                        .requestMatchers(HttpMethod.POST, "/api/products/*/images").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT,  "/api/products/*/images").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/products/*/images/*").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/products/*/images").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT,  "/api/v1/products/*/images").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/products/*/images/*").hasRole("ADMIN")
 
                         //User
-                        .requestMatchers(HttpMethod.POST, "/api/users/*/image").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/users/*/image").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/users/*/image").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/users/*/image").hasRole("ADMIN")
 
                         //Category
-                        .requestMatchers(HttpMethod.POST, "/api/categories/*/image").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT,  "/api/categories/*/image").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/categories/*/image").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/categories/*/image").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT,  "/api/v1/categories/*/image").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/categories/*/image").hasRole("ADMIN")
 
                         ///////////////////////////////////////////////////////////////////////////
                         ///////////////////////////////////////////////////////////////////////////
 
                         // Categories
-                        .requestMatchers(HttpMethod.POST, "/api/categories/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/categories/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/categories/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/categories/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/v1/categories/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/categories/**").hasRole("ADMIN")
                         // Products
-                        .requestMatchers(HttpMethod.POST, "/api/products/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/products/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/products/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/products/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/v1/products/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/products/**").hasRole("ADMIN")
                         // Reviews
-                        .requestMatchers(HttpMethod.POST, "/api/products/*/reviews", "/api/products/*/reviews/").hasRole("USER")
-                        .requestMatchers(HttpMethod.PUT, "/api/products/*/reviews/*").hasRole("USER")
-                        .requestMatchers(HttpMethod.DELETE, "/api/products/*/reviews/*").hasRole("USER")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/products/*/reviews", "/api/products/*/reviews/").hasRole("USER")
+                        .requestMatchers(HttpMethod.PUT, "/api/v1/products/*/reviews/*").hasRole("USER")
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/products/*/reviews/*").hasRole("USER")
                         // Users
-                        .requestMatchers(HttpMethod.POST, "/api/users/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/users/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/users/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/users/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/v1/users/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/users/**").hasRole("ADMIN")
                         // Files
                         .requestMatchers(HttpMethod.POST, "/api/documents/users/*/dni").hasAnyRole("USER", "ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/documents/*/file").hasAnyRole("USER", "ADMIN")

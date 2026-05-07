@@ -39,7 +39,7 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 //There is only one DTO for the entity "Review"
 
 @RestController
-@RequestMapping("/api/reviews")
+@RequestMapping("/api/v1/reviews")
 public class ReviewRestController {
     
     @Autowired

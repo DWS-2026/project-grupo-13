@@ -421,23 +421,22 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 
 | Rol | Usuario | Contraseña |
 |:---|:---|:---|
-| Administrador | admin | admin123 |
-| Usuario Registrado | user1 | user123 |
-| Usuario Registrado | user2 | user123 |
+| Administrador | lauram | admin456 |
+| Usuario Registrado | cgarcia | carlos123 |
 
 ### **Participación de Miembros en la Práctica 3**
 
-#### **Alumno 1 - [Nombre Completo]**
+#### **Alumno 1 - [Álvaro Cuadrado García]**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+[Elaboración de parte de los RestController, DTO y Mapper]
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [DocumentRestController](URL_commit_1)  | [Archivo1](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/java/com/example/demo/Controller/rest/DocumentRestController.java)   |
+|2| [CategoryRestController](URL_commit_2)  | [Archivo2](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/java/com/example/demo/Controller/rest/CategoryRestController.java)   |
+|3| [UserDetailDTO](URL_commit_3)  | [Archivo3](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/java/com/example/demo/dto/UserDetailDTO.java)   |
+|4| [UserCreateDTO](URL_commit_4)  | [Archivo4](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/java/com/example/demo/dto/UserCreateDTO.java)   |
+|5| [Document](URL_commit_5)  | [Archivo5](https://github.com/DWS-2026/project-grupo-13/blob/main/demo/src/main/java/com/example/demo/Model/Document.java)   |
 
 ---
 

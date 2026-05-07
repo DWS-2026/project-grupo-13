@@ -1,0 +1,1441 @@
+openapi: 3.1.0
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: https://localhost:8443
+  description: Generated server url
+paths:
+  /api/users/{id}:
+    get:
+      tags:
+      - user-rest-controller
+      operationId: getUser
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserDetailDTO"
+    put:
+      tags:
+      - user-rest-controller
+      operationId: replaceUser
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserDetailDTO"
+        required: true
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserDetailDTO"
+    delete:
+      tags:
+      - user-rest-controller
+      operationId: deleteUser
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserDetailDTO"
+  /api/reviews/reviews/{reviewId}:
+    put:
+      tags:
+      - review-rest-controller
+      operationId: updateReview
+      parameters:
+      - name: reviewId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Review"
+        required: true
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Review"
+    delete:
+      tags:
+      - review-rest-controller
+      operationId: deleteReview
+      parameters:
+      - name: reviewId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+  /api/products/{id}:
+    get:
+      tags:
+      - product-rest-controller
+      operationId: getproduct
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProductDetailDTO"
+    put:
+      tags:
+      - product-rest-controller
+      operationId: replaceProduct
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProductDetailDTO"
+        required: true
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProductDetailDTO"
+    delete:
+      tags:
+      - product-rest-controller
+      operationId: deleteProduct
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProductDetailDTO"
+  /api/images/{id}/images:
+    get:
+      tags:
+      - image-rest-controller
+      operationId: getImageMedia
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: byte
+    put:
+      tags:
+      - image-rest-controller
+      operationId: replaceImage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                imageFile:
+                  type: string
+                  format: binary
+              required:
+              - imageFile
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+    post:
+      tags:
+      - image-rest-controller
+      operationId: createProductImage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                imageFile:
+                  type: string
+                  format: binary
+              required:
+              - imageFile
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ImageDTO"
+  /api/images/users/{id}/image:
+    put:
+      tags:
+      - image-rest-controller
+      operationId: replaceUserImage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                imageFile:
+                  type: string
+                  format: binary
+              required:
+              - imageFile
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+    post:
+      tags:
+      - image-rest-controller
+      operationId: createUserImage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                imageFile:
+                  type: string
+                  format: binary
+              required:
+              - imageFile
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ImageDTO"
+  /api/categories/{id}:
+    get:
+      tags:
+      - category-rest-controller
+      operationId: getCategory
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/CategoryDetailDTO"
+    put:
+      tags:
+      - category-rest-controller
+      operationId: replaceCategory
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CategoryDetailDTO"
+        required: true
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/CategoryDetailDTO"
+    delete:
+      tags:
+      - category-rest-controller
+      operationId: deletecategory
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/CategoryDetailDTO"
+  /api/users/{id}/image:
+    post:
+      tags:
+      - user-rest-controller
+      operationId: uploadProfileImage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                imageFile:
+                  type: string
+                  format: binary
+              required:
+              - imageFile
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ImageDTO"
+    delete:
+      tags:
+      - user-rest-controller
+      operationId: deleteProfileImage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ImageDTO"
+  /api/users/:
+    get:
+      tags:
+      - user-rest-controller
+      operationId: getUsers
+      parameters:
+      - name: pageable
+        in: query
+        required: true
+        schema:
+          $ref: "#/components/schemas/Pageable"
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PagedModelUserBasicDTO"
+    post:
+      tags:
+      - user-rest-controller
+      operationId: createProduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserDetailDTO"
+        required: true
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserDetailDTO"
+  /api/reviews/products/{productId}/reviews:
+    post:
+      tags:
+      - review-rest-controller
+      operationId: createReview
+      parameters:
+      - name: productId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Review"
+        required: true
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Review"
+  /api/products/:
+    get:
+      tags:
+      - product-rest-controller
+      operationId: getProducts
+      parameters:
+      - name: pageable
+        in: query
+        required: true
+        schema:
+          $ref: "#/components/schemas/Pageable"
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PagedModelProductBasicDTO"
+    post:
+      tags:
+      - product-rest-controller
+      operationId: createProduct_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProductDetailDTO"
+        required: true
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProductDetailDTO"
+  /api/orders/:
+    get:
+      tags:
+      - order-rest-controller
+      operationId: getOrders
+      parameters:
+      - name: pageable
+        in: query
+        required: true
+        schema:
+          $ref: "#/components/schemas/Pageable"
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PagedModelOrderBasicDTO"
+    post:
+      tags:
+      - order-rest-controller
+      operationId: createOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OrderDetailDTO"
+        required: true
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/OrderDetailDTO"
+  /api/images/categories/{id}/images:
+    post:
+      tags:
+      - image-rest-controller
+      operationId: createCategoryImage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                imageFile:
+                  type: string
+                  format: binary
+              required:
+              - imageFile
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ImageDTO"
+  /api/documents/users/{id}/dni:
+    post:
+      tags:
+      - document-rest-controller
+      operationId: uploadUserDni
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+              required:
+              - file
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/DocumentDTO"
+  /api/categories/:
+    get:
+      tags:
+      - category-rest-controller
+      operationId: getCategories
+      parameters:
+      - name: pageable
+        in: query
+        required: true
+        schema:
+          $ref: "#/components/schemas/Pageable"
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PagedModelCategoryBasicDTO"
+    post:
+      tags:
+      - category-rest-controller
+      operationId: createCategory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CategoryDetailDTO"
+        required: true
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/CategoryDetailDTO"
+  /api/auth/refresh:
+    post:
+      tags:
+      - login-controller
+      operationId: refreshToken
+      parameters:
+      - name: RefreshToken
+        in: cookie
+        required: false
+        schema:
+          type: string
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+  /api/auth/logout:
+    post:
+      tags:
+      - login-controller
+      operationId: logOut
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+  /api/auth/login:
+    post:
+      tags:
+      - login-controller
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+        required: true
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+  /ver-usuarios:
+    get:
+      tags:
+      - user-controller
+      operationId: verUsuariosRegistrados
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+  /image/{id}:
+    get:
+      tags:
+      - image-controller
+      operationId: getImage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: byte
+  /api/reviews/{id}:
+    get:
+      tags:
+      - review-rest-controller
+      operationId: getReview
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ReviewDetailDTO"
+  /api/reviews/:
+    get:
+      tags:
+      - review-rest-controller
+      operationId: getReviews
+      parameters:
+      - name: pageable
+        in: query
+        required: true
+        schema:
+          $ref: "#/components/schemas/Pageable"
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PagedModelReviewDetailDTO"
+  /api/orders/{id}:
+    get:
+      tags:
+      - order-rest-controller
+      operationId: getOrder
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/OrderDetailDTO"
+    delete:
+      tags:
+      - order-rest-controller
+      operationId: deleteOrder
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/OrderDetailDTO"
+  /api/images/{id}:
+    get:
+      tags:
+      - image-rest-controller
+      operationId: getImage_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ImageDTO"
+  /api/documents/{id}/file:
+    get:
+      tags:
+      - document-rest-controller
+      operationId: downloadDni
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: binary
+  /api/carrito:
+    get:
+      tags:
+      - cart-controller
+      operationId: obtenerCarrito
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CartItem"
+  /AdminProducts/image/{id}:
+    get:
+      tags:
+      - admin-product-controller
+      operationId: getProductImage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: byte
+  /AdminCategories/image/{id}:
+    get:
+      tags:
+      - admin-category-controller
+      operationId: getImage_2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: byte
+  /api/images/{productId}/images/{imageId}:
+    delete:
+      tags:
+      - image-rest-controller
+      operationId: deleteProductImage
+      parameters:
+      - name: productId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: imageId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ImageDTO"
+  /api/images/users/{userId}/image/{imageId}:
+    delete:
+      tags:
+      - image-rest-controller
+      operationId: deleteUserImage
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: imageId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ImageDTO"
+  /api/images/categories/{categoryId}/images/{imageId}:
+    delete:
+      tags:
+      - image-rest-controller
+      operationId: deleteCategoryImage
+      parameters:
+      - name: categoryId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: imageId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ImageDTO"
+components:
+  schemas:
+    ImageDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+    UserDetailDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        profileImage:
+          $ref: "#/components/schemas/ImageDTO"
+        name:
+          type: string
+        surname:
+          type: string
+        email:
+          type: string
+        nickname:
+          type: string
+        role:
+          type: string
+        birthDate:
+          type: string
+          format: date
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        products:
+          type: array
+          items:
+            $ref: "#/components/schemas/Product"
+        image:
+          $ref: "#/components/schemas/Image"
+    Image:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        data:
+          type: string
+          format: byte
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        nombre:
+          type: string
+        precio:
+          type: number
+          format: double
+        descripcion:
+          type: string
+        promotion:
+          type: boolean
+        precioOriginal:
+          type: number
+          format: double
+        precioOferta:
+          type: number
+          format: double
+        category:
+          $ref: "#/components/schemas/Category"
+        image:
+          $ref: "#/components/schemas/Image"
+        reviews:
+          type: array
+          items:
+            $ref: "#/components/schemas/Review"
+    Review:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        usuario:
+          type: string
+        estrellas:
+          type: integer
+          format: int32
+        comentario:
+          type: string
+          maxLength: 5000
+          minLength: 0
+        fecha:
+          type: string
+          format: date
+        product:
+          $ref: "#/components/schemas/Product"
+    CategoryBasicDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+    ProductDetailDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        nombre:
+          type: string
+        precio:
+          type: number
+          format: double
+        descripcion:
+          type: string
+        category:
+          $ref: "#/components/schemas/CategoryBasicDTO"
+        image:
+          $ref: "#/components/schemas/ImageDTO"
+        reviews:
+          type: array
+          items:
+            $ref: "#/components/schemas/ReviewDetailDTO"
+    ReviewDetailDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        usuario:
+          type: string
+        estrellas:
+          type: integer
+          format: int32
+        comentario:
+          type: string
+        fecha:
+          type: string
+          format: date
+    CategoryDetailDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        products:
+          type: array
+          items:
+            $ref: "#/components/schemas/ProductBasicDTO"
+        image:
+          $ref: "#/components/schemas/ImageDTO"
+    ProductBasicDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        nombre:
+          type: string
+        precio:
+          type: number
+          format: double
+    OrderDetailDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        fecha:
+          type: string
+          format: date-time
+        total:
+          type: number
+          format: double
+        nickname:
+          type: string
+        email:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/OrderItemDetailDTO"
+    OrderItemDetailDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        productId:
+          type: integer
+          format: int64
+        productName:
+          type: string
+        imageUrl:
+          type: string
+        cantidad:
+          type: integer
+          format: int32
+        precio:
+          type: number
+          format: double
+        subtotal:
+          type: number
+          format: double
+    DocumentDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        originalName:
+          type: string
+    AuthResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - FAILURE
+        message:
+          type: string
+        error:
+          type: string
+    LoginRequest:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    Document:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        originalName:
+          type: string
+        filePath:
+          type: string
+        user:
+          $ref: "#/components/schemas/User"
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        profileImage:
+          $ref: "#/components/schemas/Image"
+        name:
+          type: string
+        surname:
+          type: string
+        email:
+          type: string
+        nickname:
+          type: string
+        encodedPassword:
+          type: string
+        role:
+          type: string
+        birthDate:
+          type: string
+          format: date
+        dni:
+          $ref: "#/components/schemas/Document"
+        admin:
+          type: boolean
+    Pageable:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+          minimum: 0
+        size:
+          type: integer
+          format: int32
+          minimum: 1
+        sort:
+          type: array
+          items:
+            type: string
+    PageMetadata:
+      type: object
+      properties:
+        size:
+          type: integer
+          format: int64
+        number:
+          type: integer
+          format: int64
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int64
+    PagedModelUserBasicDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: "#/components/schemas/UserBasicDTO"
+        page:
+          $ref: "#/components/schemas/PageMetadata"
+    UserBasicDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        nickname:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+    PagedModelReviewDetailDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: "#/components/schemas/ReviewDetailDTO"
+        page:
+          $ref: "#/components/schemas/PageMetadata"
+    PagedModelProductBasicDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: "#/components/schemas/ProductBasicDTO"
+        page:
+          $ref: "#/components/schemas/PageMetadata"
+    OrderBasicDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        user:
+          type: string
+        fecha:
+          type: string
+          format: date-time
+    PagedModelOrderBasicDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: "#/components/schemas/OrderBasicDTO"
+        page:
+          $ref: "#/components/schemas/PageMetadata"
+    PagedModelCategoryBasicDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: "#/components/schemas/CategoryBasicDTO"
+        page:
+          $ref: "#/components/schemas/PageMetadata"
+    CartItem:
+      type: object
+      properties:
+        productId:
+          type: integer
+          format: int32
+        nombre:
+          type: string
+        imagen:
+          type: string
+        precio:
+          type: number
+          format: double
+        cantidad:
+          type: integer
+          format: int32

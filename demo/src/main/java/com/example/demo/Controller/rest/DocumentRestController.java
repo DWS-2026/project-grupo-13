@@ -83,11 +83,10 @@ public class DocumentRestController {
                 .orElseThrow(() -> new RuntimeException("Document not found"));
 
 
-        // 1. Obtener usuario autenticado
+        // Only the owner can download the file
         String nickname = SecurityContextHolder.getContext().getAuthentication().getName();
         User authenticatedUser = userRepository.findByNickname(nickname);
 
-        // 2. Comprobar propiedad
         if (doc.getUser().getId() != authenticatedUser.getId()) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }

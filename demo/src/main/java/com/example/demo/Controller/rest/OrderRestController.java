@@ -29,7 +29,7 @@ import com.example.demo.Repository.OrderRepository;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 @RestController
-@RequestMapping("/api/orders")
+@RequestMapping("/api/v1/orders")
 public class OrderRestController {
 
     @Autowired

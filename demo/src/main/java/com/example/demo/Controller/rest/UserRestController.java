@@ -4,6 +4,7 @@ import com.example.demo.dto.ImageMapper;
 import com.example.demo.dto.ProductDetailDTO;
 import com.example.demo.dto.UserBasicDTO;
 import com.example.demo.dto.UserBasicMapper;
+import com.example.demo.dto.UserCreateDTO;
 import com.example.demo.dto.UserDetailMapper;
 import com.example.demo.Model.Image;
 import com.example.demo.Model.Product;
@@ -23,6 +24,7 @@ import java.net.URI;
 import java.sql.SQLException;
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -75,8 +77,9 @@ public class UserRestController {
     }
 
     //create new user
+    /*
     @PostMapping("/")
-    public ResponseEntity<UserDetailDTO> createProduct (@RequestBody UserDetailDTO userDetailDTO) {
+    public ResponseEntity<UserDetailDTO> createUser (@RequestBody UserDetailDTO userDetailDTO) {
 
         User user = userDetailMapper.toDomain(userDetailDTO);
 
@@ -88,6 +91,15 @@ public class UserRestController {
 
         return ResponseEntity.created(location).body(userDetailDTO);
     }
+    */
+
+    @PostMapping("/")
+    public ResponseEntity<UserDetailDTO> createUser(@RequestBody UserCreateDTO dto) {
+
+        UserDetailDTO created = userService.createUser(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(created);
+    }
+
 
     //delete a user
     @DeleteMapping("/{id}")

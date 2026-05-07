@@ -10,6 +10,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+
 import java.io.IOException;
 
 import com.example.demo.Model.Document;
@@ -19,7 +22,10 @@ import com.example.demo.Repository.ImageRepository;
 import com.example.demo.Repository.UserRepository;
 import com.example.demo.Repository.DocumentRepository;
 import com.example.demo.Service.DocumentService;
+import com.example.demo.dto.UserCreateDTO;
+import com.example.demo.dto.UserDetailDTO;
 
+import com.example.demo.dto.UserDetailMapper;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -38,6 +44,13 @@ public class UserService {
 
     @Autowired
     private DocumentService documentService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private UserDetailMapper userDetailMapper;
+
 
     // Métodos básicos
     public User save(User user) {
@@ -141,6 +154,24 @@ public class UserService {
         userRepository.save(user);
 
         return ResponseEntity.ok().build();
+    }
+
+    public UserDetailDTO createUser(UserCreateDTO dto) {
+
+        User user = new User();
+        user.setName(dto.name());
+        user.setSurname(dto.surname());
+        user.setEmail(dto.email());
+        user.setNickname(dto.nickname());
+        user.setBirthDate(dto.birthDate());
+        user.setRole("USER"); // o lo que corresponda
+
+        // Encriptar contraseña
+        user.setEncodedPassword(passwordEncoder.encode(dto.password()));
+
+        User saved = userRepository.save(user);
+
+        return userDetailMapper.toDTO(saved);
     }
 
 }

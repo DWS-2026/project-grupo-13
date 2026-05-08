@@ -79,7 +79,8 @@ public class UserRestController {
     //create new user
     @PostMapping("/")
     public ResponseEntity<UserDetailDTO> createUser(@RequestBody UserCreateDTO dto) {
-
+System.out.println(">>> ENTRA EN EL CONTROLLER createUser()");
+    System.out.println(">>> DTO RECIBIDO: " + dto);
         UserDetailDTO created = userService.createUser(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }

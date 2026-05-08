@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 
@@ -52,14 +52,38 @@ public class UserService {
     private UserDetailMapper userDetailMapper;
 
 
-    // Métodos básicos
-    public User save(User user) {
-        String name = user.getNickname();
-        if(userRepository.findByNickname(name) != null){
-            throw new IllegalArgumentException("Nickname ya existe");
+    
+   public User save(User user) {
+
+        // Si es creación (id == null)
+        if (user.getId() == null) {
+
+
+            if (userRepository.findByNickname(user.getNickname()) != null) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Nickname ya existe");
+            }
+
+            if (userRepository.findByEmail(user.getEmail()) != null) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email ya existe");
+            }
         }
+
+        // Cifrar contraseña si no está cifrada
+        if (user.getEncodedPassword() != null && !user.getEncodedPassword().startsWith("$2a$")) {
+            user.setEncodedPassword(passwordEncoder.encode(user.getEncodedPassword()));
+        }
+
+        // Rol por defecto
+        if (user.getRole() == null) {
+            user.setRole("USER");
+        }
+
         return userRepository.save(user);
     }
+
+
+
+
 
     public List<User> findAll() {
         return userRepository.findAll();
@@ -69,10 +93,6 @@ public class UserService {
         return userRepository.findById(id).orElseThrow();
     }
 
-    public User createUser(User user) {
-        userRepository.save(user);
-        return user;
-    }
 
     public boolean existsById(Long id) {
         return userRepository.existsById(id);
@@ -94,7 +114,7 @@ public class UserService {
         return userRepository.findByNickname(nickname);
     }
 
-    // 🔹 Métodos correctos para gestionar la imagen de perfil
+    
     public User addImageToUser(Long id, Image image) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
@@ -168,15 +188,16 @@ public class UserService {
         user.setEmail(dto.email());
         user.setNickname(dto.nickname());
         user.setBirthDate(dto.birthDate());
-        user.setRole("USER"); // o lo que corresponda
+        user.setRole("USER");
+        user.setEncodedPassword(dto.password()); 
 
-        // Encriptar contraseña
-        user.setEncodedPassword(passwordEncoder.encode(dto.password()));
-
-        User saved = userRepository.save(user);
+        User saved = save(user); 
 
         return userDetailMapper.toDTO(saved);
     }
+
+
+
 
 }
 

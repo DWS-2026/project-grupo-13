@@ -27,6 +27,7 @@ import com.example.demo.Service.ImageService;
 import com.example.demo.dto.ProductBasicDTO;
 import com.example.demo.dto.ProductDetailDTO;
 import com.example.demo.dto.ProductBasicMapper;
+import com.example.demo.dto.ProductCreateDTO;
 import com.example.demo.dto.ProductDetailMapper;
 
 import com.example.demo.Model.Product;
@@ -68,18 +69,18 @@ public class ProductRestController {
 
     //create a new product
     @PostMapping("/")
-    public ResponseEntity<ProductDetailDTO> createProduct (@RequestBody ProductDetailDTO productDetailDTO) {
+    public ResponseEntity<ProductDetailDTO> createProduct(@RequestBody ProductCreateDTO dto) {
 
-        Product product = productDetailMapper.toDomain(productDetailDTO);
+        ProductDetailDTO created = productService.createProduct(dto);
 
-        product = productService.createProduct(product);
+        URI location = fromCurrentRequest()
+            .path("/{id}")
+            .buildAndExpand(created.id())
+            .toUri();
 
-        productDetailDTO = productDetailMapper.toDTO(product);
-
-        URI location = fromCurrentRequest().path("/{id}").buildAndExpand(productDetailDTO.id()).toUri();
-
-        return ResponseEntity.created(location).body(productDetailDTO);
+        return ResponseEntity.created(location).body(created);
     }
+
 
     //delete a product
     @DeleteMapping("/{id}")

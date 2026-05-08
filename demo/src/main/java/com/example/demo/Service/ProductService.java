@@ -3,12 +3,17 @@ package com.example.demo.Service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.example.demo.Model.Product;
 import com.example.demo.Repository.ProductRepository;
+import com.example.demo.dto.ProductCreateDTO;
+import com.example.demo.dto.ProductDetailDTO;
 import com.example.demo.Repository.ImageRepository;
 import com.example.demo.Repository.CategoryRepository;
+import com.example.demo.dto.ProductDetailMapper;
 
 import com.example.demo.Model.Image;
 import com.example.demo.Model.Category;
@@ -24,6 +29,9 @@ public class ProductService {
 
     @Autowired
     private ImageRepository imageRepository;
+
+    @Autowired
+    private ProductDetailMapper productDetailMapper;
 
     
     public Product save(Product product) {
@@ -67,13 +75,26 @@ public class ProductService {
     return productRepository.findByPromotionTrue();
     }
 
-    public Product createProduct(Product product) {
+    public ProductDetailDTO createProduct(ProductCreateDTO dto) {
 
-        productRepository.save(product);
+        Product product = new Product();
+        product.setNombre(dto.nombre());
+        product.setPrecio(dto.precio());
+        product.setDescripcion(dto.descripcion());
+        product.setPromotion(dto.promotion());
+        product.setPrecioOriginal(dto.precioOriginal());
+        product.setPrecioOferta(dto.precioOferta());
 
-        return product;
+        Category category = categoryRepository.findById(dto.categoryId())
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Categoría no existe"));
 
+        product.setCategory(category);
+
+        Product saved = productRepository.save(product);
+
+        return productDetailMapper.toDTO(saved);
     }
+
 
     //These are methods for the ImageRestController
 

@@ -42,14 +42,14 @@ public class CategoryController {
             @RequestParam("image") MultipartFile imageFile,
             Model model) throws IOException {
 
-        // 1) Validar nombre vacío
+        
         if (name == null || name.isBlank()) {
             model.addAttribute("errorNombreVacio", true);
             model.addAttribute("categoria", new Category(name));
             return "admin/nueva-categoria";
         }
 
-        // 2) Comprobar duplicado por nombre (case-insensitive si quieres)
+       
         Category existente = categoryService.findByName(name);
         if (existente != null) {
             model.addAttribute("errorDuplicado", true);
@@ -59,9 +59,9 @@ public class CategoryController {
         }
 
         Category categoria = new Category();
-        categoria.setName(name); // si quieres, aquí podrías sanitizar
+        categoria.setName(name); 
 
-        // 3) Validar imagen (tipo y tamaño) antes de guardar
+        
         if (!imageFile.isEmpty()) {
             String contentType = imageFile.getContentType();
             if (contentType == null || !contentType.startsWith("image/")) {

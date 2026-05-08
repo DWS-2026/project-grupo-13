@@ -132,7 +132,7 @@ System.out.println(">>> ENTRA EN EL CONTROLLER createUser()");
 
     }
     
-    // 🔹 Endpoints para imágenes de perfil
+    
     @PostMapping("/{id}/image")
     public ResponseEntity<ImageDTO> uploadProfileImage(@PathVariable Long id,
                                                        @RequestParam("imageFile") org.springframework.web.multipart.MultipartFile imageFile)

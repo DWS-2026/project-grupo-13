@@ -153,10 +153,10 @@ public class ImageRestController {
             @PathVariable long userId,
             @PathVariable long imageId) {
 
-        // Obtener el usuario autenticado en sesión
+        
         User loggedUser = getLoggedUser(); 
 
-        // Comprobación de seguridad para evitar IDOR
+        
         if (loggedUser.getId() != userId && !loggedUser.getRole().equals("ADMIN")) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build(); // 403 Forbidden
         }
@@ -180,7 +180,7 @@ public class ImageRestController {
             }
 
             Image image = imageService.createImage(imageFile.getInputStream());
-            // Requiere que categoryService y el método addImageToCategory existan
+            
             categoryService.addImageToCategory(id, image); 
 
             URI location = ServletUriComponentsBuilder
@@ -196,7 +196,7 @@ public class ImageRestController {
     public ImageDTO deleteCategoryImage(@PathVariable int categoryId, @PathVariable long imageId) {
 
         Image image = imageService.getImage(imageId);
-        // Requiere que categoryService y el método removeImageCategory existan
+        
         categoryService.removeImageCategory(categoryId); 
         imageService.deleteImage(imageId);
 

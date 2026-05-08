@@ -30,7 +30,7 @@ public class AdminCategoryController {
         return "AdminCategories";
     }
 
-    //Este método está obsoleto
+    
     @PostMapping("/AdminCategories")
     public String createCategory(@RequestParam String name, 
                                  @RequestParam("image") MultipartFile image, 

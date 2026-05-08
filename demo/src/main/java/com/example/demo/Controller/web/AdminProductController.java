@@ -55,7 +55,7 @@ public class AdminProductController {
                                 @RequestParam("productImage") MultipartFile file,
                                 Model model) throws IOException {
         
-        // Obtenemos todos los productos y comparamos el nombre
+        
         List<Product> todosLosProductos = productService.findAll();
         boolean nombreDuplicado = false;
         

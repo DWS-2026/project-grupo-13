@@ -27,7 +27,7 @@ public class Review {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @Transient // Este campo no se guarda en la DB, solo sirve para Mustache
+    @Transient 
     private boolean canDelete;
 
     public Review() {
@@ -42,7 +42,7 @@ public class Review {
         this.product = product;
     }
 
-    // Getters y Setters necesarios para el funcionamiento
+    
     public Long getId() {
         return id;
     }

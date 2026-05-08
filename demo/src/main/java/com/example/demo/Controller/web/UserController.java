@@ -98,7 +98,7 @@ public class UserController {
             redirectAttributes.addFlashAttribute("error", "Error al subir el DNI");
         }
 
-        return "redirect:/EditProfile"; // o /users/{id} según tu ruta real
+        return "redirect:/EditProfile"; 
     }
 
     @GetMapping("/documents/{id}/file")

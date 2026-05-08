@@ -32,14 +32,14 @@ public class User {
     @Column(unique = true)
     private String email;
 
-    // Username para Spring Security
+    
     @Column(unique = true)
     private String nickname;
 
-    // Contraseña cifrada con BCrypt
+    
     private String encodedPassword;
 
-    // Lista de roles
+    
     private String role;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")

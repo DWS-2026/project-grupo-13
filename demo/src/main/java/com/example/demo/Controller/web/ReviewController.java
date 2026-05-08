@@ -50,17 +50,17 @@ public class ReviewController {
             return "redirect:/producto/" + productId;
         }
 
-        // Buscamos el usuario en la BD para vincularlo a la reseña
+        
         User currentUser = userService.findByNickname(principal.getName());
         
-        // Saneamos el comentario
+        
         String comentarioSaneado = SecurityUtils.sanitize(comentario);
 
         Review review = new Review();
         review.setEstrellas(estrellas);
-        review.setComentario(comentarioSaneado); // <- Usamos el comentario limpio
+        review.setComentario(comentarioSaneado);
         review.setUsuario(currentUser.getNickname());
-        review.setUser(currentUser); // <- CRÍTICO: vinculamos el objeto User
+        review.setUser(currentUser);
         review.setProduct(product);
 
         reviewService.save(review);
@@ -75,7 +75,7 @@ public String eliminarValoracion(@PathVariable Long id, @RequestParam Long produ
 
     Review review = reviewService.findById(id);
     
-    // Solo borramos si el nombre del autor coincide con el usuario conectado
+    
     if (review != null && principal.getName().equals(review.getUsuario())) {
         reviewService.deleteById(id);
     }

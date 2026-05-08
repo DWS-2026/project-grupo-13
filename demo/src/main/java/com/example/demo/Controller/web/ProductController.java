@@ -55,7 +55,7 @@ public class ProductController {
 
         Category cat = categoryService.findByName(nombre);
             if (cat == null) {
-                return "Error"; // o 404
+                return "Error"; 
             }
 
         List<Product> lista = productService.findByCategoryName(nombre);
@@ -107,7 +107,7 @@ public String verProducto(@PathVariable int id, Model model) {
         return "Error";
     }
 
-    // Obtenemos el usuario actual logueado
+    
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     String currentUsername = auth.getName();
 

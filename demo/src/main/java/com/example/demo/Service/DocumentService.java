@@ -27,14 +27,14 @@ public class DocumentService {
             throw new IOException("El archivo no puede estar vacío");
         }
 
-        // 1. Limpieza de la ruta para evitar ataques de Path Traversal
+        
         String originalName = StringUtils.cleanPath(file.getOriginalFilename());
 
         if (originalName.contains("..")) {
             throw new IOException("Nombre de archivo no válido");
         }
 
-        // 2. Obtención de la extensión de manera segura
+        
         String extension = "";
         if (originalName.contains(".")) {
             extension = originalName.substring(originalName.lastIndexOf("."));
@@ -45,7 +45,7 @@ public class DocumentService {
         String storedName = "manual_" + documentId + extension;
         Path destination = root.resolve(storedName);
 
-        // 3. Copia del archivo asegurando que no se sobrescriban otros directorios
+       
         Files.copy(file.getInputStream(), destination, StandardCopyOption.REPLACE_EXISTING);
 
         return destination.toString();

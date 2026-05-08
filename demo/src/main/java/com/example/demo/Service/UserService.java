@@ -55,7 +55,7 @@ public class UserService {
     
    public User save(User user) {
 
-        // Si es creación (id == null)
+        
         if (user.getId() == null) {
 
 
@@ -68,12 +68,12 @@ public class UserService {
             }
         }
 
-        // Cifrar contraseña si no está cifrada
+        
         if (user.getEncodedPassword() != null && !user.getEncodedPassword().startsWith("$2a$")) {
             user.setEncodedPassword(passwordEncoder.encode(user.getEncodedPassword()));
         }
 
-        // Rol por defecto
+        
         if (user.getRole() == null) {
             user.setRole("USER");
         }

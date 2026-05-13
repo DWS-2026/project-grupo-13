@@ -23,7 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.Model.User;
 import com.example.demo.dto.ImageDTO;
-import com.example.demo.dto.ImageMapper;
+import com.example.demo.dto.mapper.ImageMapper;
 import com.example.demo.Model.Image;
 import com.example.demo.Service.CategoryService;
 import com.example.demo.Service.UserService;

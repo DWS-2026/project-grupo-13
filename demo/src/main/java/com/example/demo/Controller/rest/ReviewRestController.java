@@ -26,11 +26,10 @@ import com.example.demo.Service.ProductService;
 import com.example.demo.Service.ImageService;
 import com.example.demo.dto.ProductBasicDTO;
 import com.example.demo.dto.ProductDetailDTO;
-import com.example.demo.dto.ProductBasicMapper;
-import com.example.demo.dto.ProductDetailMapper;
-
 import com.example.demo.dto.ReviewDetailDTO;
-import com.example.demo.dto.ReviewDetailMapper;
+import com.example.demo.dto.mapper.ProductBasicMapper;
+import com.example.demo.dto.mapper.ProductDetailMapper;
+import com.example.demo.dto.mapper.ReviewDetailMapper;
 
 import jakarta.persistence.EntityNotFoundException;
 

@@ -25,7 +25,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 
 import com.example.demo.dto.DocumentDTO;
-import com.example.demo.dto.DocumentMapper;
+import com.example.demo.dto.mapper.DocumentMapper;
 import com.example.demo.Repository.DocumentRepository;
 import com.example.demo.Repository.UserRepository;
 import com.example.demo.Service.DocumentService;

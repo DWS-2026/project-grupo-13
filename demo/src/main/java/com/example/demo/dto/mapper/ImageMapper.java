@@ -1,5 +1,7 @@
-package com.example.demo.dto;
+package com.example.demo.dto.mapper;
 import com.example.demo.Model.Image;
+import com.example.demo.dto.ImageDTO;
+
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

@@ -1,6 +1,7 @@
-package com.example.demo.dto;
+package com.example.demo.dto.mapper;
 
 import com.example.demo.Model.Document;
+import com.example.demo.dto.DocumentDTO;
 
 import org.mapstruct.Mapper;
 import java.util.Collection;

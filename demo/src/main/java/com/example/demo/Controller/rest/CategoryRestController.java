@@ -2,8 +2,8 @@ package com.example.demo.Controller.rest;
 
 import com.example.demo.dto.CategoryBasicDTO;
 import com.example.demo.dto.CategoryDetailDTO;
-import com.example.demo.dto.CategoryBasicMapper;
-import com.example.demo.dto.CategoryDetailMapper;
+import com.example.demo.dto.mapper.CategoryBasicMapper;
+import com.example.demo.dto.mapper.CategoryDetailMapper;
 import com.example.demo.Repository.CategoryRepository;
 import com.example.demo.Service.CategoryService;
 

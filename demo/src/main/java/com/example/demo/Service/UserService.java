@@ -24,8 +24,7 @@ import com.example.demo.Repository.DocumentRepository;
 import com.example.demo.Service.DocumentService;
 import com.example.demo.dto.UserCreateDTO;
 import com.example.demo.dto.UserDetailDTO;
-
-import com.example.demo.dto.UserDetailMapper;
+import com.example.demo.dto.mapper.UserDetailMapper;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -80,9 +79,6 @@ public class UserService {
 
         return userRepository.save(user);
     }
-
-
-
 
 
     public List<User> findAll() {
@@ -196,7 +192,26 @@ public class UserService {
         return userDetailMapper.toDTO(saved);
     }
 
+    public User deleteUserIfAuthorised(Long id) {
 
+        String nickname = SecurityContextHolder.getContext().getAuthentication().getName();
+        User userAuth = userRepository.findByNickname(nickname);
+
+        if (userAuth == null) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "No autenticado");
+        }
+
+        if (!userAuth.getId().equals(id) && !userAuth.getRole().equals("ADMIN")) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "No tienes permiso para borrar este usuario");
+        }
+
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+
+        userRepository.delete(user);
+
+        return user;
+    }
 
 
 }

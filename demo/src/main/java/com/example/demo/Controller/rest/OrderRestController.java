@@ -21,8 +21,8 @@ import org.springframework.data.domain.Pageable;
 import com.example.demo.Service.OrderService;
 import com.example.demo.dto.OrderBasicDTO;
 import com.example.demo.dto.OrderDetailDTO;
-import com.example.demo.dto.OrderBasicMapper;
-import com.example.demo.dto.OrderDetailMapper;
+import com.example.demo.dto.mapper.OrderBasicMapper;
+import com.example.demo.dto.mapper.OrderDetailMapper;
 import com.example.demo.Model.Order;
 import com.example.demo.Repository.OrderRepository;
 

@@ -1,11 +1,11 @@
 package com.example.demo.Controller.rest;
 import com.example.demo.dto.ImageDTO;
-import com.example.demo.dto.ImageMapper;
 import com.example.demo.dto.ProductDetailDTO;
 import com.example.demo.dto.UserBasicDTO;
-import com.example.demo.dto.UserBasicMapper;
 import com.example.demo.dto.UserCreateDTO;
-import com.example.demo.dto.UserDetailMapper;
+import com.example.demo.dto.mapper.ImageMapper;
+import com.example.demo.dto.mapper.UserBasicMapper;
+import com.example.demo.dto.mapper.UserDetailMapper;
 import com.example.demo.Model.Image;
 import com.example.demo.Model.Product;
 import com.example.demo.Service.ImageService;
@@ -105,13 +105,11 @@ System.out.println(">>> ENTRA EN EL CONTROLLER createUser()");
     @DeleteMapping("/{id}")
     public UserDetailDTO deleteUser(@PathVariable Long id) {
 
-        User user = userService.findById(id);
+        User deleted = userService.deleteUserIfAuthorised(id);
 
-        userService.deleteById(id);
-
-        return userDetailMapper.toDTO(user);
-
+        return userDetailMapper.toDTO(deleted);
     }
+
 
     //replace a user
     @PutMapping("/{id}")

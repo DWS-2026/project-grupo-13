@@ -26,10 +26,9 @@ import com.example.demo.Service.ProductService;
 import com.example.demo.Service.ImageService;
 import com.example.demo.dto.ProductBasicDTO;
 import com.example.demo.dto.ProductDetailDTO;
-import com.example.demo.dto.ProductBasicMapper;
 import com.example.demo.dto.ProductCreateDTO;
-import com.example.demo.dto.ProductDetailMapper;
-
+import com.example.demo.dto.mapper.ProductBasicMapper;
+import com.example.demo.dto.mapper.ProductDetailMapper;
 import com.example.demo.Model.Product;
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
@@ -122,24 +121,4 @@ public class ProductRestController {
         return ResponseEntity.ok().build();
     }
 
-
-
-    //the product is created but the category is set to null
-    /*
-        {
-    "id": 11,
-    "nombre": "Prueba",
-    "precio": 100,
-    "descripcion": "prueba prueba",
-    "category":{
-        "name": "Smartphones"
-    },
-    "image": null,
-    "reviews": null
-    }
-
-    to add a category to the created product use the method assign category to product with the category ID and the new product ID
-
-    
-    */
 }

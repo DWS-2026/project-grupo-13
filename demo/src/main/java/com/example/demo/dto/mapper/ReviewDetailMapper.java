@@ -1,6 +1,8 @@
-package com.example.demo.dto;
+package com.example.demo.dto.mapper;
 
 import com.example.demo.Model.Review;
+import com.example.demo.dto.ReviewDetailDTO;
+
 import org.mapstruct.Mapper;
 
 import java.util.List;

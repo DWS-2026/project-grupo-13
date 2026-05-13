@@ -1,6 +1,7 @@
 package com.example.demo.Controller.rest;
 
 import com.example.demo.dto.CategoryBasicDTO;
+import com.example.demo.dto.CategoryCreateDTO;
 import com.example.demo.dto.CategoryDetailDTO;
 import com.example.demo.dto.mapper.CategoryBasicMapper;
 import com.example.demo.dto.mapper.CategoryDetailMapper;
@@ -13,6 +14,7 @@ import java.net.URI;
 import java.sql.SQLException;
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +29,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 import org.springframework.web.bind.annotation.RequestParam;
@@ -66,18 +69,17 @@ public class CategoryRestController {
 
     //create a category
     @PostMapping("/")
-    public ResponseEntity<CategoryDetailDTO> createCategory (@RequestBody CategoryDetailDTO categoryDetailDTO) {
+    public ResponseEntity<CategoryDetailDTO> createCategory(@RequestBody Map<String, String> body) {
 
-        Category category = categoryDetailMapper.toDomain(categoryDetailDTO);
+        String name = body.get("name");
 
-        category = categoryService.createCategory(category);
+        CategoryCreateDTO dto = new CategoryCreateDTO(name, null);
+        Category category = categoryService.createCategory(dto);
 
-        categoryDetailDTO = categoryDetailMapper.toDTO(category);
-
-        URI location = fromCurrentRequest().path("/{id}").buildAndExpand(categoryDetailDTO.id()).toUri();
-
-        return ResponseEntity.created(location).body(categoryDetailDTO);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                            .body(categoryDetailMapper.toDTO(category));
     }
+
 
     //replace a category
     @PutMapping("/{id}")

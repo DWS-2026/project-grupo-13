@@ -3,6 +3,8 @@ package com.example.demo.Controller.web;
 import java.security.Principal;
 import java.time.LocalDate;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,46 +17,50 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.Model.Category;
 import com.example.demo.Model.Image;
-import com.example.demo.Repository.CategoryRepository; // Importamos el Repositorio
+import com.example.demo.Service.CategoryService;
+import com.example.demo.dto.CategoryCreateDTO;
 
 @Controller
 public class AdminCategoryController {
 
     
     @Autowired
-    private CategoryRepository categoryRepository;
+    private CategoryService categoryService;
 
     @GetMapping("/AdminCategories")
     public String adminCategories(Model model) {
-        model.addAttribute("categorias", categoryRepository.findAll());
+        model.addAttribute("categorias", categoryService.findAll());
         return "AdminCategories";
     }
 
     
     @PostMapping("/AdminCategories")
-    public String createCategory(@RequestParam String name, 
-                                 @RequestParam("image") MultipartFile image, 
-                                 Model model) {
+    public String createCategory(@RequestParam String name,
+                                @RequestParam("image") MultipartFile image,
+                                Model model) {
 
-        if (categoryRepository.existsByName(name)) {
-            model.addAttribute("error", "La categoría '" + name + "' ya ha sido añadida.");
-            model.addAttribute("categorias", categoryRepository.findAll());
-            return "AdminCategories"; 
+        CategoryCreateDTO dto = new CategoryCreateDTO(name, image);
+
+        try {
+            categoryService.createCategory(dto);
+            return "redirect:/AdminCategories";
+
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("error", e.getMessage());
+            model.addAttribute("categorias", categoryService.findAll());
+            return "AdminCategories";
         }
-
-        Category c = new Category(name);
-        
-        categoryRepository.save(c);
-
-        return "redirect:/AdminCategories";
     }
+
+
 
     @GetMapping("/AdminCategories/Delete/{id}")
     public String deleteCategory(@PathVariable Long id) {
-        categoryRepository.deleteById(id);
+        categoryService.deleteById(id);
         return "redirect:/AdminCategories";
     }
 
+    /*
     @GetMapping("/AdminCategories/Edit/{id}")
     public String editCategory(@PathVariable Long id, Model model) {
         Category category = categoryRepository.findById(id).orElseThrow();
@@ -101,5 +107,5 @@ public class AdminCategoryController {
         Category category = categoryRepository.findById(id).orElseThrow();
         return category.getImage().getData();
     }
-    
+    */
 }

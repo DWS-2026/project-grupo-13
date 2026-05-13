@@ -3,24 +3,28 @@ package com.example.demo.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+
 import com.example.demo.Model.Category;
 import com.example.demo.Model.Image;
 import com.example.demo.Repository.CategoryRepository;
 import com.example.demo.Repository.ImageRepository;
+import com.example.demo.Service.ImageService;
+import com.example.demo.dto.CategoryCreateDTO;
 
 import java.util.List;
 
 @Service
 public class CategoryService {
 
-    private final CategoryRepository categoryRepository;
-
     @Autowired
     private ImageRepository imageRepository;
 
-    public CategoryService(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
-    }
+    @Autowired
+    private CategoryRepository categoryRepository;
+
+    @Autowired
+    private ImageService imageService;
 
     public List<Category> findAll() {
         return categoryRepository.findAll();
@@ -29,7 +33,6 @@ public class CategoryService {
     public Category findById(Long id) {
     return categoryRepository.findById(id).orElse(null);
     }
-
 
     public Category findByName(String name) {
         return categoryRepository.findByName(name);
@@ -47,7 +50,35 @@ public class CategoryService {
         categoryRepository.deleteById(id);
     }
 
-    public Category createCategory(Category category) {
+    public boolean existsById(long id) {
+        return categoryRepository.existsById(id);
+    }
+
+
+    public Category createCategory(CategoryCreateDTO data) {
+
+        if (categoryRepository.existsByName(data.name())) {
+            throw new IllegalArgumentException("La categoría '" + data.name() + "' ya existe");
+        }
+
+        Category category = new Category(data.name());
+
+        try {
+            if (data.image() != null && !data.image().isEmpty()) {
+                Image img = imageService.createImage(data.image());
+                category.setImage(img);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Error al guardar la imagen", e);
+        }
+
+        return categoryRepository.save(category);
+    }
+
+
+
+    //this is a temporary fix, not used right now
+    public Category createCategoryRest (Category category) {
 
         categoryRepository.save(category);
 
@@ -55,11 +86,8 @@ public class CategoryService {
 
     }
 
-    public boolean existsById(long id) {
-        return categoryRepository.existsById(id);
-    }
 
-    //These are methods for the ImageRestController
+    ////////////////////////////////////////////// ADD AND REMOVE IMAGES ////////////////////////////////////////////////
 
     public Category addImageToCategory(long id, Image image) {
 

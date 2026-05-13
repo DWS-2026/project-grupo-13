@@ -167,11 +167,8 @@ public class UserService {
     //////////////////////////////// UPLOAD AND DELETE PROFILE PICTURES ///////////////////////////////////////////
 
 
-    public void deleteImage(Long id) {
-        imageRepository.deleteById(id);
-    }
-
-    //for the file
+    //////////////////////////////// UPLOAD AND DOWNLOAD DOCUMENTS ////////////////////////////////////////////////
+    
     public ResponseEntity<?> addDniToUser(long userId, MultipartFile file) throws IOException {
          
         String nickname = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -182,10 +179,8 @@ public class UserService {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
-        
         User user = authenticatedUser;
 
-        
         Document doc = user.getDni();
         if (doc == null) {
             doc = new Document();
@@ -206,6 +201,35 @@ public class UserService {
 
         return ResponseEntity.ok().build();
     }
+
+    public Document getDocumentIfAuthorised(long documentId) {
+
+        Document doc = documentRepository.findById(documentId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Documento no encontrado"));
+
+        String nickname = SecurityContextHolder.getContext().getAuthentication().getName();
+        User authUser = userRepository.findByNickname(nickname);
+
+        if (authUser == null) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "No autenticado");
+        }
+
+        boolean isOwner = authUser.getId().equals(doc.getUser().getId());
+        boolean isAdmin = authUser.getRole().equals("ADMIN");
+
+        if (!isOwner && !isAdmin) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "No tienes permiso para descargar este documento");
+        }
+
+        return doc;
+    }
+
+
+
+    //////////////////////////////// UPLOAD AND DOWNLOAD DOCUMENTS ////////////////////////////////////////////////
+
+
+    //////////////////////////////// CREATE AND DESTROY USERS /////////////////////////////////////////////////////
 
     public UserDetailDTO createUser(UserCreateDTO dto) {
 

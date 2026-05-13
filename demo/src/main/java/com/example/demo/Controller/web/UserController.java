@@ -72,6 +72,7 @@ public class UserController {
         return userService.findAll();
     }
 
+    //no duplicated logic
     @PostMapping("/user/profile/upload")
     public String uploadProfileImage(
             @RequestParam("profileImage") MultipartFile file,
@@ -79,13 +80,14 @@ public class UserController {
 
         User user = userService.findByNickname(principal.getName());
 
-        // We use the service method, like in the RestController
         userService.uploadProfileImage(user.getId(), file);
 
         return "redirect:/EditProfile";
     }
 
+    /////////////////////////////////////////////// UPLOAD AND DOWNLOAD DNI //////////////////////////////////////////////
 
+    //no duplicated logic
     @PostMapping("/users/{id}/dni")
     public String uploadUserDni(
             @PathVariable long id,
@@ -102,11 +104,11 @@ public class UserController {
         return "redirect:/EditProfile"; 
     }
 
+    //no duplicated logic
     @GetMapping("/documents/{id}/file")
-    public ResponseEntity<Resource> downloadDni(@PathVariable long id) throws IOException {
+    public ResponseEntity<Resource> downloadDniWeb(@PathVariable long id) throws IOException {
 
-        Document doc = documentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Document not found"));
+        Document doc = userService.getDocumentIfAuthorised(id);
 
         Resource file = documentService.loadFile(doc.getFilePath());
 
@@ -117,7 +119,9 @@ public class UserController {
                 .body(file);
     }
 
+    /////////////////////////////////////////////// UPLOAD AND DOWNLOAD DNI //////////////////////////////////////////////
 
+    //no duplicated logic
     @GetMapping("/UserProfileView") 
     public String mostrarPerfil(Model model, Principal principal) {
         User user = userService.findByNickname(principal.getName());
@@ -125,12 +129,16 @@ public class UserController {
         return "EditProfile";
     }
 
+    //no duplicated logic
     @GetMapping("/EditData")
     public String mostrarEditarDatos(Model model, Principal principal) {
         User usuario = userService.findByNickname(principal.getName());
         model.addAttribute("usuario", usuario);
         return "EditData";
     }
+
+
+    //to be modified
 
     @PostMapping("/EditData")
     public String editarDatos(@RequestParam String nickname, @RequestParam String name, @RequestParam String surname,
@@ -164,6 +172,7 @@ public class UserController {
         return "redirect:/EditProfile";
     }
 
+    //idk what this is
     @GetMapping("/ChangePassword")
     public String changePasswordForm(Model model) {
         return "ChangePassword";

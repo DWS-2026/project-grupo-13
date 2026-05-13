@@ -26,6 +26,10 @@ import com.example.demo.Model.Review;
 import com.example.demo.Repository.ReviewRepository;
 import com.example.demo.Security.SecurityUtils;
 import com.example.demo.Service.ProductService;
+import com.example.demo.Service.ReviewService;
+
+import jakarta.persistence.EntityNotFoundException;
+
 import com.example.demo.Service.CategoryService;
 
 
@@ -40,7 +44,7 @@ public class ProductController {
     private ProductService productService;
 
     @Autowired
-    private ReviewRepository reviewService;
+    private ReviewService reviewService;
 
     @Autowired
     private CategoryService categoryService;
@@ -70,68 +74,54 @@ public class ProductController {
     @PostMapping("/producto/{id}/review")
     public String guardarReview(@PathVariable int id,
                                 @RequestParam String comentario,
-                                Review review,
-                                BindingResult result,
-                                Model model) {
+                                Review review) {
 
-        Product p = productService.findById(id);
-        if (p == null) {
+        try {
+            reviewService.saveReviewForProduct(id, comentario, review);
+        } catch (SecurityException e) {
+            return "redirect:/Login";
+        } catch (EntityNotFoundException e) {
             return "redirect:/";
         }
-
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-
-        if (username.equals("anonymousUser")) {
-            return "redirect:/Login";
-        }
-
-        review.setUsuario(username);
-        review.setFecha(LocalDate.now());
-        review.setProduct(p);
-
-        
-        String comentarioSaneado = SecurityUtils.sanitize(comentario);
-        review.setComentario(comentarioSaneado);
-
-        reviewRepository.save(review);
 
         return "redirect:/producto/" + id;
     }
 
 
     @GetMapping("/producto/{id}")
-public String verProducto(@PathVariable int id, Model model) {
-    Product p = productService.findById(id);
-    if (p == null) {
-        return "Error";
-    }
-
-    
-    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-    String currentUsername = auth.getName();
-
-    List<Review> valoraciones = reviewService.findByProductId(id);
-
-    // Lógica de seguridad: Marcamos cuáles puede borrar el usuario
-    for (Review r : valoraciones) {
-        if (currentUsername != null && currentUsername.equals(r.getUsuario())) {
-            r.setCanDelete(true);
+    public String verProducto(@PathVariable int id, Model model) {
+        Product p = productService.findById(id);
+        if (p == null) {
+            return "Error";
         }
+
+        
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String currentUsername = auth.getName();
+
+        List<Review> valoraciones = reviewService.findByProductId(id);
+
+        
+        for (Review r : valoraciones) {
+            if (currentUsername != null && currentUsername.equals(r.getUsuario())) {
+                r.setCanDelete(true);
+            }
+        }
+
+        model.addAttribute("producto", p);
+        model.addAttribute("valoraciones", valoraciones);
+        model.addAttribute("nuevaReview", new Review());
+
+        return "Product"; 
     }
-
-    model.addAttribute("producto", p);
-    model.addAttribute("valoraciones", valoraciones);
-    model.addAttribute("nuevaReview", new Review());
-
-    return "Product"; 
-}
 
     @GetMapping("/PromotionsScreen")
     public String verPromociones(Model model) {
         model.addAttribute("promociones", productService.findPromotions());
         return "PromotionsScreen"; 
     }
+
+    
 
 
 

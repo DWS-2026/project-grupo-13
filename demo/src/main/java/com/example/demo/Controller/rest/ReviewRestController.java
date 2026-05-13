@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.data.domain.Page;
@@ -30,7 +32,7 @@ import com.example.demo.dto.ReviewDetailDTO;
 import com.example.demo.dto.mapper.ProductBasicMapper;
 import com.example.demo.dto.mapper.ProductDetailMapper;
 import com.example.demo.dto.mapper.ReviewDetailMapper;
-
+import org.springframework.security.access.AccessDeniedException;
 import jakarta.persistence.EntityNotFoundException;
 
 import com.example.demo.Service.ReviewService;
@@ -58,11 +60,7 @@ public class ReviewRestController {
     @Autowired
     private ReviewRepository reviewRepository;
 
-    @Autowired
-    private ProductRepository productRepository;
-
-    @Autowired
-    private UserRepository userRepository;
+    
 
     //show all reviews in the DB
     @GetMapping("/")
@@ -76,42 +74,44 @@ public class ReviewRestController {
         return reviewDetailMapper.toDTO(reviewService.findById(id));
     }
 
-    @PostMapping("/products/{productId}/reviews")
-    @Transactional
-    public Review createReview( @PathVariable int productId,
-        @RequestBody Review review) {
+    
 
-        Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new EntityNotFoundException("Product not found"));
-
-        String nickname = SecurityContextHolder.getContext().getAuthentication().getName();
-        User authenticatedUser = userRepository.findByNickname(nickname);
-
-        if (authenticatedUser == null) {
-            review.setUsuario("anonimo");
-        } else {
-            review.setUsuario(authenticatedUser.getNickname());
-            review.setUser(authenticatedUser);
-        }
-
-        review.setFecha(LocalDate.now());
-        review.setProduct(product);
-
-        return reviewRepository.save(review);
-    }
-
-    @PutMapping("/reviews/{reviewId}")
-    public ResponseEntity<Review> updateReview(
+    @PutMapping("/{reviewId}")
+    public ResponseEntity<?> updateReview(
             @PathVariable long reviewId,
             @RequestBody Review newData) {
 
-        Review updated = reviewService.updateReview(reviewId, newData);
-        return ResponseEntity.ok(updated);
+        try {
+            Review updated = reviewService.updateReview(reviewId, newData);
+            return ResponseEntity.ok(updated);
+
+        } catch (AccessDeniedException e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                    .body("No tienes permiso para editar esta review");
+
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Review no encontrada");
+        }
     }
 
-    @DeleteMapping("/reviews/{id}")
-    public ResponseEntity<?> deleteReview(@PathVariable int id) {
-        return reviewService.deleteReview(id);
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteReview(@PathVariable long id) {
+
+        try {
+            reviewService.deleteReview(id);
+            return ResponseEntity.ok("Review eliminada correctamente");
+
+        } catch (AccessDeniedException e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                    .body("No tienes permiso para borrar esta review");
+
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Review no encontrada");
+        }
     }
 
 }

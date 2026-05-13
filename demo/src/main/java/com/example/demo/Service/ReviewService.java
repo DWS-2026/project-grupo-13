@@ -5,13 +5,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-
+import org.springframework.security.access.AccessDeniedException;
 import com.example.demo.Model.Product;
 import com.example.demo.Model.Review;
 import com.example.demo.Model.User;
 import com.example.demo.Repository.ReviewRepository;
 import com.example.demo.Repository.ProductRepository;
 import com.example.demo.Repository.UserRepository;
+import com.example.demo.Security.SecurityUtils;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -61,38 +62,68 @@ public class ReviewService {
     }
 
     public Review updateReview(long reviewId, Review newData) {
+
         Review review = reviewRepository.findById(reviewId)
                 .orElseThrow(() -> new EntityNotFoundException("Review not found"));
 
-        review.setUsuario(newData.getUsuario());
+        String nickname = SecurityContextHolder.getContext().getAuthentication().getName();
+        
+
+        if (!review.getUsuario().equals(nickname)) {
+        throw new AccessDeniedException("No puedes editar una review que no es tuya");
+        }
+
+        
         review.setEstrellas(newData.getEstrellas());
+        review.setComentario(newData.getComentario());
 
         return reviewRepository.save(review);
     }
 
-    public ResponseEntity<?> deleteReview(long reviewId) {
 
-        String nickname = SecurityContextHolder.getContext().getAuthentication().getName();
-        User authenticatedUser = userRepository.findByNickname(nickname);
+    public void deleteReview(long reviewId) {
 
         Review review = reviewRepository.findById(reviewId)
-                .orElseThrow(() -> new RuntimeException("Review no encontrada"));
+                .orElseThrow(() -> new EntityNotFoundException("Review no encontrada"));
+        String nickname = SecurityContextHolder.getContext().getAuthentication().getName();
 
-        if (review.getUser() == null) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("La review no tiene usuario asignado");
-        }
-
-        if (review.getUser().getId() != authenticatedUser.getId()) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .body("No puedes borrar una review que no es tuya");
+        if (!review.getUsuario().equals(nickname)) {
+        throw new AccessDeniedException("No puedes borrar una review que no es tuya");
         }
 
         reviewRepository.delete(review);
-        return ResponseEntity.ok("Review eliminada correctamente");
     }
+    
     
     public void deleteById(Long id) {
         reviewRepository.deleteById(id);
     }
+
+    public Review saveReviewForProduct(int productId, String comentario, Review review) {
+
+        
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new EntityNotFoundException("Producto no encontrado"));
+
+        
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (username.equals("anonymousUser")) {
+            throw new SecurityException("Usuario no autenticado");
+        }
+
+        
+        String comentarioSaneado = SecurityUtils.sanitize(comentario);
+
+        
+        review.setUsuario(username);
+        review.setFecha(LocalDate.now());
+        review.setComentario(comentarioSaneado);
+        review.setProduct(product);
+
+        
+        save(review);
+
+        return review;
+    }
+
 }

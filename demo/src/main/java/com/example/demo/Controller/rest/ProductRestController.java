@@ -5,6 +5,7 @@ import java.net.URI;
 import java.sql.SQLException;
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import org.springframework.data.domain.Page;
@@ -28,8 +30,13 @@ import com.example.demo.dto.ProductBasicDTO;
 import com.example.demo.dto.ProductDetailDTO;
 import com.example.demo.dto.ProductCreateDTO;
 import com.example.demo.dto.mapper.ProductBasicMapper;
+import org.springframework.transaction.annotation.Transactional;
 import com.example.demo.dto.mapper.ProductDetailMapper;
+import com.example.demo.Service.ReviewService;
+import jakarta.persistence.EntityNotFoundException;
+
 import com.example.demo.Model.Product;
+import com.example.demo.Model.Review;
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
@@ -42,6 +49,10 @@ public class ProductRestController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private ReviewService reviewService;
+
 
     @Autowired
     private ImageService imageService;
@@ -120,5 +131,29 @@ public class ProductRestController {
         productService.assignCategory(productId, categoryId);
         return ResponseEntity.ok().build();
     }
+
+    @PostMapping("/{productId}/reviews")
+    @Transactional
+    public ResponseEntity<Review> createReview(
+            @PathVariable int productId,
+            @RequestBody Review review) {
+
+        try {
+            Review saved = reviewService.saveReviewForProduct(
+                    productId,
+                    review.getComentario(),
+                    review
+            );
+
+            return ResponseEntity.ok(saved);
+
+        } catch (SecurityException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
 
 }

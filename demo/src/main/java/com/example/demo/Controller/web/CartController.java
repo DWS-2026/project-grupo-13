@@ -102,45 +102,7 @@ public class CartController {
     }
 
 
-    @PostMapping("/pagar")
-    public String pagar(Authentication auth) {
-
-        String nickname = auth.getName();
-        User user = userService.findByNickname(nickname);
-
-        List<CartItem> carrito = cartService.getCartItems(nickname);
-
-        Order order = new Order();
-        order.setFecha(LocalDateTime.now());
-        order.setUser(user);
-
-        List<OrderItem> items = new ArrayList<>();
-
-        for (CartItem c : carrito) {
-
-            if (c.getCantidad()< 1 || c.getCantidad() > 10) {
-                return "Error";
-            }
-
-            Product p = productService.findById(c.getProductId());
-
-            OrderItem item = new OrderItem();
-            item.setOrder(order);
-            item.setProduct(p);
-            item.setCantidad(c.getCantidad());
-            item.setPrecio(p.getPrecio());
-
-            items.add(item);
-        }
-
-        order.setItems(items);
-
-        orderService.save(order);
-
-        cartService.clearCart(nickname);
-
-        return "redirect:/mis-pedidos";
-    }
+    
 
 
 }

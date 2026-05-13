@@ -24,6 +24,8 @@ import com.example.demo.Repository.DocumentRepository;
 import com.example.demo.Service.DocumentService;
 import com.example.demo.dto.UserCreateDTO;
 import com.example.demo.dto.UserDetailDTO;
+import com.example.demo.dto.UserPasswordUpdateDTO;
+import com.example.demo.dto.UserUpdateDTO;
 import com.example.demo.dto.mapper.UserDetailMapper;
 
 import com.example.demo.Service.ImageService;
@@ -165,7 +167,70 @@ public class UserService {
 
 
     //////////////////////////////// UPLOAD AND DELETE PROFILE PICTURES ///////////////////////////////////////////
+    
+    //////////////////////////////// UPDATE A USER ////////////////////////////////////////////////////////////////
 
+    public User updateUser(Long id, UserUpdateDTO data) {
+
+        String nickname = SecurityContextHolder.getContext().getAuthentication().getName();
+        User authUser = userRepository.findByNickname(nickname);
+
+        if (authUser == null) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "No autenticado");
+        }
+
+        boolean isOwner = authUser.getId().equals(id);
+        boolean isAdmin = authUser.getRole().equals("ADMIN");
+
+        if (!isOwner && !isAdmin) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "No tienes permiso para modificar este usuario");
+        }
+
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
+
+        if (data.email() != null) {
+            User otro = userRepository.findByEmail(data.email());
+            if (otro != null && !otro.getId().equals(id)) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email duplicado");
+            }
+        }
+
+        // 5. Actualizar campos
+        if (data.name() != null) user.setName(data.name());
+        if (data.surname() != null) user.setSurname(data.surname());
+        if (data.email() != null) user.setEmail(data.email());
+        if (data.birthDate() != null) user.setBirthDate(data.birthDate());
+
+        return userRepository.save(user);
+    }
+
+    public void updatePassword(Long userId, UserPasswordUpdateDTO data) {
+
+        String nickname = SecurityContextHolder.getContext().getAuthentication().getName();
+        User authUser = userRepository.findByNickname(nickname);
+
+        if (authUser == null) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "No autenticado");
+        }
+
+        if (!authUser.getId().equals(userId)) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "No tienes permiso para cambiar esta contraseña");
+        }
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
+
+        if (!passwordEncoder.matches(data.oldPassword(), user.getEncodedPassword())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "La contraseña antigua no es correcta");
+        }
+
+        user.setEncodedPassword(passwordEncoder.encode(data.newPassword()));
+        userRepository.save(user);
+    }
+
+
+    //////////////////////////////// UPDATE A USER ////////////////////////////////////////////////////////////////
 
     //////////////////////////////// UPLOAD AND DOWNLOAD DOCUMENTS ////////////////////////////////////////////////
     

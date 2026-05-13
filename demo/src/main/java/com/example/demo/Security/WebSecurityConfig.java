@@ -104,7 +104,7 @@ public class WebSecurityConfig {
                         // Users
                         .requestMatchers(HttpMethod.GET, "/api/v1/users/**").hasRole("ADMIN") //only an admin can see all the logged users
                         .requestMatchers(HttpMethod.POST, "/api/v1/users/**").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/api/v1/users/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/v1/users/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/v1/users/**").hasRole("ADMIN")
                         // Files
                         .requestMatchers(HttpMethod.POST, "/api/v1/documents/users/*/dni").hasAnyRole("USER", "ADMIN")

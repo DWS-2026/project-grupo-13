@@ -11,6 +11,8 @@ import com.example.demo.Model.Product;
 import com.example.demo.Service.ImageService;
 import com.example.demo.Service.UserService;
 import com.example.demo.dto.UserDetailDTO;
+import com.example.demo.dto.UserPasswordUpdateDTO;
+import com.example.demo.dto.UserUpdateDTO;
 import com.example.demo.Model.User;
 import com.example.demo.Repository.UserRepository;
 
@@ -97,22 +99,21 @@ public class UserRestController {
 
     //replace a user
     @PutMapping("/{id}")
-    public UserDetailDTO replaceUser(@PathVariable Long id, @RequestBody UserDetailDTO newUserDTO) {
+    public UserDetailDTO replaceUser(@PathVariable Long id, @RequestBody UserUpdateDTO dto) {
 
-        if (userService.existsById(id)) {
+        User updated = userService.updateUser(id, dto);
 
-            User newUser = userDetailMapper.toDomain(newUserDTO);
-
-            newUser.setId(id);
-            userService.save(newUser);
-
-            return userDetailMapper.toDTO(newUser);
-
-        } else {
-            throw new NoSuchElementException();
-        }
-
+        return userDetailMapper.toDTO(updated);
     }
+
+    @PutMapping("/{id}/password")
+    public ResponseEntity<Void> changePassword(@PathVariable Long id,
+                                            @RequestBody UserPasswordUpdateDTO dto) {
+
+        userService.updatePassword(id, dto);
+        return ResponseEntity.noContent().build();
+    }
+
 
     //////////////////////////////////////////// UPLOAD AND DELETE PROFILE IMAGES ////////////////////////////////////////7
 

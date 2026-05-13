@@ -11,12 +11,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.Model.Image;
 import com.example.demo.Model.User;
 import com.example.demo.Security.RepositoryUserDetailsService;
 import com.example.demo.Service.UserService;
+import com.example.demo.dto.UserPasswordUpdateDTO;
+import com.example.demo.dto.UserUpdateDTO;
 import com.example.demo.Service.ImageService;
 
 import java.io.IOException;
@@ -26,6 +29,7 @@ import java.util.List;
 
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
@@ -138,62 +142,71 @@ public class UserController {
     }
 
 
-    //to be modified
-
+    //no duplicated logic
     @PostMapping("/EditData")
-    public String editarDatos(@RequestParam String nickname, @RequestParam String name, @RequestParam String surname,
-                              @RequestParam String email, @RequestParam(required = false) String password,
-                              @RequestParam String birthDate, Principal principal, Model model) {
+    public String editarDatos(@RequestParam String name,
+                            @RequestParam String surname,
+                            @RequestParam String email,
+                            @RequestParam String birthDate,
+                            Principal principal,
+                            Model model) {
+
         User usuario = userService.findByNickname(principal.getName());
-        //usuario.setNickname(nickname);
-        usuario.setName(name);
-        usuario.setSurname(surname);
-        usuario.setEmail(email);
-        usuario.setBirthDate(LocalDate.parse(birthDate));
 
-        
-        User otro = userService.findByEmail(email);
+        UserUpdateDTO data = new UserUpdateDTO(
+                name,
+                surname,
+                email,
+                LocalDate.parse(birthDate)
+        );
 
-        if (otro != null && !(otro.getId().equals(usuario.getId()))) {
-            model.addAttribute("errorEmailDuplicado", true);
-            model.addAttribute("emailFallido", email);
-            model.addAttribute("usuario", usuario);
-            return "EditData";
+        try {
+            User updated = userService.updateUser(usuario.getId(), data);
+            actualizarSesion(updated);
+            return "redirect:/EditProfile";
+
+        } catch (ResponseStatusException ex) {
+            if (ex.getStatusCode() == HttpStatus.BAD_REQUEST) {
+                model.addAttribute("errorEmailDuplicado", true);
+                model.addAttribute("emailFallido", email);
+                model.addAttribute("usuario", usuario);
+                return "EditData";
+            }
+            throw ex;
         }
-
-
-
-        if (password != null && !password.isBlank()) {
-            usuario.setEncodedPassword(passwordEncoder.encode(password));
-        }
-
-        userService.save(usuario);
-        actualizarSesion(usuario);
-        return "redirect:/EditProfile";
     }
 
-    //idk what this is
+
     @GetMapping("/ChangePassword")
     public String changePasswordForm(Model model) {
         return "ChangePassword";
     }
 
+    //no duplicated logic
     @PostMapping("/ChangePassword")
-    public String changePassword(@RequestParam String oldPassword, @RequestParam String newPassword, 
-                                 Principal principal, Model model) {
+    public String changePassword(@RequestParam String oldPassword,
+                                @RequestParam String newPassword,
+                                Principal principal,
+                                Model model) {
+
         User usuario = userService.findByNickname(principal.getName());
 
-        if (!passwordEncoder.matches(oldPassword, usuario.getEncodedPassword())) {
-            model.addAttribute("errorPassword", true);
-            return "ChangePassword";
-        }
+        UserPasswordUpdateDTO data = new UserPasswordUpdateDTO(oldPassword, newPassword);
 
-        usuario.setEncodedPassword(passwordEncoder.encode(newPassword));
-        userService.save(usuario);
-        
-        actualizarSesion(usuario);
-        return "redirect:/EditProfile?passwordChanged";
+        try {
+            userService.updatePassword(usuario.getId(), data);
+            actualizarSesion(usuario);
+            return "redirect:/EditProfile?passwordChanged";
+
+        } catch (ResponseStatusException ex) {
+            if (ex.getStatusCode() == HttpStatus.BAD_REQUEST) {
+                model.addAttribute("errorPassword", true);
+                return "ChangePassword";
+            }
+            throw ex;
+        }
     }
+
 
     private void actualizarSesion(User usuario) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(usuario.getNickname());

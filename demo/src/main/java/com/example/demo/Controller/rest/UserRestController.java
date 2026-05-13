@@ -77,28 +77,14 @@ public class UserRestController {
     }
 
     //create new user
-    @PostMapping("/")
+    @PostMapping("/register")
     public ResponseEntity<UserDetailDTO> createUser(@RequestBody UserCreateDTO dto) {
-System.out.println(">>> ENTRA EN EL CONTROLLER createUser()");
-    System.out.println(">>> DTO RECIBIDO: " + dto);
+
         UserDetailDTO created = userService.createUser(dto);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
-    /*
-    
-    example:
-
-    {
-    "name": "Lucía",
-    "surname": "Martínez",
-    "email": "lucia@example.com",
-    "nickname": "lmartinez",
-    "password": "ClaveUltraSegura456",
-    "birthDate": "1998-11-03"
-    }
-
-    */
 
 
     //delete a user

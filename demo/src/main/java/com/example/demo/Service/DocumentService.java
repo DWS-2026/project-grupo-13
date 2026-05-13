@@ -27,29 +27,20 @@ public class DocumentService {
             throw new IOException("El archivo no puede estar vacío");
         }
 
-        
         String originalName = StringUtils.cleanPath(file.getOriginalFilename());
 
         if (originalName.contains("..")) {
             throw new IOException("Nombre de archivo no válido");
         }
 
-        
-        String extension = "";
-        if (originalName.contains(".")) {
-            extension = originalName.substring(originalName.lastIndexOf("."));
-        } else {
-            extension = ".bin"; 
-        }
+        // same name, no changes
+        Path destination = root.resolve(originalName);
 
-        String storedName = "manual_" + documentId + extension;
-        Path destination = root.resolve(storedName);
-
-       
         Files.copy(file.getInputStream(), destination, StandardCopyOption.REPLACE_EXISTING);
 
         return destination.toString();
     }
+
 
     public Resource loadFile(String path) throws IOException {
         Path file = Paths.get(path);

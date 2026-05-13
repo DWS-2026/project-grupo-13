@@ -57,8 +57,6 @@ public class DocumentRestController {
     private UserService userService;
 
 
-    //this method extracts the nickname used to login from the contextHolder and checks if the 
-    //item trying to be modified is asociated with the logged user
     @PostMapping("/users/{id}/dni")
     public ResponseEntity<?> uploadUserDni(
             @PathVariable long id,
@@ -68,7 +66,7 @@ public class DocumentRestController {
         try {
             ResponseEntity<?> response = userService.addDniToUser(id, file);
             redirectAttributes.addFlashAttribute("success", "DNI subido correctamente");
-            return response; // ← usa la respuesta del service directamente
+            return response;
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Error al subir el DNI");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -76,20 +74,10 @@ public class DocumentRestController {
     }
 
 
-    @GetMapping("/{id}/file")
+    @GetMapping("/users/{id}/dni")
     public ResponseEntity<Resource> downloadDni(@PathVariable long id) throws IOException {
 
-        Document doc = documentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Document not found"));
-
-
-        // Only the owner can download the file
-        String nickname = SecurityContextHolder.getContext().getAuthentication().getName();
-        User authenticatedUser = userRepository.findByNickname(nickname);
-
-        if (doc.getUser().getId() != authenticatedUser.getId()) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
+        Document doc = userService.getDocumentIfAuthorised(id);
 
         Resource file = documentService.loadFile(doc.getFilePath());
 

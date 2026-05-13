@@ -86,8 +86,6 @@ public class UserRestController {
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
-
-
     //delete a user
     @DeleteMapping("/{id}")
     public UserDetailDTO deleteUser(@PathVariable Long id) {
@@ -96,7 +94,6 @@ public class UserRestController {
 
         return userDetailMapper.toDTO(deleted);
     }
-
 
     //replace a user
     @PutMapping("/{id}")
@@ -116,6 +113,8 @@ public class UserRestController {
         }
 
     }
+
+    //////////////////////////////////////////// UPLOAD AND DELETE PROFILE IMAGES ////////////////////////////////////////7
 
     @PostMapping("/{id}/image")
     public ResponseEntity<ImageDTO> uploadProfileImage(

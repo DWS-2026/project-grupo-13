@@ -26,6 +26,8 @@ import com.example.demo.dto.UserCreateDTO;
 import com.example.demo.dto.UserDetailDTO;
 import com.example.demo.dto.mapper.UserDetailMapper;
 
+import com.example.demo.Service.ImageService;
+
 import jakarta.persistence.EntityNotFoundException;
 
 
@@ -37,6 +39,9 @@ public class UserService {
 
     @Autowired
     private ImageRepository imageRepository;
+
+    @Autowired
+    private ImageService imageService;
 
     @Autowired
     private DocumentRepository documentRepository;
@@ -54,9 +59,7 @@ public class UserService {
     
    public User save(User user) {
 
-        
         if (user.getId() == null) {
-
 
             if (userRepository.findByNickname(user.getNickname()) != null) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Nickname ya existe");
@@ -67,12 +70,10 @@ public class UserService {
             }
         }
 
-        
         if (user.getEncodedPassword() != null && !user.getEncodedPassword().startsWith("$2a$")) {
             user.setEncodedPassword(passwordEncoder.encode(user.getEncodedPassword()));
         }
 
-        
         if (user.getRole() == null) {
             user.setRole("USER");
         }
@@ -110,31 +111,47 @@ public class UserService {
         return userRepository.findByNickname(nickname);
     }
 
-    
-    public User addImageToUser(Long id, Image image) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+    //////////////////////////////// UPLOAD AND DELETE PROFILE PICTURES ///////////////////////////////////////////
+
+    public Image uploadProfileImage(Long userId, MultipartFile imageFile) throws IOException {
+
+        if (imageFile.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El archivo no puede estar vacío");
+        }
+
+        // Crear la imagen
+        Image image = imageService.createImage(imageFile.getInputStream());
+
+        // Asociarla al usuario
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
 
         user.setProfileImage(image);
         userRepository.save(user);
 
-        return user;
+        return image;
     }
 
-    public User removeImageFromUser(Long id) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+        public void deleteProfileImage(Long userId) {
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
+
+        if (user.getProfileImage() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El usuario no tiene imagen");
+        }
 
         Image image = user.getProfileImage();
         user.setProfileImage(null);
         userRepository.save(user);
 
-        if (image != null) {
-            imageRepository.delete(image);
-        }
-
-        return user;
+        imageService.deleteImage(image.getId());
     }
+
+
+
+
 
     public void deleteImage(Long id) {
         imageRepository.deleteById(id);

@@ -113,28 +113,6 @@ public class ImageRestController {
         return imageMapper.toDTO(image);
     }
 
-    //Methods for user images
-    @PostMapping("/users/{id}/image")
-    public ResponseEntity<ImageDTO> createUserImage(
-            @PathVariable long id,
-            @RequestParam MultipartFile imageFile) throws IOException {
-
-        if (imageFile.isEmpty()) {
-            throw new IllegalArgumentException("The file cannot be empty");
-        }
-
-        Image image = imageService.createImage(imageFile.getInputStream());
-        userService.addImageToUser(id, image);
-
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentContextPath()
-                .path("/images/{imageId}/media")
-                .buildAndExpand(image.getId())
-                .toUri();
-
-        return ResponseEntity.created(location).body(imageMapper.toDTO(image));
-    }
-
     @PutMapping("/users/{id}/image")
     public ResponseEntity<Void> replaceUserImage(
             @PathVariable long id,
@@ -146,27 +124,6 @@ public class ImageRestController {
 
         imageService.replaceImage(id, imageFile.getBytes());
         return ResponseEntity.noContent().build();
-    }
-
-    @DeleteMapping("/users/{userId}/image/{imageId}")
-    public ResponseEntity<ImageDTO> deleteUserImage(
-            @PathVariable long userId,
-            @PathVariable long imageId) {
-
-        
-        User loggedUser = getLoggedUser(); 
-
-        
-        if (loggedUser.getId() != userId && !loggedUser.getRole().equals("ADMIN")) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build(); // 403 Forbidden
-        }
-
-        Image image = imageService.getImage(imageId);
-
-        userService.removeImageFromUser(userId);
-        imageService.deleteImage(imageId);
-
-        return ResponseEntity.ok(imageMapper.toDTO(image));
     }
 
 

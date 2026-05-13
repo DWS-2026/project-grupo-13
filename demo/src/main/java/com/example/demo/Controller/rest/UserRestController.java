@@ -35,6 +35,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
@@ -116,7 +117,7 @@ public class UserRestController {
 
     }
     
-    
+    /*
     @PostMapping("/{id}/image")
     public ResponseEntity<ImageDTO> uploadProfileImage(@PathVariable Long id,
                                                        @RequestParam("imageFile") org.springframework.web.multipart.MultipartFile imageFile)
@@ -137,7 +138,25 @@ public class UserRestController {
 
         return ResponseEntity.created(location).body(imageMapper.toDTO(image));
     }
+        */
 
+    @PostMapping("/{id}/image")
+    public ResponseEntity<ImageDTO> uploadProfileImage(
+            @PathVariable Long id,
+            @RequestParam("imageFile") MultipartFile imageFile) throws IOException {
+
+        Image image = userService.uploadProfileImage(id, imageFile);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentContextPath()
+                .path("/images/{imageId}/media")
+                .buildAndExpand(image.getId())
+                .toUri();
+
+        return ResponseEntity.created(location).body(imageMapper.toDTO(image));
+    }
+
+    /*
     @DeleteMapping("/{id}/image")
     public ResponseEntity<ImageDTO> deleteProfileImage(@PathVariable Long id) {
         User user = userService.findById(id);
@@ -149,6 +168,13 @@ public class UserRestController {
             return ResponseEntity.ok(imageMapper.toDTO(image));
         }
 
+        return ResponseEntity.noContent().build();
+    }
+    */
+
+    @DeleteMapping("/{id}/image")
+    public ResponseEntity<Void> deleteProfileImage(@PathVariable Long id) {
+        userService.deleteProfileImage(id);
         return ResponseEntity.noContent().build();
     }
 

@@ -28,8 +28,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.demo.Model.Document;
 import com.example.demo.Service.DocumentService;
@@ -75,15 +73,18 @@ public class UserController {
     }
 
     @PostMapping("/user/profile/upload")
-    public String uploadProfileImage(@RequestParam("profileImage") MultipartFile file, Principal principal) throws IOException {
+    public String uploadProfileImage(
+            @RequestParam("profileImage") MultipartFile file,
+            Principal principal) throws IOException {
+
         User user = userService.findByNickname(principal.getName());
-        if (!file.isEmpty()) {
-            Image img = imageService.createImage(file);
-            user.setProfileImage(img);
-            userService.save(user);
-        }
+
+        // We use the service method, like in the RestController
+        userService.uploadProfileImage(user.getId(), file);
+
         return "redirect:/EditProfile";
     }
+
 
     @PostMapping("/users/{id}/dni")
     public String uploadUserDni(

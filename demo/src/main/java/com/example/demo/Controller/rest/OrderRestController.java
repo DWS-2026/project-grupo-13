@@ -1,32 +1,16 @@
 package com.example.demo.Controller.rest;
 
-import java.net.URI;
-import java.util.List;
-import java.util.NoSuchElementException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.Service.OrderService;
-import com.example.demo.dto.OrderBasicDTO;
 import com.example.demo.dto.OrderDetailDTO;
-import com.example.demo.dto.mapper.OrderBasicMapper;
 import com.example.demo.dto.mapper.OrderDetailMapper;
 import com.example.demo.Model.Order;
-import com.example.demo.Repository.OrderRepository;
 
-import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.security.access.AccessDeniedException;
 
 @RestController
 @RequestMapping("/api/v1/orders")
@@ -36,58 +20,39 @@ public class OrderRestController {
     private OrderService orderService;
 
     @Autowired
-    private OrderBasicMapper orderBasicMapper;
-
-    @Autowired
     private OrderDetailMapper orderDetailMapper;
 
-    @Autowired
-    private OrderRepository orderRepository;
-
-    //show all orders in the DB
-    @GetMapping("/")
-    public Page<OrderBasicDTO> getOrders(Pageable pageable) {
-        return orderRepository.findAll(pageable).map(orderBasicMapper::toDTO);
-    }
-
-    //show one detailed order
     @GetMapping("/{id}")
-    public OrderDetailDTO getOrder(@PathVariable Long id) {
-        Order order = orderService.findById(id);
-        if (order == null) {
-            throw new NoSuchElementException();
+    public ResponseEntity<?> getOrder(@PathVariable Long id) {
+        try {
+            Order order = orderService.findByIdForUser(id);
+            return ResponseEntity.ok(orderDetailMapper.toDTO(order));
+        } catch (AccessDeniedException e) {
+            return ResponseEntity.status(403).body("No puedes ver este pedido");
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(404).body("Pedido no encontrado");
         }
-        return orderDetailMapper.toDTO(order);
     }
 
-    //create a new order
     @PostMapping("/")
-    public ResponseEntity<OrderDetailDTO> createOrder(@RequestBody OrderDetailDTO orderDetailDTO) {
-
-        Order order = orderDetailMapper.toDomain(orderDetailDTO);
-
-        order = orderService.save(order);
-
-        orderDetailDTO = orderDetailMapper.toDTO(order);
-
-        URI location = fromCurrentRequest().path("/{id}").buildAndExpand(orderDetailDTO.id()).toUri();
-
-        return ResponseEntity.created(location).body(orderDetailDTO);
-    }
-
-    // delete an order
-    @DeleteMapping("/{id}")
-    public OrderDetailDTO deleteOrder(@PathVariable Long id) {
-
-        Order order = orderService.findById(id);
-
-        if (order == null) {
-            throw new NoSuchElementException("Order not found with id: " + id);
+    public ResponseEntity<?> createOrder() {
+        try {
+            Order order = orderService.createOrderFromCart();
+            return ResponseEntity.ok(orderDetailMapper.toDTO(order));
+        } catch (IllegalStateException | IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
-
-        orderService.deleteById(id);
-
-        return orderDetailMapper.toDTO(order);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteOrder(@PathVariable Long id) {
+        try {
+            orderService.deleteByIdForUser(id);
+            return ResponseEntity.ok("Pedido eliminado");
+        } catch (AccessDeniedException e) {
+            return ResponseEntity.status(403).body("No puedes borrar este pedido");
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(404).body("Pedido no encontrado");
+        }
+    }
 }

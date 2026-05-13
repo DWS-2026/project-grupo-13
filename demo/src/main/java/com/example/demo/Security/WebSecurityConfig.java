@@ -16,6 +16,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 
 import com.example.demo.Security.jwt.JwtRequestFilter;
 import com.example.demo.Security.jwt.JwtTokenProvider;
@@ -62,7 +63,14 @@ public class WebSecurityConfig {
 
         http
                 .securityMatcher("/api/**")
-                .exceptionHandling(handling -> handling.authenticationEntryPoint(unauthorizedHandlerJwt));
+                .exceptionHandling(handling -> handling
+                        .authenticationEntryPoint(unauthorizedHandlerJwt) // 401 cuando NO estás autenticado
+                        .accessDeniedHandler((request, response, accessDeniedException) -> { // 403 cuando NO tienes permiso
+                        response.setStatus(HttpStatus.FORBIDDEN.value());
+                        response.setContentType("application/json");
+                        response.getWriter().write("{\"error\":\"No tienes permiso para realizar esta acción\"}");
+                        })
+                );
 
         http
                 .authorizeHttpRequests(authorize -> authorize
@@ -93,14 +101,14 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/v1/categories/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/v1/categories/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/v1/categories/**").hasRole("ADMIN")
-                        // Products
-                        .requestMatchers(HttpMethod.POST, "/api/v1/products/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/v1/products/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/v1/products/**").hasRole("ADMIN")
                         // Reviews
                         .requestMatchers(HttpMethod.POST, "/api/v1/products/*/reviews", "/api/products/*/reviews/").hasRole("USER")
                         .requestMatchers(HttpMethod.PUT, "/api/v1/products/*/reviews/*").hasRole("USER")
                         .requestMatchers(HttpMethod.DELETE, "/api/v1/products/*/reviews/*").hasRole("USER")
+                        // Products
+                        .requestMatchers(HttpMethod.POST, "/api/v1/products/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/v1/products/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/products/**").hasRole("ADMIN")
                         // Users
                         .requestMatchers(HttpMethod.GET, "/api/v1/users/**").hasRole("ADMIN") //only an admin can see all the logged users
                         .requestMatchers(HttpMethod.POST, "/api/v1/users/**").permitAll()

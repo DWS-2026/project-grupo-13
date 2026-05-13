@@ -120,10 +120,24 @@ public class UserService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El archivo no puede estar vacío");
         }
 
-        // Crear la imagen
+        
+        String nickname = SecurityContextHolder.getContext().getAuthentication().getName();
+        User authUser = userRepository.findByNickname(nickname);
+
+        if (authUser == null) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "No autenticado");
+        }
+
+        
+        boolean isOwner = authUser.getId().equals(userId);
+        boolean isAdmin = authUser.getRole().equals("ADMIN");
+
+        if (!isOwner && !isAdmin) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "No tienes permiso para modificar este perfil");
+        }
+
         Image image = imageService.createImage(imageFile.getInputStream());
 
-        // Asociarla al usuario
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
 
@@ -150,7 +164,7 @@ public class UserService {
     }
 
 
-
+    //////////////////////////////// UPLOAD AND DELETE PROFILE PICTURES ///////////////////////////////////////////
 
 
     public void deleteImage(Long id) {

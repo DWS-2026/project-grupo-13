@@ -116,29 +116,6 @@ public class UserRestController {
         }
 
     }
-    
-    /*
-    @PostMapping("/{id}/image")
-    public ResponseEntity<ImageDTO> uploadProfileImage(@PathVariable Long id,
-                                                       @RequestParam("imageFile") org.springframework.web.multipart.MultipartFile imageFile)
-            throws IOException {
-
-        if (imageFile.isEmpty()) {
-            throw new IllegalArgumentException("El archivo no puede estar vacío");
-        }
-
-        Image image = imageService.createImage(imageFile.getInputStream());
-        userService.addImageToUser(id, image);
-
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentContextPath()
-                .path("/images/{imageId}/media")
-                .buildAndExpand(image.getId())
-                .toUri();
-
-        return ResponseEntity.created(location).body(imageMapper.toDTO(image));
-    }
-        */
 
     @PostMapping("/{id}/image")
     public ResponseEntity<ImageDTO> uploadProfileImage(
@@ -155,22 +132,6 @@ public class UserRestController {
 
         return ResponseEntity.created(location).body(imageMapper.toDTO(image));
     }
-
-    /*
-    @DeleteMapping("/{id}/image")
-    public ResponseEntity<ImageDTO> deleteProfileImage(@PathVariable Long id) {
-        User user = userService.findById(id);
-        Image image = user.getProfileImage();
-        userService.removeImageFromUser(id);
-
-        if (image != null) {
-            imageService.deleteImage(image.getId());
-            return ResponseEntity.ok(imageMapper.toDTO(image));
-        }
-
-        return ResponseEntity.noContent().build();
-    }
-    */
 
     @DeleteMapping("/{id}/image")
     public ResponseEntity<Void> deleteProfileImage(@PathVariable Long id) {

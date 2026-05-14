@@ -1,5 +1,7 @@
 package com.example.demo.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public record ProductCreateDTO(
     String nombre,
     double precio,
@@ -7,5 +9,6 @@ public record ProductCreateDTO(
     boolean promotion,
     Double precioOriginal,
     Double precioOferta,
-    Long categoryId
+    Long categoryId,
+    MultipartFile image
 ) {}

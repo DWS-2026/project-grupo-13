@@ -40,6 +40,7 @@ import com.example.demo.Model.Review;
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
+
 @RestController
 @RequestMapping("/api/v1/products")
 public class ProductRestController {
@@ -53,74 +54,49 @@ public class ProductRestController {
     @Autowired
     private ReviewService reviewService;
 
-
-    @Autowired
-    private ImageService imageService;
-
     @Autowired
     private ProductBasicMapper productBasicMapper;
 
     @Autowired
     private ProductDetailMapper productDetailMapper;
 
-
-
-    //show all products in the DB
+    // Show all products in the DB
     @GetMapping("/")
     public Page<ProductBasicDTO> getProducts(Pageable pageable) {
         return productRepository.findAll(pageable).map(productBasicMapper::toDTO);
     }
     
-    //show one detailed product
+    // Show one detailed product
     @GetMapping("/{id}")
     public ProductDetailDTO getproduct(@PathVariable int id) {
         return productDetailMapper.toDTO(productService.findById(id));
     }
 
-    //create a new product
+    // Create a new product
     @PostMapping("/")
     public ResponseEntity<ProductDetailDTO> createProduct(@RequestBody ProductCreateDTO dto) {
-
         ProductDetailDTO created = productService.createProduct(dto);
 
         URI location = fromCurrentRequest()
-            .path("/{id}")
-            .buildAndExpand(created.id())
-            .toUri();
+                .path("/{id}")
+                .buildAndExpand(created.id())
+                .toUri();
 
         return ResponseEntity.created(location).body(created);
     }
 
-
-    //delete a product
+    // Delete a product
     @DeleteMapping("/{id}")
     public ProductDetailDTO deleteProduct(@PathVariable int id) {
-
-        Product product = productService.findById(id);
-
-        productService.deleteById(id);
-
-        return productDetailMapper.toDTO(product);
-
+        // Now the service is responsible for finding and deleting it (including image logic)
+        return productService.deleteProductById(id);
     }
 
-    //replace a product
+    // Replace a product
     @PutMapping("/{id}")
-    public ProductDetailDTO replaceProduct(@PathVariable int id, @RequestBody ProductDetailDTO newProductDTO) {
-
-        if (productService.existsById(id)) {
-
-            Product newProduct = productDetailMapper.toDomain(newProductDTO);
-
-            newProduct.setId(id);
-            productService.save(newProduct);
-
-            return productDetailMapper.toDTO(newProduct);
-
-        } else {
-            throw new NoSuchElementException();
-        }
-
+    public ProductDetailDTO replaceProduct(@PathVariable int id, @RequestBody ProductCreateDTO dto) {
+        // We use ProductCreateDTO for PUT as well, allowing image updates
+        return productService.updateProductRest(id, dto);
     }
 
     @PostMapping("/{productId}/category/{categoryId}")
@@ -144,16 +120,13 @@ public class ProductRestController {
                     review.getComentario(),
                     review
             );
-
             return ResponseEntity.ok(saved);
-
         } catch (SecurityException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
-
-
 }
+
+

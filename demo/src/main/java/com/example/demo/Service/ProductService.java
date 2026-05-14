@@ -1,13 +1,13 @@
 package com.example.demo.Service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 import java.io.IOException;
+import java.util.NoSuchElementException;
 
 import com.example.demo.Model.Product;
 import com.example.demo.Repository.ProductRepository;
@@ -33,25 +33,22 @@ public class ProductService {
 
     @Autowired
     private ProductDetailMapper productDetailMapper;
+
     @Autowired
     private ImageService imageService;
 
-    
     public Product save(Product product) {
         return productRepository.save(product);
     }
 
-   
     public List<Product> findAll() {
         return productRepository.findAll();
     }
 
-   
     public Product findById(int id) {
         return productRepository.findById(id).orElse(null);
     }
 
-    
     public void deleteById(int id) {
         productRepository.deleteById(id);
     }
@@ -69,18 +66,39 @@ public class ProductService {
         return productRepository.existsById(id);
     }
 
-    
     public List<Product> findByCategoryName(String category) {
         return productRepository.findByCategory_Name(category);
     }
 
     public List<Product> findPromotions() {
-    return productRepository.findByPromotionTrue();
+        return productRepository.findByPromotionTrue();
     }
 
+    /**
+     * Creates a product from the REST API using a DTO.
+     * If the image in the DTO is null or empty, the product is created without an image.
+     */
     public ProductDetailDTO createProduct(ProductCreateDTO dto) {
-
         Product product = new Product();
+        return mapAndSave(product, dto);
+    }
+
+    /**
+     * Updates a product from the REST API.
+     * Based on unified image logic.
+     */
+    public ProductDetailDTO updateProductRest(int id, ProductCreateDTO dto) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
+        
+        return mapAndSave(product, dto);
+    }
+
+    /**
+     * Private method to unify data mapping and image logic 
+     * between creation and update in the API.
+     */
+    private ProductDetailDTO mapAndSave(Product product, ProductCreateDTO dto) {
         product.setNombre(dto.nombre());
         product.setPrecio(dto.precio());
         product.setDescripcion(dto.descripcion());
@@ -89,65 +107,87 @@ public class ProductService {
         product.setPrecioOferta(dto.precioOferta());
 
         Category category = categoryRepository.findById(dto.categoryId())
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Categoría no existe"));
-
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Category does not exist"));
         product.setCategory(category);
 
-        Product saved = productRepository.save(product);
+        try {
+            // Unified logic: if we receive null or empty, image is set to null.
+            if (dto.image() != null && !dto.image().isEmpty()) {
+                // Note: Ensure your ImageService accepts String 
+                // or convert it to the required type (InputStream, etc.)
+                Image img = imageService.createImage(dto.image());
+                product.setImage(img);
+            } else {
+                product.setImage(null);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Error processing product image", e);
+        }
 
+        Product saved = productRepository.save(product);
         return productDetailMapper.toDTO(saved);
     }
 
+    /**
+     * Deletes a product and returns its DTO.
+     * Fixes the image_841f04.png error using ResponseStatusException.
+     */
+    public ProductDetailDTO deleteProductById(int id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
 
-    //These are methods for the ImageRestController
+        ProductDetailDTO dto = productDetailMapper.toDTO(product);
+        
+        Image img = product.getImage();
+        productRepository.delete(product);
+
+        // Clean up the image in the DB if it existed
+        if (img != null) {
+            imageRepository.delete(img);
+        }
+
+        return dto;
+    }
+
+    // These are methods for the ImageRestController
 
     public Product addImageToProduct(int id, Image image) {
-
         Product product = productRepository.findById(id).orElseThrow();
         product.setImage(image);
         productRepository.save(product);
-
         return product;
     }
 
     public Product removeImageProduct(int id) {
-
         Product product = productRepository.findById(id).orElseThrow();
-
         Image image = product.getImage();
         product.setImage(null);
         productRepository.save(product);
 
-        //delete the image from the BD
+        // Delete the image from the DB
         if (image != null) {
             imageRepository.delete(image);
         }
-
         return product;
     }
 
     public void assignCategory(int productId, long categoryId) {
-
-        Product product = productRepository.findById(productId)
-                .orElseThrow();
-
-        Category category = categoryRepository.findById(categoryId)
-                .orElseThrow();
-
+        Product product = productRepository.findById(productId).orElseThrow();
+        Category category = categoryRepository.findById(categoryId).orElseThrow();
         product.setCategory(category);
         productRepository.save(product);
     }
 
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
 
     public Product createProduct(Product product, Long categoryId, MultipartFile file) throws IOException {
         // Validation: Duplicate name check
         boolean isDuplicate = productRepository.findAll().stream()
                 .anyMatch(p -> p.getNombre().equalsIgnoreCase(product.getNombre()));
-        
+
         if (isDuplicate) {
-            return null; 
+            return null;
         }
 
         // Set Category
@@ -159,6 +199,8 @@ public class ProductService {
         if (file != null && !file.isEmpty()) {
             Image img = imageService.createImage(file);
             product.setImage(img);
+        } else {
+            product.setImage(null);
         }
 
         return productRepository.save(product);
@@ -190,8 +232,4 @@ public class ProductService {
 
         productRepository.save(product);
     }
-
-
-
 }
-

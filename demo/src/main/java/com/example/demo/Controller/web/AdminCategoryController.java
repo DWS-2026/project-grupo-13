@@ -52,18 +52,15 @@ public class AdminCategoryController {
         }
     }
 
-
-
     @GetMapping("/AdminCategories/Delete/{id}")
     public String deleteCategory(@PathVariable Long id) {
         categoryService.deleteById(id);
         return "redirect:/AdminCategories";
     }
 
-    /*
     @GetMapping("/AdminCategories/Edit/{id}")
     public String editCategory(@PathVariable Long id, Model model) {
-        Category category = categoryRepository.findById(id).orElseThrow();
+        Category category = categoryService.findById(id);
         model.addAttribute("category", category);
         return "EditCategory";
     }
@@ -73,30 +70,9 @@ public class AdminCategoryController {
                                 @RequestParam String name,
                                 @RequestParam("image") MultipartFile file) {
 
-        Category category = categoryRepository.findById(id).orElseThrow();
+        CategoryCreateDTO dto = new CategoryCreateDTO(name, file);
 
-        
-        category.setName(name);
-
-        
-        if (!file.isEmpty()) {
-            try {
-                Image image = category.getImage();
-
-                if (image == null) {
-                    image = new Image();
-                }
-
-                image.setData(file.getBytes());
-
-                category.setImage(image);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        categoryRepository.save(category);
+        categoryService.updateCategory(id, dto);
 
         return "redirect:/AdminCategories";
     }
@@ -104,8 +80,8 @@ public class AdminCategoryController {
     @GetMapping("/AdminCategories/image/{id}")
     @ResponseBody
     public byte[] getImage(@PathVariable Long id) {
-        Category category = categoryRepository.findById(id).orElseThrow();
+        Category category = categoryService.findById(id);
         return category.getImage().getData();
     }
-    */
+    
 }

@@ -13,6 +13,7 @@ import com.example.demo.Service.ImageService;
 import com.example.demo.dto.CategoryCreateDTO;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class CategoryService {
@@ -48,12 +49,15 @@ public class CategoryService {
 
     public void deleteById(Long id) {
         categoryRepository.deleteById(id);
+
     }
 
     public boolean existsById(long id) {
         return categoryRepository.existsById(id);
     }
 
+
+    // developed methods for the controllers
 
     public Category createCategory(CategoryCreateDTO data) {
 
@@ -75,16 +79,35 @@ public class CategoryService {
         return categoryRepository.save(category);
     }
 
+    public Category updateCategory(Long id, CategoryCreateDTO data) {
 
+        Category category = categoryRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Categoría no encontrada"));
 
-    //this is a temporary fix, not used right now
-    public Category createCategoryRest (Category category) {
+        if (data.name() != null) {
+            category.setName(data.name());
+        }
 
-        categoryRepository.save(category);
+        try {
+            if (data.image() != null && !data.image().isEmpty()) {
 
-        return category;
+                Image image = category.getImage();
 
+                if (image == null) {
+                    image = new Image();
+                }
+
+                image.setData(data.image().getBytes());
+                category.setImage(image);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Error al procesar la imagen", e);
+        }
+
+        return categoryRepository.save(category);
     }
+
+
 
 
     ////////////////////////////////////////////// ADD AND REMOVE IMAGES ////////////////////////////////////////////////

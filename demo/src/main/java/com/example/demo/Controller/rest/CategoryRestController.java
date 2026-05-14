@@ -5,6 +5,9 @@ import com.example.demo.dto.CategoryCreateDTO;
 import com.example.demo.dto.CategoryDetailDTO;
 import com.example.demo.dto.mapper.CategoryBasicMapper;
 import com.example.demo.dto.mapper.CategoryDetailMapper;
+
+import jakarta.persistence.EntityNotFoundException;
+
 import com.example.demo.Repository.CategoryRepository;
 import com.example.demo.Service.CategoryService;
 
@@ -82,29 +85,42 @@ public class CategoryRestController {
 
     //replace a category
     @PutMapping("/{id}")
-    public ResponseEntity<CategoryDetailDTO> updateCategory(
+    public ResponseEntity<?> updateCategory(
             @PathVariable Long id,
             @RequestBody Map<String, String> body) {
 
         String name = body.get("name");
 
-        CategoryCreateDTO dto = new CategoryCreateDTO(name, null);
+        
+        
+        try{
 
-        Category updated = categoryService.updateCategory(id, dto);
+            CategoryCreateDTO dto = new CategoryCreateDTO(name, null);
+            Category updated = categoryService.updateCategory(id, dto);
+            return ResponseEntity.ok(categoryDetailMapper.toDTO(updated));
+        
+        }catch(EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Categoría no encontrada");
+        }
 
-        return ResponseEntity.ok(categoryDetailMapper.toDTO(updated));
+        
     }
 
-    //delete a category
     @DeleteMapping("/{id}")
-    public CategoryDetailDTO deletecategory(@PathVariable long id) {
+    public ResponseEntity<?> deleteCategory(@PathVariable long id) {
 
-        Category category = categoryService.findById(id);
+        try {
+            Category category = categoryService.findById(id); 
+            categoryService.deleteById(id);
 
-        categoryService.deleteById(id);
+            return ResponseEntity.ok("Categoría eliminada correctamente");
 
-        return categoryDetailMapper.toDTO(category);
-
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Categoría no encontrada");
+        }
     }
+
 
 }

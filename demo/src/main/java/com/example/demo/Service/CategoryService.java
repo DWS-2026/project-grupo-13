@@ -12,6 +12,8 @@ import com.example.demo.Repository.ImageRepository;
 import com.example.demo.Service.ImageService;
 import com.example.demo.dto.CategoryCreateDTO;
 
+import jakarta.persistence.EntityNotFoundException;
+
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -32,8 +34,10 @@ public class CategoryService {
     }
 
     public Category findById(Long id) {
-    return categoryRepository.findById(id).orElse(null);
+    return categoryRepository.findById(id)
+            .orElseThrow(() -> new EntityNotFoundException("Categoría no encontrada"));
     }
+
 
     public Category findByName(String name) {
         return categoryRepository.findByName(name);
@@ -82,7 +86,7 @@ public class CategoryService {
     public Category updateCategory(Long id, CategoryCreateDTO data) {
 
         Category category = categoryRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Categoría no encontrada"));
+                .orElseThrow(() -> new EntityNotFoundException("Categoría no encontrada"));
 
         if (data.name() != null) {
             category.setName(data.name());
@@ -106,6 +110,8 @@ public class CategoryService {
 
         return categoryRepository.save(category);
     }
+
+
 
 
 

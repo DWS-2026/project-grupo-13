@@ -96,7 +96,7 @@ public class ProductRestController {
     @PutMapping("/{id}")
     public ProductDetailDTO replaceProduct(@PathVariable int id, @RequestBody ProductCreateDTO dto) {
         // We use ProductCreateDTO for PUT as well, allowing image updates
-        return productService.updateProductRest(id, dto);
+        return productService.updateProduct(id, dto);
     }
 
     @PostMapping("/{productId}/category/{categoryId}")

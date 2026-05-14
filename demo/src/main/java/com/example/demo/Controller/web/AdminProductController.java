@@ -20,6 +20,8 @@ import com.example.demo.Model.Product;
 import com.example.demo.Repository.ProductRepository;
 import com.example.demo.Service.CategoryService;
 import com.example.demo.Service.ProductService;
+import com.example.demo.dto.ProductCreateDTO;
+import com.example.demo.dto.ProductDetailDTO;
 import com.example.demo.Service.ImageService;
 
 @Controller
@@ -47,11 +49,22 @@ public class AdminProductController {
 
     @PostMapping("/AdminProduct")
     public String crearProducto(@ModelAttribute Product producto,
-                                @RequestParam Long category, 
+                                @RequestParam Long category,
                                 @RequestParam("productImage") MultipartFile file,
-                                Model model) throws IOException {
-        
-        Product result = productService.createProduct(producto, category, file);
+                                Model model) {
+
+        ProductCreateDTO dto = new ProductCreateDTO(
+                producto.getNombre(),
+                producto.getPrecio(),
+                producto.getDescripcion(),
+                producto.isPromotion(),
+                producto.getPrecioOriginal(),
+                producto.getPrecioOferta(),
+                category,
+                file
+        );
+
+        ProductDetailDTO result = productService.createProduct(dto);
 
         if (result == null) {
             model.addAttribute("errorDuplicado", true);
@@ -65,17 +78,31 @@ public class AdminProductController {
         return "redirect:/AdminProduct";
     }
 
+
     @PostMapping("/AdminProducts/Edit/{id}")
     public String updateProduct(@PathVariable int id,
                                 @RequestParam String nombre,
                                 @RequestParam double precio,
                                 @RequestParam String descripcion,
                                 @RequestParam Long categoryId,
-                                @RequestParam("image") MultipartFile file) throws IOException {
+                                @RequestParam("image") MultipartFile file) {
 
-        productService.updateProduct(id, nombre, precio, descripcion, categoryId, file);
+        ProductCreateDTO dto = new ProductCreateDTO(
+                nombre,
+                precio,
+                descripcion,
+                false,
+                null,
+                null,
+                categoryId,
+                file
+        );
+
+        productService.updateProduct(id, dto);
+
         return "redirect:/AdminProduct";
     }
+
 
     @GetMapping("/AdminProducts/Edit/{id}")
     public String editProduct(@PathVariable int id, Model model) {

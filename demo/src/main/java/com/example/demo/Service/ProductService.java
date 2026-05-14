@@ -87,7 +87,7 @@ public class ProductService {
      * Updates a product from the REST API.
      * Based on unified image logic.
      */
-    public ProductDetailDTO updateProductRest(int id, ProductCreateDTO dto) {
+    public ProductDetailDTO updateProduct(int id, ProductCreateDTO dto) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
         
@@ -99,6 +99,7 @@ public class ProductService {
      * between creation and update in the API.
      */
     private ProductDetailDTO mapAndSave(Product product, ProductCreateDTO dto) {
+
         product.setNombre(dto.nombre());
         product.setPrecio(dto.precio());
         product.setDescripcion(dto.descripcion());
@@ -111,15 +112,11 @@ public class ProductService {
         product.setCategory(category);
 
         try {
-            // Unified logic: if we receive null or empty, image is set to null.
             if (dto.image() != null && !dto.image().isEmpty()) {
-                // Note: Ensure your ImageService accepts String 
-                // or convert it to the required type (InputStream, etc.)
                 Image img = imageService.createImage(dto.image());
                 product.setImage(img);
-            } else {
-                product.setImage(null);
             }
+            // IMPORTANTE: si dto.image() es null o vacío, NO tocamos la imagen existente
         } catch (IOException e) {
             throw new RuntimeException("Error processing product image", e);
         }
@@ -127,6 +124,7 @@ public class ProductService {
         Product saved = productRepository.save(product);
         return productDetailMapper.toDTO(saved);
     }
+
 
     /**
      * Deletes a product and returns its DTO.
@@ -180,6 +178,9 @@ public class ProductService {
 
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+
+    /*
 
     public Product createProduct(Product product, Long categoryId, MultipartFile file) throws IOException {
         // Validation: Duplicate name check
@@ -206,9 +207,7 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    /**
-     * Logic for updating an existing product via Web Admin Panel
-     */
+    
     public void updateProduct(int id, String nombre, double precio, String descripcion, Long categoryId, MultipartFile file) throws IOException {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
@@ -232,4 +231,6 @@ public class ProductService {
 
         productRepository.save(product);
     }
+
+    */
 }

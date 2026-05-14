@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
+import java.io.IOException;
 
 import com.example.demo.Model.Product;
 import com.example.demo.Repository.ProductRepository;
@@ -31,6 +33,8 @@ public class ProductService {
 
     @Autowired
     private ProductDetailMapper productDetailMapper;
+    @Autowired
+    private ImageService imageService;
 
     
     public Product save(Product product) {
@@ -133,6 +137,60 @@ public class ProductService {
         product.setCategory(category);
         productRepository.save(product);
     }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+
+    public Product createProduct(Product product, Long categoryId, MultipartFile file) throws IOException {
+        // Validation: Duplicate name check
+        boolean isDuplicate = productRepository.findAll().stream()
+                .anyMatch(p -> p.getNombre().equalsIgnoreCase(product.getNombre()));
+        
+        if (isDuplicate) {
+            return null; 
+        }
+
+        // Set Category
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+        product.setCategory(category);
+
+        // Handle Image
+        if (file != null && !file.isEmpty()) {
+            Image img = imageService.createImage(file);
+            product.setImage(img);
+        }
+
+        return productRepository.save(product);
+    }
+
+    /**
+     * Logic for updating an existing product via Web Admin Panel
+     */
+    public void updateProduct(int id, String nombre, double precio, String descripcion, Long categoryId, MultipartFile file) throws IOException {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        product.setNombre(nombre);
+        product.setPrecio(precio);
+        product.setDescripcion(descripcion);
+
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+        product.setCategory(category);
+
+        if (file != null && !file.isEmpty()) {
+            Image image = product.getImage();
+            if (image == null) {
+                image = new Image();
+            }
+            image.setData(file.getBytes());
+            product.setImage(image);
+        }
+
+        productRepository.save(product);
+    }
+
 
 
 }

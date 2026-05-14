@@ -80,26 +80,21 @@ public class CategoryRestController {
                             .body(categoryDetailMapper.toDTO(category));
     }
 
-
     //replace a category
     @PutMapping("/{id}")
-    public CategoryDetailDTO replaceCategory(@PathVariable long id, @RequestBody CategoryDetailDTO newCategoryDTO) {
+    public ResponseEntity<CategoryDetailDTO> updateCategory(
+            @PathVariable Long id,
+            @RequestBody Map<String, String> body) {
 
-        if (categoryService.existsById(id)) {
+        String name = body.get("name");
 
-            Category newCategory = categoryDetailMapper.toDomain(newCategoryDTO);
+        CategoryCreateDTO dto = new CategoryCreateDTO(name, null);
 
-            newCategory.setId(id);
-            categoryService.save(newCategory);
+        Category updated = categoryService.updateCategory(id, dto);
 
-            return categoryDetailMapper.toDTO(newCategory);
-
-        } else {
-            throw new NoSuchElementException();
-        }
-
+        return ResponseEntity.ok(categoryDetailMapper.toDTO(updated));
     }
-    
+
     //delete a category
     @DeleteMapping("/{id}")
     public CategoryDetailDTO deletecategory(@PathVariable long id) {
@@ -111,7 +106,5 @@ public class CategoryRestController {
         return categoryDetailMapper.toDTO(category);
 
     }
-
-    
 
 }

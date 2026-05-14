@@ -25,7 +25,6 @@ import com.example.demo.Service.UserService;
 import com.example.demo.Model.Document;
 
 
-// These methods 
 
 @RestController
 @RequestMapping("/api/v1/documents")
@@ -46,10 +45,8 @@ public class DocumentRestController {
 
         try {
             ResponseEntity<?> response = userService.addDniToUser(id, file);
-            redirectAttributes.addFlashAttribute("success", "DNI subido correctamente");
             return response;
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error", "Error al subir el DNI");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }

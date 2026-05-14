@@ -64,8 +64,8 @@ public class WebSecurityConfig {
         http
                 .securityMatcher("/api/**")
                 .exceptionHandling(handling -> handling
-                        .authenticationEntryPoint(unauthorizedHandlerJwt) // 401 cuando NO estás autenticado
-                        .accessDeniedHandler((request, response, accessDeniedException) -> { // 403 cuando NO tienes permiso
+                        .authenticationEntryPoint(unauthorizedHandlerJwt) 
+                        .accessDeniedHandler((request, response, accessDeniedException) -> { 
                         response.setStatus(HttpStatus.FORBIDDEN.value());
                         response.setContentType("application/json");
                         response.getWriter().write("{\"error\":\"No tienes permiso para realizar esta acción\"}");

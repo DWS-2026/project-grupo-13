@@ -23,6 +23,7 @@ public class DocumentService {
     }
 
     public String saveFile(MultipartFile file, Long documentId) throws IOException {
+
         if (file.isEmpty()) {
             throw new IOException("El archivo no puede estar vacío");
         }
@@ -31,6 +32,17 @@ public class DocumentService {
 
         if (originalName.contains("..")) {
             throw new IOException("Nombre de archivo no válido");
+        }
+
+        String contentType = file.getContentType();
+
+        boolean isPdfMime = contentType != null &&
+                            contentType.equals("application/pdf");
+
+        boolean isPdfExtension = originalName.toLowerCase().endsWith(".pdf");
+
+        if (!isPdfMime || !isPdfExtension) {
+            throw new IOException("Solo se permiten archivos PDF");
         }
 
         // same name, no changes

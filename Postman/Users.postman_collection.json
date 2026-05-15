@@ -73,13 +73,13 @@
       "response": []
     },
     {
-      "name": "Register User",
+      "name": "Register User in rest",
       "request": {
         "method": "POST",
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"name\":\"prueba\",\r\n    \"surname\":\"prueba\",\r\n    \"nickname\":\"prueba2\",\r\n    \"email\":\"prueba2@prueba.com\",\r\n    \"password\":\"contraseña\",\r\n    \"birthDate\":\"2004-03-08\",\r\n    \"visible\":\"false\"\r\n}",
+          "raw": "{\r\n    \"name\":\"prueba\",\r\n    \"surname\":\"prueba\",\r\n    \"nickname\":\"prueba2\",\r\n    \"email\":\"prueba2@prueba.com\",\r\n    \"password\":\"contraseña\",\r\n    \"birthDate\":\"2004-03-08\"\r\n}",
           "options": {
             "raw": {
               "language": "json"

@@ -1,9 +1,9 @@
 {
   "info": {
-    "_postman_id": "fd530473-a10d-4038-bca7-f1d2eda33257",
+    "_postman_id": "8d746cce-43f8-4221-9fbf-2bbc84d3d194",
     "name": "Category",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "54338689"
+    "_exporter_id": "54100716"
   },
   "item": [
     {
@@ -57,6 +57,106 @@
             "v1",
             "categories",
             ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Put Categories",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Coches\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://localhost:8443/api/v1/categories/1",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "8443",
+          "path": [
+            "api",
+            "v1",
+            "categories",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete categories",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "https://localhost:8443/api/v1/categories/5",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "8443",
+          "path": [
+            "api",
+            "v1",
+            "categories",
+            "5"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST image in category",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "imageFile",
+              "type": "file",
+              "id": 0,
+              "fileUploadError": "",
+              "src": [
+                "c:\\Users\\alvar\\Downloads\\TrainNetwork.png"
+              ]
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://localhost:8443/api/v1/images/categories/5/images",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "8443",
+          "path": [
+            "api",
+            "v1",
+            "images",
+            "categories",
+            "5",
+            "images"
           ]
         }
       },

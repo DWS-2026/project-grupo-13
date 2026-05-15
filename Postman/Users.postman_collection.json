@@ -1,9 +1,9 @@
 {
   "info": {
-    "_postman_id": "f8b5a311-5d5c-4e6f-80b4-34eb78aa6e5d",
+    "_postman_id": "585d6162-cbe4-4047-8f6d-da791fd29555",
     "name": "Users",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "54338689"
+    "_exporter_id": "54100716"
   },
   "item": [
     {
@@ -67,6 +67,203 @@
             "v1",
             "users",
             "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Register User",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\":\"prueba\",\r\n    \"surname\":\"prueba\",\r\n    \"nickname\":\"prueba2\",\r\n    \"email\":\"prueba2@prueba.com\",\r\n    \"password\":\"contraseña\",\r\n    \"birthDate\":\"2004-03-08\",\r\n    \"visible\":\"false\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://localhost:8443/api/v1/users/register",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "8443",
+          "path": [
+            "api",
+            "v1",
+            "users",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST profile picture",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "imageFile",
+              "type": "file",
+              "id": 0,
+              "fileUploadError": "",
+              "src": [
+                "c:\\Users\\alvar\\Downloads\\TrainNetwork.png"
+              ]
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://localhost:8443/api/v1/users/2/image",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "8443",
+          "path": [
+            "api",
+            "v1",
+            "users",
+            "2",
+            "image"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE profile picture",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "https://localhost:8443/api/v1/users/2/image",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "8443",
+          "path": [
+            "api",
+            "v1",
+            "users",
+            "2",
+            "image"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST DNI in user",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "id": 0,
+              "fileUploadError": "",
+              "src": [
+                "c:\\Users\\alvar\\Desktop\\DNI_1.pdf"
+              ]
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://localhost:8443/api/v1/documents/users/1/dni",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "8443",
+          "path": [
+            "api",
+            "v1",
+            "documents",
+            "users",
+            "1",
+            "dni"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET DNI in user",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://localhost:8443/api/v1/documents/users/1/dni",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "8443",
+          "path": [
+            "api",
+            "v1",
+            "documents",
+            "users",
+            "1",
+            "dni"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PUT contraseña USER",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"oldPassword\": \"carlos123\",\r\n    \"newPassword\": \"contraseña\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://localhost:8443/api/v1/users/1/password",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "8443",
+          "path": [
+            "api",
+            "v1",
+            "users",
+            "1",
+            "password"
           ]
         }
       },

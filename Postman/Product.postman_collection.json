@@ -1,9 +1,9 @@
 {
   "info": {
-    "_postman_id": "9324d6b2-8f3c-4c6c-8a54-279414d21949",
+    "_postman_id": "a99ce8fe-d195-402e-bc67-a0700be2b6bb",
     "name": "Product",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "54368187"
+    "_exporter_id": "54100716"
   },
   "item": [
     {
@@ -82,43 +82,7 @@
       "response": []
     },
     {
-      "name": "Post Review a Product_id",
-      "request": {
-        "auth": {
-          "type": "inherit"
-        },
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"usuario\": \"EduardoSoria\",\r\n    \"estrellas\": 5,\r\n    \"comentario\": \"Me encanta!\",\r\n    \"fecha\": \"2026-05-07\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "https://localhost:8443/api/v1/reviews/products/1/reviews",
-          "protocol": "https",
-          "host": [
-            "localhost"
-          ],
-          "port": "8443",
-          "path": [
-            "api",
-            "v1",
-            "reviews",
-            "products",
-            "1",
-            "reviews"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Delete product_id",
+      "name": "Delete product",
       "request": {
         "method": "DELETE",
         "header": [],
@@ -134,40 +98,6 @@
             "v1",
             "products",
             "11"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Put Product",
-      "request": {
-        "auth": {
-          "type": "inherit"
-        },
-        "method": "PUT",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"id\": 3,\r\n    \"nombre\": \"Smartphone Galaxy Z\",\r\n    \"precio\": 999.99,\r\n    \"descripcion\": \"Nueva versión con pantalla plegable y 12GB de RAM\",\r\n    \"category\": {\r\n        \"id\": 1,\r\n        \"name\": \"Smartphones\"\r\n    },\r\n    \"image\": {\r\n        \"id\": 10,\r\n        \"originalName\": \"galaxy-z.jpg\"\r\n    },\r\n    \"reviews\": []\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "https://localhost:8443/api/v1/products/1",
-          "protocol": "https",
-          "host": [
-            "localhost"
-          ],
-          "port": "8443",
-          "path": [
-            "api",
-            "v1",
-            "products",
-            "1"
           ]
         }
       },
@@ -202,6 +132,80 @@
             "v1",
             "products",
             ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PUT product",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"nombre\": \"RTX 4090\",\r\n  \"precio\": 1999.99,\r\n  \"descripcion\": \"Tarjeta gráfica de gama alta\",\r\n  \"promotion\": false,\r\n  \"precioOriginal\": 1999.99,\r\n  \"precioOferta\": 1999.99,\r\n  \"categoryId\": 2\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://localhost:8443/api/v1/products/1",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "8443",
+          "path": [
+            "api",
+            "v1",
+            "products",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST image in product",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "imageFile",
+              "type": "file",
+              "id": 0,
+              "fileUploadError": "",
+              "src": [
+                "c:\\Users\\alvar\\Downloads\\TrainNetwork.png"
+              ]
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://localhost:8443/api/v1/images/12/images",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "8443",
+          "path": [
+            "api",
+            "v1",
+            "images",
+            "12",
+            "images"
           ]
         }
       },

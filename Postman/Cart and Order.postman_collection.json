@@ -1,21 +1,21 @@
 {
   "info": {
-    "_postman_id": "8f421650-1026-4e0c-b49c-259b0f7e22db",
-    "name": "Order",
+    "_postman_id": "1868594c-e11d-4c8f-95a4-ce45744a9109",
+    "name": "Cart and Order",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "54338689"
+    "_exporter_id": "54100716"
   },
   "item": [
     {
-      "name": "Get Orders",
+      "name": "POST add item to cart",
       "request": {
         "auth": {
           "type": "inherit"
         },
-        "method": "GET",
+        "method": "POST",
         "header": [],
         "url": {
-          "raw": "https://localhost:8443/api/v1/orders/",
+          "raw": "https://localhost:8443/api/v1/cart/1",
           "protocol": "https",
           "host": [
             "localhost"
@@ -24,32 +24,7 @@
           "path": [
             "api",
             "v1",
-            "orders",
-            ""
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Get Order_id",
-      "request": {
-        "auth": {
-          "type": "inherit"
-        },
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "https://localhost:8443/api/v1/orders/1",
-          "protocol": "https",
-          "host": [
-            "localhost"
-          ],
-          "port": "8443",
-          "path": [
-            "api",
-            "v1",
-            "orders",
+            "cart",
             "1"
           ]
         }
@@ -57,22 +32,38 @@
       "response": []
     },
     {
-      "name": "Post Orders",
+      "name": "GET cart",
       "request": {
         "auth": {
           "type": "inherit"
         },
-        "method": "POST",
+        "method": "GET",
         "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \r\n    \"nickname\": \"Juanito99\",\r\n    \"email\": \"juan@example.com\",\r\n    \"total\": 150.50,\r\n    \"items\": null\r\n\r\n\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
+        "url": {
+          "raw": "https://localhost:8443/api/v1/cart/",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "8443",
+          "path": [
+            "api",
+            "v1",
+            "cart",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET orders",
+      "request": {
+        "auth": {
+          "type": "inherit"
         },
+        "method": "GET",
+        "header": [],
         "url": {
           "raw": "https://localhost:8443/api/v1/orders/",
           "protocol": "https",
@@ -91,15 +82,15 @@
       "response": []
     },
     {
-      "name": "Delete Order_id",
+      "name": "POST create and order",
       "request": {
         "auth": {
           "type": "inherit"
         },
-        "method": "DELETE",
+        "method": "POST",
         "header": [],
         "url": {
-          "raw": "https://localhost:8443/api/v1/orders/3",
+          "raw": "https://localhost:8443/api/v1/orders/",
           "protocol": "https",
           "host": [
             "localhost"
@@ -109,7 +100,7 @@
             "api",
             "v1",
             "orders",
-            "3"
+            ""
           ]
         }
       },

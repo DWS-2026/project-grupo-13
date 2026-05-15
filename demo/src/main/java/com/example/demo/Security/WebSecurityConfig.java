@@ -102,9 +102,9 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/api/v1/categories/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/v1/categories/**").hasRole("ADMIN")
                         // Reviews
-                        .requestMatchers(HttpMethod.POST, "/api/v1/products/*/reviews", "/api/products/*/reviews/").hasRole("USER")
-                        .requestMatchers(HttpMethod.PUT, "/api/v1/reviews/*").hasRole("USER")
-                        .requestMatchers(HttpMethod.DELETE, "/api/v1/reviews/*").hasRole("USER")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/products/*/reviews", "/api/products/*/reviews/").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/v1/reviews/*").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/reviews/*").hasAnyRole("USER", "ADMIN")
                         // Products
                         .requestMatchers(HttpMethod.POST, "/api/v1/products/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/v1/products/**").hasRole("ADMIN")

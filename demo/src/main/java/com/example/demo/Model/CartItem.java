@@ -17,6 +17,13 @@ public class CartItem {
         this.cantidad = cantidad;
     }
 
+    public CartItem(int productId, String nombre, double precio, int cantidad) {
+        this.productId = productId;
+        this.nombre = nombre;
+        this.precio = precio;
+        
+    }
+
     public int getProductId() {
         return productId;
     }

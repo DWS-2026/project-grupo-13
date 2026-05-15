@@ -78,14 +78,10 @@ public class CartController {
             1
         );
 
-        
-
         cartService.addItem(auth.getName(), item);
 
         return "redirect:/ShoppingCart";
     }
-
-
 
     @PostMapping("/eliminar-producto")
         public String eliminarProducto(@RequestParam("productId") int productId, Authentication auth) {
@@ -93,16 +89,10 @@ public class CartController {
             return "redirect:/ShoppingCart";
         }
 
-
-
     @GetMapping("/api/carrito")
     @ResponseBody
     public List<CartItem> obtenerCarrito(Authentication auth) {
         return cartService.getCartItems(auth.getName());
     }
-
-
-    
-
 
 }

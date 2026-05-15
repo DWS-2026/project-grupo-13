@@ -24,7 +24,7 @@ public class OrderController {
     @Autowired
     private UserService userService;
 
-    // Mostrar pedidos del usuario
+    // all user orders
     @GetMapping("/mis-pedidos")
     public String misPedidos(Authentication auth, Model model) {
 
@@ -49,7 +49,7 @@ public class OrderController {
         return "OrderHistory";
     }
 
-    // Ver un pedido concreto
+    // one specific order from user
     @GetMapping("/pedido/{id}")
     public String verPedido(@PathVariable Long id, Authentication auth, Model model) {
 
@@ -57,7 +57,7 @@ public class OrderController {
             return "redirect:/Login";
         }
 
-        Order pedido = orderService.findByIdForUser(id); // ahora valida dueño automáticamente
+        Order pedido = orderService.findByIdForUser(id);
 
         double total = pedido.getItems().stream()
                 .mapToDouble(i -> i.getPrecio() * i.getCantidad())
@@ -69,11 +69,11 @@ public class OrderController {
         return "OrderDetail";
     }
 
-    // Pagar → crear pedido desde carrito
+    // create an order
     @PostMapping("/pagar")
     public String pagar(Authentication auth) {
 
-        orderService.createOrderFromCart(); // lógica unificada
+        orderService.createOrderFromCart();
 
         return "redirect:/mis-pedidos";
     }

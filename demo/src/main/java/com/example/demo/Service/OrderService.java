@@ -34,7 +34,11 @@ public class OrderService {
     @Autowired
     private UserRepository userRepository;
 
-    // Crear pedido desde carrito (web + REST)
+    public List<Order> findAll() {
+        return orderRepository.findAll();
+    }
+
+    //put all the items on cart on a new order
     public Order createOrderFromCart() {
 
         String nickname = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -58,9 +62,11 @@ public class OrderService {
 
         for (CartItem c : carrito) {
 
-            if (c.getCantidad() < 1 || c.getCantidad() > 10) {
+            /*
+            if (c.getCantidad() < 0 || c.getCantidad() > 10) {
                 throw new IllegalArgumentException("Cantidad inválida");
             }
+            */
 
             Product p = productService.findById(c.getProductId());
 
@@ -82,7 +88,6 @@ public class OrderService {
         return saved;
     }
 
-    // Validar dueño al ver un pedido
     public Order findByIdForUser(Long id) {
 
         String nickname = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -98,7 +103,6 @@ public class OrderService {
         return order;
     }
 
-    // Validar dueño al borrar un pedido
     public void deleteByIdForUser(Long id) {
 
         String nickname = SecurityContextHolder.getContext().getAuthentication().getName();

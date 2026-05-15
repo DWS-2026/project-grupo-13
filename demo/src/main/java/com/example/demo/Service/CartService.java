@@ -26,7 +26,6 @@ public class CartService {
     getCartItems(nickname).removeIf(i -> i.getProductId() == productId);
     }
 
-
     public void clearCart(String nickname) {
         getCartItems(nickname).clear();
     }

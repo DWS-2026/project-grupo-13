@@ -8,7 +8,7 @@ public record OrderDetailDTO(
     Long id,
     LocalDateTime fecha,
     double total,
-    String nickname, // comes from user
-    String email,    // comes from user
+    String nickname,
+    String email,
     List<OrderItemDetailDTO> items 
 ) {}

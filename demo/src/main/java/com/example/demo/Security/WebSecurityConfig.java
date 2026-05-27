@@ -152,23 +152,23 @@ public class WebSecurityConfig {
                         // H2-console always allowed
                         .requestMatchers("/h2-console/**").permitAll()
 
-                        .requestMatchers("/css/**", "/js/**", "/imagenes/**", "/image/**", "/*.css").permitAll()
+                        .requestMatchers("/css/**", "/js/**", "/images/**", "/image/**", "/*.css").permitAll()
                         .requestMatchers("/", "/Index").permitAll()
-                        .requestMatchers("/imagenes/**").permitAll()
+                        .requestMatchers("/images/**").permitAll()
                         .requestMatchers("/image/**").permitAll()
                         .requestMatchers("/CategoriesScreen").permitAll()
                         .requestMatchers("/PromotionsScreen").permitAll()
-                        .requestMatchers("/producto/**").permitAll()
-                        .requestMatchers("/categoria/**").permitAll()
+                        .requestMatchers("/product/**").permitAll()
+                        .requestMatchers("/category/**").permitAll()
                         .requestMatchers("/register", "/Register").permitAll()
                         .requestMatchers("/login", "/Login").permitAll()
-                        .requestMatchers("/registro", "/registro/**").permitAll()
+                        .requestMatchers("/registration", "/registration/**").permitAll()
 
                         .requestMatchers("/ShoppingCart").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers("/agregar-carrito/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/add-to-cart/**").hasAnyRole("USER", "ADMIN")
 
                         .requestMatchers("/reviews/add").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers("/review/eliminar/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/review/delete/**").hasAnyRole("USER", "ADMIN")
 
                         .requestMatchers("/Admin/**").hasRole("ADMIN")
                         .requestMatchers("/AdminProduct/**").hasRole("ADMIN")

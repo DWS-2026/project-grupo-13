@@ -72,25 +72,25 @@ public class DatabaseInitializer {
         // Smartphones
         Category smartphones = new Category("Smartphones");
         categoryService.save(smartphones);
-        setCategoryImage(smartphones, "imagenes/smart.jpg");
+        setCategoryImage(smartphones, "images/smart.jpg");
         categoryService.save(smartphones);
 
         // Ordenadores
         Category ordenadores = new Category("Ordenadores");
         categoryService.save(ordenadores);
-        setCategoryImage(ordenadores, "imagenes/pcs.jpg");
+        setCategoryImage(ordenadores, "images/pcs.jpg");
         categoryService.save(ordenadores);
 
         // GPUs
         Category gpus = new Category("GPUs");
         categoryService.save(gpus);
-        setCategoryImage(gpus, "imagenes/tjs.jpg");
+        setCategoryImage(gpus, "images/tjs.jpg");
         categoryService.save(gpus);
 
         // Tablets
         Category tablets = new Category("Tablets");
         categoryService.save(tablets);
-        setCategoryImage(tablets, "imagenes/TabletLenovoTabM11.jpg");
+        setCategoryImage(tablets, "images/TabletLenovoTabM11.jpg");
         categoryService.save(tablets);
 
 
@@ -103,7 +103,7 @@ public class DatabaseInitializer {
             smartphones
         );
         
-        setProductImage(p1, "imagenes/iphone15.jpg");
+        setProductImage(p1, "images/iphone15.jpg");
         productService.save(p1);
 
         
@@ -114,7 +114,7 @@ public class DatabaseInitializer {
             smartphones
         );
         
-        setProductImage(p2, "imagenes/iphone12.jpg");
+        setProductImage(p2, "images/iphone12.jpg");
         productService.save(p2);
 
        
@@ -125,7 +125,7 @@ public class DatabaseInitializer {
             ordenadores
         );
         
-        setProductImage(p3, "imagenes/LaptopAsusGaming.jpg");
+        setProductImage(p3, "images/LaptopAsusGaming.jpg");
         productService.save(p3);
 
         
@@ -136,7 +136,7 @@ public class DatabaseInitializer {
             ordenadores
         );
         
-        setProductImage(p4, "imagenes/LaptopAsusProArt.jpg");
+        setProductImage(p4, "images/LaptopAsusProArt.jpg");
         productService.save(p4);
 
        
@@ -146,7 +146,7 @@ public class DatabaseInitializer {
             "Tarjeta gráfica de gama media para juegos y tareas creativas",
             gpus
         );
-        setProductImage(p5, "imagenes/GraficaAsusGTX1650.jpg");
+        setProductImage(p5, "images/GraficaAsusGTX1650.jpg");
         productService.save(p5);
 
         Product p6 = new Product(
@@ -155,7 +155,7 @@ public class DatabaseInitializer {
             "Tarjeta gráfica de gama media para juegos y tareas creativas",
             gpus
         );
-        setProductImage(p6, "imagenes/GraficaAsusGTX1650.jpg");
+        setProductImage(p6, "images/GraficaAsusGTX1650.jpg");
         productService.save(p6);
 
         Product p7 = new Product(
@@ -164,7 +164,7 @@ public class DatabaseInitializer {
             "Tablet de última generación con lápiz",
             tablets
         );
-        setProductImage(p7, "imagenes/tabletlenovo3.jpg");
+        setProductImage(p7, "images/tabletlenovo3.jpg");
         productService.save(p7);
 
         Product p8 = new Product(
@@ -175,7 +175,7 @@ public class DatabaseInitializer {
             );
 
         
-        setProductImage(p8, "imagenes/TabletSamsungGalaxyTabS10Ultra.jpg");
+        setProductImage(p8, "images/TabletSamsungGalaxyTabS10Ultra.jpg");
 
         
         p8.setPromotion(true); 
@@ -190,7 +190,7 @@ public class DatabaseInitializer {
         "El nuevo Pixel con cámara avanzada y Android puro.",
         smartphones
         );
-        setProductImage(p9, "imagenes/googlePixel.jpg");
+        setProductImage(p9, "images/googlePixel.jpg");
         
         p9.setPromotion(true); 
         p9.setPrecioOriginal(1099.99); 
@@ -204,7 +204,7 @@ public class DatabaseInitializer {
             "Portátil gaming con RTX 4060 y pantalla de 144Hz.",
             ordenadores
         );
-        setProductImage(p10, "imagenes/msiKatana.jpg");
+        setProductImage(p10, "images/msiKatana.jpg");
         
         p10.setPromotion(true);
         p10.setPrecioOriginal(1199.99);
@@ -219,7 +219,7 @@ public class DatabaseInitializer {
             gpus
         );
         
-        setProductImage(p11, "imagenes/nvidia4070.jpg");
+        setProductImage(p11, "images/nvidia4070.jpg");
         p11.setPromotion(true); 
         p11.setPrecioOriginal(899.99); 
         p11.setPrecioOferta(599.99);   

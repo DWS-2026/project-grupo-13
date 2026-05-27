@@ -149,7 +149,7 @@ public class WebSecurityConfig {
                 .headers(headers -> headers.frameOptions(frame -> frame.disable()))
 
                 .authorizeHttpRequests(authorize -> authorize
-                        // H2-console siempre permitido
+                        // H2-console always allowed
                         .requestMatchers("/h2-console/**").permitAll()
 
                         .requestMatchers("/css/**", "/js/**", "/imagenes/**", "/image/**", "/*.css").permitAll()

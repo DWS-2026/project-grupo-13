@@ -1,4 +1,4 @@
-/* Fondo general */
+/* General background */
 body {
     background-color: #0f172a !important;
     color: white;
@@ -9,7 +9,7 @@ body {
     border-bottom: 1px solid #0f3460;
 }
 
-/* Card (formulario) */
+/* Card (form) */
 .card {
     background-color: #16213e !important;
     border: 1px solid #0f3460;
@@ -41,7 +41,7 @@ body {
     color: #b0b8d1;
 }
 
-/* Botón guardar */
+/* Save button */
 .btn-success {
     background: #e94560;
     border: none;
@@ -52,35 +52,35 @@ body {
     box-shadow: 0 0 10px #e94560;
 }
 
-/* Tabla contenedor */
+/* Table container */
 .bg-white {
     background-color: #16213e !important;
     border: 1px solid #0f3460;
 }
 
-/* Tabla */
+/* Table */
 .table {
     color: white;
     margin-bottom: 0;
 }
 
-/* Cabecera tabla */
+/* Table header */
 .table-dark {
     background-color: #1a2a4f !important;
 }
 
-/* Hover filas */
+/* Row hover effect */
 .table-hover tbody tr:hover {
     background-color: rgba(233,69,96,0.1);
 }
 
-/* Bordes tabla */
+/* Table borders */
 .table-bordered th,
 .table-bordered td {
     border-color: #0f3460 !important;
 }
 
-/* Botones acciones */
+/* Action buttons */
 .btn-warning {
     background: #facc15;
     border: none;
@@ -92,33 +92,28 @@ body {
     border: none;
 }
 
-/* Títulos */
+/* Titles */
 h5 {
     color: white;
 }
 
-/* Quitar gris bootstrap */
+/* Remove bootstrap gray */
 .text-muted {
     color: #b0b8d1 !important;
 }
 
 .table-dark {
-    background-color: #16213e !important; /* mismo color que la tabla */
+    background-color: #16213e !important; /* same color as the table */
     color: white !important;
 }
 
 .table-dark th {
-    
     background-color: #16213e !important;
     color: white !important;
     border-color: #0f3460 !important;
-
-
-    
 }
 
 .table {
     border-radius: 10px;
-    overflow: hidden; /* MUY IMPORTANTE */
+    overflow: hidden; /* VERY IMPORTANT */
 }
-

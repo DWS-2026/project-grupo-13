@@ -13,6 +13,9 @@ import com.example.demo.Repository.ReviewRepository;
 import com.example.demo.Repository.ProductRepository;
 import com.example.demo.Repository.UserRepository;
 import com.example.demo.Security.SecurityUtils;
+import org.springframework.web.util.HtmlUtils;
+
+
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -61,25 +64,29 @@ public class ReviewService {
         return reviewRepository.save(review);
     }
 
-    public Review updateReview(long reviewId, Review newData) {
+  
 
-        Review review = reviewRepository.findById(reviewId)
-                .orElseThrow(() -> new EntityNotFoundException("Review not found"));
+public Review updateReview(long reviewId, Review newData) {
 
-        String nickname = SecurityContextHolder.getContext().getAuthentication().getName();
-        
+    Review review = reviewRepository.findById(reviewId)
+            .orElseThrow(() -> new EntityNotFoundException("Review not found"));
 
-        if (!review.getUsuario().equals(nickname)) {
-        throw new AccessDeniedException("No puedes editar una review que no es tuya");
-        }
-
-        
-        review.setEstrellas(newData.getEstrellas());
-        review.setComentario(newData.getComentario());
-
-        return reviewRepository.save(review);
+    String nickname = SecurityContextHolder.getContext().getAuthentication().getName();
+    
+    if (!review.getUsuario().equals(nickname)) {
+        throw new AccessDeniedException("You do not have permission to edit this review");
     }
 
+    review.setEstrellas(newData.getEstrellas());
+    
+    // XSS PROTECTION: Escapes HTML characters using native Spring Framework utilities
+    // Example: "<script>" becomes "&lt;script&gt;"
+    String escapedComment = HtmlUtils.htmlEscape(newData.getComentario());
+    
+    review.setComentario(escapedComment);
+
+    return reviewRepository.save(review);
+}
 
     public void deleteReview(long reviewId) {
 

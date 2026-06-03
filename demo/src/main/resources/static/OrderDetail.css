@@ -1,28 +1,28 @@
-/* Fondo general oscuro */
+/* General dark background */
 body {
     background-color: #1a1a2e;
     color: #ffffff;
     font-family: 'Segoe UI', sans-serif;
 }
 
-/* Tarjetas oscuras con borde suave */
+/* Dark cards with a smooth border */
 .card {
     background-color: #16213e;
     border: 1px solid #0f3460;
     border-radius: 8px;
 }
 
-/* Títulos */
+/* Titles */
 h1, h2, h3, h4 {
     color: #ffffff;
 }
 
-/* Texto secundario */
+/* Secondary text */
 .text-muted {
     color: #b8b8b8 !important;
 }
 
-/* Botón "Volver" */
+/* "Back" button */
 .btn-outline-light {
     border-color: #e0e0e0;
     color: #e0e0e0;

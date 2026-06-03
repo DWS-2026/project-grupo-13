@@ -204,21 +204,21 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Le preguntamos a Java cuántos items hay en el carrito
+            // We ask Java how many items are in the cart
             fetch('/api/carrito')
                 .then(response => response.json())
                 .then(carrito => {
                     const badge = document.getElementById('cart-badge');
-                    // Si hay productos, mostramos el circulito rojo con la cantidad
+                    // If there are products, we show the little red circle with the quantity
                     if (carrito && carrito.length > 0) {
                         badge.textContent = carrito.length;
                         badge.style.display = 'inline-block';
                     } else {
-                        // Si está vacío, lo ocultamos
+                        // If it is empty, we hide it
                         badge.style.display = 'none';
                     }
                 })
-                .catch(error => console.error('Error al cargar la burbuja del carrito:', error));
+                .catch(error => console.error('Error loading the cart badge:', error));
         });
     </script>
     </body>

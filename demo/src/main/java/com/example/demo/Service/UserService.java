@@ -196,7 +196,7 @@ public class UserService {
             }
         }
 
-        // 5. Actualizar campos
+        // 5. Update fields
         if (data.name() != null) user.setName(data.name());
         if (data.surname() != null) user.setSurname(data.surname());
         if (data.email() != null) user.setEmail(data.email());

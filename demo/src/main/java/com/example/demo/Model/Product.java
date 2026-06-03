@@ -31,7 +31,7 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<Review> reviews = new ArrayList<>();
 
-    public Product() {} // Para JPA
+    public Product() {} // For JPA
 
     
     public Product(String nombre, double precio, String descripcion, Category category) {

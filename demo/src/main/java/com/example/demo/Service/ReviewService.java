@@ -71,23 +71,29 @@ public Review updateReview(long reviewId, Review newData) {
     Review review = reviewRepository.findById(reviewId)
             .orElseThrow(() -> new EntityNotFoundException("Review not found"));
 
-    String nickname = SecurityContextHolder.getContext().getAuthentication().getName();
-    
-    if (!review.getUsuario().equals(nickname)) {
+    String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+    if (username.equals("anonymousUser")) {
+        throw new SecurityException("Usuario no autenticado");
+    }
+
+    // Validate that the user is the owner of the review
+    if (!review.getUsuario().equals(username)) {
         throw new AccessDeniedException("You do not have permission to edit this review");
     }
 
+    // Update stars
     review.setEstrellas(newData.getEstrellas());
-    
-    // XSS PROTECTION: Escapes HTML characters using native Spring Framework utilities
-    // Example: "<script>" becomes "&lt;script&gt;"
-    String escapedComment = HtmlUtils.htmlEscape(newData.getComentario());
-    
-    review.setComentario(escapedComment);
+
+    // Sanitize comment (HTML allowed but safe)
+    String comentarioSaneado = SecurityUtils.sanitize(newData.getComentario());
+    review.setComentario(comentarioSaneado);
+
+    // Update edit date (optional)
+    review.setFecha(LocalDate.now());
 
     return reviewRepository.save(review);
 }
-
     public void deleteReview(long reviewId) {
 
         Review review = reviewRepository.findById(reviewId)

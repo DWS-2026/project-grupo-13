@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8" />
     <title>{{producto.nombre}}</title>
@@ -24,32 +25,38 @@
 
                     {{^logged}}
                     <a class="nav-link d-flex align-items-center" href="/Login">
-                        <img src="/imagenes/agregar-usuario.png" width="20" height="20" style="filter: invert(1);" class="me-2">
+                        <img src="/imagenes/agregar-usuario.png" width="20" height="20" style="filter: invert(1);"
+                            class="me-2">
                         Iniciar sesión / Registrarse
                     </a>
                     {{/logged}}
 
                     {{#logged}}
                     <li class="nav-item dropdown ms-lg-2" style="list-style: none;">
-                        <a class="nav-link dropdown-toggle btn btn-outline-info" href="#" id="cuentaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle btn btn-outline-info" href="#" id="cuentaDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Mi cuenta
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cuentaDropdown">
                             <li><a class="dropdown-item" href="/EditProfile">Editar perfil</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><form action="/logout" method="post" style="display:inline;">
-                                <input type="hidden" name="_csrf" value="{{token}}" />
-                                <button type="submit" class="dropdown-item bg-white text-danger fw-bold">
-                                    Cerrar sesión
-                                </button>
-                            </form>
-                        </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <form action="/logout" method="post" style="display:inline;">
+                                    <input type="hidden" name="_csrf" value="{{token}}" />
+                                    <button type="submit" class="dropdown-item bg-white text-danger fw-bold">
+                                        Cerrar sesión
+                                    </button>
+                                </form>
+                            </li>
                         </ul>
                     </li>
                     {{/logged}}
 
                     <a class="nav-link d-flex align-items-center" href="/ShoppingCart">
-                        <img src="/imagenes/carrito.png" width="20" height="20" style="filter: invert(1)" class="me-2" />
+                        <img src="/imagenes/carrito.png" width="20" height="20" style="filter: invert(1)"
+                            class="me-2" />
                         Carrito
                     </a>
                 </div>
@@ -60,11 +67,13 @@
     <main class="container mt-5 pt-5">
         <article class="producto d-flex gap-4">
             {{#producto.image}}
-            <img src="/image/{{producto.image.id}}" alt="{{producto.nombre}}" style="max-width: 400px; border-radius: 8px;" class="bg-white p-2" />
+            <img src="/image/{{producto.image.id}}" alt="{{producto.nombre}}"
+                style="max-width: 400px; border-radius: 8px;" class="bg-white p-2" />
             {{/producto.image}}
 
             {{^producto.image}}
-            <img src="/imagenes/default.jpg" alt="Sin imagen" style="max-width: 400px; border-radius: 8px;" class="bg-white p-2" />
+            <img src="/imagenes/default.jpg" alt="Sin imagen" style="max-width: 400px; border-radius: 8px;"
+                class="bg-white p-2" />
             {{/producto.image}}
 
             <div class="info">
@@ -86,26 +95,27 @@
         <hr class="text-white mt-5">
 
         <section class="añadir-valoracion text-white">
-                <h2>Deja tu valoración</h2>
+            <h2>Deja tu valoración</h2>
 
-                <form id="review-form" action="/producto/{{producto.id}}/review" method="POST" class="mt-4">
-                    <input type="hidden" name="_csrf" value="{{token}}">
-                    <input type="hidden" name="productId" value="{{producto.id}}">
+            <form id="review-form" action="/producto/{{producto.id}}/review" method="POST" class="mt-4">
+                <input type="hidden" name="_csrf" value="{{token}}">
+                <input type="hidden" name="productId" value="{{producto.id}}">
 
-                    <select name="estrellas" class="form-select mb-3 bg-dark text-warning border-secondary" style="max-width: 150px;">
-                        <option value="1">★</option>
-                        <option value="2">★★</option>
-                        <option value="3">★★★</option>
-                        <option value="4">★★★★</option>
-                        <option value="5" selected>★★★★★</option>
-                    </select>
+                <select name="estrellas" class="form-select mb-3 bg-dark text-warning border-secondary"
+                    style="max-width: 150px;">
+                    <option value="1">★</option>
+                    <option value="2">★★</option>
+                    <option value="3">★★★</option>
+                    <option value="4">★★★★</option>
+                    <option value="5" selected>★★★★★</option>
+                </select>
 
-                    <div id="editor" class="bg-white text-dark" style="height: 200px;"></div>
-                    <textarea id="comentario-textarea" name="comentario" style="display:none;"></textarea>
+                <div id="editor" class="bg-white text-dark" style="height: 200px;"></div>
+                <textarea id="comentario-textarea" name="comentario" style="display:none;"></textarea>
 
-                    <button type="submit" class="btn btn-success mt-3">Enviar valoración</button>
-                </form>
-            </section>
+                <button type="submit" class="btn btn-success mt-3">Enviar valoración</button>
+            </form>
+        </section>
 
         <section class="lista-valoraciones text-white mb-5">
             <h2>Opiniones de otros clientes</h2>
@@ -117,19 +127,19 @@
             {{/valoraciones}}
 
             {{#errors}}
-                <div class="alert alert-danger">{{defaultMessage}}</div>
+            <div class="alert alert-danger">{{defaultMessage}}</div>
             {{/errors}}
 
             {{#valoraciones}}
             <div class="card mb-3 shadow-sm bg-dark border-secondary text-white">
                 <div class="card-body">
                     <h5 class="card-title">
-                        <span class="fw-bold">{{usuario}}</span> 
+                        <span class="fw-bold">{{usuario}}</span>
                         <span class="text-warning ms-2">{{estrellas}} ★</span>
                     </h5>
                     <p class="card-text">{{{comentario}}}</p>
                     <small class="text-muted">{{fecha}}</small>
-                    
+
                     {{#canDelete}}
                     <form action="/review/eliminar/{{id}}" method="POST" class="mt-2 text-end">
                         <input type="hidden" name="_csrf" value="{{token}}">
@@ -150,26 +160,27 @@
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-rc.2/dist/quill.snow.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0-rc.2/dist/quill.js"></script>
 
-<script>
-window.addEventListener("load", function () {
-    const quill = new Quill('#editor', {
-        theme: 'snow',
-        placeholder: 'Escribe tu valoración aquí...',
-        modules: {
-            toolbar: [
-                ['bold', 'italic', 'underline'],
-                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-                ['link']
-            ]
-        }
-    });
+    <script>
+        window.addEventListener("load", function () {
+            const quill = new Quill('#editor', {
+                theme: 'snow',
+                placeholder: 'Escribe tu valoración aquí...',
+                modules: {
+                    toolbar: [
+                        ['bold', 'italic', 'underline'],
+                        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                        ['link']
+                    ]
+                }
+            });
 
-    const form = document.getElementById("review-form");
-    form.addEventListener("submit", function () {
-        const contenidoHTML = quill.root.innerHTML.trim();
-        document.getElementById("comentario-textarea").value = contenidoHTML;
-    });
-});
-</script>
+            const form = document.getElementById("review-form");
+            form.addEventListener("submit", function () {
+                const contenidoHTML = quill.root.innerHTML.trim();
+                document.getElementById("comentario-textarea").value = contenidoHTML;
+            });
+        });
+    </script>
 </body>
+
 </html>

@@ -86,8 +86,8 @@ public Review updateReview(long reviewId, Review newData) {
     review.setEstrellas(newData.getEstrellas());
 
     // Sanitize comment (HTML allowed but safe)
-    String comentarioSaneado = SecurityUtils.sanitize(newData.getComentario());
-    review.setComentario(comentarioSaneado);
+    String sanitizedComment  = SecurityUtils.sanitize(newData.getComentario());
+    review.setComentario(sanitizedComment );
 
     // Update edit date (optional)
     review.setFecha(LocalDate.now());
@@ -125,12 +125,12 @@ public Review updateReview(long reviewId, Review newData) {
         }
 
         
-        String comentarioSaneado = SecurityUtils.sanitize(comentario);
+        String sanitizedComment  = SecurityUtils.sanitize(comentario);
 
         
         review.setUsuario(username);
         review.setFecha(LocalDate.now());
-        review.setComentario(comentarioSaneado);
+        review.setComentario(sanitizedComment );
         review.setProduct(product);
 
         

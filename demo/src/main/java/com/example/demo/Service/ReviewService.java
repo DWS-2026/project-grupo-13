@@ -13,6 +13,9 @@ import com.example.demo.Repository.ReviewRepository;
 import com.example.demo.Repository.ProductRepository;
 import com.example.demo.Repository.UserRepository;
 import com.example.demo.Security.SecurityUtils;
+import org.springframework.web.util.HtmlUtils;
+
+
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -61,26 +64,36 @@ public class ReviewService {
         return reviewRepository.save(review);
     }
 
-    public Review updateReview(long reviewId, Review newData) {
+  
 
-        Review review = reviewRepository.findById(reviewId)
-                .orElseThrow(() -> new EntityNotFoundException("Review not found"));
+public Review updateReview(long reviewId, Review newData) {
 
-        String nickname = SecurityContextHolder.getContext().getAuthentication().getName();
-        
+    Review review = reviewRepository.findById(reviewId)
+            .orElseThrow(() -> new EntityNotFoundException("Review not found"));
 
-        if (!review.getUsuario().equals(nickname)) {
-        throw new AccessDeniedException("No puedes editar una review que no es tuya");
-        }
+    String username = SecurityContextHolder.getContext().getAuthentication().getName();
 
-        
-        review.setEstrellas(newData.getEstrellas());
-        review.setComentario(newData.getComentario());
-
-        return reviewRepository.save(review);
+    if (username.equals("anonymousUser")) {
+        throw new SecurityException("Usuario no autenticado");
     }
 
+    // Validate that the user is the owner of the review
+    if (!review.getUsuario().equals(username)) {
+        throw new AccessDeniedException("You do not have permission to edit this review");
+    }
 
+    // Update stars
+    review.setEstrellas(newData.getEstrellas());
+
+    // Sanitize comment (HTML allowed but safe)
+    String sanitizedComment  = SecurityUtils.sanitize(newData.getComentario());
+    review.setComentario(sanitizedComment );
+
+    // Update edit date (optional)
+    review.setFecha(LocalDate.now());
+
+    return reviewRepository.save(review);
+}
     public void deleteReview(long reviewId) {
 
         Review review = reviewRepository.findById(reviewId)
@@ -112,12 +125,12 @@ public class ReviewService {
         }
 
         
-        String comentarioSaneado = SecurityUtils.sanitize(comentario);
+        String sanitizedComment  = SecurityUtils.sanitize(comentario);
 
         
         review.setUsuario(username);
         review.setFecha(LocalDate.now());
-        review.setComentario(comentarioSaneado);
+        review.setComentario(sanitizedComment );
         review.setProduct(product);
 
         

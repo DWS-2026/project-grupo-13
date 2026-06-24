@@ -116,8 +116,8 @@ public class ProductService {
                 Image img = imageService.createImage(dto.image());
                 product.setImage(img);
             }
-            // IMPORTANTE: si dto.image() es null o vacío, NO tocamos la imagen existente
-        } catch (IOException e) {
+    //IMPORTANT: if dto.image() is null or empty, we DO NOT touch the existing image
+       } catch (IOException e) {
             throw new RuntimeException("Error processing product image", e);
         }
 

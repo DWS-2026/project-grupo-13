@@ -1,15 +1,15 @@
-/* Fondo general */
+/* General background */
 body {
     background-color: #0f172a !important;
     color: white;
 }
 
-/* Navbar ya es dark, solo ajustamos */
+/* Navbar is already dark, we just adjust */
 .navbar {
     border-bottom: 1px solid #0f3460;
 }
 
-/* Card del formulario */
+/* Form card */
 .card-form {
     background-color: #16213e !important;
     border: 1px solid #0f3460;
@@ -29,7 +29,7 @@ body {
     color: #b0b8d1;
 }
 
-/* Focus bonito */
+/* Nice focus effect */
 .form-control:focus,
 .form-select:focus {
     background-color: #1a2a4f;
@@ -43,7 +43,7 @@ body {
     color: #b0b8d1;
 }
 
-/* Botón */
+/* Button */
 .btn-success {
     background: #ef4444;
     background: #e94560;
@@ -57,25 +57,25 @@ body {
     box-shadow: 0 0 10px #e94560;
 }
 
-/* Tabla contenedor */
+/* Table container */
 .bg-white {
     background-color: #16213e !important;
     border: 1px solid #0f3460;
     color: white;
 }
 
-/* Tabla */
+/* Table */
 .table {
     color: white;
 }
 
-/* Cabecera tabla */
+/* Table header */
 .table-light {
     background-color: #1a2a4f !important;
     color: white;
 }
 
-/* Hover filas */
+/* Row hover effect */
 .table-hover tbody tr:hover {
     background-color: rgba(233,69,96,0.1);
 }
@@ -85,7 +85,7 @@ body {
     font-weight: 500;
 }
 
-/* Botones acciones */
+/* Action buttons */
 .btn-warning {
     background: #facc15;
     border: none;
@@ -97,12 +97,12 @@ body {
     border: none;
 }
 
-/* Títulos */
+/* Titles */
 h5 {
     color: white;
 }
 
-/* IMPORTANTE: quitar gris de bootstrap */
+/* IMPORTANT: remove bootstrap gray */
 .text-muted {
     color: #b0b8d1 !important;
 }

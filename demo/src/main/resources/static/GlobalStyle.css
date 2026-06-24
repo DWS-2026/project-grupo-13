@@ -1,4 +1,4 @@
-/* Estilos Generales */
+/* General Styles */
 body { 
     background-color: #1a1a2e; 
     color: white; 
@@ -9,13 +9,13 @@ h2 {
     text-shadow: 0px 0px 10px rgba(233, 69, 96, 0.5); 
 }
 
-/* Tarjetas (Cards) */
+/* Cards */
 .card { 
     background-color: #16213e; 
     border: 1px solid #0f3460; 
 }
 
-/* Formularios */
+/* Forms */
 .form-label { 
     color: #cfd8dc; 
     font-weight: 600;
@@ -41,13 +41,13 @@ h2 {
     box-shadow: 0 0 8px rgba(233, 69, 96, 0.4); 
 }
 
-/* Input tipo fecha (Registro) */
+/* Date input type (Registration) */
 input[type="date"]::-webkit-calendar-picker-indicator {
     filter: invert(1); 
     cursor: pointer;
 }
 
-/* Enlaces y Textos */
+/* Links and Texts */
 .text-info {
     color: #00d4ff !important; 
     font-weight: bold;
@@ -66,7 +66,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-size: 0.95rem;
 }
 
-/* Componente Flecha Volver */
+/* Back Arrow Component */
 .flecha {
     position: fixed; 
     top: 20px;
@@ -99,7 +99,7 @@ a:hover .category-title {
     color: #00d4ff !important;
 }
 
-/* Select de estrellas */
+/* Stars Select */
 select[name="estrellas"] {
     width: 100%; 
     max-width: 150px; 
@@ -140,7 +140,7 @@ select[name="estrellas"] option {
 }
 
 /* =========================================
-   NUEVO: Mensaje de Error (Login)
+   NEW: Error Message (Login)
    ========================================= */
 .error-container {
     background-color: #1a1a1a;

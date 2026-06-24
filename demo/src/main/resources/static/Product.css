@@ -1,8 +1,8 @@
-/* --- 1. MANTENER DISTRIBUCIÓN ORIGINAL --- */
+/* --- 1. MAINTAIN ORIGINAL LAYOUT --- */
 .producto {
     display: flex;
     align-items: flex-start;
-    gap: 40px; /* Espacio entre imagen e info */
+    gap: 40px; /* Space between image and info */
     max-width: 1000px;
     margin: 40px auto;
 }
@@ -21,12 +21,12 @@
     gap: 15px;
 }
 
-/* --- 2. ESTILO DARK (Como tu Login) --- */
+/* --- 2. DARK STYLE (Like your Login) --- */
 .añadir-valoracion {
     max-width: 900px;
     margin: 40px auto;
     padding: 30px;
-    background-color: #111c30; /* Azul oscuro del login */
+    background-color: #111c30; /* Dark blue from login */
     border-radius: 12px;
     border: 1px solid #1f2937;
 }
@@ -37,7 +37,7 @@
     margin-bottom: 20px;
 }
 
-/* Inputs oscuros */
+/* Dark inputs */
 #formValoracion input, 
 #formValoracion textarea {
     background-color: #0f172a; 
@@ -49,16 +49,16 @@
     margin-bottom: 15px;
 }
 
-/* --- 3. EL BOTÓN ROJO (Igual al "Sign in") --- */
+/* --- 3. THE RED BUTTON (Same as "Sign in") --- */
 button[type="submit"] {
-    background-color: #e11d48; /* El rojo de tu captura */
+    background-color: #e11d48; /* The red from your screenshot */
     color: white;
     border: none;
     padding: 12px 25px;
     border-radius: 8px;
     font-weight: bold;
     cursor: pointer;
-    width: 100%; /* Para que ocupe el ancho como en el login */
+    width: 100%; /* To occupy the full width like in the login */
     transition: background 0.3s ease;
 }
 
@@ -67,7 +67,7 @@ button[type="submit"]:hover {
     box-shadow: 0 0 15px rgba(225, 29, 72, 0.4);
 }
 
-/* Estrellas */
+/* Stars */
 .estrellas-input span {
     font-size: 30px;
     color: #475569;
@@ -75,24 +75,25 @@ button[type="submit"]:hover {
 }
 
 .estrellas-input span.active {
-    color: #fbbf24; /* Dorado para que resalte */
+    color: #fbbf24; /* Gold to stand out */
 }
-/* Esto fuerza a que los textos dentro de las valoraciones sean claros */
+
+/* This forces the texts inside reviews to be light */
 .lista-valoraciones h2, 
 .lista-valoraciones .card-title {
     color: #ffffff !important;
 }
 
 .lista-valoraciones .card-text {
-    color: #f8f9fa !important; /* Un blanco roto para que no canse la vista */
+    color: #f8f9fa !important; /* An off-white to prevent eye strain */
 }
 
 .lista-valoraciones .text-muted, 
 .lista-valoraciones small {
-    color: #adb5bd !important; /* Gris claro para la fecha */
+    color: #adb5bd !important; /* Light gray for the date */
 }
 
-/* Si quieres que el fondo de la tarjeta sea un poco más claro que el fondo general */
+/* If you want the card background to be slightly lighter than the general background */
 .lista-valoraciones .card {
     background-color: rgba(255, 255, 255, 0.05) !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;

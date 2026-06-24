@@ -295,9 +295,9 @@ public class DatabaseInitializer {
         );
         reviewService.save(r2);
 
-        // --- ORDERS (PEDIDOS) DE PRUEBA ---
+        // --- TEST ORDERS ---
 
-            // Pedido 1: Carlos compra un iPhone 15 y un Asus Gaming
+            // Order 1: Carlos buys an iPhone 15 and an Asus Gaming Laptop
             Order o1 = new Order();
             o1.setUser(u1); // Carlos
             o1.setFecha(LocalDateTime.now());
@@ -315,16 +315,16 @@ public class DatabaseInitializer {
             item2.setOrder(o1);
 
             o1.setItems(List.of(item1, item2));
-            // El total sería la suma de p1 + p3
+            // The total would be the sum of p1 + p3
             o1.setTotal(p1.getPrecio() + p3.getPrecio());
 
             orderService.save(o1);
 
 
-            // Pedido 2: El usuario "user" compra 3 unidades de la GTX 1650
+            // Order 2: The user "user" buys 3 units of the GTX 1650
             Order o2 = new Order();
             o2.setUser(u1); // user
-            o2.setFecha(LocalDateTime.now().minusDays(1)); // Ayer
+            o2.setFecha(LocalDateTime.now().minusDays(1)); // Yesterday
 
             OrderItem item3 = new OrderItem();
             item3.setProduct(p5); // GTX 1650

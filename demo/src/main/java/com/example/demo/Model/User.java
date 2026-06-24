@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 
-// Necesaria para el tipo de dato de fecha
+// Required for the date data type
 import java.time.LocalDate; 
 import org.springframework.format.annotation.DateTimeFormat;
 

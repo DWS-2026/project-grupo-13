@@ -131,12 +131,11 @@
                     <small class="text-muted">{{fecha}}</small>
                     
                     {{#canDelete}}
-                    <form action="/review/eliminar/{{id}}" method="POST" class="mt-2 text-end">
-                        <input type="hidden" name="_csrf" value="{{token}}">
-                        <input type="hidden" name="productoId" value="{{product.id}}">
-                        <button type="submit" class="btn btn-danger btn-sm">Eliminar mi reseña</button>
-                    </form>
-                    {{/canDelete}}
+                <form action="/review/delete/{{id}}" method="POST" class="mt-2 text-end">
+                <input type="hidden" name="_csrf" value="{{token}}">
+                <button type="submit" class="btn btn-danger btn-sm">Eliminar mi reseña</button>
+                 </form>
+            {{/canDelete}}
                 </div>
             </div>
             {{/valoraciones}}

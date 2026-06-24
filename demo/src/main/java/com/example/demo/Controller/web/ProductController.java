@@ -120,7 +120,19 @@ public class ProductController {
         model.addAttribute("promociones", productService.findPromotions());
         return "PromotionsScreen"; 
     }
-
+   @PostMapping("/review/delete/{id}")
+public String deleteReviewFromWeb(@PathVariable long id) {
+    try {
+        Review review = reviewRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Reseña no encontrada"));
+        int productId = review.getProduct().getId();
+        reviewService.deleteReview(id);
+        return "redirect:/producto/" + productId;
+    } catch (Exception e) {
+        System.out.println("Error al eliminar la reseña: " + e.getMessage());
+        return "redirect:/";
+    }
+}
     
 
 
